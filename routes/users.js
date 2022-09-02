@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+
+  const product=[{
+    name:"iphone 12",
+    catagory:"mobile",
+    description:"this is a good phone"
+
+  }]
+  res.render('index', { product,});
 });
 
 module.exports = router;
