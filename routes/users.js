@@ -16,7 +16,13 @@ router.get('/login',(req,res)=>{
 })
 
 router.post('/login',(req,res)=>{
-  userhelpers.dologin(req.body)
+  userhelpers.dologin(req.body).then((response)=>{
+    if(response.status){
+      res.redirect('/')
+    }else{
+      res.redirect('/login')
+    }
+  })
 })
 
 router.get('/signup',(req,res)=>{
@@ -27,6 +33,7 @@ router.post('/signup',(req,res)=>{
   console.log(req.body)
   userhelpers.dosignup(req.body).then((response)=>{
     console.log(response)
+    res.redirect('/login')
   })
 })
 
