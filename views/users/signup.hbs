@@ -17,7 +17,7 @@
             <img src="/signup-images/deliveries.svg" alt="">
         </div>
         <div class="login-container">
-            <form action="">
+            <form action="/signup" method="post">
                 <img class="avatar" src="/signup-images/personalfile.svg" alt="">
                 <h2>welcome</h2>
                 <div class="input-div one">
@@ -26,10 +26,10 @@
                     </div>
                     <div>
                         <h5>Name</h5>
-                        <input type="text" class="input">
+                        <input type="text" name="Name" class="input">
                     </div>
                 </div>
-                <div class="input-div  two">
+                {{!--<div class="input-div  two">
                     <div class="i">
                         <i class="fas fa-phone"></i>
                     </div>
@@ -37,14 +37,14 @@
                         <h5>Phone</h5>
                         <input type="password" class="input">
                     </div>
-                </div>
+                </div>--}}
                 <div class="input-div two">
                     <div class="i">
                         <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div>
                         <h5>Email</h5>
-                        <input type="text" class="input">
+                        <input type="email" name="Email" class="input">
                     </div>
                 </div>
                 <div class="input-div two">
@@ -53,7 +53,7 @@
                     </div>
                     <div>
                         <h5>password</h5>
-                        <input type="text" class="input">
+                        <input type="password" name="password" class="input">
                     </div>
                 </div>
                 <div class="mt-3">

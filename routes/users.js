@@ -1,6 +1,8 @@
 var express = require('express');
+const { response } = require('../app');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
+const userhelpers = require('../helpers/user-helpers')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -15,6 +17,13 @@ router.get('/login',(req,res)=>{
 
 router.get('/signup',(req,res)=>{
   res.render('users/signup')
+})
+
+router.post('/signup',(req,res)=>{
+  console.log(req.body)
+  userhelpers.dosignup(req.body).then((response)=>{
+    console.log(response)
+  })
 })
 
 module.exports = router;
