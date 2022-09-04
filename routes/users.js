@@ -14,7 +14,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/login',(req,res)=>{
-  res.render('users/login')
+  if(req.session.loggedIn){
+    res.redirect('/')
+  }else{
+    res.render('users/login')
+  }
 })
 
 router.post('/login',(req,res)=>{
@@ -39,6 +43,11 @@ router.post('/signup',(req,res)=>{
     console.log(response)
     res.redirect('/login')
   })
+})
+
+router.get('/logout',(req,res)=>{
+  req.session.destroy()
+  res.redirect('/')
 })
 
 module.exports = router;
