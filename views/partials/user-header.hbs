@@ -25,12 +25,20 @@
       <li class="nav-item">
         <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Account
+    {{#if user}}
+      {{user.Name}}
+    {{else}}
+      Account
+    {{/if}}
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Account</a>
+    {{!--<a class="dropdown-item" href="#">Account</a>--}}
+    {{#if user}}
+    <a class="dropdown-item" href="/login">Logout</a>
+    {{else}}
     <a class="dropdown-item" href="/login">Login</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+    {{/if}}
+    {{!--<a class="dropdown-item" href="#">Something else here</a>--}}
   </div>
 </div>
       </li>

@@ -6,8 +6,10 @@ const userhelpers = require('../helpers/user-helpers')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  let user = req.session.user
+  console.log(user)
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/view-products', { products,});
+    res.render('users/view-products', { products,user});
   })
 });
 
@@ -18,6 +20,8 @@ router.get('/login',(req,res)=>{
 router.post('/login',(req,res)=>{
   userhelpers.dologin(req.body).then((response)=>{
     if(response.status){
+      req.session.loggedIn = true
+      req.session.user = response.user
       res.redirect('/')
     }else{
       res.redirect('/login')
