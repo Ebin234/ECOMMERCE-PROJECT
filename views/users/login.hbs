@@ -20,6 +20,9 @@
             <form action="/login" method="post">
                 <img class="avatar" src="/login-images/avatar2.svg" alt="">
                 <h2>Welcome</h2>
+                {{#if loginErr}}
+                <p class="error" style="color: red;">invalid username or password</p>
+                {{/if}}
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-user"></i>
