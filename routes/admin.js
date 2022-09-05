@@ -42,7 +42,7 @@ router.get('/delete-product/:id',(req,res)=>{
 })
 
 router.get('/edit-product/:id',async(req,res)=>{
-  prodId = req.params.id
+  const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   //console.log(product)
   res.render('admin/edit-product',{product})
