@@ -2,6 +2,7 @@ var db = require('../config/connection')
 var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
 const async = require('hbs/lib/async')
+const objectId = require('mongodb').ObjectId
 
 module.exports = {
     dosignup : (userdata)=>{
@@ -34,6 +35,24 @@ module.exports = {
             }else{
                 console.log("login failed")
                 resolve({status:false})
+            }
+        })
+    },
+    addToCart : (prodId,userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let userCart = await db.get().collection(collection.CART_COLLECTION)
+            .findOne({user:objectId(userId)})
+            if(userCart){
+
+            }else{
+            let cartObj = {
+                    user : objectId(userId),
+                    products :[objectId(prodId)]
+                }
+            db.get().collection(collection.CART_COLLECTION).insertOne(cartObj)
+            .then(()=>{
+                resolve()
+            })
             }
         })
     }

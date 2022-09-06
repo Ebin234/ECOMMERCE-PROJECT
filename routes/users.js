@@ -66,9 +66,14 @@ router.get('/cart',verifyLogin,(req,res)=>{
   res.render('users/cart')
 })
 
-router.get('/add-to-cart/:id',(req,res)=>{
+router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
    let userId = req.session.user._id
    const prodId =req.params.id
+   //console.log(userId)
+   //console.log(prodId)
+   userhelpers.addToCart(prodId,userId).then(()=>{
+    res.redirect('/')
+   })
 })
 
 module.exports = router;
