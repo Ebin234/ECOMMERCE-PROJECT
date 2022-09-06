@@ -80,4 +80,8 @@ router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
    })
 })
 
+router.get('/home',(req,res)=>{
+  res.render('users/homepage')
+})
+
 module.exports = router;
