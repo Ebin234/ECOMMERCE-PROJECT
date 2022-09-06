@@ -43,7 +43,11 @@ module.exports = {
             let userCart = await db.get().collection(collection.CART_COLLECTION)
             .findOne({user:objectId(userId)})
             if(userCart){
-
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({user : objectId(userId)},{
+                            $push :{products : objectId(prodId)}}).then(()=>{
+                            resolve()
+                           })
             }else{
             let cartObj = {
                     user : objectId(userId),
