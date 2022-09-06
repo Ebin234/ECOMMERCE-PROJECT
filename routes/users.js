@@ -1,4 +1,5 @@
 var express = require('express');
+const async = require('hbs/lib/async');
 const { response } = require('../app');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
@@ -62,7 +63,10 @@ router.get('/logout',(req,res)=>{
   res.redirect('/')
 })
 
-router.get('/cart',verifyLogin,(req,res)=>{
+router.get('/cart',verifyLogin,async(req,res)=>{
+  let userId = req.session.user._id
+  let products = await userhelpers.getCartProducts(userId)
+  console.log("products",products)
   res.render('users/cart')
 })
 
