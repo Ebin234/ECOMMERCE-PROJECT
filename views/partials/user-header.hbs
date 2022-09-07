@@ -9,9 +9,10 @@
                 <li><a href="">New Arrivals</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
-                <li><a href=""><i class="far fa-shopping-bag"></i></a></li>
+                <li id="lg-bag"><a href=""><i class="far fa-shopping-bag"></i></a></li>
                 <li><a href=""><i class="far fa-search"></i></a></li>
                 <li><a href=""><i class="far fa-heart"></i></a></li>
+                <a href="" id="close"><i class="far fa-times"></i></a>
 
                 {{#if user}}
                 <li><a href="">{{user.Name}}</a>
@@ -22,7 +23,7 @@
                     </ul>
                 </li>
                 {{else}}
-                <li><a href="">Login</a>/
+                <li><a href="/login">Login</a>/
                 <a href="">Register</a></li>
                 {{/if}}
 
@@ -30,6 +31,10 @@
                 
             
             </ul>
+        </div>
+        <div id="mobile">
+            <a href=""><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
         </div>
     </section>
 </header>
