@@ -490,4 +490,8 @@ footer .copyright{
     #banner{
         height: 20vh;
     }
+
+    #newsletter .form{
+        width: 70%;
+    }
 }
