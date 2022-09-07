@@ -165,6 +165,14 @@ div ul li .dropdown li a:after {
     display: none;
 }
 
+.dis{
+    display: initial;
+}
+
+.dis1{
+    display: none;
+}
+
 /* Home Page */
 
 #hero{
@@ -472,6 +480,14 @@ footer .copyright{
         display: none;
     }
 
+    .dis{
+        display: none;
+    }
+
+    .dis1{
+        display: initial;
+    }
+
     #hero {
         
         height: 70vh;
@@ -499,6 +515,14 @@ footer .copyright{
 @media (max-width: 477px){
     .section-p1{
         padding: 20px;
+    }
+
+    .dis{
+        display: none;
+    }
+
+    .dis1{
+        display: initial;
     }
 
     #header{
