@@ -13,28 +13,21 @@
                 <li><a href=""><i class="far fa-search"></i></a></li>
                 <li><a href=""><i class="far fa-heart"></i></a></li>
 
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{#if user}}
-                            {{user.Name}}
-                            {{else}}
-                            {{!-- <ul class="navbar-nav navbar-user">
-                                <li class="nav-item"><a href=""><i class="fa fa-user" arial-hidden="true"></i></a></li>
-                            </ul> --}}
-                            Account
-                            {{/if}}
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {{#if user}}
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                            {{else}}
-                            <a class="dropdown-item" href="/login">Login</a>
-                            {{/if}}
-                        </div>
-                    </div>
+                {{#if user}}
+                <li><a href="">{{user.Name}}</a>
+                    <ul class="dropdown">
+                        <li class="mt-1"><a href="">Profile</a></li>
+                        <li class="mt-1"><a href="">Orders</a></li>
+                        <li class="mt-1"><a href="">Logout</a></li>
+                    </ul>
                 </li>
+                {{else}}
+                <li><a href="">Login</a>/
+                <a href="">Register</a></li>
+                {{/if}}
+
+
+                
             
             </ul>
         </div>

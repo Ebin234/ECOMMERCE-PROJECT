@@ -115,6 +115,47 @@ header{
     left: 20px;
 }
 
+
+div ul li:hover .dropdown {
+	top: 27px;
+	opacity: 1;
+	visibility: visible;
+}
+
+div ul li:last-child {
+	margin-right: 0;
+}
+
+div ul li .dropdown {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 200px;
+	background: #e3e6f3;
+	text-align: left;
+	padding: 2px 0;
+	z-index: 9;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+div ul li .dropdown li {
+	display: block;
+	margin-right: 0;
+}
+
+ div ul li .dropdown li a {
+	padding: 8px 12px;
+	text-transform: capitalize;
+}
+
+div ul li .dropdown li a:after {
+	display: none;
+}
+
 /* Home Page */
 
 #hero{
