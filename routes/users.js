@@ -100,6 +100,10 @@ router.get('/contact',(req,res)=>{
   res.render('users/contact')
 })
 
+router.get('/cart1',(req,res)=>{
+  res.render('users/newcart')
+})
+
 
 
 module.exports = router;
