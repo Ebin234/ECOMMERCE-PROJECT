@@ -104,7 +104,7 @@ header{
     color: #088178;
 }
 
-#navbar li a.active::after,
+/* #navbar li a.active::after,
 #navbar li a:hover::after{
     content: "";
     width: 40%;
@@ -113,7 +113,7 @@ header{
     position: absolute;
     bottom: -4px;
     left: 20px;
-}
+} */
 
 
 div ul li:hover .dropdown {
@@ -426,6 +426,43 @@ footer a:hover{
 footer .copyright{
     width: 100%;
     text-align: center;
+}
+
+/* Products Page */
+
+#page-header{
+    background-image: url('/images/b1.jpg');
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 14px;
+}
+
+#page-header h2,
+#page-header p{
+    color: #fff;
+}
+
+#pagination{
+    text-align: center;
+}
+
+#pagination a{
+    text-decoration: none;
+    background-color: #088178;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+}
+
+#pagination a i{
+    font-size: 16px;
+    font-weight: 600;
 }
 
 

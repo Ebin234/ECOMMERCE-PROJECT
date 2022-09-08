@@ -81,7 +81,15 @@ router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
 })
 
 router.get('/home',(req,res)=>{
-  res.render('users/homepage')
+  res.render('users/home-Page')
+})
+
+router.get('/products',(req,res)=>{
+  res.render('users/viewProducts')
+})
+
+router.get('/product',(req,res)=>{
+  res.render('users/product')
 })
 
 module.exports = router;
