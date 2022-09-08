@@ -96,6 +96,10 @@ router.get('/about',(req,res)=>{
   res.render('users/about')
 })
 
+router.get('/contact',(req,res)=>{
+  res.render('users/contact')
+})
+
 
 
 module.exports = router;
