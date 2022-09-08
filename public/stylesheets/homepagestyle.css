@@ -530,6 +530,12 @@ footer .copyright{
     line-height: 25px;
 }
 
+
+/* About Page */
+#page-header.about-header{
+    background-image: url('/images/banner.png');
+}
+
 /* Start Mediia Query */
 
 @media (max-width:799px) {

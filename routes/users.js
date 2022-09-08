@@ -92,4 +92,10 @@ router.get('/product',(req,res)=>{
   res.render('users/product')
 })
 
+router.get('/about',(req,res)=>{
+  res.render('users/about')
+})
+
+
+
 module.exports = router;
