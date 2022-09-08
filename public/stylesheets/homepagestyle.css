@@ -658,4 +658,25 @@ footer .copyright{
     #newsletter .form{
         width: 100%;
     }
+
+
+    /* Single Product */
+
+    #prodetails{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #prodetails .single-pro-image{
+        width: 100%;
+        margin-right: 0px;
+    }
+
+    #prodetails .single-pro-details{
+        width: 100%;
+    }
+
+    #prodetails .single-pro-details input {
+        width: 55px;
+    }
 }
