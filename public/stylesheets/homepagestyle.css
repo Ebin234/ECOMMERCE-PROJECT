@@ -239,6 +239,7 @@ div ul li .dropdown li a:after {
 }
 
 #product1 .pro img {
+    height: 225px;
     width: 100%;
     border-radius: 20px;
 }
@@ -481,6 +482,14 @@ footer .copyright {
     margin-right: 50px;
 }
 
+/* .single-pro-image #maincont{
+    height:482px ;
+}
+.single-pro-image #maincont img{
+    max-width: 100%;
+    max-height: 100%;
+} */
+
 .small-img-group {
     display: flex;
     justify-content: space-between;
@@ -495,6 +504,15 @@ footer .copyright {
     width: 50%;
     padding-top: 30px;
 }
+
+/* #sub .small-img-col{
+    height: 116px;
+}
+
+#sub .small-img-col img{
+    max-height: 100%;
+    
+} */
 
 #prodetails .single-pro-details h4 {
     padding: 40px 0 8px 0;

@@ -87,7 +87,7 @@ router.get('/allProducts',(req,res)=>{
 })
 
 router.get('/product',(req,res)=>{
-  res.render('users/product')
+  res.render('users/single-product')
 })
 
 router.get('/about',(req,res)=>{
