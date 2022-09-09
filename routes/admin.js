@@ -11,8 +11,9 @@ router.get('/', function(req, res, next) {
   })
 });
 
+
 router.get('/add-product',(req,res)=>{
-  res.render('admin/add-product')
+  res.render('admin/add-product',{admin:true})
 })
 
 router.post('/add-product',(req,res)=>{
@@ -57,6 +58,10 @@ router.post('/edit-product/:id',(req,res)=>{
       image.mv('./public/product-images/'+prodId+'.jpg')
     }
   })
+})
+
+router.get('/allproducts',(req,res)=>{
+  res.render('admin/all-products',{admin:true})
 })
 
 module.exports = router;
