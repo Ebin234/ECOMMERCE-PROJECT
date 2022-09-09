@@ -102,7 +102,7 @@ header {
 }
 
 #navbar li a:hover,
-#navbar li a.active {
+#navbar li .active  {
     color: #088178;
 }
 
