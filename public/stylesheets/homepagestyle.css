@@ -81,6 +81,20 @@ header {
     left: 0;
 }
 
+#header h3{
+    font-size: 30px;
+    margin-left: -40px;
+}
+
+#header h3 a{
+    text-decoration: none;
+    color: #1a1a1a;
+}
+
+#header h3 a:hover{
+    color: #088178;
+}
+
 #navbar {
     display: flex;
     align-items: center;
@@ -239,7 +253,7 @@ div ul li .dropdown li a:after {
 }
 
 #product1 .pro img {
-    height: 225px;
+    height: 70%;
     width: 100%;
     border-radius: 20px;
 }
@@ -470,90 +484,8 @@ footer .copyright {
     font-weight: 600;
 }
 
-
-/* Single Product */
-#prodetails {
-    display: flex;
-    margin-top: 20px;
-}
-
-#prodetails .single-pro-image {
-    width: 40%;
-    margin-right: 50px;
-}
-
-/* .single-pro-image #maincont{
-    height:482px ;
-}
-.single-pro-image #maincont img{
-    max-width: 100%;
-    max-height: 100%;
-} */
-
-.small-img-group {
-    display: flex;
-    justify-content: space-between;
-}
-
-.small-img-col {
-    flex-basis: 24%;
-    cursor: pointer;
-}
-
-#prodetails .single-pro-details {
-    width: 50%;
-    padding-top: 30px;
-}
-
-/* #sub .small-img-col{
-    height: 116px;
-}
-
-#sub .small-img-col img{
-    max-height: 100%;
-    
-} */
-
-#prodetails .single-pro-details h4 {
-    padding: 40px 0 8px 0;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-#prodetails .single-pro-details h2 {
-    font-size: 26px;
-}
-
-#prodetails .single-pro-details select {
-    display: block;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-}
-
-#prodetails .single-pro-details input {
-    width: 50px;
-    height: 47px;
-    padding-left: 10px;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-#prodetails .single-pro-details input:focus {
-    outline: none;
-}
-
-#prodetails .single-pro-details button {
-    background: #088178;
-    color: #fff;
-
-}
-
-#prodetails .single-pro-details span {
-    line-height: 25px;
-}
-
-
 /* About Page */
+
 #page-header.about-header {
     background-image: url('/images/banner.png');
 }
@@ -988,6 +920,10 @@ footer .copyright {
 
     #header {
         padding: 10px 30px;
+    }
+
+    #header h3 {
+        margin-left: -9px;
     }
 
     h1 {
