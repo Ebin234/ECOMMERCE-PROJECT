@@ -4,14 +4,14 @@
 
         <div id="ac">
             <ul id="navbar">
-                <li><a class="btn1" href="/home">Home</a></li>
-                <li><a class="btn1" href="/login">All Products</a></li>
-                <li><a class="act" href="">New Arrivals</a></li>
-                <li><a class="act" href="">About</a></li>
-                <li><a class="act" href="">Contact</a></li>
-                <li id="lg-bag"><a class="act" href=""><i class="far fa-shopping-bag"></i></a></li>
-                <li><a class="act" href=""><i class="far fa-search"></i></a></li>
-                <li><a class="act" href=""><i class="far fa-heart"></i></a></li>
+                <li><a class="btn1" href="/">Home</a></li>
+                <li><a class="btn1" href="/allProducts">All Products</a></li>
+                <li><a class="btn1" href="/newArrivals">New Arrivals</a></li>
+                <li><a class="btn1" href="/about">About</a></li>
+                <li><a class="btn1" href="/contact">Contact</a></li>
+                <li id="lg-bag"><a class="btn1" href="/cart"><i class="far fa-shopping-bag"></i></a></li>
+                <li><a class="btn1" href="/search"><i class="far fa-search"></i></a></li>
+                <li><a class="btn1" href="/whishlist"><i class="far fa-heart"></i></a></li>
                 <a href="" id="close"><i class="far fa-times"></i></a>
 
                 {{#if user}}
@@ -19,16 +19,16 @@
                     <ul class="dropdown">
                         <li class="mt-1"><a href="">Profile</a></li>
                         <li class="mt-1"><a href="">Orders</a></li>
-                        <li class="mt-1"><a href="">Logout</a></li>
+                        <li class="mt-1"><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
                 {{else}}
                 <div class="dis">
                 <li ><a class="act" href="/login">Login</a> / 
-                <a class="act" href="">Register</a></li>
+                <a class="act" href="signup">Register</a></li>
                 </div>
                 <li class="dis1"><a class="act" href="/login">Login</a></li>
-                <li class="dis1"><a class="act" href="">Register</a></li>
+                <li class="dis1"><a class="act" href="signup">Register</a></li>
                 {{/if}}
 
 

@@ -319,11 +319,12 @@ div ul li .dropdown li a:after {
 }
 
 #newsletter {
+    margin-bottom: 0px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    background-color: #041e42;
+    background-color: #0f2a50;  /*#042757;*/
     /*background-image: url();
     background-repeat: no-repeat;
     background-position: 20% 30%;*/
@@ -371,6 +372,7 @@ div ul li .dropdown li a:after {
 }
 
 footer {
+    background: #cdd4f8;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;

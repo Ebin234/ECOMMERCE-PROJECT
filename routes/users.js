@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
   let user = req.session.user
   console.log(user)
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/view-products', { products,user});
+    res.render('users/home-page', { products,user});
   })
 });
 
@@ -65,9 +65,10 @@ router.get('/logout',(req,res)=>{
 
 router.get('/cart',verifyLogin,async(req,res)=>{
   let userId = req.session.user._id
+  let user = req.session.user
   let products = await userhelpers.getCartProducts(userId)
   console.log("products",products)
-  res.render('users/cart',{products})
+  res.render('users/newcart',{products ,user})
 })
 
 router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
@@ -80,12 +81,9 @@ router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
    })
 })
 
-router.get('/home',(req,res)=>{
-  res.render('users/home-Page')
-})
-
-router.get('/products',(req,res)=>{
-  res.render('users/viewProducts')
+router.get('/allProducts',(req,res)=>{
+  let user = req.session.user
+  res.render('users/viewProducts',{user})
 })
 
 router.get('/product',(req,res)=>{
@@ -100,9 +98,6 @@ router.get('/contact',(req,res)=>{
   res.render('users/contact')
 })
 
-router.get('/cart1',(req,res)=>{
-  res.render('users/newcart')
-})
 
 
 
