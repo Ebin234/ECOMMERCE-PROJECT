@@ -89,6 +89,15 @@ section div h2{
     margin-bottom: 37px;
 }
 
+.addform select{
+    height: 40px;
+    padding: 0px 10px;
+    padding: 0px 10pxpx;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+}
+
 .addform ul li{
     
     padding: 10px 0;
@@ -132,6 +141,10 @@ section div h2{
     .s1 .s2 input {
         width: 120%;
     }
+
+    .addform select {
+        width: 120%;
+    }
 }
 
 @media (max-width: 477px){
@@ -154,6 +167,10 @@ section div h2{
 
     .wd input{
         width: 100%;
+    }
+
+    .addform select {
+        width: 120%;
     }
 
     
