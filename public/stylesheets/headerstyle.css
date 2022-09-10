@@ -1,4 +1,4 @@
-.navbar-user{
+/* .navbar-user{
     margin-left: 37px;
 }
 .navbar-user li{
@@ -18,4 +18,102 @@
 }
 .navbar-user li a:hover{
     color: #b5aec4;
+} */
+
+section div h2{
+    display: flex;
+    justify-content: center;
+}
+
+.section-p2 {
+    padding: 15px 65px;
+}
+
+.main{
+    display: flex;
+}
+.main img{
+    width: 100%;
+    height: 52vh;
+}
+.addform{
+    padding:10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e1e1e1;
+}
+
+.addform .s1{
+    display: flex;
+    flex-direction: row;
+}
+
+.s1 .s2{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 7px 25px;
+    
+}
+
+.s1 .s2 input{
+    width: 100%;
+}
+
+.s1 .s3{
+    margin: 0 25px;
+    width: 50%;
+    margin-left: 100px;
+}
+
+.s3 .des{
+    display: flex;
+    justify-content: center;
+}
+
+.addform label{
+    font-size: 20px;
+    font-family: sans-serif;
+}
+.addform input{
+    height: 40px;
+    width: 622px;
+    padding: 4px 3px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+}
+.wd input{
+    width: 100%;
+    margin-bottom: 37px;
+}
+
+.addform ul li{
+    
+    padding: 10px 0;
+}
+
+.addimg{
+    margin: 0 25px;
+    display: flex;
+    flex-direction: column;
+}
+.subbtn{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+.subbtn button{
+    width: 225px;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 8px 8px;
+    color: #000;
+    background-color: rgb(56, 179, 19);
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
 }
