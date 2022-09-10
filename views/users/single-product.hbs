@@ -6,6 +6,11 @@
             width: 100%;
         }
 
+        section div h2 {
+            display: flex;
+            justify-content: flex-start;
+        }    
+
         .wrapper {
             width: 90%;
             height: 100vh;
@@ -50,7 +55,7 @@
         }
 
         p {
-            margin-bottom: 20px;
+            margin-bottom: 4px;
         }
 
         .brand {
@@ -121,11 +126,11 @@
             background-color: rgb(201, 97, 57);
         }
 
-        .product-details{
+        .product-details {
             padding: 25px 0;
         }
 
-        .product-details h4{
+        .product-details h4 {
             padding: 12px 0;
         }
 
@@ -184,28 +189,28 @@
             <div class="product-box">
                 <div class="all-images">
                     <div class="small-images">
-                        <img src="/images/products/new/m1.jpg" onclick="clickimg(this)">
-                        <img src="/images/products/new/m2.jpg" onclick="clickimg(this)">
-                        <img src="/images/products/new/m5.jpg" onclick="clickimg(this)">
-                        <img src="/images/products/new/m4.jpg" onclick="clickimg(this)">
+                        <img src="/images/product-images/{{product._id}}/0{{product._id}}.jpg" onclick="clickimg(this)">
+                        <img src="/images/product-images/{{product._id}}/1{{product._id}}.jpg" onclick="clickimg(this)">
+                        <img src="/images/product-images/{{product._id}}/2{{product._id}}.jpg" onclick="clickimg(this)">
+                        <img src="/images/product-images/{{product._id}}/3{{product._id}}.jpg" onclick="clickimg(this)">
                     </div>
                     <div class="main-images">
-                        <img src="images/products/new/m3.jpg" id="imagebox">
+                        <img src="/images/product-images/{{product._id}}/0{{product._id}}.jpg" id="imagebox">
                     </div>
                 </div>
             </div>
 
             <div class="text">
                 <div class="content">
-                    <p class="brand">Brand : Apple</p>
-                    <h2>APPLE iphone 12 (white , 64GB)</h2>
+                    <p class="brand">Brand : {{product.brand}}</p>
+                    <h2>{{product.Name}}</h2>
                     <div class="review">
                         <span>(4.6)</span>
                         <span class="fa fa-star"></span>
                     </div>
                     <div class="price-box">
-                        <p class="price">&#8377; 77,900</p>
-                        <strike>&#8377; 89,900</strike>
+                        <p class="price">&#8377; {{product.Price}}</p>
+                        <strike>&#8377; 89000</strike>
                     </div>
                     <p>Size : <select name="size">
                             <option value="select color">select color</option>
@@ -221,24 +226,24 @@
                         Buy now
                     </button>
 
-                     
+
 
 
                 </div>
-               
-               <div class="product-details">
-                <h4>About this item</h4>
-                <ul>
-                    <li><span>6.5" 720 x 1600 (HD+) PLS TFT LCD Infinity-V Display, 5000mAh Battery, Fingerprint (side-mounted)</span></li>
-                    <li><span>128GB ROM, 4GB RAM, Exynos 850 (8nm), Octa-core (4x2.0 GHz Cortex-A55 & 4x2.0 GHz Cortex-A55), Mali-G52, Android 11, One UI 3.1</span></li>
-                    <li><span>Rear Camera: 48MP, F2.0 + 5MP, F2.2 + 2MP, F2.4 + 2MP, F2.4, Front Camera: 8MP, F2.2, Bluetooth 5.0</span></li>
-                    <li><span>2G Bands: 850, 900, 1800, 1900MHz, 3G Bands: 850, 900, 1700, 1900, 4G LTE Bands: 1, 3, 5, 7, 8, 20, 28, 38, 40, 41 - Dual SIM</span></li>
-                    <li><span>International Model - No Warranty in US. Compatible with Most GSM Carriers like T-Mobile, AT&T, MetroPCS, etc. Will NOT work with CDMA Carriers Such as Verizon, Cricket, Boost</span></li>
-                </ul>
-               </div>
+
+                <div class="product-details">
+                    <h4>About this item</h4>
+                    <ul>
+                        <li><span>{{product.Description1}}</span></li>
+                        <li><span>{{product.Description2}}</span></li>
+                        <li><span>{{product.Description3}}</span></li>
+                        <li><span>{{product.Description4}}</span></li>
+                        <li><span>{{product.Description5}}</span></li>
+                    </ul>
+                </div>
             </div>
 
-    
+
 
 
         </div>
@@ -316,9 +321,9 @@
             </div>
             <a href=""><i class="fal fa-shopping-cart cart"></i></a>
         </div>
-        
-        
-       
+
+
+
 
 
     </div>
