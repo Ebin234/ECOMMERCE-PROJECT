@@ -16,6 +16,10 @@ router.get('/add-product',(req,res)=>{
   res.render('admin/add-product',{admin:true})
 })
 
+router.get('/add-product2',(req,res)=>{
+  res.render('admin/add-product2',{admin:true})
+})
+
 router.post('/add-product',(req,res)=>{
   //console.log(req.body)
   //console.log(req.files.image)
