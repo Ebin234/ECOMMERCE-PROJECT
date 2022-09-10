@@ -98,6 +98,8 @@ section div h2{
     margin: 0 25px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .subbtn{
     margin-bottom: 10px;
@@ -116,4 +118,44 @@ section div h2{
     border: none;
     outline: none;
     transition: 0.2s;
+}
+
+@media (max-width: 799px){
+    .addform input{
+        width: 568px;
+    }
+
+    .wd input{
+        width: 100%;
+    }
+
+    .s1 .s2 input {
+        width: 120%;
+    }
+}
+
+@media (max-width: 477px){
+    .addform .s1 {
+        flex-direction: column;
+    }
+
+    .addform input {
+        width: 193px;
+    }
+
+    .s1 .s2 {
+        width: 88%;
+    }
+
+    .s1 .s3 {
+        width: 80%;
+        margin-left: 25px;
+    }
+
+    .wd input{
+        width: 100%;
+    }
+
+    
+
 }
