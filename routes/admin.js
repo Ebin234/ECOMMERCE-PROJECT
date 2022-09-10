@@ -2,6 +2,8 @@ var express = require('express');
 const async = require('hbs/lib/async');
 var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
+const path = require('path');
+const fs = require('fs');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -33,6 +35,45 @@ router.post('/add-product',(req,res)=>{
       console.log(err)
     }
    })
+    
+  })
+})
+
+router.post('/add-product2',(req,res)=>{
+  //console.log(req.body);
+  //console.log(req.files.image)
+  productHelpers.addproduct(req.body,(insertedId)=>{
+    console.log(insertedId)
+    fs.mkdir(path.join('./public/',''+insertedId),{},(err)=>{
+      if(err) throw err
+    })
+    let mainImage = req.files.image[0]
+    let subImage1 = req.files.image[1]
+    let subImage2 = req.files.image[2]
+    let subImage3 = req.files.image[3]
+    mainImage.mv('./public/'+insertedId+'/0'+insertedId+'.jpg',(err,done)=>{
+      if(err){
+        console.log(err)
+      }else{
+        subImage1.mv('./public/'+insertedId+'/1'+insertedId+'.jpg',(err,done)=>{
+          if(err){
+            console.log(err)
+          }else{
+            subImage2.mv('./public/'+insertedId+'/2'+insertedId+'.jpg',(err,done)=>{
+              if(err){
+                console.log(err)
+              }else{
+                subImage3.mv('./public/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
+                  if(err){
+                    console.log(err)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    })
     
   })
 })

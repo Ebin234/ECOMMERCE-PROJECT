@@ -7,42 +7,42 @@
 
 <section class="section-p2">
     <div class="section-m1 main">
-        <form class="addform">
+        <form class="addform" action="/admin/add-product2" method="post" enctype="multipart/form-data">
             <div class="s1">
             <div class="s2">
             <label for="">product name</label>
-            <input type="text">
+            <input type="text" name="Name">
             <label for="">Catagory</label>
-            <select name="" id="">
-                <option value="">select</option>
-                <option value="">smartphone</option>
-                <option value="">laptop</option>
+            <select id="" name="Catagory">
+                <option value="select">select</option>
+                <option value="smartphone">smartphone</option>
+                <option value="laptop">laptop</option>
             </select>
             <label for="">brand</label>
-            <input type="text">
+            <input type="text" name="brand">
             <label for="">stoke</label>
-            <input type="number">
+            <input type="number" name="Stoke">
             <label for="">Price</label>
-            <input type="number">
+            <input type="number" name="Price">
             </div>
             <div class="s3">
             <label for="" class="des">Description</label>
             <ul class="wd">
-                <li><input type="text"></li>
-                <li><input type="text"></li>
-                <li><input type="text"></li>
-                <li><input type="text"></li>
-                <li><input type="text"></li>
+                <li><input type="text" name="Description"></li>
+                <li><input type="text" name="Description"></li>
+                <li><input type="text" name="Description"></li>
+                <li><input type="text" name="Description"></li>
+                <li><input type="text" name="Description"></li>
             </ul>
             </div>
             </div>
             <div class="addimg">
             <label for="">image</label>
-            <input type="file">
+            <input type="file" name="image">
             <label for="">subimage</label>
-            <input type="file">
-            <input type="file">
-            <input type="file">
+            <input type="file" name="image">
+            <input type="file" name="image">
+            <input type="file" name="image">
             </div>
             <div class="subbtn">
             <button type="submit">submit</button>
