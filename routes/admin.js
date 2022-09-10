@@ -44,27 +44,29 @@ router.post('/add-product2',(req,res)=>{
   //console.log(req.files.image)
   productHelpers.addproduct(req.body,(insertedId)=>{
     console.log(insertedId)
-    fs.mkdir(path.join('./public/',''+insertedId),{},(err)=>{
+    fs.mkdir(path.join('./public/images/product-images/',''+insertedId),{},(err)=>{
       if(err) throw err
     })
     let mainImage = req.files.image[0]
     let subImage1 = req.files.image[1]
     let subImage2 = req.files.image[2]
     let subImage3 = req.files.image[3]
-    mainImage.mv('./public/'+insertedId+'/0'+insertedId+'.jpg',(err,done)=>{
+    mainImage.mv('./public/images/product-images/'+insertedId+'/0'+insertedId+'.jpg',(err,done)=>{
       if(err){
         console.log(err)
       }else{
-        subImage1.mv('./public/'+insertedId+'/1'+insertedId+'.jpg',(err,done)=>{
+        subImage1.mv('./public/images/product-images/'+insertedId+'/1'+insertedId+'.jpg',(err,done)=>{
           if(err){
             console.log(err)
           }else{
-            subImage2.mv('./public/'+insertedId+'/2'+insertedId+'.jpg',(err,done)=>{
+            subImage2.mv('./public/images/product-images/'+insertedId+'/2'+insertedId+'.jpg',(err,done)=>{
               if(err){
                 console.log(err)
               }else{
-                subImage3.mv('./public/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
-                  if(err){
+                subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
+                  if(!err){
+                    res.render('admin/add-product')
+                  }else{
                     console.log(err)
                   }
                 })
@@ -106,7 +108,11 @@ router.post('/edit-product/:id',(req,res)=>{
 })
 
 router.get('/allproducts',(req,res)=>{
-  res.render('admin/all-products',{admin:true})
+  productHelpers.getAllproducts().then((products)=>{
+    console.log(products)
+    res.render('admin/all-products',{products,admin:true})
+  })
+  
 })
 
 module.exports = router;
