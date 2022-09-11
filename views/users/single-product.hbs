@@ -56,6 +56,8 @@
 
         p {
             margin-bottom: 4px;
+            margin: 0 0 0 0;
+            margin: 10px 0;
         }
 
         .brand {
@@ -69,7 +71,7 @@
         h2 {
             font-size: 32px;
             color: #555;
-            margin-bottom: 20px;
+            margin: 10px 0;
         }
 
         .review {
@@ -103,6 +105,7 @@
             border: 1px solid #ccc;
             text-align: center;
             padding-top: 5px;
+            outline-style: none;
         }
 
         button {
@@ -114,6 +117,7 @@
             border-radius: 5px;
             background-color: #fe980f;
             padding: 10px 15px;
+            margin: 10px 0;
             box-sizing: border-box;
             cursor: pointer;
         }
@@ -127,7 +131,7 @@
         }
 
         .product-details {
-            padding: 25px 0;
+            padding: 3px 0;
         }
 
         .product-details h4 {
@@ -136,8 +140,9 @@
 
         .product-details li {
             font-family: sans-serif;
-            font-size: 13px;
-            padding: 10px 0;
+            font-size: 16px;
+            padding: 5px 0;
+            line-height: 20px;
         }
 
         /* Start media query */
@@ -212,10 +217,10 @@
                         <p class="price">&#8377; {{product.Price}}</p>
                         <strike>&#8377; 89000</strike>
                     </div>
-                    <p>Size : <select name="size">
+                    {{!-- <p>Size : <select name="size">
                             <option value="select color">select color</option>
                             <option value="black">black</option>
-                        </select></p>
+                        </select></p> --}}
                     <p>quantity <input type="text" value="1"></p>
                     <button>
                         <span class="fa fa-shopping-cart"></span>
