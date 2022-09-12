@@ -1,6 +1,5 @@
 <style>
-    button.normal {
-        width: 85px;
+    a.normal {
     font-size: 14px;
     font-weight: 600;
     padding: 9px 8px;
@@ -11,13 +10,15 @@
     border: none;
     outline: none;
     transition: 0.2s;
+    text-decoration: none;
 }
 
-button.b1{
+a.b1{
     background-color: rgb(56, 179, 19);
+    padding: 9px 20px;
 }
 
-button.b2{
+a.b2{
     background-color: rgb(238, 18, 18);
 }
 
@@ -62,8 +63,8 @@ button.b2{
                 <td>{{this.Stoke}}</td>
                 <td>${{this.Price}}</td>
                 <td>
-                    <button class="b1 normal">Edit</button>
-                    <button class=" b2 normal">Delete</button>
+                    <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
+                    <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
                 </td>
             </tr>
             {{/each}}

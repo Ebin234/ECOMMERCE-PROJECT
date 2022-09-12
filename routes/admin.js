@@ -9,37 +9,37 @@ const fs = require('fs');
 router.get('/', function(req, res, next) {
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
-    res.render('admin/view-products',{products ,admin:true})
+    res.render('admin/all-products',{products ,admin:true})
   })
 });
 
 
 router.get('/add-product',(req,res)=>{
-  res.render('admin/add-product',{admin:true})
-})
-
-router.get('/add-product2',(req,res)=>{
   res.render('admin/add-product2',{admin:true})
 })
 
-router.post('/add-product',(req,res)=>{
-  //console.log(req.body)
-  //console.log(req.files.image)
-  productHelpers.addproduct(req.body,(insertedId)=>{
-   // console.log(insertedId)
-   let image = req.files.image
-   image.mv('./public/product-images/'+insertedId+'.jpg',(err,done)=>{
-    if(!err){
-      res.render('admin/add-product')
-    }else{
-      console.log(err)
-    }
-   })
-    
-  })
-})
+// router.get('/add-product2',(req,res)=>{
+//   res.render('admin/add-product2',{admin:true})
+// })
 
-router.post('/add-product2',(req,res)=>{
+// router.post('/add-product',(req,res)=>{
+//   //console.log(req.body)
+//   //console.log(req.files.image)
+//   productHelpers.addproduct(req.body,(insertedId)=>{
+//    // console.log(insertedId)
+//    let image = req.files.image
+//    image.mv('./public/product-images/'+insertedId+'.jpg',(err,done)=>{
+//     if(!err){
+//       res.render('admin/add-product')
+//     }else{
+//       console.log(err)
+//     }
+//    })
+    
+//   })
+// })
+
+router.post('/add-product',(req,res)=>{
   //console.log(req.body);
   //console.log(req.files.image)
   productHelpers.addproduct(req.body,(insertedId)=>{
