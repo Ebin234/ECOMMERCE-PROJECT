@@ -93,7 +93,7 @@ router.get('/edit-product/:id',async(req,res)=>{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   //console.log(product)
-  res.render('admin/edit-product',{product})
+  res.render('admin/editproduct1',{product})
 })
 
 router.post('/edit-product/:id',(req,res)=>{
