@@ -14,11 +14,14 @@ const verifyLogin = (req,res,next)=>{
 }
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   let user = req.session.user
-  console.log(user)
+  //console.log(user)
+  let cartCount = 0;
+  if(user){
+  cartCount = await userhelpers.getCartCount(user._id)}
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/home-page', {products,user});
+    res.render('users/home-page', {products,user,cartCount});
   })
 });
 
