@@ -16,11 +16,12 @@
             </tr>
         </thead>
         <tbody>
+            {{#each products}}
             <tr>
                 <td><a href=""><i class="far fa-times-circle"></i></a></td>
-                <td><img src="/images/products/n1.jpg" alt=""></td>
-                <td>Cartoon Astronaut T-shirts</td>
-                <td>$118.19</td>
+                <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td>
+                <td>{{this.Name}}</td>
+                <td>${{this.Price}}</td>
                 <td>
                         <button class="normal b1">-</button>
                         1
@@ -28,6 +29,7 @@
                 </td>
                 <td>$118.19</td>
             </tr>
+            {{/each}}
             <tr>
                 <td><a href=""><i class="far fa-times-circle"></i></a></td>
                 <td><img src="/images/products/n1.jpg" alt=""></td>
