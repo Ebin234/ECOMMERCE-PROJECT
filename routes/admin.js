@@ -96,15 +96,24 @@ router.get('/edit-product/:id',async(req,res)=>{
   res.render('admin/editproduct1',{product})
 })
 
-router.post('/edit-product/:id',(req,res)=>{
+router.post('/edit-product1/:id',(req,res)=>{
   prodId = req.params.id
-  productHelpers.updateProduct(prodId,req.body).then(()=>{
-    res.redirect('/admin')
-    if(req.files.image){
-      let image = req.files.image
-      image.mv('./public/product-images/'+prodId+'.jpg')
-    }
-  })
+  // console.log(req.body)
+  // console.log(req.files.image)
+   productHelpers.updateProduct(prodId,req.body).then(()=>{
+     res.redirect('/admin')
+     if(req.files.image){
+      let mainImage = req.files.image[0]
+      let subImage1 = req.files.image[1]
+      let subImage2 = req.files.image[2]
+      let subImage3 = req.files.image[3]
+      //  image.mv('./public/product-images/'+prodId+'.jpg')
+      mainImage.mv('./public/images/product-images/'+prodId+'/0'+prodId+'.jpg')
+      subImage1.mv('./public/images/product-images/'+prodId+'/1'+prodId+'.jpg')
+      subImage2.mv('./public/images/product-images/'+prodId+'/2'+prodId+'.jpg')
+      subImage3.mv('./public/images/product-images/'+prodId+'/3'+prodId+'.jpg')
+     }
+   })
 })
 
 router.get('/allproducts',(req,res)=>{

@@ -42,10 +42,18 @@ module.exports = {
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION)
             .updateOne({_id:objectId(prodId)},
-            {$set:{Name : prodDetails.Name,
+            {$set:{
+                   Name : prodDetails.Name,
                    Catagory : prodDetails.Catagory,
+                   brand : prodDetails.brand,
+                   Stoke : prodDetails.Stoke,
                    Price : prodDetails.Price,
-                   Description : prodDetails.Description}
+                   Description1 : prodDetails.Description1,
+                   Description2 : prodDetails.Description2,
+                   Description3 : prodDetails.Description3,
+                   Description4 : prodDetails.Description4,
+                   Description5 : prodDetails.Description5
+                }
             }).then(()=>{
                 //console.log(response)
                 resolve()
