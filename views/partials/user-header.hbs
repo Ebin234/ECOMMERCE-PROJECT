@@ -1,6 +1,23 @@
+<style>
+    .cart_badge{
+        position: absolute;
+        top: -19px;
+        right: 0px;
+        width: 24px;
+        height: 24px;
+        background: rgb(86 181 43);
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+</style>
+
+
 <header>
     <section id="header">
-        <a href="#"><img src=""  class="logo" alt=""><h4>Shopping Cart</h4></a>
+        <a href="/"><img src=""  class="logo" alt=""><h4>Shopping Cart</h4></a>
 
         <div id="ac">
             <ul id="navbar">
@@ -9,7 +26,8 @@
                 <li><a class="btn1" href="/newArrivals">New Arrivals</a></li>
                 <li><a class="btn1" href="/about">About</a></li>
                 <li><a class="btn1" href="/contact">Contact</a></li>
-                <li id="lg-bag"><a class="btn1" href="/cart"><i class="far fa-shopping-bag"></i></a></li>
+                <li id="lg-bag"><a class="btn1" href="/cart"><i class="far fa-shopping-bag"></i>
+                <span class="cart_badge">5</span></a></li>
                 <li><a class="btn1" href="/search"><i class="far fa-search"></i></a></li>
                 <li><a class="btn1" href="/whishlist"><i class="far fa-heart"></i></a></li>
                 <a href="" id="close"><i class="far fa-times"></i></a>
