@@ -40,19 +40,36 @@ module.exports = {
     },
     addToCart: (prodId, userId) => {
         return new Promise(async (resolve, reject) => {
+            let prodObj = {
+                item : objectId(prodId),
+                quantity : 1
+            }
             let userCart = await db.get().collection(collection.CART_COLLECTION)
                 .findOne({ user: objectId(userId) })
             if (userCart) {
-                db.get().collection(collection.CART_COLLECTION)
-                    .updateOne({ user: objectId(userId) }, {
-                        $push: { products: objectId(prodId) }
-                    }).then(() => {
+                let prodExist = userCart.products.findIndex(product => product.item == prodId)
+                console.log(prodExist)
+                if(prodExist != -1){
+                    db.get().collection(collection.CART_COLLECTION)
+                    .updateOne({'products.item': objectId(prodId)},
+                    {
+                        $inc : {'products.$.quantity':1}
+                    }
+                    ).then(()=>{
                         resolve()
                     })
+                }else{
+                 db.get().collection(collection.CART_COLLECTION)
+                     .updateOne({ user: objectId(userId) }, {
+                         $push: { products:prodObj }
+                     }).then(() => {
+                         resolve()
+                     })
+                }
             } else {
                 let cartObj = {
                     user: objectId(userId),
-                    products: [objectId(prodId)]
+                    products: [prodObj]
                 }
                 db.get().collection(collection.CART_COLLECTION).insertOne(cartObj)
                     .then(() => {
