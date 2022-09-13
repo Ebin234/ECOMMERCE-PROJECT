@@ -81,14 +81,18 @@ router.get('/add-to-cart/:id',(req,res)=>{
    //console.log(userId)
    //console.log(prodId)
    userhelpers.addToCart(prodId,userId).then(()=>{
-    res.redirect('/')
+   // res.redirect('/')
+    res.json({status:true})
    })
 })
 
-router.get('/allProducts',(req,res)=>{
+router.get('/allProducts',async(req,res)=>{
   let user = req.session.user
+  let cartCount = 0;
+  if(user){
+  cartCount = await userhelpers.getCartCount(user._id)}
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/viewProducts',{products,user})
+    res.render('users/viewProducts',{products,user,cartCount})
   })
 })
 
