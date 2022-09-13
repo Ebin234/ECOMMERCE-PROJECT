@@ -18,13 +18,15 @@
         <tbody>
             {{#each products}}
             <tr>
+                {{#each this.product}}
                 <td><a href=""><i class="far fa-times-circle"></i></a></td>
                 <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td>
                 <td>{{this.Name}}</td>
                 <td>${{this.Price}}</td>
+                {{/each}}
                 <td>
                         <button class="normal b1">-</button>
-                        1
+                        {{this.quantity}}
                         <button class="normal b2">+</button>
                 </td>
                 <td>$118.19</td>

@@ -83,26 +83,44 @@ module.exports = {
             let cartProducts = await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
                     $match: { user: objectId(userId) }
-                }, {
-                    $lookup: {
-                        from: collection.PRODUCT_COLLECTION,
-                        let: { proList: '$products' },
-                        pipeline: [
-                            {
-                                $match: {
-                                    $expr: {
-                                        $in: ['$_id', "$$proList"]
-                                    }
-                                }
-                            }
-                        ],
-                        as: 'cartItems'
+                 },
+                 {
+                    $unwind:'$products'
+                 },
+                 {
+                    $project : {
+                        item:'$products.item',
+                        quantity:'$products.quantity'
                     }
-                }
+                 },
+                 {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'product'
+                    }
+                 }
+                 //{
+                //     $lookup: {
+                //         from: collection.PRODUCT_COLLECTION,
+                //         let: { proList: '$products' },
+                //         pipeline: [
+                //             {
+                //                 $match: {
+                //                     $expr: {
+                //                         $in: ['$_id', "$$proList"]
+                //                     }
+                //                 }
+                //             }
+                //         ],
+                //         as: 'cartItems'
+                //     }
+                // }
 
             ]).toArray()
-            //console.log(cartProducts[0].cartItems)
-            resolve(cartProducts[0].cartItems)
+            //console.log(cartProducts[1])
+            resolve(cartProducts)
         })
     },
     getCartCount : (userId)=>{
