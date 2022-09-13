@@ -354,6 +354,12 @@ div ul li .dropdown li a:after {
     transition: 0.5s;
 }
 
+.overlay button{
+    outline: none;
+    border: none;
+    background-color: #fff;
+}
+
 .overlay .fa {
     cursor: pointer;
     color: #088178;

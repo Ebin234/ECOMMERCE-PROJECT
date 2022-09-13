@@ -74,7 +74,8 @@ router.get('/cart',verifyLogin,async(req,res)=>{
   res.render('users/newcart',{products ,user})
 })
 
-router.get('/add-to-cart/:id',verifyLogin,(req,res)=>{
+router.get('/add-to-cart/:id',(req,res)=>{
+  console.log("api called")
    let userId = req.session.user._id
    const prodId =req.params.id
    //console.log(userId)
