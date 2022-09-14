@@ -2,6 +2,7 @@ var db = require('../config/connection')
 var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
 const async = require('hbs/lib/async')
+const { response } = require('../app')
 const objectId = require('mongodb').ObjectId
 
 module.exports = {
@@ -51,7 +52,7 @@ module.exports = {
                 console.log(prodExist)
                 if(prodExist != -1){
                     db.get().collection(collection.CART_COLLECTION)
-                    .updateOne({'products.item': objectId(prodId)},
+                    .updateOne({user:objectId(userId),'products.item': objectId(prodId)},
                     {
                         $inc : {'products.$.quantity':1}
                     }
@@ -126,8 +127,8 @@ module.exports = {
                 // }
 
             ]).toArray()
-            console.log(cartProducts)
-           // resolve(cartProducts)
+            //console.log(cartProducts)
+            resolve(cartProducts)
         })
     },
     getCartCount : (userId)=>{
@@ -140,6 +141,34 @@ module.exports = {
            console.log(count)
            }
            resolve(count)
+        })
+    },
+    changeProductQuantity:(details)=>{
+        console.log(details)
+        details.count = parseInt(details.count)
+        details.quantity = parseInt(details.quantity)
+        return new Promise((resolve,reject)=>{
+            if(details.count==-1 && details.quantity==1){
+                db.get().collection(collection.CART_COLLECTION)
+                .updateOne({_id:objectId(details.cart)},
+                {
+                    $pull:{products:{item:objectId(details.product)}}
+                }
+              ).then((response)=>{
+                console.log(response)
+                resolve({removeProduct:true})
+              })
+            }else{
+            db.get().collection(collection.CART_COLLECTION)
+            .updateOne({_id:objectId(details.cart),'products.item': objectId(details.product)},
+            {
+                $inc : {'products.$.quantity':details.count}
+            }
+            ).then((response)=>{
+                console.log(response)
+                resolve(response)
+            })
+        }
         })
     }
 }

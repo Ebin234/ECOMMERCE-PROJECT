@@ -112,6 +112,13 @@ router.get('/contact',(req,res)=>{
   res.render('users/contact')
 })
 
+router.post('/change-product-quantity',(req,res,next)=>{
+  console.log(req.body)
+  userhelpers.changeProductQuantity(req.body).then((response)=>{
+    res.json(response)
+  })
+})
+
 
 
 
