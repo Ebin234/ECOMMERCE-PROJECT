@@ -108,6 +108,11 @@ module.exports = {
                         quantity:1,
                         product:{$arrayElemAt:['$product',0]}
                     }
+                 },
+                 {
+                    $addFields:{
+                        totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]}
+                    }
                  }
                  //{
                 //     $lookup: {
@@ -127,7 +132,7 @@ module.exports = {
                 // }
 
             ]).toArray()
-            //console.log(cartProducts)
+            console.log(cartProducts)
             resolve(cartProducts)
         })
     },
