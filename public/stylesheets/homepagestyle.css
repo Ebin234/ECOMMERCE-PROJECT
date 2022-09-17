@@ -843,10 +843,15 @@ footer .copyright {
 }
 
 #coupon button,
-#subtotal button {
+#subtotal a {
     background-color: #088178;
     color: #fff;
     padding: 12px 20px;
+}
+
+#subtotal a{
+    text-decoration: none;
+    border-radius: 4px;
 }
 
 #subtotal {
