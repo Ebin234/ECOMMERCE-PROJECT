@@ -70,8 +70,9 @@ router.get('/cart',verifyLogin,async(req,res)=>{
   let userId = req.session.user._id
   let user = req.session.user
   let products = await userhelpers.getCartProducts(userId)
+  let totalValue = await userhelpers.getTotalAmount(userId)
   console.log("products",products)
-  res.render('users/newcart',{products ,user})
+  res.render('users/newcart',{products ,user,totalValue})
 })
 
 router.get('/add-to-cart/:id',(req,res)=>{

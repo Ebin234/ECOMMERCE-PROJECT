@@ -71,7 +71,7 @@
         <table>
             <tr>
                 <td>Cart Subtotal</td>
-                <td>$ 335</td>
+                <td>$ {{totalValue}}</td>
             </tr>
             <tr>
                 <td>Shipping</td>
@@ -79,7 +79,7 @@
             </tr>
             <tr>
                 <td><strong>Total</strong></td>
-                <td><strong>$ 335</strong></td>
+                <td><strong>$ <span id="total">{{totalValue}}</span></strong></td>
             </tr>
         </table>
         <a href="/place-order" class="normal">Proceed to checkout</a>
