@@ -171,7 +171,7 @@ module.exports = {
             }
             ).then((response)=>{
                 console.log(response)
-                resolve(response)
+                resolve({status:true})
             })
         }
         })
