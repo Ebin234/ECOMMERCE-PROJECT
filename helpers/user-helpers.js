@@ -214,8 +214,8 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log(total)
-            //resolve(cartProducts)
+            console.log(total[0].total)
+            resolve(total[0].total)
         })
     }
 }
