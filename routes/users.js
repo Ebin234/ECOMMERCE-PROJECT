@@ -138,6 +138,10 @@ router.post('/checkout',async(req,res)=>{
   })
 })
 
+router.get('/success',(req,res)=>{
+  res.render('users/order-success')
+})
+
 
 
 

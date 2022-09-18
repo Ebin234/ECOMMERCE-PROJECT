@@ -1,0 +1,122 @@
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .border {
+        width: 900px;
+        border: 1px solid;
+        margin: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .border h4 {
+        margin: 20px 0;
+        font-size: 30px;
+    }
+
+    .border div {
+        text-align: center;
+    }
+
+    .border i {
+        margin: 5px 0;
+        width: 60px;
+        height: 60px;
+        border: 2px solid #34f234;
+        background: #0cca0c;
+        text-align: center;
+        display: inline-block;
+        border-radius: 50%;
+        line-height: 54px;
+    }
+
+    .border div i.fa {
+        font-size: 38px;
+        color: whitesmoke;
+    }
+
+    .border p {
+        margin-top: 30px;
+    }
+
+    .border .links {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .border .first {
+        text-decoration: none;
+        margin-bottom: 10px;
+        color: blue;
+    }
+
+    a.normal {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 15px 30px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    .border .second {
+        text-decoration: none;
+        background: green;
+        width: 280px;
+        margin: 8px 308px;
+        color: #fff;
+        border-radius: 8px;
+    }
+
+    /* Start Media Query */
+
+    @media (max-width:799px) {
+        .border {
+            width: 676px;
+        }
+
+        .border .second {
+            margin: 8px 201px;
+        }
+    }
+
+    @media (max-width: 477px) {
+        .border {
+            width: 360px;
+        }
+
+        .border h4 {
+            font-size: 26px;
+        }
+
+        .border .second {
+            margin: 8px 39px;
+        }
+    }
+</style>
+
+<section>
+    <div class="border">
+        <h4>Your Order Has Been Recieved</h4>
+        <div>
+            <i class="fa fa-check"></i>
+        </div>
+        <p>Thank You For Your Purchase</p>
+        <div class="links">
+            <a class="first" href="">View Orders</a>
+            <a class="normal second" href="">Continue shopping</a>
+        </div>
+    </div>
+</section>
