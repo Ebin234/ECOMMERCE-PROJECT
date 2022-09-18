@@ -142,6 +142,10 @@ router.get('/order-success',(req,res)=>{
   res.render('users/order-success',{user:req.session.user})
 })
 
+router.get('/order-details',(req,res)=>{
+  res.render('users/order-details')
+})
+
 
 
 

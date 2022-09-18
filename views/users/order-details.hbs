@@ -1,0 +1,95 @@
+<style>
+    #cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+#cart table td:nth-child(2) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(3) {
+    width: 230px;
+    text-align: center;
+}
+
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6),
+#cart table td:nth-child(7),
+#cart table td:nth-child(8) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(9) {
+    width: 100px;
+    text-align: center;
+}
+</style>
+
+
+
+
+<section id="cart" class="section-p1">
+    <table width="100%">
+        <thead>
+            <tr>
+                <td>No</td>
+                <td>Image</td>
+                <td>product</td>
+                <td>Date</td>
+                <td>Status</td>
+                <td>Address</td>
+                <td>Delivery Status</td>
+                <td>Invoice</td>
+                <td>Remove</td>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>1</td>
+                <td><img src="/images/product-images/{{this.product._id}}/0{{this.product._id}}.jpg" alt=""></td>
+                <td>Cartoon Astronaut T-shirts</td>
+                <td>${{this.product.Price}}</td>
+                <td>
+                        {{!-- <button class="normal b1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                        <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button> --}}
+                </td>
+                <td>{{totalPrice}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+            </tr>
+            {{!-- <tr>
+                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                <td><img src="/images/products/n1.jpg" alt=""></td>
+                <td>Cartoon Astronaut T-shirts</td>
+                <td>$118.19</td>
+                <td>
+                        <button class="normal b1">-</button>
+                        1
+                        <button class="normal b2">+</button>
+                </td>
+                <td>$118.19</td>
+            </tr> --}}
+            {{!-- <tr>
+                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                <td><img src="/images/products/n1.jpg" alt=""></td>
+                <td>Cartoon Astronaut T-shirts</td>
+                <td>$118.19</td>
+                <td>
+                        <button class="normal b1">-</button>
+                        1
+                        <button class="normal b2">+</button>
+                </td>
+                <td>$118.19</td>
+            </tr> --}}
+        </tbody>
+    </table>
+</section>
