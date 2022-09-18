@@ -121,10 +121,10 @@ router.post('/change-product-quantity',(req,res,next)=>{
   })
 })
 
-router.get('/place-order',verifyLogin,async(req,res)=>{
+router.get('/checkout',verifyLogin,async(req,res)=>{
   user=req.session.user
   let total = await userhelpers.getTotalAmount(user._id)
-    res.render('users/place-order',{total,user})
+    res.render('users/checkout',{total,user})
   
 })
 
