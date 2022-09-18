@@ -128,6 +128,10 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
   
 })
 
+router.post('/checkout',(req,res)=>{
+  console.log(req.body)
+})
+
 
 
 

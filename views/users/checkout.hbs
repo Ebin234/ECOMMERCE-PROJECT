@@ -17,20 +17,23 @@
     .main .formbody {
         display: flex;
     }
-    .formbody #form{
+
+    {{!-- .formbody #form {
         width: 70%;
-    }
+    } --}}
 
     .formbody .billing {
+        display: flex;
+        flex-direction: row;
         padding: 10px 5px;
-        }
+    }
 
     .billing label {
         margin: 10px 0;
         font-size: 20px;
     }
 
-    .billing input {
+    .billing .details input {
         margin: 10px 0;
         width: 100%;
         height: 42px;
@@ -41,99 +44,110 @@
         margin-bottom: 37px;
     }
 
-    .formbody .order{
-    width: 30%;
-    height: fit-content;
-    border: 1px solid;
-    margin: 40px 45px;
-    padding: 10px 10px;
-    background: #e3e6f3;
+    .formbody .order {
+        width: 30%;
+        height: fit-content;
+        border: 1px solid;
+        margin: 40px 45px;
+        padding: 10px 10px;
+        background: #e3e6f3;
     }
 
-    .order h3{
+    .order h3 {
         font-size: 25px;
         padding: 20px 0;
     }
-    .order table{
+
+    .order table {
         width: 100%;
         margin: 10px 0;
         border: 1px solid #aeb0bd;
         padding: 10px;
     }
-    .order table thead td{
+
+    .order table thead td {
         font-size: 20px;
         padding-bottom: 15px;
         text-align: center;
     }
-    .order table tbody td{
+
+    .order table tbody td {
         padding-bottom: 6px;
         text-align: center;
     }
-    .order div hr{
+
+    .order div hr {
         margin: 20px 0;
     }
 
-    .order .total ul{
+    .order .total ul {
         display: flex;
-        flex-direction:row;
-        list-style:none
+        flex-direction: row;
+        list-style: none
     }
-    div ul li{
+
+    div ul li {
         font-weight: 700;
         font-size: 20px;
     }
 
     div ul li:last-child {
-    padding-left: 292px;
-}
-.order .radio{
-    display: flex;
+        padding-left: 292px;
+    }
+
+    .order .radio {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .radio label {
+        margin-bottom: 12px;
+    }
+
+    .order .checkoutbtn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .order button {
+        background: red;
+        width: 250px;
+        border-radius: 35px;
+        font-size: 16px;
+        color: #fff;
+    }
+
+    /* Start Media Query */
+
+    @media (max-width:799px) {
+        .main .formbody {
+            flex-direction: column;
+        }
+
+        .formbody .billing{
     flex-direction: column;
 }
 
-.radio label{
-    margin-bottom: 12px;
-}
-.order .checkoutbtn{
-    display: flex;
-    justify-content: center;
-}
-.order button{
-    background: red;
-    width: 250px;
-    border-radius: 35px;
-    font-size: 16px;
-    color: #fff;
-}
+        {{!-- .formbody #form {
+            width: 100%;
+        } --}}
 
-/* Start Media Query */
+        .formbody .order {
+            width: 100%;
+            margin: 0 0;
+        }
 
-@media (max-width:799px) {
-    .main .formbody {
-    flex-direction: column;
-}
+        div ul li:last-child {
+            padding-left: 450px;
+        }
 
-.formbody #form {
-    width: 100%;
-}
+    }
 
-.formbody .order {
-    width: 100%;
-    margin: 0 0;
-}
-
-div ul li:last-child {
-    padding-left: 450px;
-}
-
-}
-
-@media (max-width: 477px){
-    div ul li:last-child {
-    padding-left: 88px;
-}
-}
-    
+    @media (max-width: 477px) {
+        div ul li:last-child {
+            padding-left: 88px;
+        }
+    }
 </style>
 
 
@@ -148,70 +162,91 @@ div ul li:last-child {
         <hr class="hr">
         <div class="formbody">
             <div id="form">
-                <form class="billing" action="/admin/add-product2" method="post" enctype="multipart/form-data">
-                    <label for="">Full Name*</label>
-                    <input type="text" name="Name">
-                    <label for="">Address*</label>
-                    <input type="text">
-                    <label for="">Town/City*</label>
-                    <input type="text" name="brand">
-                    <label for="">State8</label>
-                    <input type="text" name="Stoke">
-                    <label for="">Postcode/Zip*</label>
-                    <input type="number" name="Price">
-                    <label for="">Phone*</label>
-                    <input type="number">
+                <form id="checkout-form" class="billing" action="" method="post" enctype="multipart/form-data">
+                    <div class="details">
+                        <label for="">Full Name*</label>
+                        <input type="text" name="Name">
+                        <label for="">Address*</label>
+                        <input type="text">
+                        <label for="">Town/City*</label>
+                        <input type="text" name="brand">
+                        <label for="">State8</label>
+                        <input type="text" name="Stoke">
+                        <label for="">Postcode/Zip*</label>
+                        <input type="number" name="Price">
+                        <label for="">Phone*</label>
+                        <input type="number">
+                    </div>
 
+
+
+                    <div class="order">
+                        <h3>your order</h3>
+                        <hr>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Product</td>
+                                    <td>qty</td>
+                                    <td>Total</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>iphone</td>
+                                    <td>4</td>
+                                    <td>400</td>
+                                </tr>
+                                <tr>
+                                    <td>iphone</td>
+                                    <td>4</td>
+                                    <td>400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <hr>
+                            <div class="total">
+                                <ul>
+                                    <li>Total</li>
+                                    <li>Rs.{{total}}</li>
+                                </ul>
+                            </div>
+                            <hr>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="payment-method" value="COD" checked>COD
+                                </label>
+                                <label>
+                                    <input type="radio" name="payment-method" value="ONLINE">Online Payment
+                                </label>
+                            </div>
+                        </div>
+                        <div class="checkoutbtn">
+                            <button class="normal" type="submit">Place Order</button>
+                        </div>
+                    </div>
                 </form>
-            </div>
-            <div class="order">
-                <h3>your order</h3>
-                <hr>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Product</td>
-                            <td>qty</td>
-                            <td>Total</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>iphone</td>
-                            <td>4</td>
-                            <td>400</td>
-                        </tr>
-                        <tr>
-                            <td>iphone</td>
-                            <td>4</td>
-                            <td>400</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div>
-                <hr>
-                <div class="total">
-                    <ul>
-                        <li>Total</li>
-                        <li>Rs.{{total}}</li>
-                    </ul>
-                </div>
-                <hr>
-                <div class="radio">
-                <label>
-                 <input type="radio" name="payment-method" value="COD" checked>COD
-                </label>
-                <label>
-                 <input type="radio" name="payment-method" value="ONLINE">Online Payment
-                 </label>
-                </div>
-                </div>
-                <div class="checkoutbtn">
-                <button  class="normal" type="submit">Place Order</button>
-                </div>
             </div>
         </div>
 
     </div>
 
 </section>
+
+
+
+
+<script>
+    $("#checkout-form").submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/checkout',
+            method: 'post',
+            data: $('#checkout-form').serialize(),
+            success: (response) => {
+                alert(response)
+            }
+        })
+    })
+</script>
