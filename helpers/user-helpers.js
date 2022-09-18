@@ -217,5 +217,41 @@ module.exports = {
             console.log(total[0].total)
             resolve(total[0].total)
         })
+    },
+    getCartProductsList : (userId)=>{
+        return new Promise(async(resolve,reject)=>{
+          let cart = await db.get().collection(collection.CART_COLLECTION)
+            .findOne({user:objectId(userId)})
+            resolve(cart.products)
+        })
+    },
+    placeOrder : (order,products,total)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(order,products,total)
+            let status = order['payment-method'] ==='COD'?'placed':'pending'
+            //console.log(status)
+            let orderObj = {
+                deliveryDetails : {
+                    fullName : order.Name,
+                    address : order.address,
+                    city : order.city,
+                    state : order.state,
+                    pincode : order.pincode,
+                    mobile : order.mobile
+                },
+                userId : objectId(order.userId),
+                paymentMethod : order['payment-method'],
+                products : products,
+                totalAmount : total,
+                status : status,
+                date : new Date()
+            }
+           // console.log('orderObj',orderObj)
+
+           db.get().collection(collection.ORDER_COLLECTION)
+           .insertOne(orderObj).then((response)=>{
+            resolve()
+           })
+        })
     }
 }

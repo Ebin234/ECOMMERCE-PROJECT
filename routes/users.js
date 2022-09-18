@@ -128,8 +128,14 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
   
 })
 
-router.post('/checkout',(req,res)=>{
+router.post('/checkout',async(req,res)=>{
   console.log(req.body)
+  let products = await userhelpers.getCartProductsList(req.body.userId)
+  let totalPrice = await userhelpers.getTotalAmount(req.body.userId)
+  console.log(products)
+  userhelpers.placeOrder(req.body,products,totalPrice).then((response)=>{
+    res.json({status : true})
+  })
 })
 
 
