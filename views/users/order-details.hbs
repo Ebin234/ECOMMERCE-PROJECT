@@ -52,11 +52,22 @@
             <tr>
                 <td>{{inc @index}}</td>
                 <td><img src="/images/product-images/{{this.product}}/0{{this.product}}.jpg" alt=""></td>
-                <td>{{this.productName}}</td>
-                <td>{{this.date}} <br> {{this.time}}</td>
+                <td>{{this.productName}} <br>
+                    Catagory:{{this.Catagory}} <br>
+                    Quantity:{{this.quantity}} <br>
+                    Price:{{this.price}}
+                </td>
+                <td>{{this.date}} <br>
+                    {{this.time}}
+                </td>
                 <td>{{this.status}}</td>
-                <td>ebin yesudas <br> koilparambil <br> punnapra po <br>
-                 punnapara </td>
+                <td>{{this.deliveryDetails.fullName}} <br>
+                    {{this.deliveryDetails.address}} <br>
+                    {{this.deliveryDetails.state}} <br>
+                    {{this.deliveryDetails.city}} <br>
+                    pin: {{this.deliveryDetails.pincode}} <br>
+                    mob: {{this.deliveryDetails.mobile}}
+                </td>
                 <td>pending</td>
                 <td><i class="fa-solid fa-file-invoice"></i></td>
                 <td><a href=""><i class="far fa-times-circle"></i></a></td>
