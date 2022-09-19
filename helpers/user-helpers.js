@@ -288,7 +288,6 @@ module.exports = {
                   },
                 {
                      $project: {
-                        orderStatus: 1,
                         deliveryDetails: 1,
                         productName: "$productDetails.Name",
                         catagory: "$productDetails.Catagory",
@@ -297,10 +296,11 @@ module.exports = {
                         status: 1,
                         price: "$productDetails.Price",
                         quantity: "$products.quantity",
-                        product: "$products.item",
-                        orderStatus: "$products.orderStatus",
-                        isCancelled: "$products.isCancelled"
+                        product: "$products.item"
                      }
+                  },
+                  {
+                    $sort : {date:-1}
                   }
             ]).toArray()
             console.log(orders)
