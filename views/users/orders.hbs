@@ -1,0 +1,97 @@
+<style>
+    #cart table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+#cart table td:nth-child(2) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(3) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(4),
+#cart table td:nth-child(5),
+#cart table td:nth-child(6),
+#cart table td:nth-child(7),
+#cart table td:nth-child(8) {
+    width: 150px;
+    text-align: center;
+}
+
+#cart table td:nth-child(9),
+#cart table td:nth-child(10) {
+    width: 150px;
+    text-align: center;
+}
+
+a.normal {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 15px 30px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+    }
+a.button{
+    text-decoration: none;
+    background-color: #1ab521;
+    color: #fff;
+    border-radius: 28px;
+}    
+</style>
+
+
+
+
+<section id="cart" class="section-p1">
+    <table width="100%">
+        <thead>
+            <tr>
+                <td>No</td>
+                
+                
+                <td>Date</td>
+                <td>Status</td>
+                <td>Address</td>
+                <td>mobile</td>
+                <td>Delivery Status</td>
+                <td>amount</td>
+                <td>payment</td>
+                <td>products</td>
+                <td>Remove</td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+            <tr>
+                <td>{{inc @index}}</td>
+                <td>{{this.date}} <br>
+                    {{this.time}}
+                </td>
+                <td>{{this.status}}</td>
+                <td>{{this.deliveryDetails.fullName}} <br>
+                    {{this.deliveryDetails.address}} <br>
+                    {{this.deliveryDetails.state}} <br>
+                    {{this.deliveryDetails.city}} <br>
+                    pin: {{this.deliveryDetails.pincode}} <br></td>
+                <td>{{this.deliveryDetails.mobile}}</td>
+                <td>pending</td>
+                <td>{{this.totalAmount}}</td>
+                <td>{{this.paymentMethod}}</td>
+                <td><a class="normal button" href="">view products</a></td>
+                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+            </tr>
+            {{/each}}
+           
+        </tbody>
+    </table>
+</section>

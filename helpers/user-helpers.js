@@ -262,49 +262,59 @@ module.exports = {
            })
         })
     },
+    // getUserOrders : (userId)=>{
+    //     return new Promise(async(resolve,reject)=>{
+    //         console.log(userId)
+    //         let orders = await db.get().collection(collection.ORDER_COLLECTION)
+    //         .aggregate([
+    //             {
+    //                 $match: {
+    //                     userId: objectId(userId)
+    //                 }
+    //             },
+    //             {
+    //                 $unwind:"$products"
+    //             },
+    //             {
+    //                 $lookup: {
+    //                     from: collection.PRODUCT_COLLECTION,
+    //                     localField: "products.item",
+    //                     foreignField: "_id",
+    //                     as: "productDetails"
+    //                 }
+    //             },
+    //              {
+    //                  $unwind:"$productDetails"
+    //               },
+    //             {
+    //                  $project: {
+    //                     deliveryDetails: 1,
+    //                     productName: "$productDetails.Name",
+    //                     catagory: "$productDetails.Catagory",
+    //                     date: 1,
+    //                     time: 1,
+    //                     status: 1,
+    //                     price: "$productDetails.Price",
+    //                     quantity: "$products.quantity",
+    //                     product: "$products.item"
+    //                  }
+    //               },
+    //               {
+    //                 $sort : {date:-1}
+    //               }
+    //         ]).toArray()
+    //         console.log(orders)
+    //         //console.log('products=',orders[0].products)
+    //         resolve(orders)
+    //     })
+    // }
+
     getUserOrders : (userId)=>{
         return new Promise(async(resolve,reject)=>{
             console.log(userId)
-            let orders = await db.get().collection(collection.ORDER_COLLECTION)
-            .aggregate([
-                {
-                    $match: {
-                        userId: objectId(userId)
-                    }
-                },
-                {
-                    $unwind:"$products"
-                },
-                {
-                    $lookup: {
-                        from: collection.PRODUCT_COLLECTION,
-                        localField: "products.item",
-                        foreignField: "_id",
-                        as: "productDetails"
-                    }
-                },
-                 {
-                     $unwind:"$productDetails"
-                  },
-                {
-                     $project: {
-                        deliveryDetails: 1,
-                        productName: "$productDetails.Name",
-                        catagory: "$productDetails.Catagory",
-                        date: 1,
-                        time: 1,
-                        status: 1,
-                        price: "$productDetails.Price",
-                        quantity: "$products.quantity",
-                        product: "$products.item"
-                     }
-                  },
-                  {
-                    $sort : {date:-1}
-                  }
-            ]).toArray()
+            let orders =await db.get().collection(collection.ORDER_COLLECTION)
+            .find({userId:objectId(userId)}).toArray()
             console.log(orders)
-            //console.log('products=',orders[0].products)
             resolve(orders)
         })
     }
