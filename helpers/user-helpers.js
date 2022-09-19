@@ -230,8 +230,10 @@ module.exports = {
     placeOrder : (order,products,total)=>{
         return new Promise((resolve,reject)=>{
             console.log(order,products,total)
-            
             let status = order['payment-method'] ==='COD'?'placed':'pending'
+            let d = new Date()
+            let date = moment(d).format('YYYY-MM-DD');
+            let time = moment(d).format('HH:MM:SS')
             //console.log(status)
             let orderObj = {
                 deliveryDetails : {
@@ -247,7 +249,8 @@ module.exports = {
                 products : products,
                 totalAmount : total,
                 status : status,
-                date : new Date()
+                date : date,
+                time : time
             }
            // console.log('orderObj',orderObj)
 
