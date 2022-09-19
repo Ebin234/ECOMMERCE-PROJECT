@@ -305,7 +305,7 @@ module.exports = {
             ]).toArray()
             console.log(orders)
             //console.log('products=',orders[0].products)
-            //resolve(orders)
+            resolve(orders)
         })
     }
 }

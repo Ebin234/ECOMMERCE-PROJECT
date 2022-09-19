@@ -50,11 +50,11 @@
         <tbody>
             {{#each orders}}
             <tr>
-                <td>1</td>
-                <td><img src="/images/product-images/{{this.product._id}}/0{{this.product._id}}.jpg" alt=""></td>
-                <td>Cartoon Astronaut T-shirts</td>
-                <td>2022/08/04 <br> 15:02:04</td>
-                <td>placed</td>
+                <td>{{inc @index}}</td>
+                <td><img src="/images/product-images/{{this.product}}/0{{this.product}}.jpg" alt=""></td>
+                <td>{{this.productName}}</td>
+                <td>{{this.date}} <br> {{this.time}}</td>
+                <td>{{this.status}}</td>
                 <td>ebin yesudas <br> koilparambil <br> punnapra po <br>
                  punnapara </td>
                 <td>pending</td>
