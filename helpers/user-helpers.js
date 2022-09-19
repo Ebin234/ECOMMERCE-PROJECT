@@ -3,6 +3,7 @@ var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
 const async = require('hbs/lib/async')
 const { response } = require('../app')
+const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
 
 module.exports = {
@@ -254,6 +255,11 @@ module.exports = {
             .deleteOne({user:objectId(order.userId)})
             resolve()
            })
+        })
+    },
+    getUserOrders : (userId)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(userId)
         })
     }
 }
