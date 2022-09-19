@@ -48,7 +48,7 @@
             </tr>
         </thead>
         <tbody>
-            
+            {{#each orders}}
             <tr>
                 <td>1</td>
                 <td><img src="/images/product-images/{{this.product._id}}/0{{this.product._id}}.jpg" alt=""></td>
@@ -61,6 +61,7 @@
                 <td><i class="fa-solid fa-file-invoice"></i></td>
                 <td><a href=""><i class="far fa-times-circle"></i></a></td>
             </tr>
+            {{/each}}
             {{!-- <tr>
                 <td><a href=""></a></td>
                 <td><img src="/images/products/n1.jpg" alt=""></td>

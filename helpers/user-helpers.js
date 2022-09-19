@@ -5,6 +5,7 @@ const async = require('hbs/lib/async')
 const { response } = require('../app')
 const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
+const moment = require('moment')
 
 module.exports = {
     dosignup: (userdata) => {
@@ -229,6 +230,7 @@ module.exports = {
     placeOrder : (order,products,total)=>{
         return new Promise((resolve,reject)=>{
             console.log(order,products,total)
+            
             let status = order['payment-method'] ==='COD'?'placed':'pending'
             //console.log(status)
             let orderObj = {
@@ -258,8 +260,49 @@ module.exports = {
         })
     },
     getUserOrders : (userId)=>{
-        return new Promise((resolve,reject)=>{
+        return new Promise(async(resolve,reject)=>{
             console.log(userId)
+            let orders = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match: {
+                        userId: objectId(userId)
+                    }
+                },
+                {
+                    $unwind:"$products"
+                },
+                {
+                    $lookup: {
+                        from: collection.PRODUCT_COLLECTION,
+                        localField: "products.item",
+                        foreignField: "_id",
+                        as: "productDetails"
+                    }
+                },
+                 {
+                     $unwind:"$productDetails"
+                  },
+                {
+                     $project: {
+                        orderStatus: 1,
+                        deliveryDetails: 1,
+                        productName: "$productDetails.Name",
+                        catagory: "$productDetails.Catagory",
+                        date: 1,
+                        time: 1,
+                        status: 1,
+                        price: "$productDetails.Price",
+                        quantity: "$products.quantity",
+                        product: "$products.item",
+                        orderStatus: "$products.orderStatus",
+                        isCancelled: "$products.isCancelled"
+                     }
+                  }
+            ]).toArray()
+            console.log(orders)
+            //console.log('products=',orders[0].products)
+            //resolve(orders)
         })
     }
 }
