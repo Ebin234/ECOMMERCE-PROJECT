@@ -313,7 +313,7 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             console.log(userId)
             let orders =await db.get().collection(collection.ORDER_COLLECTION)
-            .find({userId:objectId(userId)}).toArray()
+            .find({userId:objectId(userId)}).sort({date:-1,time:-1}).toArray()
             console.log(orders)
             resolve(orders)
         })
