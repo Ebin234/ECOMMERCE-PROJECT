@@ -6,7 +6,7 @@ const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
 
 const verifyLogin = (req,res,next)=>{
-  if(req.session.loggedIn){
+  if(req.session.userLoggedIn){
     next()
   }else{
     res.redirect('/login')
@@ -26,22 +26,22 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/login',(req,res)=>{
-  if(req.session.loggedIn){
+  if(req.session.userLoggedIn){
     res.redirect('/')
   }else{
-    res.render('users/login',{"loginErr":req.session.loginErr})
-    req.session.loginErr = false
+    res.render('users/login',{"loginErr":req.session.userLoginErr})
+    req.session.userLoginErr = false
   }
 })
 
 router.post('/login',(req,res)=>{
   userhelpers.dologin(req.body).then((response)=>{
     if(response.status){
-      req.session.loggedIn = true
       req.session.user = response.user
+      req.session.userLoggedIn = true
       res.redirect('/')
     }else{
-      req.session.loginErr=true
+      req.session.userLoginErr=true
       res.redirect('/login')
     }
   })
@@ -55,14 +55,15 @@ router.post('/signup',(req,res)=>{
   console.log(req.body)
   userhelpers.dosignup(req.body).then((response)=>{
     console.log(response)
-    req.session.loggedIn=true
     req.session.user = response
+    req.session.userLoggedIn=true
     res.redirect('/')
   })
 })
 
 router.get('/logout',(req,res)=>{
-  req.session.destroy()
+  req.session.user = null
+  req.session.userLoggedIn = false
   res.redirect('/')
 })
 
