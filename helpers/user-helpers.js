@@ -337,5 +337,23 @@ module.exports = {
                 }
               })
         })
+    },
+    verifyPayment : (details)=>{
+        return new Promise((resolve,reject)=>{
+            console.log("details:",details)
+            const crypto = require('crypto')
+            let body = details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']
+            var expectedSignature = crypto.createHmac('sha256', 'h2iHzZE8IZM1tSnhdkb6pOuc')
+             .update(body.toString())
+             .digest('hex');
+
+             console.log("sig recieved :",details['payment[razorpay_signature]']);
+             console.log("sig generated :",expectedSignature);
+             if(expectedSignature===details['payment[razorpay_signature]']){
+                resolve
+             }else{
+                reject()
+             }
+        })
     }
 }

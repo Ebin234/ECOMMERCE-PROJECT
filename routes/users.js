@@ -148,6 +148,9 @@ router.post('/checkout',async(req,res)=>{
 
 router.post('/verify-payment',(req,res)=>{
   console.log(req.body)
+  userhelpers.verifyPayment(req.body).then((response)=>{
+  
+  })
 })
 
 router.get('/order-success',(req,res)=>{
