@@ -149,7 +149,11 @@ router.post('/checkout',async(req,res)=>{
 router.post('/verify-payment',(req,res)=>{
   console.log(req.body)
   userhelpers.verifyPayment(req.body).then((response)=>{
-  
+    userhelpers.changePaymentStatus(req.body['order[receipt]']).then(()=>{
+      res.json({status:true})
+    })
+  }).catch((err)=>{
+    res.json({status:false,errmsg:''})
   })
 })
 

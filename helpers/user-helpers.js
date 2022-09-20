@@ -8,6 +8,7 @@ const objectId = require('mongodb').ObjectId
 const moment = require('moment')
 const Razorpay = require('razorpay')
 const { options } = require('../routes/admin')
+const { resolve } = require('path')
 
 var instance = new Razorpay({
     key_id: 'rzp_test_9WR1WMwomrKaJa',
@@ -354,6 +355,19 @@ module.exports = {
              }else{
                 reject()
              }
+        })
+    },
+    changePaymentStatus : (orderId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.ORDER_COLLECTION)
+            .updateOne({_id:objectId(orderId)},
+            {
+                $set:{
+                    status:'placed'
+                }
+            }).then(()=>{
+                resolve()
+            })
         })
     }
 }
