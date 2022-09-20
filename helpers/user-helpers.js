@@ -325,7 +325,7 @@ module.exports = {
         return new Promise((resolve,reject)=>{
             console.log(orderId)
             var options = {
-                amount: total,
+                amount: total*100,
                 currency: "INR",
                 receipt: ""+orderId
             };
@@ -351,7 +351,7 @@ module.exports = {
              console.log("sig recieved :",details['payment[razorpay_signature]']);
              console.log("sig generated :",expectedSignature);
              if(expectedSignature===details['payment[razorpay_signature]']){
-                resolve
+                resolve()
              }else{
                 reject()
              }
