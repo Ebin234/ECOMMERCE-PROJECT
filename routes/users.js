@@ -148,8 +148,12 @@ router.get('/view-orders',async(req,res)=>{
   res.render('users/orders',{orders})
 })
 
-router.get('/view-order-products/:id',(req,res)=>{
-  
+router.get('/view-order-products/:id',async(req,res)=>{
+  let orderId = req.params.id
+  console.log(orderId)
+  let orderItems =await userhelpers.getOrderProductsDetails(orderId)
+  console.log("orderItems :",orderItems)
+  res.render('users/view-order-details',{orderItems})
 })
 // router.get('/orders',async(req,res)=>{
 //   let orders = await userhelpers.getUserOrders(req.session.user._id)

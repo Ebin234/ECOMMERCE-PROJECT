@@ -22,11 +22,6 @@
     width: 150px;
     text-align: center;
 }
-
-#cart table td:nth-child(9) {
-    width: 100px;
-    text-align: center;
-}
 </style>
 
 
@@ -44,18 +39,18 @@
                 <td>Address</td>
                 <td>Delivery Status</td>
                 <td>Invoice</td>
-                <td>Remove</td>
             </tr>
         </thead>
         <tbody>
-            {{#each orders}}
+            {{#each orderItems}}
             <tr>
                 <td>{{inc @index}}</td>
                 <td><img src="/images/product-images/{{this.product}}/0{{this.product}}.jpg" alt=""></td>
                 <td>{{this.productName}} <br>
-                    Catagory:{{this.Catagory}} <br>
-                    Quantity:{{this.quantity}} <br>
-                    Price:{{this.price}}
+                    Brand : {{this.brand}} <br>
+                    Catagory : {{this.catagory}} <br>
+                    Quantity : {{this.quantity}} <br>
+                    Price : {{this.price}}
                 </td>
                 <td>{{this.date}} <br>
                     {{this.time}}
@@ -70,7 +65,6 @@
                 </td>
                 <td>pending</td>
                 <td><i class="fa-solid fa-file-invoice"></i></td>
-                <td><a href=""><i class="far fa-times-circle"></i></a></td>
             </tr>
             {{/each}}
             {{!-- <tr>
