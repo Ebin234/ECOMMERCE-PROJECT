@@ -41,7 +41,7 @@ a.b2{
 
 <section id="cart" class="section-p1">
     <div class="add"><a href="/admin/add-product" class="normal">add product</a></div>
-    <table width="100%">
+    <table id="productTable" width="100%">
         <thead>
             <tr>
                 <td>No</td>
@@ -68,7 +68,7 @@ a.b2{
                 </td>
             </tr>
             {{/each}}
-            <tr>
+            {{!-- <tr>
                 <td>1.</td>
                 <td><img src="/images/products/n1.jpg" alt=""></td>
                 <td>Cartoon Astronaut T-shirts</td>
@@ -79,19 +79,14 @@ a.b2{
                     <button class="b1 normal">Edit</button>
                     <button class=" b2 normal">Delete</button>
                 </td>
-            </tr>
-            <tr>
-                <td>1.</td>
-                <td><img src="/images/products/n1.jpg" alt=""></td>
-                <td>Cartoon Astronaut T-shirts</td>
-                <td>smartphone</td>
-                <td>2000</td>
-                <td>$118.19</td>
-                <td>
-                    <button class="b1 normal">Edit</button>
-                    <button class=" b2 normal">Delete</button>
-                </td>
-            </tr>
+            </tr> --}}
+            
         </tbody>
     </table>
 </section>
+
+<script>
+  $( function () {
+    $('#productTable').DataTable();
+} );
+</script>
