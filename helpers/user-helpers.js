@@ -7,6 +7,7 @@ const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
 const moment = require('moment')
 const Razorpay = require('razorpay')
+const { options } = require('../routes/admin')
 
 var instance = new Razorpay({
     key_id: 'rzp_test_9WR1WMwomrKaJa',
@@ -322,19 +323,16 @@ module.exports = {
     generateRazorpay: (orderId,total)=>{
         return new Promise((resolve,reject)=>{
             console.log(orderId)
-            instance.orders.create({
-                amount: 50000,
+            var options = {
+                amount: total,
                 currency: "INR",
-                receipt: ""+orderId,
-                notes: {
-                  key1: "value3",
-                  key2: "value2"
-                }
-              },function(err,order){
+                receipt: ""+orderId
+            };
+            instance.orders.create(options,function(err, order){
                 if(err){
-                    console.log(err)
+                    console.log("err:",err)
                 }else{
-                    console.log("new order:",order)
+                    console.log("new order:",order);
                     resolve(order)
                 }
               })

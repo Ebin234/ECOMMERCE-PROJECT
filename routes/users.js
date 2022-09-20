@@ -129,20 +129,25 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
 })
 
 router.post('/checkout',async(req,res)=>{
-  console.log(req.body)
+  //console.log(req.body)
   let products = await userhelpers.getCartProductsList(req.body.userId)
   let totalPrice = await userhelpers.getTotalAmount(req.body.userId)
-  console.log(products)
+  // console.log(products)
   userhelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
-    console.log("orderId:",orderId)
+    // console.log("orderId:",orderId)
     if(req.body['payment-method']=='COD'){
-    res.json({status : true})
+    res.json({codSuccess : true})
   }else{
     userhelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
-      
+      console.log("response:",response)
+      res.json(response)
     })
   }
   })
+})
+
+router.post('/verify-payment',(req,res)=>{
+  console.log(req.body)
 })
 
 router.get('/order-success',(req,res)=>{
