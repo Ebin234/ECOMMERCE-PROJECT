@@ -6,6 +6,12 @@ const { response } = require('../app')
 const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
 const moment = require('moment')
+const Razorpay = require('razorpay')
+
+var instance = new Razorpay({
+    key_id: 'rzp_test_9WR1WMwomrKaJa',
+    key_secret: 'h2iHzZE8IZM1tSnhdkb6pOuc',
+  });
 
 module.exports = {
     dosignup: (userdata) => {
@@ -258,7 +264,8 @@ module.exports = {
            .insertOne(orderObj).then((response)=>{
             db.get().collection(collection.CART_COLLECTION)
             .deleteOne({user:objectId(order.userId)})
-            resolve()
+            //console.log(response.insertedId)
+            resolve(response.insertedId)
            })
         })
     },
@@ -310,6 +317,27 @@ module.exports = {
             ]).toArray()
             //console.log(orderItems)
             resolve(orderItems)
+        })
+    },
+    generateRazorpay: (orderId,total)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(orderId)
+            instance.orders.create({
+                amount: 50000,
+                currency: "INR",
+                receipt: ""+orderId,
+                notes: {
+                  key1: "value3",
+                  key2: "value2"
+                }
+              },function(err,order){
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log("new order:",order)
+                    resolve(order)
+                }
+              })
         })
     }
 }
