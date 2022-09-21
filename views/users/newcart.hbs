@@ -23,11 +23,11 @@
                 <td>{{this.product.Name}}</td>
                 <td>${{this.product.Price}}</td>
                 <td>
-                        <button class="normal b1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</button>
+                        <button class="normal b1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1,'1{{this.product._id}}')">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                        <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1,'1{{this.product._id}}')">+</button>
                 </td>
-                <td><span id="totalSubtotal">{{totalPrice}}</span></td>
+                <td><span id="1{{this.product._id}}">{{totalPrice}}</span></td>
             </tr>
             {{/each}}
             {{!-- <tr>
@@ -87,7 +87,8 @@
 </section>
 
 <script>
-    function changeQuantity(cartId,prodId,userId,count){
+    function changeQuantity(cartId,prodId,userId,count,subId){
+        console.log(subId)
         let quantity = parseInt(document.getElementById(prodId).innerHTML)
         count = parseInt(count)
         $.ajax({
@@ -107,6 +108,7 @@
                 }else{
                     document.getElementById(prodId).innerHTML=quantity+count
                     document.getElementById('total').innerHTML=response.total
+                    document.getElementById(subId).innerHTML=response.subTotal
                 }
             }
         })

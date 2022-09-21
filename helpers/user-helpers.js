@@ -121,7 +121,8 @@ module.exports = {
                  },
                  {
                     $addFields:{
-                        totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]}
+                        totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]},
+                        // subtotalId:'$product._id'
                     }
                  }
                  //{
@@ -142,7 +143,7 @@ module.exports = {
                 // }
 
             ]).toArray()
-            console.log(cartProducts)
+            console.log("cart:",cartProducts)
             resolve(cartProducts)
         })
     },
