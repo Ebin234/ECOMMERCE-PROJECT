@@ -124,4 +124,8 @@ router.get('/allproducts',(req,res)=>{
   
 })
 
+router.get('/create-coupon',(req,res)=>{
+  res.render('admin/create-coupon')
+})
+
 module.exports = router;
