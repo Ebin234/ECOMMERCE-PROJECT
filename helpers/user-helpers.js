@@ -433,7 +433,22 @@ module.exports = {
             })
         })
     },
-    getDiscount : (details,userId,total)=>{
-        
+    getDiscount : (code,total)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(code,total)
+            let discountRate = await db.get().collection(collection.COUPON_COLLECTION)
+            .aggregate([
+                {
+                    $match:{name:code}
+                },
+            ]).toArray()
+           // console.log(discountRate[0].discount)
+            let discount = parseFloat(discountRate[0].discount)
+            //console.log(typeof discount)
+            // console.log(discount)
+            let newTotal = total - ((total*discount)/100)
+             console.log(newTotal)
+             resolve(newTotal)
+        })
     }
 }

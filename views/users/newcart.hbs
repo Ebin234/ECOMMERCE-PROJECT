@@ -62,9 +62,9 @@
     <div id="coupon">
         <h3>Apply Coupon</h3>
         <div>
-            <form action="/apply-coupon/{{totalValue}}" method="post" enctype="multipart/form-data">
-            <input type="text" placeholder="Enter Your Coupon" name="name">
-            <button type="submit" class="normal">Apply</button>
+            <form action="/apply-coupon/" id="form" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Enter Your Coupon" name="name"  id="couponCode">
+            <button class="normal" onclick="applyCoupon()">Apply</button>
             </form>
         </div>
     </div>
@@ -73,7 +73,7 @@
         <table>
             <tr>
                 <td>Cart Subtotal</td>
-                <td>$ {{totalValue}}</td>
+                <td>$ <span id="value">{{totalValue}}</span></td>
             </tr>
             <tr>
                 <td>Shipping</td>
@@ -112,6 +112,19 @@
                     document.getElementById('total').innerHTML=response.total
                     document.getElementById(subId).innerHTML=response.subTotal
                 }
+            }
+        })
+    }
+
+    function applyCoupon(){
+        var $form = $('#form')
+        $.ajax({
+            url:'/apply-coupon',
+            method:'post',
+            data:$form.serialize(),
+            success:(newTotal)=>{
+                
+                document.getElementById('value').innerHTML=newTotal
             }
         })
     }

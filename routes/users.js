@@ -190,12 +190,19 @@ router.get('/view-order-products/:id',async(req,res)=>{
 //   res.render('users/order-details',{user:req.session.user,orders})
 // })
  
-router.post('/apply-coupon/:price',(req,res)=>{
-  let total = req.params.price
+router.post('/apply-coupon',async(req,res)=>{
+  console.log(req.body)
+  let couponCode = req.body.name
   let userId = req.session.user._id
-  console.log(req.body,total,userId)
-  userhelpers.getDiscount(req.body,userId,total)
- // res.redirect('/cart')
+  let totalAmount = await userhelpers.getTotalAmount(userId)
+  //console.log(totalValue)
+  //console.log(couponCode)
+  userhelpers.getDiscount(couponCode,totalAmount).then((newTotal)=>{
+    //console.log("newtotal:",newTotal)
+    //res.render('/cart',{newTotal})
+    //res.redirect('/cart')
+    res.json(newTotal)
+  })
 })
 
 
