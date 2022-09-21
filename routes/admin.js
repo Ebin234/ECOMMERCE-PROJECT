@@ -128,4 +128,11 @@ router.get('/create-coupon',(req,res)=>{
   res.render('admin/create-coupon')
 })
 
+router.post('/create-coupon',(req,res)=>{
+  //console.log(req.body);
+  productHelpers.createCoupon(req.body).then(()=>{
+    res.redirect('/admin')
+  })
+})
+
 module.exports = router;

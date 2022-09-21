@@ -60,5 +60,19 @@ module.exports = {
             })
         })
     },
-    
+    createCoupon:(details)=>{
+        return new Promise((resolve,reject)=>{
+            //console.log(details)
+            let discountCoupon = {
+                name:details.Name,
+                discount:details.Discount
+            }
+            //console.log(discountCoupon)
+            db.get().collection(collection.COUPON_COLLECTION)
+            .insertOne(discountCoupon).then((response)=>{
+                //console.log("res:",response)
+                resolve()
+            })
+        })
+    }
 }
