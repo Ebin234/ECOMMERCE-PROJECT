@@ -146,6 +146,46 @@ module.exports = {
             resolve(cartProducts)
         })
     },
+    getProductSubtotal : (prodId)=>{
+        return new Promise(async(resolve,reject)=>{
+            // console.log("prodId:",prodId)
+           let totalPrice = await db.get().collection(collection.CART_COLLECTION)
+            .aggregate([
+                {
+                    $match:{'products.item' : objectId(prodId)}
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $project : {
+                        item:'$products.item',
+                        quantity:'$products.quantity'
+                    }
+                 },
+                 {
+                    $match : {item:objectId(prodId)}
+                 },
+                 {
+                    $lookup:{
+                        from:collection.PRODUCT_COLLECTION,
+                        localField:'item',
+                        foreignField:'_id',
+                        as:'productDetails'
+                    }
+                 },
+                 {
+                    $project:{
+                        item:1,
+                        quantity:1,
+                        productDetails:{$arrayElemAt:['$product',0]}
+                    }
+                 }
+            ]).toArray()
+
+            console.log("total:",totalPrice)
+        })
+    },
     getCartCount : (userId)=>{
         return new Promise(async(resolve,reject)=>{
             let count = 0;
@@ -219,13 +259,21 @@ module.exports = {
                 {
                     $group:{
                         _id:null,
+                        // _id:'$totalPrice',
+                        // total:{$sum:'$totalPrice'}
+                        // totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]},
                         total:{$sum:{$multiply:['$quantity',{$toInt:'$product.Price'}]}
                         }
                     }
                 }
+                // {
+                //     $addFields:{
+                //         totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]}
+                //     }
+                //  },
             ]).toArray()
-            console.log(total[0].total)
-            resolve(total[0].total)
+            console.log("total:",total)
+           resolve(total[0].total)
         })
     },
     getCartProductsList : (userId)=>{

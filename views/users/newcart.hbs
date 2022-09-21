@@ -27,7 +27,7 @@
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
                         <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
                 </td>
-                <td>{{totalPrice}}</td>
+                <td><span id="totalSubtotal">{{totalPrice}}</span></td>
             </tr>
             {{/each}}
             {{!-- <tr>
