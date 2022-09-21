@@ -192,17 +192,18 @@ router.get('/view-order-products/:id',async(req,res)=>{
  
 router.post('/apply-coupon',async(req,res)=>{
   console.log(req.body)
-  let couponCode = req.body.name
+  //let newTotal=100
+  let couponCode = req.body.couponCode
   let userId = req.session.user._id
   let totalAmount = await userhelpers.getTotalAmount(userId)
   //console.log(totalValue)
-  //console.log(couponCode)
+  console.log("coupon:",couponCode)
   userhelpers.getDiscount(couponCode,totalAmount).then((newTotal)=>{
-    //console.log("newtotal:",newTotal)
-    //res.render('/cart',{newTotal})
-    //res.redirect('/cart')
-    res.json(newTotal)
-  })
+     console.log("newtotal:",newTotal)
+  //   //res.render('/cart',{newTotal})
+  //   //res.redirect('/cart')
+     res.json(newTotal)
+   })
 })
 
 

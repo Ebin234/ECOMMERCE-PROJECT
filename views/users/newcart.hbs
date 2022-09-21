@@ -62,10 +62,9 @@
     <div id="coupon">
         <h3>Apply Coupon</h3>
         <div>
-            <form action="/apply-coupon/" id="form" method="post" enctype="multipart/form-data">
             <input type="text" placeholder="Enter Your Coupon" name="name"  id="couponCode">
             <button class="normal" onclick="applyCoupon()">Apply</button>
-            </form>
+            
         </div>
     </div>
     <div id="subtotal">
@@ -117,14 +116,16 @@
     }
 
     function applyCoupon(){
-        var $form = $('#form')
+        let coupon = document.getElementById('couponCode').value;
         $.ajax({
             url:'/apply-coupon',
             method:'post',
-            data:$form.serialize(),
-            success:(newTotal)=>{
-                
-                document.getElementById('value').innerHTML=newTotal
+            data:{
+                couponCode:coupon
+            },
+            success:(response)=>{
+                document.getElementById('value').innerHTML=response
+               
             }
         })
     }
