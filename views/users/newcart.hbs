@@ -62,8 +62,10 @@
     <div id="coupon">
         <h3>Apply Coupon</h3>
         <div>
-            <input type="text" placeholder="Enter Your Coupon">
-            <button class="normal">Apply</button>
+            <form action="/apply-coupon/{{totalValue}}" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Enter Your Coupon" name="name">
+            <button type="submit" class="normal">Apply</button>
+            </form>
         </div>
     </div>
     <div id="subtotal">

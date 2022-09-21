@@ -189,8 +189,14 @@ router.get('/view-order-products/:id',async(req,res)=>{
 //   let orders = await userhelpers.getUserOrders(req.session.user._id)
 //   res.render('users/order-details',{user:req.session.user,orders})
 // })
-
-
+ 
+router.post('/apply-coupon/:price',(req,res)=>{
+  let total = req.params.price
+  let userId = req.session.user._id
+  console.log(req.body,total,userId)
+  userhelpers.getDiscount(req.body,userId,total)
+ // res.redirect('/cart')
+})
 
 
 module.exports = router;

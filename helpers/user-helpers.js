@@ -233,7 +233,7 @@ module.exports = {
             .updateOne({_id:objectId(details.cart),'products.item': objectId(details.product)},
             {
                 $inc : {'products.$.quantity':details.count}
-            }
+             }
             ).then((response)=>{
                 console.log(response)
                 resolve({status:true})
@@ -432,5 +432,8 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getDiscount : (details,userId,total)=>{
+        
     }
 }
