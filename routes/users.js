@@ -124,6 +124,7 @@ router.post('/change-product-quantity',(req,res,next)=>{
    let subTotal = await userhelpers.getProductSubtotal(req.body.product)
    //console.log(cartProducts)
    //response.subtotal = cartProducts.totalPrice
+   console.log("subtotal:",subTotal)
    console.log(response)
     res.json(response)
   })

@@ -175,15 +175,29 @@ module.exports = {
                     }
                  },
                  {
+                    $unwind: '$productDetails'
+                 },
+                 {
+                    $addFields:{
+                        totalPrice:{$multiply:['$quantity',{$toInt:'$productDetails.Price'}]}
+                    }
+                 },
+                 {
                     $project:{
-                        item:1,
-                        quantity:1,
-                        productDetails:{$arrayElemAt:['$product',0]}
+                        totalPrice:1
                     }
                  }
+                //  {
+                //     $project:{
+                //         item:1,
+                //         quantity:1,
+                //         productDetails:{$arrayElemAt:['$product',0]}
+                //     }
+                //  }
             ]).toArray()
 
-            console.log("total:",totalPrice)
+            // console.log("subtotal:",totalPrice[0].totalPrice)
+            resolve(totalPrice[0].totalPrice)
         })
     },
     getCartCount : (userId)=>{
