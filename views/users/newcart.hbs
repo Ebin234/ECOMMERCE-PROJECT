@@ -83,7 +83,7 @@
                 <td><strong>$ <span id="total">{{totalValue}}</span></strong></td>
             </tr>
         </table>
-        <a href="/checkout" class="normal">Proceed to checkout</a>
+        <a id="check" href="/checkout"  class="normal">Proceed to checkout</a>
     </div>
 </section>
 
@@ -125,7 +125,7 @@
             },
             success:(response)=>{
                 document.getElementById('value').innerHTML=response
-               
+                document.getElementById('check').href ='/checkout/'+response
             }
         })
     }

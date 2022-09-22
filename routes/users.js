@@ -137,6 +137,12 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
   
 })
 
+router.get('/checkout/:id',(req,res)=>{
+  let total = req.params.id
+  console.log("total:",total)
+  res.render('users/checkout',{total,user})
+})
+
 router.post('/checkout',async(req,res)=>{
   //console.log(req.body)
   let products = await userhelpers.getCartProductsList(req.body.userId)
