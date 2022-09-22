@@ -1,13 +1,76 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css" 
+integrity="sha384-X8QTME3FCg1DLb58++lPvsjbQoCT9bp3MsUU3grbIny/3ZwUJkRNO8NPW6zqzuW9" crossorigin="anonymous">
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins',sans-serif;
+    }
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .navigation{
+        position: fixed;
+        width: 300px;
+        height: 100%;
+        background: #003147;
+        transition: 0.5s;
+        overflow: hidden;
+    }
+
+    .navigation ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+</style>
+
+
 <div class="container">
     <div class="navigation">
         <ul>
             <li>
-                <span class="icon"></span>
+                <span class="icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></span>
                 <span class="title"><h2>Shopping Cart</h2></span>
             </li>
             <li>
-                <span class="icon"></span>
+                <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
                 <span class="title">Dashboard</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                <span class="title">Customers</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-comment" aria-hidden="true"></i></span>
+                <span class="title">Messages</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+                <span class="title">Help</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+                <span class="title">Settingd</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                <span class="title">Password</span>
+            </li>
+            <li>
+                <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                <span class="title">Sign Out</span>
             </li>
         </ul>
     </div>

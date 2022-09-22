@@ -136,7 +136,7 @@ router.post('/create-coupon',(req,res)=>{
 })
 
 router.get('/admin-page',(req,res)=>{
-  res.render('admin/admin-page')
+  res.render('admin/admin-page',{admin:true})
 })
 
 module.exports = router;
