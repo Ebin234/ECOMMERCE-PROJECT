@@ -442,12 +442,14 @@ module.exports = {
                     $match:{name:code}
                 },
             ]).toArray()
-           // console.log(discountRate[0].discount)
+            console.log("output:",discountRate[0].name)
             let discount = parseFloat(discountRate[0].discount)
             //console.log(typeof discount)
             // console.log(discount)
-            let newTotal = total - ((total*discount)/100)
-             console.log(newTotal)
+            let newTotal = { total : total - ((total*discount)/100),
+            code : discountRate[0].name
+        }
+             console.log("out:",newTotal)
              resolve(newTotal)
         })
     }

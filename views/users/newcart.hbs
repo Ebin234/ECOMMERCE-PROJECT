@@ -75,6 +75,10 @@
                 <td>$ <span id="value">{{totalValue}}</span></td>
             </tr>
             <tr>
+                <td>Coupon</td>
+                <td> <span id="displayCoupon" >empty</span></td>
+            </tr>
+            <tr>
                 <td>Shipping</td>
                 <td>Free</td>
             </tr>
@@ -108,8 +112,13 @@
                     location.reload()
                 }else{
                     document.getElementById(prodId).innerHTML=quantity+count
-                    document.getElementById('total').innerHTML=response.total
+                    document.getElementById('value').innerHTML=response.total
                     document.getElementById(subId).innerHTML=response.subTotal
+
+
+                    document.getElementById('total').innerHTML=response.total
+                document.getElementById('check').href ='/checkout'
+                document.getElementById('displayCoupon').innerHTML="empty"
                 }
             }
         })
@@ -124,8 +133,9 @@
                 couponCode:coupon
             },
             success:(response)=>{
-                document.getElementById('value').innerHTML=response
-                document.getElementById('check').href ='/checkout/'+response
+                document.getElementById('total').innerHTML=response.total
+                document.getElementById('check').href ='/checkout/'+response.total
+                document.getElementById('displayCoupon').innerHTML=response.code
             }
         })
     }
