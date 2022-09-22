@@ -139,14 +139,15 @@ router.get('/checkout',verifyLogin,async(req,res)=>{
 
 router.get('/checkout/:id',(req,res)=>{
   let total = req.params.id
+  let user=req.session.user
   console.log("total:",total)
   res.render('users/checkout',{total,user})
 })
 
 router.post('/checkout',async(req,res)=>{
-  //console.log(req.body)
+  console.log("place:",req.body.total)
   let products = await userhelpers.getCartProductsList(req.body.userId)
-  let totalPrice = await userhelpers.getTotalAmount(req.body.userId)
+  let totalPrice = req.body.total
   // console.log(products)
   userhelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
     // console.log("orderId:",orderId)
