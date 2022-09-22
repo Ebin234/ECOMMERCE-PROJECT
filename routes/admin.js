@@ -135,4 +135,8 @@ router.post('/create-coupon',(req,res)=>{
   })
 })
 
+router.get('/admin-page',(req,res)=>{
+  res.render('admin/admin-page')
+})
+
 module.exports = router;
