@@ -1,92 +1,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css"
     integrity="sha384-X8QTME3FCg1DLb58++lPvsjbQoCT9bp3MsUU3grbIny/3ZwUJkRNO8NPW6zqzuW9" crossorigin="anonymous">
 
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+<link rel="stylesheet" href="/stylesheets/admin-page-style.css">
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-        overflow-x: hidden;
-    }
-
-    .container {
-        position: relative;
-        width: 100%;
-    }
-
-    .navigation {
-        position: fixed;
-        width: 300px;
-        height: 100%;
-        background: #003147;
-        transition: 0.5s;
-        overflow: hidden;
-    }
-
-    .navigation ul {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .navigation ul li {
-        position: relative;
-        width: 100%;
-        list-style: none;
-    }
-
-    .navigation ul li:hover {
-        background: #03a9f4;
-    }
-
-    .navigation ul li:nth-child(1) {
-        margin-bottom: 20px;
-    }
-
-    .navigation ul li:nth-child(1):hover {
-        background: transparent;
-    }
-
-    .navigation ul li a {
-        position: relative;
-        display: block;
-        width: 100%;
-        display: flex;
-        text-decoration: none;
-        color: #fff;
-    }
-
-    .navigation ul li a .icon{
-        position: relative;
-        display: block;
-        min-width: 60px;
-        height: 60px;
-        line-height: 60px;
-        text-align: center;
-    }
-
-    .navigation ul li a .icon .fa {
-        color: #fff;
-        font-size: 24px;
-    }
-
-    .navigation ul li a .title {
-        position: relative;
-        display: block;
-        padding: 0 10px;
-        height: 60px;
-        line-height: 60px;
-        white-space: nowrap;
-    }
-
-</style>
 
 
 <div class="container">
@@ -144,4 +60,39 @@
             </li>
         </ul>
     </div>
+
+
+
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle" onclick="toggleMenu()"></div>
+            <div class="search">
+                <label for="">
+                    <input type="text" placeholder="Search Here">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </label>
+            </div>
+            <div class="user">
+                <img src="/login-images/avatar2.svg" alt="">
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+</div>
+
+
+
+<script>
+    function toggleMenu() {
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+        main.classList.toggle('active')
+    }
+</script>
