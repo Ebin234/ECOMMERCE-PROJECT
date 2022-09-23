@@ -65,7 +65,7 @@ router.post('/add-product',(req,res)=>{
               }else{
                 subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
                   if(!err){
-                    res.render('admin/add-product')
+                    res.render('admin/add-product2')
                   }else{
                     console.log(err)
                   }
