@@ -361,3 +361,84 @@ body {
     font-weight: 500;
     line-height: 1.2em;
 }
+
+/* Start Mediia Query */
+
+@media (max-width: 992px) {
+    .navigation {
+        left: -300px;
+    }
+
+    .navigation.active {
+        left: 0;
+        width: 300px;
+    }
+
+    .main {
+        width: 100%;
+        left: 0;
+    }
+
+    .main.active {
+        width: calc(100% - 300px);
+        left: 300px;
+    }
+
+    .cardBox {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .details {
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .cardHeader h2 {
+        font-weight: 600;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardBox {
+        grid-template-columns: repeat(1,1fr);
+    }
+
+    .details .recentOrders {
+        overflow-x: auto;
+    }
+
+    .details .recentOrders table {
+        width: 600px;
+    }
+
+    .navigation {
+        width: 100%;
+        left: -100%;
+        z-index: 1000;
+    }
+
+    .navigation.active{
+        width: 100%;
+        left: 0;
+    }
+
+    .toggle.active {
+        position: absolute;
+        z-index: 10000;
+        right: 0;
+        left: initial;
+        
+    }
+
+    .toggle.active::before {
+        color: #fff;
+    }
+
+    .main,
+    .main.active {
+        width: 100%;
+        left: 0;
+    }
+}
