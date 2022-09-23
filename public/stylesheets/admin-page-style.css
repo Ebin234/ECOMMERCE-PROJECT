@@ -208,3 +208,109 @@ body {
     font-size: 2.5em;
     color: #03a9f4;
 }
+
+.details {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.details .recentOrders {
+    position: relative;
+    display: grid;
+    min-height: 530px;
+    background: #fff;
+    padding: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cardHeader h2 {
+    font-weight: 600;
+}
+
+.btn {
+    position: relative;
+    padding: 5px 10px;
+    background: #03a9f4;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.details table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.details table thead td {
+    font-weight: 600;
+}
+
+.details .recentOrders table tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .recentOrders table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.details .recentOrders table tbody tr:hover {
+    background: #03a9f4;
+    color: #fff;
+}
+
+.details .recentOrders table tr td {
+    padding: 9px 5px;
+}
+
+.details .recentOrders table thead tr td:last-child,
+.details .recentOrders table tbody tr td:last-child {
+    text-align: right;
+}
+
+.details .recentOrders table thead tr td:nth-child(2),
+.details .recentOrders table tbody tr td:nth-child(2) {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.details .recentOrders table thead tr td:nth-child(3),
+.details .recentOrders table tbody tr td:nth-child(3) {
+    text-align: center;
+}
+
+.status {
+    position: relative;
+    padding: 2px 4px;
+    background: #f00;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14x;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.delivered {
+    background: #8de02c;
+}
+
+.pending {
+    background: #f9ca3f;
+}
+
+.inprogress {
+    background: #1795ce;
+}
+
+.return {
+    background: #f00;
+}
