@@ -29,10 +29,10 @@ section div h2{
     padding: 15px 65px;
 }
 
-.main{
+.main1{
     display: flex;
 }
-.main img{
+.main1 img{
     width: 100%;
     height: 52vh;
 }
