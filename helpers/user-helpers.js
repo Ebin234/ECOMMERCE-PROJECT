@@ -18,8 +18,21 @@ var instance = new Razorpay({
 module.exports = {
     dosignup: (userdata) => {
         return new Promise(async (resolve, reject) => {
+            // console.log(userdata)
+            let d = new Date()
+            let date = moment(d).format('YYYY-MM-DD');
+            let time = moment(d).format('HH:MM:SS')
             userdata.Password = await bcrypt.hash(userdata.Password, 10)
-            db.get().collection(collection.USER_COLLECTION).insertOne(userdata)
+            let userObj = {
+                Name : userdata.Name,
+                Email : userdata.Email,
+                Mobile : userdata.Mobile,
+                Date : date,
+                Time : time,
+                Password : userdata.Password
+            }
+            console.log("userObj:",userObj)
+            db.get().collection(collection.USER_COLLECTION).insertOne(userObj)
                 .then((data) => {
                     resolve(data.insertedId)
                 })
