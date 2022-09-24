@@ -3,9 +3,10 @@
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
 <style>
+
     a.normal {
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 23px;
+    font-weight: 500;
     padding: 9px 8px;
     color: #000;
     background-color: #fff;
@@ -26,9 +27,21 @@ a.b2{
     background-color: rgb(238, 18, 18);
 }
 
+#cart .head {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .add {
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+    {{!-- flex-wrap: nowrap; --}}
     {{!-- justify-content: end; --}}
 }
 .add a{
@@ -40,6 +53,11 @@ a.b2{
     padding: 9px 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+#cart table tbody tr:hover {
+    background: #fff;  
+    {{!-- color: #fff;  03a9f4--}}
 }
 </style>
 
@@ -59,8 +77,8 @@ a.b2{
 
 
 <section id="cart" class="section-p1">
-    <div class="add"><h2>Add Product</h2>
-    <a href="/admin/add-product" class="normal">add product</a></div>
+    <div class="head"><h2>Product Details</h2></div>
+    <div class="add"><a href="/admin/add-product" class="normal">Add Product</a></div>
     <table id="productTable" width="100%">
         <thead>
             <tr>

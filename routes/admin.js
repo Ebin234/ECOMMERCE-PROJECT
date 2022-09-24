@@ -9,9 +9,16 @@ const fs = require('fs');
 router.get('/', function(req, res, next) {
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
-    res.render('admin/all-products',{products ,admin:true})
+    res.render('admin/admin-Dashboard',{products ,admin:true})
   })
 });
+
+router.get('/products-details',(req,res)=>{
+  productHelpers.getAllproducts().then((products)=>{
+    console.log(products)
+  res.render('admin/products-details',{products,admin:true})
+  })
+})
 
 
 router.get('/add-product',(req,res)=>{
