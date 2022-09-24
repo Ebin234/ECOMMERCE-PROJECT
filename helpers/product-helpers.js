@@ -65,12 +65,45 @@ module.exports = {
             //console.log(details)
             let discountCoupon = {
                 name:details.Name,
+                code:details.Code,
                 discount:details.Discount
             }
             //console.log(discountCoupon)
             db.get().collection(collection.COUPON_COLLECTION)
             .insertOne(discountCoupon).then((response)=>{
                 //console.log("res:",response)
+                resolve()
+            })
+        })
+    },
+    getAllCoupons:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let coupons = await db.get().collection(collection.COUPON_COLLECTION).find().toArray()
+            resolve(coupons)
+        })
+    },
+    getCouponDetails : (couponId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let couponDetails = await db.get().collection(collection.COUPON_COLLECTION)
+            .findOne({_id:objectId(couponId)})
+            // console.log("coupon:",couponDetails)
+            resolve(couponDetails)
+        })
+    },
+    updateCoupon : (couponId,details)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(couponId)
+            console.log(details)
+            db.get().collection(collection.COUPON_COLLECTION)
+            .updateOne({_id:objectId(couponId)},
+            {
+                $set:{
+                    name:details.Name,
+                    code:details.Code,
+                    discount:details.Discount
+
+                }
+            }).then(()=>{
                 resolve()
             })
         })

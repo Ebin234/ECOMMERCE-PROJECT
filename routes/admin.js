@@ -4,13 +4,14 @@ var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 const path = require('path');
 const fs = require('fs');
+const { Router } = require('express');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  productHelpers.getAllproducts().then((products)=>{
-    console.log(products)
-    res.render('admin/admin-Dashboard',{products ,admin:true})
-  })
+  // productHelpers.getAllproducts().then((products)=>{
+  //   console.log(products)
+    res.render('admin/admin-Dashboard',{ admin:true})
+  // })
 });
 
 router.get('/products-details',(req,res)=>{
@@ -129,15 +130,33 @@ router.get('/create-coupon',(req,res)=>{
 })
 
 router.post('/create-coupon',(req,res)=>{
-  //console.log(req.body);
+    console.log(req.body);
   productHelpers.createCoupon(req.body).then(()=>{
     res.redirect('/admin')
   })
 })
 
 
-router.get('/coupons',(req,res)=>{
-  res.render('admin/coupon-details',{admin:true})
+router.get('/coupons',async(req,res)=>{
+  let coupons = await productHelpers.getAllCoupons() 
+  console.log(coupons);
+  res.render('admin/coupon-details',{coupons,admin:true})
+})
+
+router.get('/edit-coupon/:id',async(req,res)=>{
+  couponId = req.params.id
+  console.log(couponId)
+  let couponDetails = await productHelpers.getCouponDetails(couponId)
+  console.log(couponDetails)
+  res.render('admin/edit-coupon',{couponDetails,admin:true})
+})
+
+router.post('/edit-coupon/:id',(req,res)=>{
+  let couponId = req.params.id
+  // console.log("couponId:",couponId,"data:",req.body)
+  productHelpers.updateCoupon(couponId,req.body).then(()=>{
+    res.redirect('/admin/coupons')
+  })
 })
 
 module.exports = router;
