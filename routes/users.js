@@ -213,5 +213,9 @@ router.post('/apply-coupon',async(req,res)=>{
    })
 })
 
+router.get('/profile',(req,res)=>{
+  res.render('users/profile')
+})
+
 
 module.exports = router;
