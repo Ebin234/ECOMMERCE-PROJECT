@@ -115,5 +115,10 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    getAllUsers : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log("hi")
+        })
     }
 }

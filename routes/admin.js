@@ -2,9 +2,11 @@ var express = require('express');
 const async = require('hbs/lib/async');
 var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
+const userHelpers = require('../helpers/user-helpers')
 const path = require('path');
 const fs = require('fs');
 const { Router } = require('express');
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -166,6 +168,10 @@ router.get('/delete-coupon/:id',(req,res)=>{
   })
 })
 
-
+router.get('/users-details',async(req,res)=>{
+  let users = await userHelpers.getAllUsers()
+  console.log(users)
+  res.render('admin/users-details',{users,admin:true})
+})
 
 module.exports = router;

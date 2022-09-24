@@ -7,7 +7,7 @@ const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
 const moment = require('moment')
 const Razorpay = require('razorpay')
-const { options } = require('../routes/admin')
+// const { options } = require('../routes/admin')
 const { resolve } = require('path')
 
 var instance = new Razorpay({
@@ -465,5 +465,14 @@ module.exports = {
              console.log("out:",newTotal)
              resolve(newTotal)
         })
+    },
+    getAllUsers : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let users = await db.get().collection(collection.USER_COLLECTION).find().toArray()
+            // console.log(users)
+            resolve(users)
+        })
     }
+    
+    
 }
