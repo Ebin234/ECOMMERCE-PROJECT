@@ -107,5 +107,13 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    deleteCoupon : (couponId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.COUPON_COLLECTION)
+            .deleteOne({_id:objectId(couponId)}).then(()=>{
+                resolve()
+            })
+        })
     }
 }

@@ -159,4 +159,11 @@ router.post('/edit-coupon/:id',(req,res)=>{
   })
 })
 
+router.get('/delete-coupon/:id',(req,res)=>{
+  let couponId = req.params.id
+  productHelpers.deleteCoupon(couponId).then(()=>{
+    res.redirect('/admin/coupons')
+  })
+})
+
 module.exports = router;
