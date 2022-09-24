@@ -1,5 +1,6 @@
-<link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
+<link rel="stylesheet" href="/stylesheets/admin-page-style.css">
+<link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
 <style>
     a.normal {
@@ -28,7 +29,7 @@ a.b2{
 .add {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: end;
+    {{!-- justify-content: end; --}}
 }
 .add a{
     text-decoration: none;
@@ -42,8 +43,24 @@ a.b2{
 }
 </style>
 
+<div class="main">
+        <div class="topbar">
+            <div class="toggle" onclick="toggleMenu()"></div>
+            <div class="search">
+                <label for="">
+                    <input type="text" placeholder="Search Here">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </label>
+            </div>
+            <div class="user">
+                <img src="/login-images/avatar2.svg" alt="">
+            </div>
+        </div>
+
+
 <section id="cart" class="section-p1">
-    <div class="add"><a href="/admin/add-product" class="normal">add product</a></div>
+    <div class="add"><h2>Add Product</h2>
+    <a href="/admin/add-product" class="normal">add product</a></div>
     <table id="productTable" width="100%">
         <thead>
             <tr>
@@ -87,6 +104,8 @@ a.b2{
         </tbody>
     </table>
 </section>
+
+</div>
 
 <script>
   $( function () {
