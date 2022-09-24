@@ -22,7 +22,7 @@ router.get('/products-details',(req,res)=>{
 
 
 router.get('/add-product',(req,res)=>{
-  res.render('admin/add-product2',{admin:true})
+  res.render('admin/add-product',{admin:true})
 })
 
 // router.get('/add-product2',(req,res)=>{
@@ -72,7 +72,7 @@ router.post('/add-product',(req,res)=>{
               }else{
                 subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
                   if(!err){
-                    res.render('admin/add-product2')
+                    res.render('admin/add-product')
                   }else{
                     console.log(err)
                   }
@@ -100,7 +100,7 @@ router.get('/edit-product/:id',async(req,res)=>{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   //console.log(product)
-  res.render('admin/editproduct1',{product})
+  res.render('admin/edit-product',{product,admin:true})
 })
 
 router.post('/edit-product1/:id',(req,res)=>{
@@ -123,16 +123,9 @@ router.post('/edit-product1/:id',(req,res)=>{
    })
 })
 
-router.get('/allproducts',(req,res)=>{
-  productHelpers.getAllproducts().then((products)=>{
-    console.log(products)
-    res.render('admin/all-products',{products,admin:true})
-  })
-  
-})
 
 router.get('/create-coupon',(req,res)=>{
-  res.render('admin/create-coupon')
+  res.render('admin/create-coupon',{admin:true})
 })
 
 router.post('/create-coupon',(req,res)=>{
@@ -142,8 +135,9 @@ router.post('/create-coupon',(req,res)=>{
   })
 })
 
-router.get('/admin-page',(req,res)=>{
-  res.render('admin/admin-page',{admin:true})
+
+router.get('/coupons',(req,res)=>{
+  res.render('admin/coupon-details',{admin:true})
 })
 
 module.exports = router;
