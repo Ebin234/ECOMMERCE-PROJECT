@@ -472,7 +472,27 @@ module.exports = {
             // console.log(users)
             resolve(users)
         })
+    },
+    updateUserDetails : (userId,details)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(details)
+            db.get().collection(collection.USER_COLLECTION)
+            .updateOne({_id:objectId(userId)},
+            {
+                $set : {
+                    Name : details.Name,
+                    Email : details.Email,
+                    Address : details.Address,
+                    Pincode : details.Pincode,
+                    Username : details.Username,
+                    Mobile : details.Mobile,
+                    State : details.State,
+                    District : details.District
+                }
+            }).then((response)=>{
+                // console.log(response)
+                resolve()
+            })
+        })
     }
-    
-    
 }

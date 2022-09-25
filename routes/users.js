@@ -222,6 +222,21 @@ router.get('/edit-profile',(req,res)=>{
   res.render('users/profile-edit-page')
 })
 
+router.post('/edit-profile',(req,res)=>{
+  let userId = req.session.user._id
+  // console.log(userId)
+  // console.log(req.body)
+  console.log(req.files.image)
+  userhelpers.updateUserDetails(userId,req.body).then(()=>{
+    res.redirect('/profile')
+    if(req.files.image){
+      let userImage = req.files.image
+      //  image.mv('./public/product-images/'+prodId+'.jpg')
+      userImage.mv('./public/images/users-dp/'+userId+'.jpg')
+     }
+  })
+})
+
 router.get('/change-password',(req,res)=>{
   res.render('users/change-password')
 })
