@@ -214,7 +214,12 @@ router.post('/apply-coupon',async(req,res)=>{
 })
 
 router.get('/profile',(req,res)=>{
-  res.render('users/profile')
+  res.render('users/profile-page')
+})
+
+
+router.get('/edit-profile',(req,res)=>{
+  res.render('users/profile-edit-page')
 })
 
 
