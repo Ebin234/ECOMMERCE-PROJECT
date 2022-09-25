@@ -28,37 +28,43 @@
 
 <div class="update-profile">
     <form action="/edit-profile" method="post" enctype="multipart/form-data">
-      <img src="/login-images/avatar2.svg" alt="">
+      <img src="/images/users-dp/{{userDetails._id}}.jpg" alt="" id="userDp">
         <div class="flex">
             <div class="inputBox">
                 <span>Full Name :</span>
-                <input type="text" name="Name" class="box" >
+                <input type="text" name="Name" class="box" value="{{userDetails.Name}}">
                 <span>Your Email :</span>
-                <input type="text" name="Email"  class="box">
+                <input type="text" name="Email"  class="box" value="{{userDetails.Email}}">
                 <span>Address :</span>
-                <input type="text" name="Address" class="box">
+                <input type="text" name="Address" class="box" value="{{userDetails.Address}}">
                 <span>Pin Code :</span>
-                <input type="number" name="Pincode" class="box" >
+                <input type="number" name="Pincode" class="box" value="{{userDetails.Pincode}}">
                 
             </div>
             <div class="inputBox">
                 <span>Username :</span>
-                <input type="text" name="Username" class="box" >
+                <input type="text" name="Username" class="box" value="{{userDetails.Username}}">
                 <span>Mobile No :</span>
-                <input type="number" name="Mobile" class="box">
+                <input type="number" name="Mobile" class="box" value="{{userDetails.Mobile}}">
                 <span>State :</span>
-                <input type="text" name="State" class="box">
+                <input type="text" name="State" class="box" value="{{userDetails.State}}">
                 <span>District :</span>
-                <input type="text" name="District" class="box">
+                <input type="text" name="District" class="box" value="{{userDetails.District}}">
                 {{!-- <input type="hidden" name="" id=""> --}}
                 
             </div>
         </div>
         <div class="file">
                 <span>Update Your Pic :</span>
-                <input type="file" name="image"  class="box">
+                <input type="file" name="image" onchange="userProfile(event)" class="box">
             </div>
         <input type="submit" value="update Profile" class="btn">
         <a href="/profile" class="delete-btn">go back</a>
     </form>
 </div>
+
+<script>
+    function userProfile(event) {
+        document.getElementById('userDp').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

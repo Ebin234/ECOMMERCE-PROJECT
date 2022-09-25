@@ -213,13 +213,17 @@ router.post('/apply-coupon',async(req,res)=>{
    })
 })
 
-router.get('/profile',(req,res)=>{
-  res.render('users/profile-page')
+router.get('/profile',async(req,res)=>{
+  let userId = req.session.user._id
+  let userDetails = await userhelpers.getUserDetails(userId)
+  res.render('users/profile-page',{userDetails})
 })
 
 
-router.get('/edit-profile',(req,res)=>{
-  res.render('users/profile-edit-page')
+router.get('/edit-profile',async(req,res)=>{
+  let userId = req.session.user._id
+  let userDetails = await userhelpers.getUserDetails(userId)
+  res.render('users/profile-edit-page',{userDetails})
 })
 
 router.post('/edit-profile',(req,res)=>{

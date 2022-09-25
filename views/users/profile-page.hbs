@@ -3,28 +3,28 @@
 
 <div class="update-profile">
     <form action="" method="post" enctype="multipart/form-data">
-      <img src="/images/users-dp/{{this._id}}.jpg" alt="">
+      <img src="/images/users-dp/{{userDetails._id}}.jpg" alt="">
         <div class="flex">
             <div class="inputBox">
                 <span>Username :</span>
-                <input type="text" name="" value="Eby234" class="box" >
+                <input type="text" name="" value="{{userDetails.Username}}" class="box" disabled>
                 <span>Full Name :</span>
-                <input type="text" name="" value="Ebin Yesudas" class="box" >
+                <input type="text" name="" value="{{userDetails.Name}}" class="box" disabled>
                 <span>Email Address :</span>
-                <input type="email" name="" value="ebinyesudas234@gmail.com" class="box">
+                <input type="email" name="" value="{{userDetails.Email}}" class="box" disabled>
                 <span>Mobile No :</span>
-                <input type="number" name="" value="9895574237" class="box">
+                <input type="number" name="" value="{{userDetails.Mobile}}" class="box" disabled>
             </div>
             <div class="inputBox">
-                <input type="hidden" name="" id="">
+                {{!-- <input type="hidden" name="" id=""> --}}
                 <span>Address :</span>
-                <input type="text" name="" value="Koilparambil" class="box">
+                <input type="text" name="" value="{{userDetails.Address}}" class="box" disabled>
                 <span>State :</span>
-                <input type="text" name="" value="Kerala" class="box">
+                <input type="text" name="" value="{{userDetails.State}}" class="box" disabled>
                 <span>District :</span>
-                <input type="text" name="" value="Alappuzha" class="box">
+                <input type="text" name="" value="{{userDetails.District}}" class="box" disabled>
                 <span>Pin Code :</span>
-                <input type="number" name="" value="688004" class="box" >
+                <input type="number" name="" value="{{userDetails.Pincode}}" class="box" disabled>
                 
             </div>
         </div>
