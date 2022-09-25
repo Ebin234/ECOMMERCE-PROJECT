@@ -222,5 +222,9 @@ router.get('/edit-profile',(req,res)=>{
   res.render('users/profile-edit-page')
 })
 
+router.get('/change-password',(req,res)=>{
+  res.render('users/change-password')
+})
+
 
 module.exports = router;
