@@ -245,7 +245,11 @@ router.get('/change-password',(req,res)=>{
   res.render('users/change-password')
 })
 
-
+router.post('/change-password',(req,res)=>{
+  console.log(req.body)
+  let userId = req.session.user._id
+  userhelpers.verifyPassword(userId,req.body)
+})
 
 
 module.exports = router;
