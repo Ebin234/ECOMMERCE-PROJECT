@@ -254,5 +254,9 @@ router.post('/change-password',(req,res)=>{
   })
 })
 
+router.get('/wishlist',(req,res)=>{
+  res.render('users/wishlist')
+})
+
 
 module.exports = router;
