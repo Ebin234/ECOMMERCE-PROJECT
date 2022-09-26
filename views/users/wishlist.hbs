@@ -20,7 +20,7 @@
 
 <section id="product1" class="section-p1">
     <div class="pro-container">
-        <div class="pro">
+        {{!-- <div class="pro">
             <img class="a" src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
             <div class="overlay">
                 <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -38,8 +38,8 @@
                 </div>
                 <h4>$78</h4>
             </div>
-        </div>
-        <div class="pro">
+        </div> --}}
+        {{!-- <div class="pro">
             <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
             <div class="overlay">
                 <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -76,16 +76,17 @@
                 </div>
                 <h4>$78</h4>
             </div>
-        </div>
+        </div> --}}
+        {{#each products}}
         <div class="pro">
-            <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
+            <img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg" alt="">
             <div class="overlay">
                 <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
             </div>
             <div class="des">
-                <span>adidas</span>
-                <h5>Cartoon Astronaut T-Shirts</h5>
+                <span>{{this.productDetails.brand}}</span>
+                <h5>{{this.productDetails.Name}}</h5>
                 <div class="star">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -93,9 +94,10 @@
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                 </div>
-                <h4>$78</h4>
+                <h4>{{this.productDetails.Price}}</h4>
             </div>
         </div>
+        {{/each}}
         <div class="pro">
             <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
             <div class="overlay">

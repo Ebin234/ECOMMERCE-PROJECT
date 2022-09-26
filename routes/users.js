@@ -268,8 +268,10 @@ router.get('/add-to-wishlist/:id',(req,res)=>{
   })
 })
 
-router.get('/wishlist',(req,res)=>{
-  res.render('users/wishlist')
+router.get('/wishlist',async(req,res)=>{
+  let userId = req.session.user._id
+  let products = await userhelpers.getWishlistProducts(userId)
+   res.render('users/wishlist',{products,user:req.session.user._id})
 })
 
 
