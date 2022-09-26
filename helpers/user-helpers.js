@@ -505,8 +505,8 @@ module.exports = {
     },
     verifyPassword : (userId,details) =>{
         return new Promise(async(resolve,reject)=>{
-            details.old_password = await bcrypt.hash(details.old_password, 10)
-            console.log(details.old_password)
+            // details.old_password = await bcrypt.hash(details.old_password, 10)
+            // console.log(details.old_password)
         })
     }
 }
