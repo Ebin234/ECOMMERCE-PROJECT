@@ -527,5 +527,41 @@ module.exports = {
                 }
             })
         })
+    },
+    addToWishlist : (userId,prodId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let prodObj = {
+                item : objectId(prodId)
+            }
+            let userWishlist = await db.get().collection(collection.WISHLIST_COLLECTION)
+            .findOne({user:objectId(userId)})
+            if(userWishlist){
+                let prodExist = userWishlist.products.findIndex(product=>product.item == prodId)
+                console.log(prodExist)
+                if(prodExist != -1){
+                    console.log("allready exist")
+                    resolve({status:false})
+                }else{
+                    db.get().collection(collection.WISHLIST_COLLECTION)
+                    .updateOne({user : objectId(userId)},
+                    {
+                        $push : {products:prodObj}
+                    }).then((response)=>{
+                        console.log(response)
+                        resolve({status:true})
+                    })
+                }
+            }else{
+                let wishObj = {
+                    user : objectId(userId),
+                    products : [prodObj]
+                }
+                db.get().collection(collection.WISHLIST_COLLECTION)
+                .insertOne(wishObj).then((response)=>{
+                    console.log(response)
+                    resolve({status:true})
+                })
+            }
+        })
     }
 }

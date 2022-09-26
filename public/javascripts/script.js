@@ -13,3 +13,10 @@ function addToCart(prodId){
         }
     })
 }
+
+function addToWishlist(prodId){
+    $.ajax({
+        url:'/add-to-wishlist/'+prodId,
+        method:'get'
+    })
+}

@@ -254,6 +254,15 @@ router.post('/change-password',(req,res)=>{
   })
 })
 
+router.get('/add-to-wishlist/:id',(req,res)=>{
+  let prodId = req.params.id
+  let userId = req.session.user._id 
+  console.log(prodId)
+  userhelpers.addToWishlist(userId,prodId).then((response)=>{
+    res.json(response)
+  })
+})
+
 router.get('/wishlist',(req,res)=>{
   res.render('users/wishlist')
 })
