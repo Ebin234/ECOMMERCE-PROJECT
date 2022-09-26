@@ -606,5 +606,19 @@ module.exports = {
             console.log("products :",products)
             resolve(products)
         })
+    },
+    removeWishlistProduct : (details)=>{
+        return new Promise((resolve,reject)=>{
+            let prodId = details.prodId
+            let wishlistId = details.wishlistId
+            db.get().collection(collection.WISHLIST_COLLECTION)
+            .updateOne({_id:objectId(wishlistId)},
+            {
+                $pull:{products:{item:objectId(prodId)}}
+            }).then((response)=>{
+                console.log(response)
+                resolve({removeProduct:true})
+            })
+        })
     }
 }

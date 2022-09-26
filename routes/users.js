@@ -274,5 +274,12 @@ router.get('/wishlist',async(req,res)=>{
    res.render('users/wishlist',{products,user:req.session.user._id})
 })
 
+router.post('/remove-wishlist-product',(req,res)=>{
+  console.log(req.body)
+  userhelpers.removeWishlistProduct(req.body).then((response)=>{
+    res.json(response)
+  })
+})
+
 
 module.exports = router;

@@ -81,8 +81,8 @@
         <div class="pro">
             <img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg" alt="">
             <div class="overlay">
-                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+                <button title="remove" onclick="removeWishlistProduct('{{this.productDetails._id}}','{{this._id}}')"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this.productDetails._id}}')"><i class="fa fa-shopping-bag"></i></button>
             </div>
             <div class="des">
                 <span>{{this.productDetails.brand}}</span>
@@ -101,8 +101,8 @@
         <div class="pro">
             <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
             <div class="overlay">
-                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+                <button title="remove" onclick="removeWishlistProduct()"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this.productDetails._id}}')"><i class="fa fa-shopping-bag"></i></button>
             </div>
             <div class="des">
                 <span>adidas</span>
@@ -119,3 +119,22 @@
         </div>
     </div>
 </section>
+
+<script>
+    function removeWishlistProduct(prodId,wishlistId){
+        $.ajax({
+            url:'/remove-wishlist-product',
+            data:{
+                prodId:prodId,
+                wishlistId:wishlistId
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.removeProduct){
+                   alert("product removed from wishlist") 
+                   location.reload()
+                }
+            }
+        })
+    }
+</script>
