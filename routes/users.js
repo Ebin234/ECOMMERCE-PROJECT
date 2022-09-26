@@ -15,13 +15,16 @@ const verifyLogin = (req,res,next)=>{
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  let user = req.session.user
+  let user = req.session.user;
   //console.log(user)
   let cartCount = 0;
+  let wishCount = 0;
   if(user){
-  cartCount = await userhelpers.getCartCount(user._id)}
+  cartCount = await userhelpers.getCartCount(user._id)
+  wishCount = await userhelpers.getWishCount(user._id)
+  }
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/home-page', {products,user,cartCount});
+    res.render('users/home-page', {products,user,cartCount,wishCount});
   })
 });
 
@@ -94,10 +97,12 @@ router.get('/add-to-cart/:id',(req,res)=>{
 router.get('/allProducts',async(req,res)=>{
   let user = req.session.user
   let cartCount = 0;
+  let wishCount = 0;
   if(user){
-  cartCount = await userhelpers.getCartCount(user._id)}
+  cartCount = await userhelpers.getCartCount(user._id)
+  wishCount = await userhelpers.getWishCount(user._id)}
   productHelpers.getAllproducts().then((products)=>{
-    res.render('users/viewProducts',{products,user,cartCount})
+    res.render('users/viewProducts',{products,user,cartCount,wishCount})
   })
 })
 

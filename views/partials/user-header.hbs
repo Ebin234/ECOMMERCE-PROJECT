@@ -12,6 +12,19 @@
         align-items: center;
         border-radius: 50%;
     }
+    .wish_badge{
+        position: absolute;
+        top: -19px;
+        right: 0px;
+        width: 24px;
+        height: 24px;
+        background: rgb(238, 72, 6);
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
 </style>
 
 
@@ -29,7 +42,8 @@
                 <li id="lg-bag"><a class="btn1" href="/cart"><i class="far fa-shopping-bag"></i>
                 <span  id="cart_count" class="cart_badge">{{cartCount}}</span></a></li>
                 <li><a class="btn1" href="/search"><i class="far fa-search"></i></a></li>
-                <li><a class="btn1" href="/whishlist"><i class="far fa-heart"></i></a></li>
+                <li><a class="btn1" href="/whishlist"><i class="far fa-heart"></i>
+                <span  id="wish_count" class="wish_badge">{{wishCount}}</span></a></li>
                 <a href="" id="close"><i class="far fa-times"></i></a>
 
                 {{#if user}}

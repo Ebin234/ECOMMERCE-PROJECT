@@ -1,3 +1,5 @@
+const { response } = require("../../app")
+
 function addToCart(prodId){
     $.ajax({
         url:'/add-to-cart/'+ prodId,
@@ -17,6 +19,14 @@ function addToCart(prodId){
 function addToWishlist(prodId){
     $.ajax({
         url:'/add-to-wishlist/'+prodId,
-        method:'get'
+        method:'get',
+        success:(response)=>{
+            if(response.status){
+                let count = $('#wish_count').html()
+                console.log(count)
+                count = parseInt(count)+1
+                $('#wish_count').html(count)
+            }
+        }
     })
 }
