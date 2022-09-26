@@ -10,11 +10,7 @@
     width: 7px;
 }
 
-#cart {
-    position: absolute;
-    top: 450px;
-    right: 6px;
-}
+
 </style>
 
 <section id="page-header" class="about-header">
@@ -25,7 +21,11 @@
 <section id="product1" class="section-p1">
     <div class="pro-container">
         <div class="pro">
-            <img src="/product-images/6315a6351bcfce3ff4c0964c.jpg" alt="">
+            <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
+            <div class="overlay">
+                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+            </div>
             <div class="des">
                 <span>adidas</span>
                 <h5>Cartoon Astronaut T-Shirts</h5>
@@ -38,33 +38,12 @@
                 </div>
                 <h4>$78</h4>
             </div>
-            <a href=""><i class="fal fa-shopping-cart cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="/product-images/6315a6351bcfce3ff4c0964c.jpg" alt="">
-            <div class="des">
-                <span>adidas</span>
-                <h5>Cartoon Astronaut T-Shirts</h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>$78</h4>
-            </div>
-            <a href=""><i class="fal fa-shopping-cart cart"></i></a>
         </div>
         <div class="pro">
             <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
             <div class="overlay">
-                {{!-- <a href=""  title="Quick shop"><i class=" fa fa-solid fa-up-right-and-down-left-from-center"></i></a> --}}
-                {{!-- <button><i class=" fa fa-solid fa-up-right-and-down-left-from-center"></i></button> --}}
-                <button><i class="fa fa-heart"></i></button>
-                {{!-- <a href=""  title="Add to Wishlist"><i class="fa fa-heart"></i></a> --}}
+                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
-                {{!-- <a href="/add-to-cart/{{this._id}}"  title="Add to Cart"><i class="fa fa-shopping-bag"></i></a> --}}
             </div>
             <div class="des">
                 <span>adidas</span>
@@ -77,13 +56,14 @@
                     <i class="fas fa-star"></i>
                 </div>
                 <h4>$78</h4>
-            </div>
-            <div class="overlay" id="cart">
-            <a href=""><i class="fal fa-shopping-cart cart"></i></a>
             </div>
         </div>
         <div class="pro">
-            <img src="/product-images/6315a6351bcfce3ff4c0964c.jpg" alt="">
+            <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
+            <div class="overlay">
+                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+            </div>
             <div class="des">
                 <span>adidas</span>
                 <h5>Cartoon Astronaut T-Shirts</h5>
@@ -96,7 +76,44 @@
                 </div>
                 <h4>$78</h4>
             </div>
-            <a href=""><i class="fal fa-shopping-cart cart"></i></a>
+        </div>
+        <div class="pro">
+            <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
+            <div class="overlay">
+                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+            </div>
+            <div class="des">
+                <span>adidas</span>
+                <h5>Cartoon Astronaut T-Shirts</h5>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>$78</h4>
+            </div>
+        </div>
+        <div class="pro">
+            <img src="/product-images/63133a43c78d5ff4f3c6f3b0.jpg" alt="">
+            <div class="overlay">
+                <button title="remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                <button title="add to cart" onclick="addToCart('{{this._id}}')"><i class="fa fa-shopping-bag"></i></button>
+            </div>
+            <div class="des">
+                <span>adidas</span>
+                <h5>Cartoon Astronaut T-Shirts</h5>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>$78</h4>
+            </div>
         </div>
     </div>
 </section>
