@@ -503,10 +503,29 @@ module.exports = {
             resolve(userDetails)
         })
     },
-    verifyPassword : (userId,details) =>{
+    changePassword : (userId,details) =>{
         return new Promise(async(resolve,reject)=>{
             // details.old_password = await bcrypt.hash(details.old_password, 10)
-            // console.log(details.old_password)
+            let user = await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)})
+            console.log(details)
+            bcrypt.compare(details.old_password, user.Password).then(async(response)=>{
+                console.log('respo:',response)
+                if(response){
+                    let newPassword = await bcrypt.hash(details.new_password, 10)
+                    db.get().collection(collection.USER_COLLECTION)
+                    .updateOne({_id:objectId(userId)},
+                    {
+                        $set : {
+                            Password : newPassword
+                        }
+                    }).then((response)=>{
+                        console.log(response)
+                        resolve({response:true})
+                    })
+                }else{
+                    resolve({response:false})
+                }
+            })
         })
     }
 }

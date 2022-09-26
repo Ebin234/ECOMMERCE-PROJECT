@@ -248,7 +248,10 @@ router.get('/change-password',(req,res)=>{
 router.post('/change-password',(req,res)=>{
   console.log(req.body)
   let userId = req.session.user._id
-  userhelpers.verifyPassword(userId,req.body)
+  userhelpers.changePassword(userId,req.body).then((response)=>{
+    console.log("res:",response)
+    res.json(response)
+  })
 })
 
 
