@@ -10,38 +10,118 @@
 
 <section id="product1" class="section-p1">
     <input  class="search" type="text" placeholder="Search">
-
+    <button class="normal">Search</button>
     <div class="pro-container">
         
-        <div class="filter">
-            <div>
+        {{!-- <div class="filter"> --}}
+            <div class="outer">
                 <h2>
-                    shop by genre
+                  shop by genre
                 </h2>
                 <div class="genre">
                     <div class="check">
                         <input type="checkbox">
                         <label for="">Smart Phones</label>
                     </div>
-                    <div class="">
+                    <div class="check">
                         <input type="checkbox">
                         <label for="">Smart Watches</label>
                     </div>
-                    <div>
+                    <div class="check">
                         <input type="checkbox">
                         <label for="">Laptop</label>
                     </div>
-                    <div>
+                    <div class="check">
                         <input type="checkbox">
                         <label for="">Tab</label>
                     </div>
-                    <div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                    <div class="check">
                         <input type="checkbox">
                         <label for="">Smart TV</label>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="outer">
+                <h2>
+                  shop by brand
+                </h2>
+                <div class="genre">
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Samsung</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">apple</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">redmi</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Tab</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                </div>
+            </div>
+            <div class="outer">
+                <h2>
+                  shop by genre
+                </h2>
+                <div class="genre">
+                    <div class="check">
+                        <input type="radio">
+                        <label for="">under rs.100</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio">
+                        <label for="">under rs.500</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio">
+                        <label for="">under rs.1000</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio">
+                        <label for="">under rs.10000</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio">
+                        <label for="">under rs.100000</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                    <div class="check">
+                        <input type="checkbox">
+                        <label for="">Smart TV</label>
+                    </div>
+                </div>
+            </div>
+
+           
+        
         {{#each products}}
         <div class="pro">
             <img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg"
