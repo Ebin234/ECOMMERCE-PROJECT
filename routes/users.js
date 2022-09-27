@@ -104,9 +104,9 @@ router.get('/allProducts',async(req,res)=>{
   if(user){
   cartCount = await userhelpers.getCartCount(user._id)
   wishCount = await userhelpers.getWishCount(user._id)}
-  productHelpers.getAllproducts().then((products)=>{
+   let products = await productHelpers.getAllproducts()
     res.render('users/viewProducts',{products,user,cartCount,wishCount})
-  })
+
 })
 
 router.get('/product/:id',async(req,res)=>{
@@ -292,7 +292,13 @@ router.post('/search-product',async(req,res)=>{
   res.json(searchProducts)
 })
 
-
+router.get('/shope',(req,res)=>{
+  console.log("searchproducts:",searchProducts)
+  if(searchProducts){
+     products=searchProducts;
+  }
+  res.render('users/viewProducts',{products})
+})
 
 
 module.exports = router;
