@@ -210,8 +210,14 @@ module.exports = {
                 //  }
             ]).toArray()
 
-            // console.log("subtotal:",totalPrice[0].totalPrice)
+            console.log("subtotal:",totalPrice)
+            console.log(totalPrice.length)
+            if(totalPrice.legth>0){
             resolve(totalPrice[0].totalPrice)
+            }else{
+                // totalPrice[0].totalPrice = 0;
+                resolve(0)
+            }
         })
     },
     getCartCount : (userId)=>{
@@ -256,6 +262,7 @@ module.exports = {
     },
     getTotalAmount : (userId)=>{
         return new Promise(async (resolve, reject) => {
+            
             let total = await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
                     $match: { user: objectId(userId) }
@@ -301,6 +308,7 @@ module.exports = {
                 //  },
             ]).toArray()
             console.log("total:",total)
+            // console.log(total.length)
            resolve(total[0].total)
         })
     },
