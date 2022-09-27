@@ -281,5 +281,10 @@ router.post('/remove-wishlist-product',(req,res)=>{
   })
 })
 
+router.post('/search-product',async(req,res)=>{
+  console.log(req.body)
+  let products = await userhelpers.searchProducts(req.body)
+})
+
 
 module.exports = router;

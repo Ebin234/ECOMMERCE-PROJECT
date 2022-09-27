@@ -628,5 +628,24 @@ module.exports = {
                 resolve({removeProduct:true})
             })
         })
+    },
+    searchProducts : (details)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log("search:",details.result)
+            let obj = details.result;
+            let products = await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find({
+                $or : [
+                    {
+                        Name : {$regex: obj, $options: "i"}
+                    },
+                    {
+                        brand : {$regex: obj, $options: "i"}
+                    }
+                ]
+            }).toArray()
+            console.log(products)
+            resolve(products)
+        })
     }
 }

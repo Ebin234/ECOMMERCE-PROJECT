@@ -9,8 +9,8 @@
 </section>
 
 <section id="product1" class="section-p1">
-    <input  class="search" type="text" placeholder="Search">
-    <button class="normal">Search</button>
+    <input  class="search" type="search" name="Search" placeholder="Search" id="searchContent">
+    <button type="submit" class="normal" onclick="searchProduct()">Search</button>
     <div class="pro-container">
         
         {{!-- <div class="filter"> --}}
@@ -425,3 +425,17 @@
         <button class="normal">Sign Up</button>
     </div>
 </section>
+
+
+<script>
+    function searchProduct(){
+         let search = document.getElementById('searchContent').value;
+         $.ajax({
+            url:'/search-product',
+            data:{
+                result:search
+            },
+            method:'post'
+         })
+    }
+</script>
