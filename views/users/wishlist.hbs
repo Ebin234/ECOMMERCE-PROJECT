@@ -121,8 +121,20 @@
 </section>
 
 <script>
+    
     function removeWishlistProduct(prodId,wishlistId){
-        $.ajax({
+        {{!-- const Swal = require('sweetalert2') --}}
+        Swal.fire({
+            title:'Are you sure?',
+            text:"You won't be able to revert this!",
+            icon:'warning',
+            showCancelButton:true,
+            confirmButtonColor:'#3085d6',
+            cancelButtonColor:'#d33',
+            confirmButtonText:'Yes,delete it!'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                $.ajax({
             url:'/remove-wishlist-product',
             data:{
                 prodId:prodId,
@@ -131,10 +143,16 @@
             method:'post',
             success:(response)=>{
                 if(response.removeProduct){
-                   alert("product removed from wishlist") 
+                    Swal.fire('Deleted!','Your file has been deleted.','success')
+                   .then(()=>{
+                    {{!-- alert("product removed from wishlist")  --}}
                    location.reload()
+                   })
                 }
             }
         })
+            }
+        })
+        
     }
 </script>

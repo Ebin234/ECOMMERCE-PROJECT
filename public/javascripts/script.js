@@ -1,4 +1,4 @@
-const { response } = require("../../app")
+
 
 function addToCart(prodId){
     $.ajax({
