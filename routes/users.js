@@ -5,6 +5,9 @@ var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
 const Swal = require('sweetalert2')
+
+let searchProducts;
+
 const verifyLogin = (req,res,next)=>{
   if(req.session.userLoggedIn){
     next()
@@ -283,8 +286,13 @@ router.post('/remove-wishlist-product',(req,res)=>{
 
 router.post('/search-product',async(req,res)=>{
   console.log(req.body)
-  let products = await userhelpers.searchProducts(req.body)
+  searchProducts = await userhelpers.searchProducts(req.body)
+  // console.log(resolve.search)
+  // res.json(resolve.search)
+  res.json(searchProducts)
 })
+
+
 
 
 module.exports = router;
