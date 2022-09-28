@@ -1,5 +1,7 @@
 // const { default: Swal } = require("sweetalert2")
 
+// const { response } = require("../../app")
+
 
 
 function addToCart(prodId) {
@@ -108,14 +110,20 @@ function addCategory() {
             Swal.fire({
                 title:`${result.value} `,
                 text:'Category Added Successfully'
-            })
+            }).then(()=>{
             $.ajax({
                 url: '/admin/add-category',
                 data:{
                     category:result.value
                 },
-                method: 'post'
+                method: 'post',
+                success:(response)=>{
+                    if(response.added){
+                        location.href='/admin/view-categories'
+                    }
+                }
             })
+        })
         }
     })
 

@@ -180,8 +180,10 @@ router.get('/view-categories',(req,res)=>{
 })
 
 router.post('/add-category',(req,res)=>{
-  console.log(req.body)
-  adminHelpers.addCategory(req.body)
+  console.log("body:",req.body)
+  adminHelpers.addCategory(req.body).then((response)=>{
+    res.json({added:true})
+  })
 })
 
 router.get('/edit-category',(req,res)=>{
