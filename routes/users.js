@@ -300,14 +300,16 @@ router.get('/shope',(req,res)=>{
   res.render('users/viewProducts',{products})
 })
 
-router.post('/product-filter',(req,res)=>{
+router.post('/product-filter',async(req,res)=>{
   let details = req.body
   console.log("filterDetails:",details)
-  let price = parseInt(details.price)
+  // let price = parseInt(details.price)
+  let price = details.price
   const brand = [];
   for (const i of details.brandName){
-    brand.push({brandName:i});
+    brand.push({brand:i});
   }
+  let products = await userhelpers.productFilter(brand,price)
   console.log('brand:',brand)
 
 })

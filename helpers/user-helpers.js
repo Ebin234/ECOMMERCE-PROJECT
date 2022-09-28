@@ -647,5 +647,39 @@ module.exports = {
             console.log(products)
             resolve(products)
         })
+    },
+    productFilter : (brand,price)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log("brand:",brand)
+            console.log("brandlength:",brand.length)
+            if(brand.length>1){
+                let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+                .aggregate([
+                    {
+                        $match : {
+                            $or : brand
+                        }
+                    },
+                    {
+                        $match : { 
+                            Price : {
+                                 $lt : price}}
+                    }
+                ]).toArray()
+                console.log("filterProducts:",filterProducts)
+                resolve(filterProducts)
+            }else{
+                let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+                .aggregate([
+                    {
+                        $match : { 
+                            Price : {
+                                 $lt : price}}
+                    }
+                ]).toArray()
+                console.log("filterProducts:",filterProducts)
+                resolve(filterProducts)
+            }
+        })
     }
 }
