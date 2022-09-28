@@ -108,28 +108,30 @@
                 </tr>
             </thead>
             <tbody>
-                {{!-- {{#each products}}
+                {{#each categories}}
                 <tr>
                     <td>1.</td>
-                
-                    {{!-- <td>
-                        {{!-- <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a> --}}
-                        {{!-- <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a> --}}
-                    {{!-- </td> --}}
-                {{!-- </tr> --}}
-                {{!-- {{/each}} --}}
-                <tr>
-                    <td>1.</td>
-                    {{!-- <td><img src="/images/products/n1.jpg" alt=""></td> --}}
-                    {{!-- <td>Cartoon Astronaut T-shirts</td> --}}
-                    <td>smartphone</td>
-                    {{!-- <td>2000</td> --}}
-                    {{!-- <td>$118.19</td> --}}
+                    <td>{{this.name}}</td>
                     <td>
                         <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
                         <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
                     </td>
                 </tr>
+                {{/each}}
+                
+
+                {{!-- <tr>
+                    <td>1.</td>
+                    <td><img src="/images/products/n1.jpg" alt=""></td>
+                    <td>Cartoon Astronaut T-shirts</td>
+                    <td>smartphone</td>
+                    <td>2000</td>
+                    <td>$118.19</td>
+                    <td>
+                        <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
+                        <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
+                    </td>
+                </tr>  --}}
 
             </tbody>
         </table>

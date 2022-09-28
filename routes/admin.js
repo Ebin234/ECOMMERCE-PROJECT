@@ -175,8 +175,9 @@ router.get('/users-details',async(req,res)=>{
   res.render('admin/users-details',{users,admin:true})
 })
 
-router.get('/view-categories',(req,res)=>{
-  res.render('admin/view-categories',{admin:true})
+router.get('/view-categories',async(req,res)=>{
+  let categories = await adminHelpers.getCategories()
+  res.render('admin/view-categories',{categories, admin:true})
 })
 
 router.post('/add-category',(req,res)=>{
