@@ -123,9 +123,11 @@
                         <input type="text" name="Name" value="{{product.Name}}">
                         <label for="">Catagory</label>
                         <select id="" name="Catagory">
-                            <option value="select">{{product.Catagory}}</option>
-                            <option value="smartphone">smartphone</option>
-                            <option value="laptop">laptop</option>
+                            <option value="{{product.Catagory}}">{{product.Catagory}}</option>
+                            {{#each catagories}}
+                            <option value="{{this.name}}">{{this.name}}</option>
+                            {{/each}}
+                            {{!-- <option value="laptop">laptop</option> --}}
                         </select>
                         <label for="">brand</label>
                         <input type="text" name="brand" value="{{product.brand}}">

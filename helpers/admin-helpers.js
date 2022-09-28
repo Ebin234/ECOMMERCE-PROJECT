@@ -3,7 +3,7 @@ var collection = require('../config/collections')
 const { response } = require('../app')
 const async = require('hbs/lib/async')
 // const { Promise } = require('mongodb')
-var objectId = require('mongodb').ObjectId
+const objectId = require('mongodb').ObjectId
 
 
 module.exports = {
@@ -26,6 +26,28 @@ module.exports = {
             let catagories = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
             console.log("cat:",catagories)
             resolve(catagories)
+        })
+    },
+    getCategoryDetails :(catId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let catDetails = await db.get().collection(collection.CATEGORY_COLLECTION)
+            .findOne({_id:objectId(catId)})
+            // console.log(catDetails)
+            resolve(catDetails)
+        })
+    },
+    updateCategory : (catId,data)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.CATEGORY_COLLECTION)
+            .updateOne({_id:objectId(catId)},
+            {
+                $set : {
+                    name : data
+                }
+            }).then((response)=>{
+                console.log(response)
+                resolve()
+            })
         })
     }
 }

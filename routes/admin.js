@@ -25,8 +25,9 @@ router.get('/products-details',(req,res)=>{
 })
 
 
-router.get('/add-product',(req,res)=>{
-  res.render('admin/add-product',{admin:true})
+router.get('/add-product',async(req,res)=>{
+  let catagories = await adminHelpers.getCategories()
+  res.render('admin/add-product',{catagories, admin:true})
 })
 
 // router.get('/add-product2',(req,res)=>{
@@ -103,8 +104,9 @@ router.get('/delete-product/:id',(req,res)=>{
 router.get('/edit-product/:id',async(req,res)=>{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
+  let catagories = await adminHelpers.getCategories()
   //console.log(product)
-  res.render('admin/edit-product',{product,admin:true})
+  res.render('admin/edit-product',{catagories,product,admin:true})
 })
 
 router.post('/edit-product1/:id',(req,res)=>{
@@ -187,11 +189,21 @@ router.post('/add-category',(req,res)=>{
   })
 })
 
-router.get('/edit-category',(req,res)=>{
-  res.json({result:400})
+router.get('/edit-category/:id',async(req,res)=>{
+  let catId = req.params.id
+  console.log("catId",catId)
+  let catDetails = await adminHelpers.getCategoryDetails(catId)
+  console.log("catDetails:",catDetails.name)
+  res.json(catDetails.name)
 })
 
 router.post('/edit-category',(req,res)=>{
-  console.log("category:",req.body)
+  // console.log("edited data:",req.body)
+  let data = req.body.newCategory
+  let catId = req.body.catId
+  console.log("data:",data,"catId:",catId)
+  adminHelpers.updateCategory(catId,data).then(()=>{
+    res.json({updated:true})
+  })
 })
 module.exports = router;

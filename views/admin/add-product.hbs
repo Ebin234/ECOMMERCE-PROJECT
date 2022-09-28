@@ -125,8 +125,10 @@
                         <label for="">Catagory</label>
                         <select id="" name="Catagory">
                             <option value="select">select</option>
-                            <option value="smartphone">smartphone</option>
-                            <option value="laptop">laptop</option>
+                            {{#each catagories}}
+                            <option value="{{this.name}}">{{this.name}}</option>
+                            {{!-- <option value="laptop">laptop</option> --}}
+                            {{/each}}
                         </select>
                         <label for="">brand</label>
                         <input type="text" name="brand">

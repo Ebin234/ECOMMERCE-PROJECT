@@ -1,5 +1,7 @@
 // const { default: Swal } = require("sweetalert2")
 
+const { response } = require("../../app")
+
 // const { response } = require("../../app")
 
 
@@ -108,23 +110,69 @@ function addCategory() {
     }).then((result) => {
         if (result.value) {
             Swal.fire({
-                title:`${result.value} `,
-                text:'Category Added Successfully'
-            }).then(()=>{
-            $.ajax({
-                url: '/admin/add-category',
-                data:{
-                    category:result.value
-                },
-                method: 'post',
-                success:(response)=>{
-                    if(response.added){
-                        location.href='/admin/view-categories'
+                title: `${result.value} `,
+                text: 'Category Added Successfully'
+            }).then(() => {
+                $.ajax({
+                    url: '/admin/add-category',
+                    data: {
+                        category: result.value
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        if (response.added) {
+                            location.href = '/admin/view-categories'
+                        }
                     }
-                }
+                })
             })
-        })
         }
     })
 
+}
+
+function editCategory(catId) {
+    console.log(catId)
+    const ipAPI = 'http://localhost:3000/admin/edit-category/'+catId
+
+
+    const inputValue = fetch(ipAPI)
+    .then(response => response.json())
+    .then(data => data)
+
+    
+
+    Swal.fire({
+        title: 'Edit Category Name',
+        input: 'text',
+        inputLabel: 'Category Name',
+        inputValue: inputValue,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: `${result.value} `,
+                text: 'Category Added Successfully'
+            }).then(()=>{
+                $.ajax({
+                    url:'/admin/edit-category',
+                    data: {
+                        newCategory : result.value,
+                        catId : catId
+                    },
+                    method:'post',
+                    success:(response)=>{
+                        if(response.updated){
+                            location.reload()
+                        }
+                    }
+                })
+            })
+        }
+    })
 }
