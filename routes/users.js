@@ -4,8 +4,9 @@ const { response } = require('../app');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
-const Swal = require('sweetalert2')
+const Swal = require('sweetalert2');
 
+let productFilter = [];
 let searchProducts;
 
 const verifyLogin = (req,res,next)=>{
@@ -104,8 +105,9 @@ router.get('/allProducts',async(req,res)=>{
   if(user){
   cartCount = await userhelpers.getCartCount(user._id)
   wishCount = await userhelpers.getWishCount(user._id)}
-   let products = await productHelpers.getAllproducts()
-    res.render('users/viewProducts',{products,user,cartCount,wishCount})
+  productFilter = await productHelpers.getAllproducts()
+    // res.render('users/viewProducts',{products,user,cartCount,wishCount})
+    res.redirect('/shope')
 
 })
 
@@ -295,22 +297,29 @@ router.post('/search-product',async(req,res)=>{
 router.get('/shope',(req,res)=>{
   console.log("searchproducts:",searchProducts)
   if(searchProducts){
-     products=searchProducts;
+    productFilter=searchProducts;
+    res.render('users/viewProducts',{productFilter})
+    searchProducts = null
+  }else{
+    res.render('users/viewProducts',{productFilter})
   }
-  res.render('users/viewProducts',{products})
+  
 })
 
 router.post('/product-filter',async(req,res)=>{
   let details = req.body
   console.log("filterDetails:",details)
-  // let price = parseInt(details.price)
-  let price = details.price
+  let price = parseInt(details.price)
+  // let price = details.price
   const brand = [];
   for (const i of details.brandName){
     brand.push({brand:i});
   }
-  let products = await userhelpers.productFilter(brand,price)
+  let products = await userhelpers.filterProducts(brand,price)
   console.log('brand:',brand)
+  productFilter = products
+  res.json({status:true})
+
 
 })
 

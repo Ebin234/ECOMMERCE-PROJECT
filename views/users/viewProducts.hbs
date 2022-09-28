@@ -81,15 +81,15 @@
                         <label for="">under rs.5000000</label>
                     </div>
                     <div class="check">
-                        <input type="radio" name="price" value="900">
+                        <input type="radio" name="price" value="500">
                         <label for="">under rs.500</label>
                     </div>
                     <div class="check">
-                        <input type="radio" name="price" value="2000">
+                        <input type="radio" name="price" value="1000">
                         <label for="">under rs.1000</label>
                     </div>
                     <div class="check">
-                        <input type="radio" name="price" value="3000">
+                        <input type="radio" name="price" value="2000">
                         <label for="">under rs.2000</label>
                     </div>
                     {{!-- <div class="check">
@@ -108,9 +108,10 @@
                 </div>
             </div>
       
-           
+    </div>
+    <div class="pro-container" id="products" >      
         
-        {{#each products}}
+        {{#each productFilter}}
         <div class="pro">
             <img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg"
                 onclick="window.location.href='/product/{{this._id}}';">
@@ -430,7 +431,12 @@
         $.ajax({
             url:'/product-filter',
             data:$('#productfilter').serialize(),
-            method:'post'
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    $('#products').load(location.href + " #products")
+                }
+            }
         })
     })
 
@@ -438,7 +444,12 @@
         $.ajax({
             url:'/product-filter',
             data:$('#productfilter').serialize(),
-            method:'post'
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    $('#products').load(location.href + " #products")
+                }
+            }
         })
     })
 </script>

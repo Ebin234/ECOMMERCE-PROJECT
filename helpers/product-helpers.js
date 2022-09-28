@@ -40,6 +40,7 @@ module.exports = {
     },
     updateProduct : (prodId,prodDetails)=>{
         return new Promise((resolve,reject)=>{
+            let price = parseInt(prodDetails.Price)
             db.get().collection(collection.PRODUCT_COLLECTION)
             .updateOne({_id:objectId(prodId)},
             {$set:{
@@ -47,7 +48,7 @@ module.exports = {
                    Catagory : prodDetails.Catagory,
                    brand : prodDetails.brand,
                    Stoke : prodDetails.Stoke,
-                   Price : prodDetails.Price,
+                   Price : price,
                    Description1 : prodDetails.Description1,
                    Description2 : prodDetails.Description2,
                    Description3 : prodDetails.Description3,

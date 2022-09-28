@@ -648,7 +648,7 @@ module.exports = {
             resolve(products)
         })
     },
-    productFilter : (brand,price)=>{
+    filterProducts : (brand,price)=>{
         return new Promise(async(resolve,reject)=>{
             console.log("brand:",brand)
             console.log("brandlength:",brand.length)
