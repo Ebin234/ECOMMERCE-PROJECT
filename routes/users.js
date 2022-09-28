@@ -300,5 +300,17 @@ router.get('/shope',(req,res)=>{
   res.render('users/viewProducts',{products})
 })
 
+router.post('/product-filter',(req,res)=>{
+  let details = req.body
+  console.log("filterDetails:",details)
+  let price = parseInt(details.price)
+  const brand = [];
+  for (const i of details.brandName){
+    brand.push({brandName:i});
+  }
+  console.log('brand:',brand)
+
+})
+
 
 module.exports = router;

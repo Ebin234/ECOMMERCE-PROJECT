@@ -10,41 +10,35 @@
 
 <section id="product1" class="section-p1">
     <input  class="search" type="search" name="Search" placeholder="Search" id="searchContent">
-    <button type="submit" class="normal" onclick="searchProduct()">Search</button>
+    <button type="submit" class="normal searchbtn" onclick="searchProduct()">Search</button>
+    <form id="productfilter">
     <div class="pro-container">
         
-        {{!-- <div class="filter"> --}}
+        
             <div class="outer">
                 <h2>
                   shop by genre
                 </h2>
                 <div class="genre">
+                    <input type="checkbox" name="catagoryName" value="" hidden checked>
                     <div class="check">
-                        <input type="checkbox">
+                        <input type="checkbox" name="catagoryName" value="smartpnones">
                         <label for="">Smart Phones</label>
                     </div>
                     <div class="check">
-                        <input type="checkbox">
+                        <input type="checkbox" name="catagoryName" value="smartwatches">
                         <label for="">Smart Watches</label>
                     </div>
                     <div class="check">
-                        <input type="checkbox">
+                        <input type="checkbox" name="catagoryName" value="laptop">
                         <label for="">Laptop</label>
                     </div>
                     <div class="check">
-                        <input type="checkbox">
+                        <input type="checkbox" name="catagoryName" value="tab">
                         <label for="">Tab</label>
                     </div>
                     <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
+                        <input type="checkbox" name="catagoryName" value="smarttv">
                         <label for="">Smart TV</label>
                     </div>
                 </div>
@@ -54,13 +48,14 @@
                   shop by brand
                 </h2>
                 <div class="genre">
+                    <input type="checkbox" name="brandName" value="" hidden checked>
                     <div class="check">
-                        <input type="checkbox">
-                        <label for="">Samsung</label>
+                        <input type="checkbox" name="brandName" value="oneplus">
+                        <label for="">oneplus</label>
                     </div>
                     <div class="check">
-                        <input type="checkbox">
-                        <label for="">apple</label>
+                        <input type="checkbox" name="brandName" value="motorla">
+                        <label for="">motorla</label>
                     </div>
                     <div class="check">
                         <input type="checkbox">
@@ -81,15 +76,20 @@
                   shop by genre
                 </h2>
                 <div class="genre">
+                     <input type="radio" name="price" value="50000000000" hidden checked>
                     <div class="check">
-                        <input type="radio">
-                        <label for="">under rs.100</label>
-                    </div>
-                    <div class="check">
-                        <input type="radio">
+                        <input type="radio" name="price" value="500">
                         <label for="">under rs.500</label>
                     </div>
                     <div class="check">
+                        <input type="radio" name="price" value="1000">
+                        <label for="">under rs.1000</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="price" value="2000">
+                        <label for="">under rs.2000</label>
+                    </div>
+                    {{!-- <div class="check">
                         <input type="radio">
                         <label for="">under rs.1000</label>
                     </div>
@@ -100,26 +100,11 @@
                     <div class="check">
                         <input type="radio">
                         <label for="">under rs.100000</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
-                    <div class="check">
-                        <input type="checkbox">
-                        <label for="">Smart TV</label>
-                    </div>
+                    </div> --}}
+                    
                 </div>
             </div>
-
+      
            
         
         {{#each products}}
@@ -154,6 +139,8 @@
         </div>
 
         {{/each}}
+
+        
 
 
         <div class="pro">
@@ -406,6 +393,7 @@
 
 
     </div>
+    </form>
 </section>
 
 
@@ -425,6 +413,32 @@
         <button class="normal">Sign Up</button>
     </div>
 </section>
+
+<script>
+    $('input[name=catagoryName]').change(function(){
+        $.ajax({
+            url:'/product-filter',
+            data:$('#productfilter').serialize(),
+            method:'post'
+        })
+    })
+
+    $('input[name=brandName]').change(function(){
+        $.ajax({
+            url:'/product-filter',
+            data:$('#productfilter').serialize(),
+            method:'post'
+        })
+    })
+
+    $('input[name=price]').change(function(){
+        $.ajax({
+            url:'/product-filter',
+            data:$('#productfilter').serialize(),
+            method:'post'
+        })
+    })
+</script>
 
 
 <script>
