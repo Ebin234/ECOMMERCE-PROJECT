@@ -179,7 +179,12 @@ router.get('/view-categories',(req,res)=>{
   res.render('admin/view-categories',{admin:true})
 })
 
-router.get('/add-category',(req,res)=>{
+router.post('/add-category',(req,res)=>{
+  console.log(req.body)
+  adminHelpers.addCategory(req.body)
+})
+
+router.get('/edit-category',(req,res)=>{
   res.json({result:400})
 })
 

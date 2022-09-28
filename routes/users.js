@@ -4,7 +4,7 @@ const { response } = require('../app');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
-const Swal = require('sweetalert2');
+
 
 let productFilter = [];
 let searchProducts;
