@@ -3,6 +3,7 @@ const async = require('hbs/lib/async');
 var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 const userHelpers = require('../helpers/user-helpers')
+const adminHelpers = require('../helpers/admin-helpers')
 const path = require('path');
 const fs = require('fs');
 const { Router } = require('express');
@@ -174,4 +175,15 @@ router.get('/users-details',async(req,res)=>{
   res.render('admin/users-details',{users,admin:true})
 })
 
+router.get('/view-categories',(req,res)=>{
+  res.render('admin/view-categories',{admin:true})
+})
+
+router.get('/add-category',(req,res)=>{
+  res.json({result:400})
+})
+
+router.post('/edit-category',(req,res)=>{
+  console.log("category:",req.body)
+})
 module.exports = router;

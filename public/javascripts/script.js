@@ -80,3 +80,39 @@ function removeWishlistProduct(prodId,wishlistId){
     })
     
 }
+
+  function addCategory (){
+    
+    const ipAPI = 'http://localhost:3000/admin/add-category'
+    
+
+const inputValue = fetch(ipAPI)
+  .then(response => response.json())
+  .then(data => data.result)
+
+
+const { value: ipAddress } =  Swal.fire({
+  title: 'Enter Category Name',
+  input: 'text',
+  inputLabel: 'Category Name',
+  inputValue: inputValue,
+  showCancelButton: true,
+  inputValidator: (value) => {
+    if (!value) {
+      return 'You need to write something!'
+    }
+  }
+}).then((result)=>{
+    if (result.value) {
+        Swal.fire(`Your IP address is ${result.value}`)
+        $.ajax({
+            url:'edit-category',
+            data:{
+                category : result.value
+            },
+            method:'post'
+        })
+    }
+})
+
+}
