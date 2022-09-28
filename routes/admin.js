@@ -206,4 +206,12 @@ router.post('/edit-category',(req,res)=>{
     res.json({updated:true})
   })
 })
+
+router.get('/delete-category/:id',(req,res)=>{
+  let catId = req.params.id
+  console.log(catId)
+  adminHelpers.deleteCategory(catId).then(()=>{
+    res.redirect('/admin/view-categories')
+  })
+})
 module.exports = router;

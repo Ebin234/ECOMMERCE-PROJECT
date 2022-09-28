@@ -15,13 +15,26 @@
         transition: 0.2s;
         text-decoration: none;
     }
+    a.normal {
+        font-size: 23px;
+        font-weight: 500;
+        padding: 9px 8px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        text-decoration: none;
+    }
 
     button.b1 {
         background-color: rgb(56, 179, 19);
         padding: 9px 20px;
     }
 
-    button.b2 {
+    a.b2 {
         background-color: rgb(238, 18, 18);
     }
 
@@ -114,7 +127,7 @@
                     <td>{{this.name}}</td>
                     <td>
                         <button href="/admin/edit-category/{{this._id}}" class=" normal b1 " onclick="editCategory('{{this._id}}')">Edit</button>
-                        <button href="/admin/delete-category/{{this._id}}" class="normal b2 ">Delete</button>
+                        <a href="/admin/delete-category/{{this._id}}" class="normal b2 ">Delete</a>
                     </td>
                 </tr>
                 {{/each}}

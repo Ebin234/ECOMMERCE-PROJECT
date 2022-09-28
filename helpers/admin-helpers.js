@@ -49,5 +49,14 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    deleteCategory : (catId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.CATEGORY_COLLECTION)
+            .deleteOne({_id:objectId(catId)}).then((response)=>{
+                console.log(response)
+                resolve()
+            })
+        })
     }
 }
