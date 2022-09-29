@@ -166,30 +166,31 @@
                     </td>
                 </tr>
                 {{/each}} --}}
+                {{#each orders}}
                 <tr>
                     <td>1.</td>
-                    <td><img src="/images/product-images/631cb14dc8a1a2d7fd4fc623/0631cb14dc8a1a2d7fd4fc623.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-shirts <br>
-                        Category : smartphone  <br>
-                        Brand : Samsung   <br>
-                        Quantity : 3  <br>
-                        Price : 30000 <br>
-                        Stock : 300 
+                    <td><img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg" alt=""></td>
+                    <td>{{this.productDetails.Name}} <br>
+                        Category : {{this.productDetails.Catagory}}  <br>
+                        Brand : {{this.productDetails.brand}}   <br>
+                        Quantity : {{this.products.Quantity}}  <br>
+                        Price : {{this.productDetails.Price}} <br>
+                        Stock : {{this.productDetails.Stoke}} 
                     </td>
-                    <td>Ebin yesudas <br>
+                    <td>{{this.deliveryDetails.fullName}} <br>
                         
-                        85574237
+                        {{this.deliveryDetails.mobile}}
                     </td>
-                    <td>20/05/2022</td>
-                    <td>Placed</td>
+                    <td>{{this.date}}</td>
+                    <td>{{this.status}}</td>
                     <td>
-                        Ebin yesudas <br>
-                        Koilparambil <br>
-                        kerala  <br>
-                        Alappuzha <br>
-                        688004
+                        {{this.deliveryDetails.fullName}} <br>
+                        {{this.deliveryDetails.address}} <br>
+                        {{this.deliveryDetails.state}}  <br>
+                        {{this.deliveryDetails.city}} <br>
+                        {{this.deliveryDetails.pincode}}
                     </td>
-                    <td>Online</td>
+                    <td>{{this.paymentMethod}}</td>
                     <td>
                         <select name="Status" >
                             <option value="Pending">Pending</option>
@@ -198,8 +199,7 @@
                         </select>
                     </td>
                 </tr>
-
-
+                {{/each}}
 
                 <tr>
                     <td>1.</td>

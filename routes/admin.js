@@ -258,7 +258,7 @@ router.get('/delete-brand/:id',(req,res)=>{
 router.get('/view-orders',async(req,res)=>{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
-  // res.render('admin/view-orders',{admin:true})
+  res.render('admin/view-orders',{orders,admin:true})
 })
 
 

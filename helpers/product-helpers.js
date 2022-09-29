@@ -142,6 +142,9 @@ module.exports = {
                 },
                 {
                     $unwind : '$productDetails'
+                },
+                {
+                    $sort : { date:-1,time:-1}
                 }
             ]).toArray()
             // console.log(orders)
