@@ -255,5 +255,9 @@ router.get('/delete-brand/:id',(req,res)=>{
   })
 })
 
+router.get('/view-orders',(req,res)=>{
+  res.render('admin/view-orders',{admin:true})
+})
+
 
 module.exports = router;

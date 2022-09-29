@@ -1,0 +1,246 @@
+<link rel="stylesheet" href="/stylesheets/admin-page-style.css">
+<link rel="stylesheet" href="/stylesheets/homepagestyle.css">
+
+<style>
+    a.normal {
+        font-size: 23px;
+        font-weight: 500;
+        padding: 9px 8px;
+        color: #000;
+        background-color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        transition: 0.2s;
+        text-decoration: none;
+    }
+
+    a.b1 {
+        background-color: rgb(56, 179, 19);
+        padding: 9px 20px;
+    }
+
+    a.b2 {
+        background-color: rgb(238, 18, 18);
+    }
+
+    #cart .head {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .add {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 15px;
+
+            {
+                {
+                 !-- flex-wrap: nowrap;
+                --
+            }
+        }
+
+            {
+                {
+                 !-- justify-content: end;
+                --
+            }
+        }
+    }
+
+    .add a {
+        text-decoration: none;
+        background-color: rgb(56, 179, 19);
+        color: #000;
+    }
+
+    .add .normal {
+        padding: 9px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #cart table tbody tr:hover {
+        background: #fff;
+
+            {
+                {
+                 !-- color: #fff;
+                03a9f4--
+            }
+        }
+    }
+
+    #cart table td:nth-child(3) {
+    width: 210px;
+    text-align: start;
+    line-height: 20px;
+}
+
+#cart table thead td {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    padding: 18px 7px;
+}
+
+#cart table  td:nth-child(4), #cart table td:nth-child(5), #cart table td:nth-child(6) ,
+#cart table td:nth-child(7),#cart table td:nth-child(8),#cart table td:nth-child(9){
+    width: 150px;
+    text-align: start;
+    justify-content: flex-start;
+}
+
+#cart table td:nth-child(1) {
+    width: 30px;
+    text-align: center;
+}
+
+#cart table td:nth-child(9) select {
+    background: #f5f5f5;
+    border: 1px solid gray;
+    height: 29px;
+    border-radius: 10px;
+}
+
+#cart table td:nth-child(9) select option{
+    border-radius: 10px;
+}
+
+
+</style>
+
+<div class="main">
+    <div class="topbar">
+        <div class="toggle" onclick="toggleMenu()"></div>
+        <div class="search">
+            <label for="">
+                <input type="text" placeholder="Search Here">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </label>
+        </div>
+        <div class="user">
+            <img src="/login-images/avatar2.svg" alt="">
+        </div>
+    </div>
+
+
+    <section id="cart" class="section-p1">
+        <div class="head">
+            <h2>Orders </h2>
+        </div>
+        {{!-- <div class="add"><a href="/admin/add-product" class="normal">Add Product</a></div> --}}
+        <table id="productTable" width="100%">
+            <thead>
+                <tr>
+                    <td>No</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>User</td>
+                    <td>Date</td>
+                    <td>Order Status</td>
+                    <td>Address</td>
+                    <td>Payment</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{!-- {{#each products}}
+                <tr>
+                    <td>1.</td>
+                    <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td>
+                    <td>{{this.Name}}</td>
+                    <td>{{this.Catagory}}</td>
+                    <td>{{this.Stoke}}</td>
+                    <td>${{this.Price}}</td>
+                    <td>
+                        <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
+                        <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
+                    </td>
+                </tr>
+                {{/each}} --}}
+                <tr>
+                    <td>1.</td>
+                    <td><img src="/images/product-images/631cb14dc8a1a2d7fd4fc623/0631cb14dc8a1a2d7fd4fc623.jpg" alt=""></td>
+                    <td>Cartoon Astronaut T-shirts <br>
+                        Category : smartphone  <br>
+                        Brand : Samsung   <br>
+                        Quantity : 3  <br>
+                        Price : 30000 <br>
+                        Stock : 300 
+                    </td>
+                    <td>Ebin yesudas <br>
+                        
+                        85574237
+                    </td>
+                    <td>20/05/2022</td>
+                    <td>Placed</td>
+                    <td>
+                        Ebin yesudas <br>
+                        Koilparambil <br>
+                        kerala  <br>
+                        Alappuzha <br>
+                        688004
+                    </td>
+                    <td>Online</td>
+                    <td>
+                        <select name="Status" >
+                            <option value="Pending">Pending</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td>1.</td>
+                    <td><img src="/images/product-images/631cb14dc8a1a2d7fd4fc623/0631cb14dc8a1a2d7fd4fc623.jpg" alt=""></td>
+                    <td>Cartoon  <br>
+                        Category : smartphone  <br>
+                        Brand : Samsung   <br>
+                        Quantity : 3  <br>
+                        Price : 30000 <br>
+                        Stock : 300 
+                    </td>
+                    <td>Ebin yesudas <br>
+                        
+                        85574237
+                    </td>
+                    <td>20/05/2022</td>
+                    <td>Placed</td>
+                    <td>
+                        Ebin yesudas <br>
+                        Koilparambil <br>
+                        kerala  <br>
+                        Alappuzha <br>
+                        688004
+                    </td>
+                    <td>Online</td>
+                    <td>Shipped</td>
+                </tr>
+
+
+
+
+
+
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<script>
+    $(function () {
+        $('#productTable').DataTable();
+    });
+</script>
