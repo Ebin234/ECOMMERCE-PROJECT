@@ -261,5 +261,10 @@ router.get('/view-orders',async(req,res)=>{
   res.render('admin/view-orders',{orders,admin:true})
 })
 
+router.post('/change-delivery-status',(req,res)=>{
+  console.log(req.body)
+  productHelpers.changeDeliveryStatus()
+})
+
 
 module.exports = router;

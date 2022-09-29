@@ -342,9 +342,11 @@ module.exports = {
                 totalAmount : total,
                 status : status,
                 date : date,
-                time : time
+                time : time,
+                deliveryStatus : 'pending'
+
             }
-           // console.log('orderObj',orderObj)
+        //    console.log('orderObj',orderObj)
 
            db.get().collection(collection.ORDER_COLLECTION)
            .insertOne(orderObj).then((response)=>{

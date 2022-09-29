@@ -192,11 +192,14 @@
                     </td>
                     <td>{{this.paymentMethod}}</td>
                     <td>
-                        <select name="Status" >
+                        
+                        <select id="change" name="deliveryStatus" >
+                            <option value="{{this.deliveryStatus}}">{{this.deliveryStatus}}</option>
                             <option value="Pending">Pending</option>
                             <option value="Shipped">Shipped</option>
                             <option value="Delivered">Delivered</option>
                         </select>
+                        
                     </td>
                 </tr>
                 {{/each}}
@@ -255,4 +258,17 @@
         navigation.classList.toggle('active')
         main.classList.toggle('active')
     }
+</script>
+
+<script>
+    $('select[name=deliveryStatus]').change(function () {
+        let data = document.getElementById('change').value
+        $.ajax({
+            url:'/admin/change-delivery-status',
+            data: {
+                data : $('#change').val()
+            },
+            method:'post'
+        })
+    })
 </script>
