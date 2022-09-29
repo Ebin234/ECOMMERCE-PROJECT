@@ -255,8 +255,10 @@ router.get('/delete-brand/:id',(req,res)=>{
   })
 })
 
-router.get('/view-orders',(req,res)=>{
-  res.render('admin/view-orders',{admin:true})
+router.get('/view-orders',async(req,res)=>{
+  let orders = await productHelpers.getOrders()
+  console.log("allOrders:",orders)
+  // res.render('admin/view-orders',{admin:true})
 })
 
 

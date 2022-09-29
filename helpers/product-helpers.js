@@ -121,5 +121,31 @@ module.exports = {
         return new Promise(async(resolve,reject)=>{
             console.log("hi")
         })
+    },
+    getOrders : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let orders = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match:{}
+                },
+                {
+                    $unwind : '$products'
+                },
+                {
+                    $lookup : {
+                        from : collection.PRODUCT_COLLECTION,
+                        localField: 'products.item',
+                        foreignField: '_id',
+                        as: 'productDetails'
+                    }
+                },
+                {
+                    $unwind : '$productDetails'
+                }
+            ]).toArray()
+            // console.log(orders)
+            resolve(orders)
+        })
     }
 }

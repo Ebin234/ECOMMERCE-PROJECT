@@ -1,6 +1,6 @@
 // const { default: Swal } = require("sweetalert2")
 
-const { response } = require("../../app")
+// const { response } = require("../../app")
 
 // const { response } = require("../../app")
 
@@ -12,9 +12,9 @@ function addToCart(prodId) {
         method: 'get',
         success: (response) => {
             //alert(response)
-            if (response.status) {
+            if (response.cartAdded) {
                 let count = $('#cart_count').html()
-                console.log(count)
+                console.log("count",count)
                 count = parseInt(count) + 1
                 $("#cart_count").html(count)
             }

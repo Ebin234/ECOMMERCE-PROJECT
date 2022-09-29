@@ -94,7 +94,7 @@ router.get('/add-to-cart/:id',(req,res)=>{
    //console.log(prodId)
    userhelpers.addToCart(prodId,userId).then(()=>{
    // res.redirect('/')
-    res.json({status:true})
+    res.json({cartAdded:true})
    })
 })
 
@@ -106,6 +106,7 @@ router.get('/allProducts',async(req,res)=>{
   cartCount = await userhelpers.getCartCount(user._id)
   wishCount = await userhelpers.getWishCount(user._id)}
   productFilter = await productHelpers.getAllproducts()
+  
     // res.render('users/viewProducts',{products,user,cartCount,wishCount})
     res.redirect('/shope')
 
@@ -294,14 +295,20 @@ router.post('/search-product',async(req,res)=>{
   res.json(searchProducts)
 })
 
-router.get('/shope',(req,res)=>{
+router.get('/shope',async(req,res)=>{
   console.log("searchproducts:",searchProducts)
+  let user = req.session.user
+  let cartCount = 0;
+  let wishCount = 0;
+  if(user){
+  cartCount = await userhelpers.getCartCount(user._id)
+  wishCount = await userhelpers.getWishCount(user._id)}
   if(searchProducts){
     productFilter=searchProducts;
-    res.render('users/viewProducts',{productFilter})
+    res.render('users/viewProducts',{productFilter,cartCount,wishCount,user})
     searchProducts = null
   }else{
-    res.render('users/viewProducts',{productFilter})
+    res.render('users/viewProducts',{productFilter,cartCount,wishCount,user})
   }
   
 })
