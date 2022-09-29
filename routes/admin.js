@@ -227,5 +227,23 @@ router.post('/add-brand',(req,res)=>{
   })
 })
 
+router.get('/edit-brand/:id',async(req,res)=>{
+  let brandId = req.params.id
+  console.log("brandId:",brandId)
+  let brandDetails = await adminHelpers.getBrandDetails(brandId) 
+  console.log("brandData:",brandDetails)
+  res.json(brandDetails.name)
+})
+
+router.post('/edit-brand',(req,res)=>{
+  // console.log(req.body)
+  let data = req.body.newBrand
+  let brandId = req.body.brandId
+  console.log("data:",data,"brandId:",brandId)
+  adminHelpers.updateBrand(brandId,data).then(()=>{
+    res.json({brandUpdated:true})
+  })
+})
+
 
 module.exports = router;

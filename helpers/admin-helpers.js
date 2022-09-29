@@ -79,5 +79,25 @@ module.exports = {
             console.log(brands)
             resolve(brands)
         })
+    },
+    getBrandDetails : (brandId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let brandDetails = await db.get().collection(collection.BRAND_COLLECTION)
+            .findOne({_id:objectId(brandId)})
+            // console.log(brandDetails)
+            resolve(brandDetails)
+        })
+    },
+    updateBrand : (brandId,brandName)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.BRAND_COLLECTION)
+            .updateOne({_id:objectId(brandId)},
+            {
+                $set : {name : brandName}
+            }).then((response)=>{
+                console.log(response)
+                resolve()
+            })
+        })
     }
 }

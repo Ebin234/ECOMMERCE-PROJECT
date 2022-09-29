@@ -222,3 +222,50 @@ function addBrand() {
     })
 
 }
+
+
+function editBrand(brandId) {
+    console.log(brandId)
+    const ipAPI = 'http://localhost:3000/admin/edit-brand/'+brandId
+
+
+    const inputValue = fetch(ipAPI)
+    .then(response => response.json())
+    .then(data => data)
+
+    
+
+    Swal.fire({
+        title: 'Edit Brand Name',
+        input: 'text',
+        inputLabel: 'Brand Name',
+        inputValue: inputValue,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: `${result.value} `,
+                text: 'Added Successfully'
+            }).then(()=>{
+                $.ajax({
+                    url:'/admin/edit-brand',
+                    data: {
+                        newBrand : result.value,
+                        brandId : brandId
+                    },
+                    method:'post',
+                    success:(response)=>{
+                        if(response.brandUpdated){
+                            location.reload()
+                        }
+                    }
+                })
+            })
+        }
+    })
+}
