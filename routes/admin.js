@@ -27,7 +27,8 @@ router.get('/products-details',(req,res)=>{
 
 router.get('/add-product',async(req,res)=>{
   let catagories = await adminHelpers.getCategories()
-  res.render('admin/add-product',{catagories, admin:true})
+  let brands = await adminHelpers.getBrands()
+  res.render('admin/add-product',{brands,catagories, admin:true})
 })
 
 // router.get('/add-product2',(req,res)=>{
@@ -105,8 +106,9 @@ router.get('/edit-product/:id',async(req,res)=>{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   let catagories = await adminHelpers.getCategories()
+  let brands = await adminHelpers.getBrands()
   //console.log(product)
-  res.render('admin/edit-product',{catagories,product,admin:true})
+  res.render('admin/edit-product',{brands,catagories,product,admin:true})
 })
 
 router.post('/edit-product1/:id',(req,res)=>{
@@ -242,6 +244,14 @@ router.post('/edit-brand',(req,res)=>{
   console.log("data:",data,"brandId:",brandId)
   adminHelpers.updateBrand(brandId,data).then(()=>{
     res.json({brandUpdated:true})
+  })
+})
+
+router.get('/delete-brand/:id',(req,res)=>{
+  let brandId = req.params.id
+  console.log(brandId)
+  adminHelpers.deleteBrand(brandId).then(()=>{
+    res.redirect('/admin/view-brands')
   })
 })
 

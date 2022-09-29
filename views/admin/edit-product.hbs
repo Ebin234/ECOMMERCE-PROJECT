@@ -130,7 +130,14 @@
                             {{!-- <option value="laptop">laptop</option> --}}
                         </select>
                         <label for="">brand</label>
-                        <input type="text" name="brand" value="{{product.brand}}">
+                        <select id="" name="brand">
+                            <option value="{{product.brand}}">{{product.brand}}</option>
+                            {{#each brands}}
+                            <option value="{{this.name}}">{{this.name}}</option>
+                            {{/each}}
+                            {{!-- <option value="laptop">laptop</option> --}}
+                        </select>
+                        {{!-- <input type="text" name="brand" value="{{product.brand}}"> --}}
                         <label for="">stoke</label>
                         <input type="number" name="Stoke" value="{{product.Stoke}}">
                         <label for="">Price</label>

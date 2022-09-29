@@ -99,5 +99,14 @@ module.exports = {
                 resolve()
             })
         })
+    },
+    deleteBrand : (brandId)=>{
+        return new Promise((resolve,reject)=>{
+            db.get().collection(collection.BRAND_COLLECTION)
+            .deleteOne({_id:objectId(brandId)}).then((response)=>{
+                console.log(response)
+                resolve()
+            })
+        })
     }
 }

@@ -117,7 +117,7 @@
 
     <section class="section-p2">
         <div class="section-m1 main1">
-            <form class="addform" action="/admin/add-product2" method="post" enctype="multipart/form-data">
+            <form class="addform" action="/admin/add-product" method="post" enctype="multipart/form-data">
                 <div class="s1">
                     <div class="s2">
                         <label for="">product name</label>
@@ -131,7 +131,14 @@
                             {{/each}}
                         </select>
                         <label for="">brand</label>
-                        <input type="text" name="brand">
+                        <select id="" name="brand">
+                            <option value="select">select</option>
+                            {{#each brands}}
+                            <option value="{{this.name}}">{{this.name}}</option>
+                            {{!-- <option value="laptop">laptop</option> --}}
+                            {{/each}}
+                        </select>
+                        {{!-- <input type="text" name="brand"> --}}
                         <label for="">stoke</label>
                         <input type="number" name="Stoke">
                         <label for="">Price</label>
