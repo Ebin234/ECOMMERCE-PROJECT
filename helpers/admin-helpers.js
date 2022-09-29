@@ -73,5 +73,11 @@ module.exports = {
             })
         })
     },
-    
+    getBrands : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let brands = await db.get().collection(collection.BRAND_COLLECTION).find().toArray()
+            console.log(brands)
+            resolve(brands)
+        })
+    }
 }

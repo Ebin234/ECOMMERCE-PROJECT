@@ -216,8 +216,8 @@ router.get('/delete-category/:id',(req,res)=>{
 })
 
 router.get('/view-brands',async(req,res)=>{
-  
-  res.render('admin/view-brands',{admin:true})
+  let brands = await adminHelpers.getBrands()
+  res.render('admin/view-brands',{brands,admin:true})
 })
 
 router.post('/add-brand',(req,res)=>{
