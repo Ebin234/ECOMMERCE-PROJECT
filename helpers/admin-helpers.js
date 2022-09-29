@@ -58,5 +58,20 @@ module.exports = {
                 resolve()
             })
         })
-    }
+    },
+    addBrand : (data)=>{
+        return new Promise((resolve,reject)=>{
+            // console.log("brand data:",data)
+            let brand = {
+                name : data.brand
+            }
+            console.log(brand)
+            db.get().collection(collection.BRAND_COLLECTION).insertOne(brand)
+            .then((response)=>{
+                console.log(response)
+                resolve()
+            })
+        })
+    },
+    
 }

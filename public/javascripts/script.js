@@ -176,3 +176,49 @@ function editCategory(catId) {
         }
     })
 }
+
+function addBrand() {
+
+    // const ipAPI = 'http://localhost:3000/admin/add-category';
+
+
+    const inputValue = null
+
+    // fetch(ipAPI)
+    //     .then(response => response.json())
+    //     .then(data => data.result)
+
+    Swal.fire({
+        title: 'Enter Brand Name',
+        input: 'text',
+        inputLabel: 'Barnd Name',
+        inputValue: inputValue,
+        showCancelButton: true,
+        inputValidator: (value) => {
+            if (!value) {
+                return 'You need to write something!'
+            }
+        }
+    }).then((result) => {
+        if (result.value) {
+            Swal.fire({
+                title: `${result.value} `,
+                text: 'Added Successfully'
+            }).then(() => {
+                $.ajax({
+                    url: '/admin/add-brand',
+                    data: {
+                        brand: result.value
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        if (response.brand) {
+                            location.href = '/admin/view-brands'
+                        }
+                    }
+                })
+            })
+        }
+    })
+
+}

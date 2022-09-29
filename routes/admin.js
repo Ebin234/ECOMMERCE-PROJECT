@@ -214,4 +214,18 @@ router.get('/delete-category/:id',(req,res)=>{
     res.redirect('/admin/view-categories')
   })
 })
+
+router.get('/view-brands',async(req,res)=>{
+  
+  res.render('admin/view-brands',{admin:true})
+})
+
+router.post('/add-brand',(req,res)=>{
+  // console.log(req.body)
+  adminHelpers.addBrand(req.body).then(()=>{
+    res.json({brand:true})
+  })
+})
+
+
 module.exports = router;
