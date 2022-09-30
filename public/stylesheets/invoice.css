@@ -4,6 +4,11 @@
     text-decoration: none;
     color: #7793C4; 
   }
+
+  .col-sm-6 {
+    width: 50%;
+    line-height: 25px;
+}
   
   .receipt-content .invoice-wrapper {
     background: #FFF;
@@ -25,22 +30,24 @@
   
   .receipt-content .invoice-wrapper .line-items .print a {
     display: inline-block;
-    border: 1px solid #9CB5D6;
+    /* border: 1px solid #9CB5D6; */
+    background: #c0392b;
     padding: 13px 13px;
     border-radius: 5px;
-    color: #708DC0;
+    color: #fff;
     font-size: 13px;
-    -webkit-transition: all 0.2s linear;
+    /* -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -ms-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
-    transition: all 0.2s linear; 
+    transition: all 0.2s linear;  */
   }
   
   .receipt-content .invoice-wrapper .line-items .print a:hover {
     text-decoration: none;
-    border-color: #333;
-    color: #333; 
+    background: #e74c3c;
+    /* border-color: #333; */
+    color: #fff; 
   }
   
     .receipt-content {
@@ -51,7 +58,7 @@
     }
   
   @media (min-width: 1200px) {
-    .receipt-content .container {width: 1000px; } 
+    .receipt-content .container {width: 1170px; } 
   }
   
   .receipt-content .logo {
