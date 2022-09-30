@@ -144,7 +144,7 @@ module.exports = {
                     $unwind : '$productDetails'
                 },
                 {
-                    $sort : { date:-1,time:-1}
+                    $sort : { date:1,time:1}
                 }
             ]).toArray()
             // console.log(orders)
@@ -152,14 +152,20 @@ module.exports = {
         })
     },
     changeDeliveryStatus : (orderId,prodId,paymentStatus)=>{
-        return new Promise(async(resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             console.log(orderId,prodId,paymentStatus)
-            db.get().collection(collection.ORDER_COLLECTION)
-            .aggregate([
+           db.get().collection(collection.ORDER_COLLECTION)
+            .updateOne(
                 {
-                    $match : {_id : objectId(orderId)}
-                }
-            ])
+                    _id : objectId(orderId),
+                    products : { $elemMatch : {item : objectId(prodId)}}
+                },
+                {
+                    $set : { "products.$.deliveryStatus": paymentStatus}
+                }).then((response)=>{
+                    // console.log(response)
+                    resolve(response)
+                })
         // console.log(a)
         })
     }

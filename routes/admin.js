@@ -7,6 +7,7 @@ const adminHelpers = require('../helpers/admin-helpers')
 const path = require('path');
 const fs = require('fs');
 const { Router } = require('express');
+const { response } = require('../app');
 
 
 /* GET users listing. */
@@ -266,8 +267,11 @@ router.post('/change-delivery-status',(req,res)=>{
   let paymentStatus = req.body.data
   let prodId = req.body.prodId
   let orderId =req.body.orderId
-  // console.log(paymentStatus,prodId,orderId)
-  productHelpers.changeDeliveryStatus(orderId,prodId,paymentStatus)
+  console.log(paymentStatus,prodId,orderId)
+  // productHelpers.changeDeliveryStatus(orderId,prodId,paymentStatus).then((response)=>{
+  //   console.log(response)
+  // })
+  res.json({upd:true})
 })
 
 

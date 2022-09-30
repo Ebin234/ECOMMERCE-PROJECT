@@ -192,17 +192,22 @@
                     </td>
                     <td>{{this.paymentMethod}}</td>
                     <td>
+                        
+                        {{!-- <form id="submit" method="post" enctype="multipart/form-data" > --}}
                         {{!-- <form action="" id="deliveryStatus"> --}}
                         <input type="text" id="orderId" value="{{this._id}}" hidden>
                         <input type="text" id="prodId" value="{{this.products.item}}" hidden>
-                        <select id="change" name="deliveryStatus" >
-                            <option value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
+                        <select id="change" name="deliveryStatus" onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}',this)">
+                            <option  value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
                             <option name="deliveryStatus" value="Pending">Pending</option>
                             <option value="Shipped">Shipped</option>
                             <option name="deliveryStatus" value="Delivered">Delivered</option>
+                            
                         </select>
+                        {{!-- <button  >submit</button> --}}
                         {{!-- </form> --}}
                     </td>
+                    {{!-- <td id="product" hidden>{{this._id}}</td> --}}
                 </tr>
                 {{/each}}
 
@@ -244,11 +249,11 @@
 
 </div>
 
-<script>
+{{!-- <script>
     $(function () {
         $('#productTable').DataTable();
     });
-</script>
+</script> --}}
 
 
 <script>
@@ -262,23 +267,60 @@
     }
 </script>
 
+
+
 <script>
-    $('select[name=deliveryStatus]').change(function () {
-        {{!-- let data = document.getElementById('change').value --}}
-        let prodId = document.getElementById('prodId').value
-        let orderId = document.getElementById('orderId').value
-        {{!-- let pay = $('#change').val() --}}
-        $.ajax({
+    function changeDeliveryStatus (orderId,prodId,obj){
+
+            $.ajax({
             url:'/admin/change-delivery-status',
-            data: {
-                data :$(this).val(),
+            data:{
+                orderId : orderId,
                 prodId : prodId,
-                orderId : orderId
+                data : obj.value
             },
             method:'post'
         })
-    })
+        
+        
+    }
 </script>
 
 
+
+
+
+
+
+
+
+{{!-- <script>
+    {{!-- $('select[name=deliveryStatus]').change(function () { --}}
+    $('#submit').submit((e)=>{
+        e.preventDefault()
+        {{!-- document.forms["submit"].submit(); --}}
+        {{!-- let data = document.getElementById('change').value --}}
+        let prodId = document.getElementById('prodId').value
+        let orderId = $('#product').html()
+        {{!-- let pay = $('#change').val() --}}
+        $.ajax({
+            url:'/admin/change-delivery-status',
+            data:$('#submit').serialize(),
+            
+            method:'post',
+            
+        })
+        })
+</script> --}}
+
+
 {{!-- $('#deliveryStatus').serialize(), --}}
+{{!-- data: {
+                data :$(this).val(),
+                prodId : $('#deliveryStatus').serialize(),
+                orderId : orderId
+            }, --}}
+
+            {{!-- success:(response)=>{
+                {{!-- location.reload() --}}
+            } --}}
