@@ -19,6 +19,9 @@ app.set('view engine', 'hbs');
 app.engine('hbs',hbs.engine({helpers:{
   inc: function(value,options){
     return parseInt(value)+1
+  },
+  ifEquals: function(arg1,arg2,options){
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
   }
 },
 extname:'hbs',

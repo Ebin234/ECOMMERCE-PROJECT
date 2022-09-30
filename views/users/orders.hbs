@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/stylesheets/homepagestyle.css">
+
+
 <style>
     #cart table td:nth-child(1) {
     width: 100px;
@@ -63,11 +66,11 @@ a.button{
                 <td>Status</td>
                 <td>Address</td>
                 <td>mobile</td>
-                <td>Delivery Status</td>
+                {{!-- <td>Delivery Status</td> --}}
                 <td>amount</td>
                 <td>payment</td>
                 <td>products</td>
-                <td>Remove</td>
+                {{!-- <td>Remove</td> --}}
             </tr>
         </thead>
         <tbody>
@@ -84,11 +87,11 @@ a.button{
                     {{this.deliveryDetails.city}} <br>
                     pin: {{this.deliveryDetails.pincode}} <br></td>
                 <td>{{this.deliveryDetails.mobile}}</td>
-                <td>{{this.products.deliveryStatus}}</td>
+                {{!-- <td>{{this.products.deliveryStatus}}</td> --}}
                 <td>{{this.totalAmount}}</td>
                 <td>{{this.paymentMethod}}</td>
                 <td><a class="normal button" href="/view-order-products/{{this._id}}">view products</a></td>
-                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                {{!-- <td><a href=""><i class="far fa-times-circle"></i></a></td> --}}
             </tr>
             {{/each}}
            

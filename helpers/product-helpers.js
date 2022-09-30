@@ -166,7 +166,6 @@ module.exports = {
                     // console.log(response)
                     resolve(response)
                 })
-        // console.log(a)
         })
     }
 }

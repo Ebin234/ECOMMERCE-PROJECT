@@ -259,19 +259,20 @@ router.get('/delete-brand/:id',(req,res)=>{
 router.get('/view-orders',async(req,res)=>{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
+  
   res.render('admin/view-orders',{orders,admin:true})
 })
 
 router.post('/change-delivery-status',(req,res)=>{
   console.log(req.body)
-  let paymentStatus = req.body.data
+  let deliveryStatus = req.body.data
   let prodId = req.body.prodId
   let orderId =req.body.orderId
-  console.log(paymentStatus,prodId,orderId)
-  // productHelpers.changeDeliveryStatus(orderId,prodId,paymentStatus).then((response)=>{
-  //   console.log(response)
-  // })
-  res.json({upd:true})
+  console.log(deliveryStatus,prodId,orderId)
+  productHelpers.changeDeliveryStatus(orderId,prodId,deliveryStatus).then((response)=>{
+    console.log(response)
+  })
+  res.json({updated:true})
 })
 
 

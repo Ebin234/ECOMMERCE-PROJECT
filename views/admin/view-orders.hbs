@@ -98,6 +98,11 @@
     justify-content: flex-start;
 }
 
+#cart table tbody td:nth-child(9){
+    font-weight: 700;
+    font-size: 16px;
+}
+
 #cart table td:nth-child(1) {
     width: 30px;
     text-align: center;
@@ -191,12 +196,18 @@
                         {{this.deliveryDetails.pincode}}
                     </td>
                     <td>{{this.paymentMethod}}</td>
-                    <td>
+                    
                         
                         {{!-- <form id="submit" method="post" enctype="multipart/form-data" > --}}
                         {{!-- <form action="" id="deliveryStatus"> --}}
-                        <input type="text" id="orderId" value="{{this._id}}" hidden>
-                        <input type="text" id="prodId" value="{{this.products.item}}" hidden>
+                        {{!-- <input type="text" id="orderId" value="{{this._id}}" hidden> --}}
+                        {{!-- <input type="text" id="prodId" value="{{this.products.item}}" hidden> --}}
+
+                        {{#ifEquals this.products.deliveryStatus  "Delivered"}}
+                         <td>Delivered</td>
+
+                        {{else}}
+                        <td>
                         <select id="change" name="deliveryStatus" onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}',this)">
                             <option  value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
                             <option name="deliveryStatus" value="Pending">Pending</option>
@@ -204,9 +215,11 @@
                             <option name="deliveryStatus" value="Delivered">Delivered</option>
                             
                         </select>
+                        </td>
+                        {{/ifEquals}}
                         {{!-- <button  >submit</button> --}}
                         {{!-- </form> --}}
-                    </td>
+                    
                     {{!-- <td id="product" hidden>{{this._id}}</td> --}}
                 </tr>
                 {{/each}}
@@ -279,7 +292,11 @@
                 prodId : prodId,
                 data : obj.value
             },
-            method:'post'
+            method:'post',
+            success : (response)=>{
+                {{!-- $('#change').load(location.href + " #change") --}}
+                location.reload()
+            }
         })
         
         

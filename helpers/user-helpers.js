@@ -402,11 +402,12 @@ module.exports = {
                         price: "$productDetails.Price",
                         quantity: "$products.quantity",
                         product: "$products.item",
-                        brand: "$productDetails.brand"
+                        brand: "$productDetails.brand",
+                        deliveryStatus: "$products.deliveryStatus"
                     }
                 }
             ]).toArray()
-            //console.log(orderItems)
+            // console.log(orderItems)
             resolve(orderItems)
         })
     },

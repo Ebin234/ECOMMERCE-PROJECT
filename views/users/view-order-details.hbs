@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="/stylesheets/homepagestyle.css">
+
+
 <style>
     #cart table td:nth-child(1) {
     width: 100px;
@@ -63,7 +66,7 @@
                     pin: {{this.deliveryDetails.pincode}} <br>
                     mob: {{this.deliveryDetails.mobile}}
                 </td>
-                <td>pending</td>
+                <td>{{this.deliveryStatus}}</td>
                 <td><i class="fa-solid fa-file-invoice"></i></td>
             </tr>
             {{/each}}
