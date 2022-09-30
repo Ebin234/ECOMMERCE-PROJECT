@@ -691,6 +691,14 @@ module.exports = {
     getInvoiceData : (orderId)=>{
         return new Promise(async(resolve,reject)=>{
             console.log("orderId:",orderId)
+            let invoiceData = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {_id : objectId(orderId)}
+                },
+                
+            ]).toArray()
+            console.log(invoiceData)
         })
     }
 }
