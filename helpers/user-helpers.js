@@ -325,7 +325,11 @@ module.exports = {
             let status = order['payment-method'] ==='COD'?'placed':'pending'
             let d = new Date()
             let date = moment(d).format('YYYY-MM-DD');
-            let time = moment(d).format('HH:MM:SS')
+            let time = moment(d).format('HH:MM:SS');
+            for(i=0; i<products.length;i++){
+                products[i].deliveryStatus= "pending";
+            }
+            console.log(products)
             //console.log(status)
             let orderObj = {
                 deliveryDetails : {
@@ -342,8 +346,7 @@ module.exports = {
                 totalAmount : total,
                 status : status,
                 date : date,
-                time : time,
-                deliveryStatus : 'pending'
+                time : time
 
             }
         //    console.log('orderObj',orderObj)

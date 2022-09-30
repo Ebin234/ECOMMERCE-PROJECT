@@ -262,8 +262,11 @@ router.get('/view-orders',async(req,res)=>{
 })
 
 router.post('/change-delivery-status',(req,res)=>{
-  console.log(req.body)
-  productHelpers.changeDeliveryStatus()
+  // console.log(req.body)
+  let paymentStatus = req.body.data
+  let orderProdId = req.body.prodId
+  // console.log(paymentStatus,orderProdId)
+  productHelpers.changeDeliveryStatus(orderProdId,paymentStatus)
 })
 
 
