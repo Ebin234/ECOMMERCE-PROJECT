@@ -330,5 +330,9 @@ router.post('/product-filter',async(req,res)=>{
 
 })
 
+router.get('/invoice',(req,res)=>{
+  res.render('users/invoice')
+})
+
 
 module.exports = router;

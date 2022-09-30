@@ -69,7 +69,9 @@ a.button{
                 {{!-- <td>Delivery Status</td> --}}
                 <td>amount</td>
                 <td>payment</td>
+                <td>Invoice</td>
                 <td>products</td>
+
                 {{!-- <td>Remove</td> --}}
             </tr>
         </thead>
@@ -90,6 +92,7 @@ a.button{
                 {{!-- <td>{{this.products.deliveryStatus}}</td> --}}
                 <td>{{this.totalAmount}}</td>
                 <td>{{this.paymentMethod}}</td>
+                <td><a href="/invoice"><i class="fa-solid fa-file-invoice"></i></a></td>
                 <td><a class="normal button" href="/view-order-products/{{this._id}}">view products</a></td>
                 {{!-- <td><a href=""><i class="far fa-times-circle"></i></a></td> --}}
             </tr>
