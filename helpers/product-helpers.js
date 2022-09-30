@@ -151,12 +151,18 @@ module.exports = {
             resolve(orders)
         })
     },
-    changeDeliveryStatus : (orderProdId,paymentStatus)=>{
+    changeDeliveryStatus : (orderId,prodId,paymentStatus)=>{
         return new Promise(async(resolve,reject)=>{
-            console.log(orderProdId,paymentStatus)
-           let a =await db.get().collection(collection.ORDER_COLLECTION)
-            .findOne({products : { $elemMatch : {item : objectId(orderProdId)}} })
-        console.log(a)
+            console.log(orderId,prodId,paymentStatus)
+            db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {_id : objectId(orderId)}
+                }
+            ])
+        // console.log(a)
         })
     }
 }
+
+// products : { $elemMatch : {item : objectId(prodId)}}

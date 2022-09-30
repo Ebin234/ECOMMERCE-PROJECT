@@ -192,15 +192,16 @@
                     </td>
                     <td>{{this.paymentMethod}}</td>
                     <td>
+                        {{!-- <form action="" id="deliveryStatus"> --}}
+                        <input type="text" id="orderId" value="{{this._id}}" hidden>
                         <input type="text" id="prodId" value="{{this.products.item}}" hidden>
                         <select id="change" name="deliveryStatus" >
-                            
                             <option value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
-                            <option value="Pending">Pending</option>
+                            <option name="deliveryStatus" value="Pending">Pending</option>
                             <option value="Shipped">Shipped</option>
-                            <option value="Delivered">Delivered</option>
+                            <option name="deliveryStatus" value="Delivered">Delivered</option>
                         </select>
-                        
+                        {{!-- </form> --}}
                     </td>
                 </tr>
                 {{/each}}
@@ -265,13 +266,19 @@
     $('select[name=deliveryStatus]').change(function () {
         {{!-- let data = document.getElementById('change').value --}}
         let prodId = document.getElementById('prodId').value
+        let orderId = document.getElementById('orderId').value
+        {{!-- let pay = $('#change').val() --}}
         $.ajax({
             url:'/admin/change-delivery-status',
             data: {
-                data : $('#change').val(),
-                prodId : prodId
+                data :$(this).val(),
+                prodId : prodId,
+                orderId : orderId
             },
             method:'post'
         })
     })
 </script>
+
+
+{{!-- $('#deliveryStatus').serialize(), --}}
