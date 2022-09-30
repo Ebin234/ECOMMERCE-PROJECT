@@ -687,5 +687,10 @@ module.exports = {
                 resolve(filterProducts)
             }
         })
+    },
+    getInvoiceData : (orderId)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log("orderId:",orderId)
+        })
     }
 }
