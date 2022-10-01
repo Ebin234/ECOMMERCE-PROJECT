@@ -696,9 +696,38 @@ module.exports = {
                 {
                     $match : {_id : objectId(orderId)}
                 },
-                
+                {
+                    $unwind : '$products'
+                },
+                {
+                    $lookup : {
+                        from : collection.PRODUCT_COLLECTION,
+                        localField : 'products.item',
+                        foreignField : '_id',
+                        as : 'productDetails'
+                    }
+                },
+                {
+                    $unwind : '$productDetails'
+                },
+                {
+                    $project : {
+                        deliveryDetails : 1,
+                        paymentMethod : 1,
+                        productQuantity : '$products.quantity',
+                        deliveryStatus : '$products.deliveryStatus',
+                        orderStatus : '$status',
+                        date : 1,
+                        time : 1,
+                        productName : '$productDetails.Name',
+                        productCategory : '$productDetails.catagory',
+                        productPrice : '$productDetails.Price',
+                        subTotal : '$totalAmount'
+                    }
+                }
             ]).toArray()
             console.log(invoiceData)
+            resolve(invoiceData)
         })
     }
 }
