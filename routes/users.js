@@ -333,9 +333,11 @@ router.post('/product-filter',async(req,res)=>{
 router.get('/invoice/:id',async(req,res)=>{
   let orderId = req.params.id
   console.log(orderId)
-  let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
-  console.log("invoice:",invoiceDeliveryData)
-  res.render('users/invoice',{invoiceDeliveryData})
+  // let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
+  let invoiceProductsData = await userhelpers.getInvoiceProductsData(orderId)
+  // console.log("invoice:",invoiceDeliveryData)
+  console.log("productsdata:",invoiceProductsData)
+  // res.render('users/invoice',{invoiceDeliveryData})
 })
 
 

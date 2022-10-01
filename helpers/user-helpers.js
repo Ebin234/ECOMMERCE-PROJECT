@@ -776,5 +776,39 @@ module.exports = {
             // console.log(invoiceDeliveryData[0])
             resolve(invoiceDeliveryData[0])
         })
+    },
+    getInvoiceProductsData : (orderId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let invoiceProductsData = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : { _id : objectId(orderId)}
+                },
+                {
+                    $unwind : "$products"
+                },
+                {
+                    $lookup : {
+                        from : collection.PRODUCT_COLLECTION,
+                        localField : "products.item",
+                        foreignField : "_id",
+                        as : "productDetails"
+                    }
+                },
+                {
+                    $unwind : "$productDetails"
+                },
+                {
+                    $project : {
+                        productQuantity : "$products.quantity",
+                        productName : "$productDetails.Name",
+                        productCategory : "$productDetails.Catagory",
+                        productPrice : "$productDetails.Price"
+                    }
+                }
+            ]).toArray()
+            // console.log(invoiceProductsData)
+            resolve(invoiceProductsData)
+        })
     }
 }
