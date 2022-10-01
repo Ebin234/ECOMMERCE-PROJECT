@@ -58,7 +58,7 @@
     }
   
   @media (min-width: 1200px) {
-    .receipt-content .container {width: 1170px; } 
+    .receipt-content .container {width: 1080px; } 
   }
   
   .receipt-content .logo {
@@ -220,4 +220,12 @@
     text-align: center;
     font-size: 12px;
     color: #969CAD; 
+  }
+  .print button {
+    height: 38px;
+    border-radius: 6px;
+    background-color: red;
+    color: #fff;
+    border-color: #fff;
+    padding: 6px;
   }

@@ -466,7 +466,7 @@ module.exports = {
             let discountRate = await db.get().collection(collection.COUPON_COLLECTION)
             .aggregate([
                 {
-                    $match:{name:code}
+                    $match:{code:code}
                 },
             ]).toArray()
             console.log("output:",discountRate[0].name)
@@ -474,7 +474,7 @@ module.exports = {
             //console.log(typeof discount)
             // console.log(discount)
             let newTotal = { total : total - ((total*discount)/100),
-            code : discountRate[0].name
+            name : discountRate[0].name
         }
              console.log("out:",newTotal)
              resolve(newTotal)

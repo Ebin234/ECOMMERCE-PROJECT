@@ -137,7 +137,7 @@
             success:(response)=>{
                 document.getElementById('total').innerHTML=response.total
                 document.getElementById('check').href ='/checkout/'+response.total
-                document.getElementById('displayCoupon').innerHTML=response.code
+                document.getElementById('displayCoupon').innerHTML=response.name
             }
         })
     }
