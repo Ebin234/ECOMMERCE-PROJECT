@@ -12,7 +12,7 @@
 			<div class="col-md-12">
 				<div class="invoice-wrapper">
 					<div class="intro">
-						Hi <strong>Ebin yesudas</strong>, 
+						Hi <strong>{{invoiceDeliveryData.userName}}</strong>, 
 						<br>
 						This is your order receipt 
                         {{!-- <strong>$312.00</strong> (USD) for your works --}}
@@ -22,14 +22,14 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<span>Order No.</span>
-								<strong>434334343</strong>
+								<strong>{{invoiceDeliveryData._id}}</strong>
 								<span>Order Date</span>
-								<strong>Jul 09, 2014 - 12:20 pm</strong>
+								<strong>{{invoiceDeliveryData.date}} - {{invoiceDeliveryData.time}} </strong>
                                 
 							</div>
 							<div class="col-sm-6 text-right">
 								<span>Payment Method</span>
-								<strong>Online</strong>
+								<strong>{{invoiceDeliveryData.paymentMethod}}</strong>
 								<span>Payment Status</span>
 								<strong>Paid</strong>
 							</div>
@@ -41,13 +41,14 @@
 							<div class="col-sm-6">
 								<span>Client</span>
 								<strong>
-									Ebin yesudas
+									{{invoiceDeliveryData.deliveryDetails.fullName}}
 								</strong>
 								<p>
-									Koilparambil <br>
-									kerala <br>
-									Alappuzha <br>
-									688004 <br>
+									{{invoiceDeliveryData.deliveryDetails.address}} <br>
+									{{invoiceDeliveryData.deliveryDetails.state}} <br>
+									{{invoiceDeliveryData.deliveryDetails.city}} <br>
+									Mobile : {{invoiceDeliveryData.deliveryDetails.mobile}} <br>
+									{{invoiceDeliveryData.deliveryDetails.pincode}} <br>
 									{{!-- <a href="#">
 										ebinyesudas@gmail.com
 									</a> --}}
@@ -122,7 +123,7 @@
 								Thanks a lot.
 							</p>
 							<div class="field">
-								Subtotal <span>$379.00</span>
+								Subtotal <span>${{invoiceDeliveryData.subTotal}}</span>
 							</div>
 							<div class="field">
 								Shipping <span>$0.00</span>

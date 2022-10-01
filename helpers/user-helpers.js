@@ -688,46 +688,93 @@ module.exports = {
             }
         })
     },
-    getInvoiceData : (orderId)=>{
+    getInvoiceDeliveryData : (orderId)=>{
         return new Promise(async(resolve,reject)=>{
             console.log("orderId:",orderId)
-            let invoiceData = await db.get().collection(collection.ORDER_COLLECTION)
+            let invoiceDeliveryData = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
                     $match : {_id : objectId(orderId)}
                 },
                 {
-                    $unwind : '$products'
-                },
-                {
-                    $lookup : {
-                        from : collection.PRODUCT_COLLECTION,
-                        localField : 'products.item',
-                        foreignField : '_id',
-                        as : 'productDetails'
+                        $lookup : {
+                            from : collection.USER_COLLECTION,
+                            localField : 'userId',
+                            foreignField : '_id',
+                            as : 'userDetails'
+                        }
+                    },
+                    {
+                        $unwind : '$userDetails'
+                    },
+                    {
+                        $project : {
+                            deliveryDetails: 1,
+                            paymentMethod: 1,
+                            subTotal: "$totalAmount",
+                            orderStatus: "$status",
+                            date: 1,
+                            time: 1,
+                            userName: "$userDetails.Name"
+                        }
                     }
-                },
-                {
-                    $unwind : '$productDetails'
-                },
-                {
-                    $project : {
-                        deliveryDetails : 1,
-                        paymentMethod : 1,
-                        productQuantity : '$products.quantity',
-                        deliveryStatus : '$products.deliveryStatus',
-                        orderStatus : '$status',
-                        date : 1,
-                        time : 1,
-                        productName : '$productDetails.Name',
-                        productCategory : '$productDetails.catagory',
-                        productPrice : '$productDetails.Price',
-                        subTotal : '$totalAmount'
-                    }
-                }
+                // {
+                //     $unwind : "$products"
+                // },
+                // {
+                //     $group : {
+                //         _id:0,
+                //         merged: {
+                //             $push: "$$ROOT"
+                //         }
+                //     }
+                // },
+                // {
+                //     $replaceRoot:{
+                //         newRoot:{
+                //             "$mergeObjects": "$merged"
+                //         }
+                //     }
+                // }
+                // {
+                //     $group : {
+                //         _id : null,
+                //         products : {
+                //             "$addToSet": "$products"
+                //         }
+                //     }
+                // },
+                // {
+                //     $lookup : {
+                //         from : collection.PRODUCT_COLLECTION,
+                //         localField : 'products.item',
+                //         foreignField : '_id',
+                //         as : 'productDetails'
+                //     }
+                // },
+                // {
+                //     $unwind : '$productDetails'
+                // },
+                // 
+                // {
+                //     $project : {
+                //         deliveryDetails : 1,
+                //         paymentMethod : 1,
+                //         productQuantity : '$products.quantity',
+                //         deliveryStatus : '$products.deliveryStatus',
+                //         orderStatus : '$status',
+                //         date : 1,
+                //         time : 1,
+                //         productName : '$productDetails.Name',
+                //         productCategory : '$productDetails.catagory',
+                //         productPrice : '$productDetails.Price',
+                //         subTotal : '$totalAmount',
+                //         userName : '$userDetails.Name'
+                //     }
+                // }
             ]).toArray()
-            console.log(invoiceData)
-            resolve(invoiceData)
+            // console.log(invoiceDeliveryData[0])
+            resolve(invoiceDeliveryData[0])
         })
     }
 }
