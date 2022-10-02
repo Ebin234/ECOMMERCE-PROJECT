@@ -12,10 +12,9 @@ const { response } = require('../app');
 
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  // productHelpers.getAllproducts().then((products)=>{
-  //   console.log(products)
-    res.render('admin/admin-Dashboard',{ admin:true})
+router.get('/',async function(req, res, next) {
+   let totalOrders = await adminHelpers.getTotalOrdersCount()
+    res.render('admin/admin-Dashboard',{totalOrders, admin:true})
   // })
 });
 

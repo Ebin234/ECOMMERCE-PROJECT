@@ -109,4 +109,12 @@ module.exports = {
             })
         })
     },
+    getTotalOrdersCount : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let orders = await db.get().collection(collection.ORDER_COLLECTION)
+            .find({status:"placed"}).toArray()
+            console.log(orders.length)
+            resolve(orders.length)
+        })
+    }
 }
