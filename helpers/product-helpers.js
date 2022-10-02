@@ -169,7 +169,7 @@ module.exports = {
                     $unwind : '$userDetails'
                 },
                 {
-                    $sort : { date:1,time:1}
+                    $sort : { date:-1,time:-1}
                 }
             ]).toArray()
             console.log(orders)
