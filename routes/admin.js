@@ -4,6 +4,7 @@ var router = express.Router();
 var productHelpers = require('../helpers/product-helpers')
 const userHelpers = require('../helpers/user-helpers')
 const adminHelpers = require('../helpers/admin-helpers')
+const mailConnection = require('../config/mailConnection');
 const path = require('path');
 const fs = require('fs');
 const { Router } = require('express');
@@ -272,9 +273,10 @@ router.post('/change-delivery-status',(req,res)=>{
   console.log(deliveryStatus,prodId,orderId,userEmail)
   productHelpers.changeDeliveryStatus(orderId,prodId,deliveryStatus).then(async(response)=>{
     console.log(response)
-    await mailConnection.statusMail(userEmail)
+    await mailConnection.statusMail(userEmail,deliveryStatus)
+    res.json({updated:true})
   })
-  // res.json({updated:true})
+  
 })
 
 
