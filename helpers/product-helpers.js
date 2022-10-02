@@ -7,7 +7,21 @@ const { ObjectId } = require('mongodb')
 module.exports = {
     addproduct : (product,callback)=>{
         console.log(product)
-        db.get().collection('product').insertOne(product).then((data)=>{
+        let proObj = {
+            Name : product.Name,
+                   Catagory : product.Catagory,
+                   brand : product.brand,
+                   Stoke : parseInt(product.Stoke),
+                   Price : parseInt(product.Price),
+                   Featured : product.Featured,
+                   Description1 : product.Description1,
+                   Description2 : product.Description2,
+                   Description3 : product.Description3,
+                   Description4 : product.Description4,
+                   Description5 : product.Description5
+        }
+        console.log(proObj)
+        db.get().collection('product').insertOne(proObj).then((data)=>{
             //console.log(data.insertedId)
             callback(data.insertedId)
         })
@@ -31,7 +45,7 @@ module.exports = {
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(prodId)})
             .then((response)=>{
-                //console.log(response)
+                // console.log(response)
                 resolve(response)
             })
             
@@ -40,15 +54,15 @@ module.exports = {
     },
     updateProduct : (prodId,prodDetails)=>{
         return new Promise((resolve,reject)=>{
-            let price = parseInt(prodDetails.Price)
             db.get().collection(collection.PRODUCT_COLLECTION)
             .updateOne({_id:objectId(prodId)},
             {$set:{
                    Name : prodDetails.Name,
                    Catagory : prodDetails.Catagory,
                    brand : prodDetails.brand,
-                   Stoke : prodDetails.Stoke,
-                   Price : price,
+                   Stoke : parseInt(prodDetails.Stoke) ,
+                   Price : parseInt(prodDetails.Price),
+                   Featured : prodDetails.Featured,
                    Description1 : prodDetails.Description1,
                    Description2 : prodDetails.Description2,
                    Description3 : prodDetails.Description3,

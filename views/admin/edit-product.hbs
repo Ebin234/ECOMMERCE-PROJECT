@@ -142,6 +142,14 @@
                         <input type="number" name="Stoke" value="{{product.Stoke}}">
                         <label for="">Price</label>
                         <input type="number" name="Price" value="{{product.Price}}">
+                        <label for="">Featured</label>
+                        <select id="" name="Featured">
+                            <option value="{{product.Featured}}">{{product.Featured}}</option>
+                            {{!-- <option value="{{this.name}}">{{this.name}}</option> --}}
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                    
+                        </select>
                     </div>
                     <div class="s3">
                         <label for="" class="des">Description</label>

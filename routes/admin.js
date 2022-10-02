@@ -55,7 +55,7 @@ router.get('/add-product',async(req,res)=>{
 
 router.post('/add-product',(req,res)=>{
   // console.log(req.body);
-  //console.log(req.files.image)
+  // console.log(req.files.image)
   productHelpers.addproduct(req.body,(insertedId)=>{
     console.log(insertedId)
     fs.mkdir(path.join('./public/images/product-images/',''+insertedId),{},(err)=>{
@@ -79,7 +79,7 @@ router.post('/add-product',(req,res)=>{
               }else{
                 subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
                   if(!err){
-                    res.render('admin/add-product')
+                    res.render('admin/products-details')
                   }else{
                     console.log(err)
                   }
@@ -99,7 +99,7 @@ router.get('/delete-product/:id',(req,res)=>{
   //console.log(proId)
   productHelpers.deleteProduct(prodId).then((response)=>{
     //console.log(response)
-    res.redirect('/admin')
+    res.redirect('/admin/products-details')
   })
 })
 
@@ -115,10 +115,10 @@ router.get('/edit-product/:id',async(req,res)=>{
 router.post('/edit-product1/:id',(req,res)=>{
   prodId = req.params.id
   // console.log(req.body)
-  // console.log(req.files.image)
+  // console.log(req.files)
    productHelpers.updateProduct(prodId,req.body).then(()=>{
-     res.redirect('/admin')
-     if(req.files.image){
+     res.redirect('/admin/products-details')
+     if(req.files){
       let mainImage = req.files.image[0]
       let subImage1 = req.files.image[1]
       let subImage2 = req.files.image[2]

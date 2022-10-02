@@ -6,7 +6,7 @@
 
 
 
-function addToCart(prodId) {
+function addToCart(prodId,userId) {
     $.ajax({
         url: '/add-to-cart/' + prodId,
         method: 'get',
