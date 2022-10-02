@@ -208,7 +208,7 @@
 
                         {{else}}
                         <td>
-                        <select id="change" name="deliveryStatus" onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}',this)">
+                        <select id="change" name="deliveryStatus" onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}','{{this.userDetails.Email}}',this)">
                             <option  value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
                             <option name="deliveryStatus" value="Pending">Pending</option>
                             <option value="Shipped">Shipped</option>
@@ -283,13 +283,14 @@
 
 
 <script>
-    function changeDeliveryStatus (orderId,prodId,obj){
+    function changeDeliveryStatus (orderId,prodId,userEmail,obj){
 
             $.ajax({
             url:'/admin/change-delivery-status',
             data:{
                 orderId : orderId,
                 prodId : prodId,
+                userEmail : userEmail,
                 data : obj.value
             },
             method:'post',

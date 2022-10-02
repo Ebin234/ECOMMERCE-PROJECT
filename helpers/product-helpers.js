@@ -158,10 +158,21 @@ module.exports = {
                     $unwind : '$productDetails'
                 },
                 {
+                    $lookup : {
+                        from: collection.USER_COLLECTION,
+                        localField: 'userId',
+                        foreignField: '_id',
+                        as: 'userDetails'
+                    }
+                },
+                {
+                    $unwind : '$userDetails'
+                },
+                {
                     $sort : { date:1,time:1}
                 }
             ]).toArray()
-            // console.log(orders)
+            console.log(orders)
             resolve(orders)
         })
     },

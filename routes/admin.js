@@ -268,11 +268,13 @@ router.post('/change-delivery-status',(req,res)=>{
   let deliveryStatus = req.body.data
   let prodId = req.body.prodId
   let orderId =req.body.orderId
-  console.log(deliveryStatus,prodId,orderId)
-  productHelpers.changeDeliveryStatus(orderId,prodId,deliveryStatus).then((response)=>{
+  let userEmail = req.body.userEmail
+  console.log(deliveryStatus,prodId,orderId,userEmail)
+  productHelpers.changeDeliveryStatus(orderId,prodId,deliveryStatus).then(async(response)=>{
     console.log(response)
+    await mailConnection.statusMail(userEmail)
   })
-  res.json({updated:true})
+  // res.json({updated:true})
 })
 
 
