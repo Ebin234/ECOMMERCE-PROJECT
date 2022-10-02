@@ -9,10 +9,12 @@ const moment = require('moment')
 const Razorpay = require('razorpay')
 // const { options } = require('../routes/admin')
 const { resolve } = require('path')
+const dotenv = require('dotenv')
+dotenv.config()
 
 var instance = new Razorpay({
-    key_id: 'rzp_test_9WR1WMwomrKaJa',
-    key_secret: 'h2iHzZE8IZM1tSnhdkb6pOuc',
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
   });
 
 module.exports = {
@@ -434,7 +436,7 @@ module.exports = {
             console.log("details:",details)
             const crypto = require('crypto')
             let body = details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']
-            var expectedSignature = crypto.createHmac('sha256', 'h2iHzZE8IZM1tSnhdkb6pOuc')
+            var expectedSignature = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
              .update(body.toString())
              .digest('hex');
 
