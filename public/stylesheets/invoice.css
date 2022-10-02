@@ -14,7 +14,7 @@
     background: #FFF;
     border: 1px solid #CDD3E2;
     box-shadow: 0px 0px 1px #CCC;
-    padding: 40px 40px 60px;
+    padding: 40px 40px 40px;
     margin-top: 40px;
     border-radius: 4px; 
   }
@@ -58,7 +58,7 @@
     }
   
   @media (min-width: 1200px) {
-    .receipt-content .container {width: 1080px; } 
+    .receipt-content .container {width: 1000px; } 
   }
   
   .receipt-content .logo {
