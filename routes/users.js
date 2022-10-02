@@ -1,6 +1,7 @@
 var express = require('express');
 const async = require('hbs/lib/async');
 const { response } = require('../app');
+const mailConnection = require('../config/mailConnection');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
@@ -20,6 +21,7 @@ const verifyLogin = (req, res, next) => {
 router.get('/', async function (req, res, next) {
   let user = req.session.user;
   //console.log(user)
+  // console.log("ssss:",process.env.NODEMAILER_USER)
   let cartCount = 0;
   let wishCount = 0;
   if (user) {
@@ -158,12 +160,15 @@ router.get('/checkout/:id', (req, res) => {
 
 router.post('/checkout', async (req, res) => {
   console.log("place:", req.body.total)
+  let userEmail = req.session.user.Email
+  console.log("user",userEmail)
   let products = await userhelpers.getCartProductsList(req.body.userId)
   let totalPrice = req.body.total
   // console.log(products)
-  userhelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
+  userhelpers.placeOrder(req.body, products, totalPrice).then(async(orderId) => {
     // console.log("orderId:",orderId)
     if (req.body['payment-method'] == 'COD') {
+       await mailConnection.sendMail(userEmail)
       res.json({ codSuccess: true })
     } else {
       userhelpers.generateRazorpay(orderId, totalPrice).then((response) => {
@@ -176,8 +181,10 @@ router.post('/checkout', async (req, res) => {
 
 router.post('/verify-payment', (req, res) => {
   console.log(req.body)
-  userhelpers.verifyPayment(req.body).then((response) => {
-    userhelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
+  let userEmail = req.session.user.Email
+  userhelpers.verifyPayment(req.body).then(async(response) => {
+    userhelpers.changePaymentStatus(req.body['order[receipt]']).then(async(response) => {
+      await mailConnection.sendMail(userEmail)
       console.log("payment successfull")
       res.json({ status: true })
     })
