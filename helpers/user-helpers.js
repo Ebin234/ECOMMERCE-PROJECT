@@ -360,7 +360,7 @@ module.exports = {
                 userId : objectId(order.userId),
                 paymentMethod : order['payment-method'],
                 products : products,
-                totalAmount : total,
+                totalAmount : parseInt(total),
                 status : status,
                 date : date,
                 time : time

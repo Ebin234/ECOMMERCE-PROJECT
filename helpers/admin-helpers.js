@@ -132,5 +132,6 @@ module.exports = {
             console.log(products.length)
             resolve(products.length)
         })
-    }
+    },
+    
 }

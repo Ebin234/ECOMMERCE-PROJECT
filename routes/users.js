@@ -187,7 +187,7 @@ router.post('/checkout', async (req, res) => {
   userhelpers.placeOrder(req.body, products, totalPrice).then(async(orderId) => {
     // console.log("orderId:",orderId)
     if (req.body['payment-method'] == 'COD') {
-       await mailConnection.sendMail(userEmail)
+      await mailConnection.sendMail(userEmail)
       res.json({ codSuccess: true })
     } else {
       userhelpers.generateRazorpay(orderId, totalPrice).then((response) => {
