@@ -116,5 +116,13 @@ module.exports = {
             console.log(orders.length)
             resolve(orders.length)
         })
+    },
+    getTotalCustomersCount : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let customers = await db.get().collection(collection.USER_COLLECTION)
+            .find().toArray()
+            console.log(customers.length)
+            resolve(customers.length)
+        })
     }
 }

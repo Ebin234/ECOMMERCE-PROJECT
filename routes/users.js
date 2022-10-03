@@ -85,6 +85,10 @@ router.get('/otp',(req,res)=>{
   res.render('users/otp')
 })
 
+router.post('/otp',(req,res)=>{
+  console.log(req.body)
+})
+
 router.get('/logout', (req, res) => {
   req.session.user = null
   req.session.userLoggedIn = false
