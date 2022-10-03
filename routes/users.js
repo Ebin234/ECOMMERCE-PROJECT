@@ -5,7 +5,6 @@ const mailConnection = require('../config/mailConnection');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
-
 let productFilter = [];
 let searchProducts;
 
@@ -63,19 +62,27 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', (req, res) => {
   console.log(req.body)
+  req.session.signupBody = req.body
   userhelpers.userExist(req.body.Email,req.body.Mobile).then((response)=>{
     console.log(response.exist)
     if(response.exist){
       req.session.userExist = true
       res.redirect('/signup')
+    }else{
+      res.redirect('/otp')
+      // req.session.userExist = false
+      // res.json(response)
     }
-  })
   // userhelpers.dosignup(req.body).then((response) => {
   //   console.log(response)
   //   req.session.user = response
   //   req.session.userLoggedIn = true
   //   res.redirect('/')
-  // })
+  })
+})
+
+router.get('/otp',(req,res)=>{
+  res.render('users/otp')
 })
 
 router.get('/logout', (req, res) => {

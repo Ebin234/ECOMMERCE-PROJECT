@@ -6,7 +6,7 @@
 
 
 
-function addToCart(prodId,userId) {
+function addToCart(prodId, userId) {
     $.ajax({
         url: '/add-to-cart/' + prodId,
         method: 'get',
@@ -14,7 +14,7 @@ function addToCart(prodId,userId) {
             //alert(response)
             if (response.cartAdded) {
                 let count = $('#cart_count').html()
-                console.log("count",count)
+                console.log("count", count)
                 count = parseInt(count) + 1
                 $("#cart_count").html(count)
             }
@@ -133,14 +133,14 @@ function addCategory() {
 
 function editCategory(catId) {
     console.log(catId)
-    const ipAPI = 'http://localhost:3000/admin/edit-category/'+catId
+    const ipAPI = 'http://localhost:3000/admin/edit-category/' + catId
 
 
     const inputValue = fetch(ipAPI)
-    .then(response => response.json())
-    .then(data => data)
+        .then(response => response.json())
+        .then(data => data)
 
-    
+
 
     Swal.fire({
         title: 'Edit Category Name',
@@ -158,16 +158,16 @@ function editCategory(catId) {
             Swal.fire({
                 title: `${result.value} `,
                 text: 'Category Added Successfully'
-            }).then(()=>{
+            }).then(() => {
                 $.ajax({
-                    url:'/admin/edit-category',
+                    url: '/admin/edit-category',
                     data: {
-                        newCategory : result.value,
-                        catId : catId
+                        newCategory: result.value,
+                        catId: catId
                     },
-                    method:'post',
-                    success:(response)=>{
-                        if(response.updated){
+                    method: 'post',
+                    success: (response) => {
+                        if (response.updated) {
                             location.reload()
                         }
                     }
@@ -226,14 +226,14 @@ function addBrand() {
 
 function editBrand(brandId) {
     console.log(brandId)
-    const ipAPI = 'http://localhost:3000/admin/edit-brand/'+brandId
+    const ipAPI = 'http://localhost:3000/admin/edit-brand/' + brandId
 
 
     const inputValue = fetch(ipAPI)
-    .then(response => response.json())
-    .then(data => data)
+        .then(response => response.json())
+        .then(data => data)
 
-    
+
 
     Swal.fire({
         title: 'Edit Brand Name',
@@ -251,16 +251,16 @@ function editBrand(brandId) {
             Swal.fire({
                 title: `${result.value} `,
                 text: 'Added Successfully'
-            }).then(()=>{
+            }).then(() => {
                 $.ajax({
-                    url:'/admin/edit-brand',
+                    url: '/admin/edit-brand',
                     data: {
-                        newBrand : result.value,
-                        brandId : brandId
+                        newBrand: result.value,
+                        brandId: brandId
                     },
-                    method:'post',
-                    success:(response)=>{
-                        if(response.brandUpdated){
+                    method: 'post',
+                    success: (response) => {
+                        if (response.brandUpdated) {
                             location.reload()
                         }
                     }
@@ -269,3 +269,22 @@ function editBrand(brandId) {
         }
     })
 }
+
+// function signupFunc() {
+//     $.ajax({
+//         url: '/signup',
+//         data: $('#signupform').serialize(),
+//         method: 'post',
+//         success: (response) => {
+//             if (response.exist) {
+//                 Swal.fire({"ddfvdfvdfv":dcsdcsdc
+//                 })
+
+
+
+//             }else{
+//                 location.href = '/login'
+//             }
+//         }
+//     })
+// }

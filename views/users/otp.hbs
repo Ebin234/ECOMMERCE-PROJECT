@@ -1,0 +1,47 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+<style>
+    .otpbody {
+    width: 400px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #e3e6f3;
+}
+
+.otpbody h6{
+    font-size: 19px
+}
+
+.otpbody form #otp {
+    width: 200px;
+}
+
+form #otp input{
+    width: 200px;
+}
+</style>            
+<div  class="container height-100 d-flex justify-content-center align-items-center " style="margin-top: 8%; margin-bottom:8%">
+
+  <div class="position-relative">
+    <div class="card otpbody p-2 text-center">
+      <h6 class="text-dark">Please enter the one time password <br /> to verify your account</h6>
+      <form action="/otp" method="post">
+      <div id="otp" class="inputs inp d-flex flex-row justify-content-center mt-2">
+        <input class="m-2 text-center form-control rounded " type="text" name="verifyOtp" maxlength="6">
+      </div>
+    
+
+      <div class="mt-3">
+        <button type="submit" class="btn btn-danger px-4 validate">Validate</button>
+      </div>
+        </form>
+    </div>
+    <div class="card-2">
+      <div class="content d-flex justify-content-center align-items-center">
+      </div>
+    </div>
+  </div>
+</div>
