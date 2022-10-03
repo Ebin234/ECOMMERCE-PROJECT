@@ -17,7 +17,7 @@ router.get('/',async function(req, res, next) {
    let totalCustomers = await adminHelpers.getTotalCustomersCount()
    let totalProducts = await adminHelpers.getTotalProductsCount()
    let totalRevenue = await adminHelpers.getTotalRevenue()
-    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts, admin:true})
+    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts,totalRevenue, admin:true})
   // })
 });
 
