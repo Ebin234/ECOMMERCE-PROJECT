@@ -133,5 +133,26 @@ module.exports = {
             resolve(products.length)
         })
     },
-    
+    getTotalRevenue : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let revenue = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {
+                        status : "placed"
+                    }
+                },
+                {
+                    $group : {
+                        _id : null,
+                        totalRevenue : {
+                            $sum : "$totalAmount"
+                        }
+                    }
+                }
+            ]).toArray()
+            console.log(revenue[0].totalRevenue)
+            resolve(revenue[0].totalRevenue)
+        })
+    }
 }
