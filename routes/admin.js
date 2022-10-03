@@ -15,7 +15,8 @@ const { response } = require('../app');
 router.get('/',async function(req, res, next) {
    let totalOrders = await adminHelpers.getTotalOrdersCount()
    let totalCustomers = await adminHelpers.getTotalCustomersCount()
-    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers, admin:true})
+   let totalProducts = await adminHelpers.getTotalProductsCount()
+    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts, admin:true})
   // })
 });
 

@@ -124,5 +124,13 @@ module.exports = {
             console.log(customers.length)
             resolve(customers.length)
         })
+    },
+    getTotalProductsCount : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let products = await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find().toArray()
+            console.log(products.length)
+            resolve(products.length)
+        })
     }
 }
