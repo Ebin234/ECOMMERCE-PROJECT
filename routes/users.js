@@ -62,12 +62,13 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', (req, res) => {
   console.log(req.body)
-  userhelpers.dosignup(req.body).then((response) => {
-    console.log(response)
-    req.session.user = response
-    req.session.userLoggedIn = true
-    res.redirect('/')
-  })
+  userhelpers.userExist(req.body.Email)
+  // userhelpers.dosignup(req.body).then((response) => {
+  //   console.log(response)
+  //   req.session.user = response
+  //   req.session.userLoggedIn = true
+  //   res.redirect('/')
+  // })
 })
 
 router.get('/logout', (req, res) => {
