@@ -29,6 +29,9 @@
             <form action="/signup" method="post">
                 <img class="avatar" src="/signup-images/personalfile.svg" alt="">
                 <h2>welcome</h2>
+                {{#if userErr}}
+                <p class="error" style="color: red;">User Already Exist</p>
+                {{/if}}
                 <div class="input-div one">
                     <div class="i">
                         <i class="fas fa-user"></i>

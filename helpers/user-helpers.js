@@ -18,12 +18,19 @@ var instance = new Razorpay({
   });
 
 module.exports = {
-    userExist : (userEmail)=>{
-        return new Promise((resolve,reject)=>{
-            db.get().collection(collection.USER_COLLECTION)
-            .findOne({Email : userEmail}).then((response)=>{
-                console.log(response)
-            })
+    userExist : (userEmail,userMobile)=>{
+        return new Promise(async(resolve,reject)=>{
+            let user = {}
+            let users = await db.get().collection(collection.USER_COLLECTION)
+            .findOne({ $or : [{Email : userEmail},{Mobile : userMobile}]})
+                if(users){
+                    user.exist = true
+                    resolve(user)
+                }else{
+                    resolve(user)
+                }
+                // console.log("exist:",user)
+                // console.log("response:",users)
         })
     },
     dosignup: (userdata) => {

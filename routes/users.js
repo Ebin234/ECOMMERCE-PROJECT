@@ -57,12 +57,19 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/signup', (req, res) => {
-  res.render('users/signup')
+  res.render('users/signup',{ "userErr": req.session.userExist })
+  req.session.userExist = false
 })
 
 router.post('/signup', (req, res) => {
   console.log(req.body)
-  userhelpers.userExist(req.body.Email)
+  userhelpers.userExist(req.body.Email,req.body.Mobile).then((response)=>{
+    console.log(response.exist)
+    if(response.exist){
+      req.session.userExist = true
+      res.redirect('/signup')
+    }
+  })
   // userhelpers.dosignup(req.body).then((response) => {
   //   console.log(response)
   //   req.session.user = response
