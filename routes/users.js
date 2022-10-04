@@ -57,8 +57,9 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/signup', (req, res) => {
-  res.render('users/signup', { "userErr": req.session.userExist })
+  res.render('users/signup', { "userErr": req.session.userExist,"phoneErr": req.session.userPhoneErr })
   req.session.userExist = false
+  req.session.userPhoneErr = false
 })
 
 router.post('/signup', (req, res) => {
@@ -75,6 +76,7 @@ router.post('/signup', (req, res) => {
         if (response.send) {
           res.redirect('/otp')
         }else{
+          req.session.userPhoneErr = true
           res.redirect('/signup')
         }
       })
