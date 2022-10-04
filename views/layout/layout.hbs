@@ -18,18 +18,28 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="/stylesheets/preloader.css">
   
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <title>Hello, world!</title>
   </head>
   <body>
+
+    <div class="showbox">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+
+
+
     {{#if admin}}
     {{> ad-header}}
     {{else}}
     {{> user-header}}
     {{/if}}
-    
- 
 
  {{{body}}}
     {{#if admin}}
