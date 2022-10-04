@@ -28,7 +28,7 @@ router.get('/', async function (req, res, next) {
     cartCount = await userhelpers.getCartCount(user._id)
     wishCount = await userhelpers.getWishCount(user._id)
   }
-  console.log("user:",user)
+  console.log("user:", user)
   productHelpers.getAllproducts().then((products) => {
     res.render('users/home-page', { products, user, cartCount, wishCount });
   })
@@ -57,42 +57,55 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/signup', (req, res) => {
-  res.render('users/signup',{ "userErr": req.session.userExist })
+  res.render('users/signup', { "userErr": req.session.userExist })
   req.session.userExist = false
 })
 
 router.post('/signup', (req, res) => {
   console.log(req.body)
   req.session.signupBody = req.body
-  userhelpers.userExist(req.body.Email,req.body.Mobile).then((response)=>{
+  userhelpers.userExist(req.body.Email, req.body.Mobile).then((response) => {
     console.log(response.exist)
-    if(response.exist){
+    if (response.exist) {
       req.session.userExist = true
       res.redirect('/signup')
-    }else{
-      twilioHelpers.sendOtp(req.session.signupBody.Mobile).then((response)=>{
-        console.log(response)
-        if(response){
+    } else {
+      twilioHelpers.sendOtp(req.session.signupBody.Mobile).then((response) => {
+        // console.log(response)
+        if (response.send) {
           res.redirect('/otp')
+        }else{
+          res.redirect('/signup')
         }
       })
       // req.session.userExist = false
       // res.json(response)
     }
-  // userhelpers.dosignup(req.body).then((response) => {
-  //   console.log(response)
-  //   req.session.user = response
-  //   req.session.userLoggedIn = true
-  //   res.redirect('/')
+    // userhelpers.dosignup(req.body).then((response) => {
+    //   console.log(response)
+    //   req.session.user = response
+    //   req.session.userLoggedIn = true
+    //   res.redirect('/')
   })
 })
 
-router.get('/otp',(req,res)=>{
+router.get('/otp', (req, res) => {
   res.render('users/otp')
 })
 
-router.post('/otp',(req,res)=>{
+router.post('/otp', (req, res) => {
+  console.log(req.session.signupBody)
   console.log(req.body)
+  twilioHelpers.verifyOtp(req.session.signupBody.Mobile, req.body.verifyOtp)
+    .then((response) => {
+      if (response.status == 'approved') {
+        console.log("approved")
+        userhelpers.dosignup(req.session.signupBody).then((response) => {
+          //   console.log(response)
+          res.redirect('/login')
+        })
+      }
+    })
 })
 
 router.get('/logout', (req, res) => {
@@ -186,11 +199,11 @@ router.get('/checkout/:id', (req, res) => {
 router.post('/checkout', async (req, res) => {
   console.log("place:", req.body.total)
   let userEmail = req.session.user.Email
-  console.log("user",userEmail)
+  console.log("user", userEmail)
   let products = await userhelpers.getCartProductsList(req.body.userId)
   let totalPrice = req.body.total
   // console.log(products)
-  userhelpers.placeOrder(req.body, products, totalPrice).then(async(orderId) => {
+  userhelpers.placeOrder(req.body, products, totalPrice).then(async (orderId) => {
     // console.log("orderId:",orderId)
     if (req.body['payment-method'] == 'COD') {
       await mailConnection.sendMail(userEmail)
@@ -207,8 +220,8 @@ router.post('/checkout', async (req, res) => {
 router.post('/verify-payment', (req, res) => {
   console.log(req.body)
   let userEmail = req.session.user.Email
-  userhelpers.verifyPayment(req.body).then(async(response) => {
-    userhelpers.changePaymentStatus(req.body['order[receipt]']).then(async(response) => {
+  userhelpers.verifyPayment(req.body).then(async (response) => {
+    userhelpers.changePaymentStatus(req.body['order[receipt]']).then(async (response) => {
       await mailConnection.sendMail(userEmail)
       console.log("payment successfull")
       res.json({ status: true })
@@ -364,19 +377,19 @@ router.post('/product-filter', async (req, res) => {
 
 })
 
-router.get('/invoice/:id',async(req,res)=>{
+router.get('/invoice/:id', async (req, res) => {
   let orderId = req.params.id
   console.log(orderId)
   let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
   let invoiceProductsData = await userhelpers.getInvoiceProductsData(orderId)
-  console.log("invoice:",invoiceDeliveryData)
-  console.log("productsdata:",invoiceProductsData)
-  let total=0
-  for( i =0;i<invoiceProductsData.length;i++){
-    total = total + (invoiceProductsData[i].productQuantity*invoiceProductsData[i].productPrice)
+  console.log("invoice:", invoiceDeliveryData)
+  console.log("productsdata:", invoiceProductsData)
+  let total = 0
+  for (i = 0; i < invoiceProductsData.length; i++) {
+    total = total + (invoiceProductsData[i].productQuantity * invoiceProductsData[i].productPrice)
   }
-  console.log("total:",total)
-  res.render('users/invoice',{invoiceDeliveryData,invoiceProductsData,total})
+  console.log("total:", total)
+  res.render('users/invoice', { invoiceDeliveryData, invoiceProductsData, total })
 })
 
 

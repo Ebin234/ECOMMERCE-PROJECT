@@ -35,7 +35,7 @@ module.exports = {
     },
     dosignup: (userdata) => {
         return new Promise(async (resolve, reject) => {
-            // console.log(userdata)
+            console.log("userdata",userdata)
             let d = new Date()
             let date = moment(d).format('YYYY-MM-DD');
             let time = moment(d).format('HH:MM:SS')
