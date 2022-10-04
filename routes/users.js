@@ -5,6 +5,7 @@ const mailConnection = require('../config/mailConnection');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
+const twilioHelpers = require('../helpers/twilio_helpers')
 let productFilter = [];
 let searchProducts;
 
@@ -69,7 +70,12 @@ router.post('/signup', (req, res) => {
       req.session.userExist = true
       res.redirect('/signup')
     }else{
-      res.redirect('/otp')
+      twilioHelpers.sendOtp(req.session.signupBody.Mobile).then((response)=>{
+        console.log(response)
+        if(response){
+          res.redirect('/otp')
+        }
+      })
       // req.session.userExist = false
       // res.json(response)
     }
