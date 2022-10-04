@@ -23,9 +23,9 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <title>Hello, world!</title>
   </head>
-  <body>
+  <body onload="preloader()">
 
-    <div class="showbox">
+    <div id="load" class="showbox">
   <div class="loader">
     <svg class="circular" viewBox="25 25 50 50">
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
@@ -56,6 +56,11 @@
     
     <script src="/javascripts/homepage.js"></script>
     <script src="/javascripts/script.js"></script>
-
+    <script>
+      var loader = document.getElementById('load');
+      function preloader(){
+        loader.style.display = 'none'
+      }
+    </script>
   </body>
 </html>
