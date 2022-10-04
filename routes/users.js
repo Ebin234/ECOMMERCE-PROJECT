@@ -409,4 +409,8 @@ router.get('/invoice/:id', async (req, res) => {
 // })
 
 
+router.get('/500',(req,res)=>{
+  res.render('users/500error',{layout:'error-layout'})
+})
+
 module.exports = router;
