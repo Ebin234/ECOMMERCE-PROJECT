@@ -226,7 +226,7 @@
                         <span class="fa fa-shopping-cart"></span>
                         Add to Cart
                     </button>
-                    <button class="buy">
+                    <button class="buy" onclick="buyNow('{{product._id}}')">
                         <span class="fa fa-shopping-cart"></span>
                         Buy now
                     </button>
@@ -341,5 +341,18 @@
     function clickimg(smallimg) {
         var fullimg = document.getElementById('imagebox');
         fullimg.src = smallimg.src
+    }
+</script>
+
+<script>
+    function buyNow(prodId){
+        $.ajax({
+            url:'/buysingleproduct',
+            data:{
+                prodId:prodId,
+
+            },
+            method:'post'
+        })
     }
 </script>

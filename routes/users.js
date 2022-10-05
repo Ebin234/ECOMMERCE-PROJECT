@@ -420,6 +420,12 @@ router.get('/invoice/:id', async (req, res) => {
 //    res.json()
 // })
 
+router.post('/buysingleproduct',(req,res)=>{
+  console.log(req.body)
+  let userId = req.session.user._id
+  console.log(userId)
+})
+
 
 router.get('/500',(req,res)=>{
   res.render('users/500error',{layout:'error-layout'})
