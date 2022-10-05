@@ -428,7 +428,9 @@ router.post('/buysingleproduct',async(req,res)=>{
   if(cartcheck == '0')
   {
     // console.log(cartcheck);
-    res.json()
+    res.json({productNotFount : true})
+  }else{
+    res.json({productNotFount : false})
   }
 })
 
