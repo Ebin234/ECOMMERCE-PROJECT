@@ -155,6 +155,11 @@ router.post('/forgot-password',async(req,res)=>{
     }
 })
 
+router.post('/forgot-change-password',(req,res)=>{
+  console.log(req.body);
+  console.log(req.session.userForgotData);
+})
+
 router.get('/cart', verifyLogin, async (req, res) => {
   let userId = req.session.user._id
   //let user = req.session.user
@@ -473,7 +478,7 @@ router.post('/buysingleproduct',async(req,res)=>{
 
 
 router.get('/500',(req,res)=>{
-  res.render('users/500error',{layout:'error-layout'})
+  res.render('users/forgot-change-password')
 })
 
 module.exports = router;
