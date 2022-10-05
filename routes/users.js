@@ -118,6 +118,10 @@ router.get('/logout', (req, res) => {
   res.redirect('/')
 })
 
+router.get('/forgot-password',(req,res)=>{
+  res.render('users/forgot-password')
+})
+
 router.get('/cart', verifyLogin, async (req, res) => {
   let userId = req.session.user._id
   //let user = req.session.user
