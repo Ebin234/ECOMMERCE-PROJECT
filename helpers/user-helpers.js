@@ -11,6 +11,7 @@ const Razorpay = require('razorpay')
 const { resolve } = require('path')
 
 const dotenv = require('dotenv')
+const { log } = require('console')
 dotenv.config()
 
 var instance = new Razorpay({
@@ -850,6 +851,17 @@ module.exports = {
             ]).toArray()
             // console.log(cart.length)
             resolve(cart.length)
+        })
+    },
+    getUserData : (userEmail)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(userEmail);
+            let userData = await db.get().collection(collection.USER_COLLECTION)
+            .findOne({
+                Email : userEmail
+            })
+            // console.log(userData);
+            resolve(userData)
         })
     }
 }

@@ -98,6 +98,18 @@ router.get('/otp', (req, res) => {
 })
 
 router.post('/otp', (req, res) => {
+  if(req.session.userForgotData){
+    console.log(req.session.userForgotData)
+    console.log(req.body)
+    twilioHelpers.verifyOtp(req.session.userForgotData.Mobile, req.body.verifyOtp)
+    .then((response) => {
+      if (response.status == 'approved') {
+        console.log("approved")
+        res.render('users/forgot-change-password')
+      }
+    })
+  }
+  if(req.session.signupBody){
   console.log(req.session.signupBody)
   console.log(req.body)
   twilioHelpers.verifyOtp(req.session.signupBody.Mobile, req.body.verifyOtp)
@@ -110,6 +122,7 @@ router.post('/otp', (req, res) => {
         })
       }
     })
+  }
 })
 
 router.get('/logout', (req, res) => {
@@ -119,7 +132,27 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/forgot-password',(req,res)=>{
-  res.render('users/forgot-password')
+  res.render('users/forgot-password',{"userData":req.session.userData})
+  req.session.userData = false
+})
+
+router.post('/forgot-password',async(req,res)=>{
+  console.log(req.body);
+  let userData = await userhelpers.getUserData(req.body.Email)
+  req.session.userForgotData = userData
+  console.log(userData)
+    if(userData){
+     twilioHelpers.sendOtp(userData.Mobile).then((response)=>{
+      if (response.send) {
+        console.log("otp send")
+        res.redirect('/otp')
+       
+      }
+     })
+    }else{
+        req.session.userData = true
+        res.redirect('/forgot-password')
+    }
 })
 
 router.get('/cart', verifyLogin, async (req, res) => {
