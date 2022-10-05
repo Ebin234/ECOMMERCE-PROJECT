@@ -6,6 +6,7 @@ var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
 const twilioHelpers = require('../helpers/twilio_helpers')
+// const ApiError = require('../config/Apierrors');
 let productFilter = [];
 let searchProducts;
 
@@ -43,7 +44,8 @@ router.get('/login', (req, res) => {
   }
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res,next) => {
+  
   userhelpers.dologin(req.body).then((response) => {
     if (response.status) {
       req.session.user = response.user
@@ -128,10 +130,15 @@ router.get('/cart', verifyLogin, async (req, res) => {
   res.render('users/newcart', { products, user: req.session.user._id, totalValue })
 })
 
-router.get('/add-to-cart/:id', (req, res) => {
+router.get('/add-to-cart/:id', (req, res,next) => {
   console.log("api called")
+  
   let userId = req.session.user._id
   const prodId = req.params.id
+  // if(!userId){
+  //   next(ApiError.badRequest('login first'))
+  //   return;
+  // }
   //console.log(userId)
   //console.log(prodId)
   userhelpers.addToCart(prodId, userId).then(() => {
@@ -155,12 +162,17 @@ router.get('/allProducts', async (req, res) => {
 
 })
 
-router.get('/product/:id', async (req, res) => {
+router.get('/product/:id', async (req, res,next) => {
+  try{
   let prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   console.log(product)
 
   res.render('users/single-product', { product })
+  }
+  catch(error){
+    next(error)
+  }
 })
 
 router.get('/about', (req, res) => {

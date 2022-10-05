@@ -12,6 +12,7 @@ var app = express();
 var fileupload = require('express-fileupload')
 var db = require('./config/connection')
 var session = require('express-session')
+// const apiErrorHandler = require('./helpers/ApiError-handler')
 const dotenv = require('dotenv');
 dotenv.config()
 
@@ -56,15 +57,17 @@ app.use(function(req, res, next) {
   res.render('users/404error',{layout:'error-layout'})
 });
 
+// app.use(apiErrorHandler);
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // res.status(err.status || 500);
+  res.render('users/500error',{layout:'error-layout'});
 });
 
 module.exports = app;
