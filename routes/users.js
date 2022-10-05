@@ -420,10 +420,16 @@ router.get('/invoice/:id', async (req, res) => {
 //    res.json()
 // })
 
-router.post('/buysingleproduct',(req,res)=>{
+router.post('/buysingleproduct',async(req,res)=>{
   console.log(req.body)
   let userId = req.session.user._id
   console.log(userId)
+  let cartcheck = await userhelpers.checkCartProduct(userId,req.body.prodId)
+  if(cartcheck == '0')
+  {
+    // console.log(cartcheck);
+    res.json()
+  }
 })
 
 

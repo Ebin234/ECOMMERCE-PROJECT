@@ -828,5 +828,28 @@ module.exports = {
             // console.log(invoiceProductsData)
             resolve(invoiceProductsData)
         })
+    },
+    checkCartProduct : (userId,prodId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let  cart = null
+           cart = await db.get().collection(collection.CART_COLLECTION)
+            .aggregate([
+                {
+                    $match : {
+                        user : objectId(userId)
+                    }
+                },
+                {
+                    $unwind:'$products'
+                },
+                {
+                    $match : {
+                        'products.item' : objectId(prodId)
+                    }
+                }
+            ]).toArray()
+            // console.log(cart.length)
+            resolve(cart.length)
+        })
     }
 }
