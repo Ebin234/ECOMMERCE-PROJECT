@@ -158,6 +158,10 @@ router.post('/forgot-password',async(req,res)=>{
 router.post('/forgot-change-password',(req,res)=>{
   console.log(req.body);
   console.log(req.session.userForgotData);
+  userhelpers.changeUserForgottenPassword(req.session.userForgotData._id,req.body.new_password)
+  .then((response)=>{
+    res.json({changed : true})
+  })
 })
 
 router.get('/cart', verifyLogin, async (req, res) => {

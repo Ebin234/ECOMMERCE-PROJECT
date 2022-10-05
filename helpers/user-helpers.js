@@ -863,5 +863,25 @@ module.exports = {
             // console.log(userData);
             resolve(userData)
         })
+    },
+    changeUserForgottenPassword : (userId,data)=>{
+        return new Promise(async(resolve,reject)=>{
+            console.log(userId,data);
+        data = await bcrypt.hash(data, 10);
+        console.log(data);
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne(
+            {
+                _id : objectId(userId)
+            },
+            {
+                $set : {
+                    Password : data
+                }
+            }
+        ).then((response)=>{
+            resolve(response)
+        })
+        })
     }
 }
