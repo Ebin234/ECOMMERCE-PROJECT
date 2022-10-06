@@ -173,5 +173,24 @@ module.exports = {
                 resolve(response)
             })
         })
+    },
+    unblockUser : (userId)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(userId);
+        db.get().collection(collection.USER_COLLECTION)
+        .updateOne(
+            {
+                _id : objectId(userId)
+            },
+            {
+                $set : {
+                    Blocked : false
+                }
+            }
+        ).then((response)=>{
+            console.log(response)
+            resolve(response)
+        })
+        })
     }
 }

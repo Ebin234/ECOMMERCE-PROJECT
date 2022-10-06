@@ -288,5 +288,12 @@ router.post('/block-user',(req,res)=>{
   })
 })
 
+router.post('/unblock-user',(req,res)=>{
+  // console.log(req.body);
+  adminHelpers.unblockUser(req.body.userId).then((response)=>{
+    res.json({unblocked : true})
+  })
+})
+
 
 module.exports = router;

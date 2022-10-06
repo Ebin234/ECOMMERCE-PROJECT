@@ -172,4 +172,19 @@
             }
         })
     }
+
+    function unblockUser(userId){
+        $.ajax({
+            url : '/admin/unblock-user',
+            data : {
+                userId : userId
+            },
+            method : 'post',
+            success : (response)=>{
+                if(response.unblocked){
+                    location.reload()
+                }
+            }
+        })
+    }
 </script>
