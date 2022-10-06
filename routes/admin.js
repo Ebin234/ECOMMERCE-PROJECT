@@ -21,6 +21,12 @@ router.get('/',async function(req, res, next) {
   // })
 });
 
+router.get('/login',(req,res)=>{
+  res.render('admin/login',{admin:true})
+})
+
+
+
 router.get('/products-details',(req,res)=>{
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
