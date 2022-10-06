@@ -472,7 +472,8 @@ router.get('/invoice/:id', async (req, res) => {
 //    res.json()
 // })
 
-router.post('/buysingleproduct',async(req,res)=>{
+router.post('/buysingleproduct',async(req,res,next)=>{
+  try{
   console.log(req.body)
   let userId = req.session.user._id
   console.log(userId)
@@ -484,6 +485,9 @@ router.post('/buysingleproduct',async(req,res)=>{
   }else{
     res.json({productNotFount : false})
   }
+}catch (error){
+  next(error)
+}
 })
 
 

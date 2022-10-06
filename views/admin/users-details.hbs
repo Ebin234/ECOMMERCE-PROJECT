@@ -23,7 +23,7 @@
 
     button.b2 {
         background-color: rgb(238, 18, 18);
-            padding: 9px 36px;
+        padding: 9px 36px;
     }
 
     #cart .head {
@@ -125,10 +125,10 @@
                         {{#if this.Blocked}}
                         <button onclick="unblockUser('{{this._id}}')" class=" normal b1 ">Unblock</button>
                         {{else}}
-                        <button onclick="blockUser('{{this._id}}')"  class="normal b2 ">Block</button>
+                        <button onclick="blockUser('{{this._id}}')" class="normal b2 ">Block</button>
                         {{/if}}
-                        
-                        
+
+
                     </td>
                 </tr>
                 {{/each}}
@@ -158,33 +158,67 @@
 </script>
 
 <script>
-    function blockUser(userId){
-        $.ajax({
-            url : '/admin/block-user',
-            data : {
-                userId : userId
-            },
-            method : 'post',
-            success : (response)=>{
-                if(response.blocked){
-                    location.reload()
-                }
-            }
-        })
+    function blockUser(userId) {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            {{!-- text: "You won't be able to revert this!", --}}
+            width: 700,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes,Block it!'
+        }).then((result) => {
+                if (result.isConfirmed) {
+                         $.ajax({
+                            url: '/admin/block-user',
+                            data: {
+                                 userId: userId
+                                },
+                            method: 'post',
+                            success: (response) => {
+                                if (response.blocked) {
+                                    Swal.fire('Blocked!', 'success')
+                                    .then(() => {
+                                        location.reload()
+                                    })
+                                }
+                            }
+                        })
+                    }
+            })
     }
 
-    function unblockUser(userId){
-        $.ajax({
-            url : '/admin/unblock-user',
-            data : {
-                userId : userId
-            },
-            method : 'post',
-            success : (response)=>{
-                if(response.unblocked){
-                    location.reload()
+    function unblockUser(userId) {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            {{!-- text: "You won't be able to revert this!", --}}
+            width: 700,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes,Unblock it!'
+        }).then((result) => {
+                if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/unblock-user',
+                            data: {
+                                     userId: userId
+                                },
+                            method: 'post',
+                            success: (response) => {
+                                if (response.unblocked) {
+                                    Swal.fire('UnBlocked!', 'success')
+                                        .then(() => {
+                                            location.reload()
+                                        })
+                                }
+                            }
+                         })
                 }
-            }
-        })
+            })
     }
 </script>
