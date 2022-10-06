@@ -8,6 +8,30 @@ const objectId = require('mongodb').ObjectId
 
 
 module.exports = {
+    adminLogin : (data)=>{
+        return new Promise(async(resolve,reject)=>{
+            let loginStatus = false
+            let response = {}
+            let admin = await db.get().collection(collection.ADMIN_COLLECTION)
+                .findOne({email : data.Email})
+            if (admin) {
+                bcrypt.compare(data.Password, admin.password).then((status) => {
+                    if (status) {
+                        console.log("login success")
+                        response.status = true
+                        response.admin = admin
+                        resolve(response)
+                    } else {
+                        console.log("login failed")
+                        resolve({ status: false })
+                    }
+                })
+            } else {
+                console.log("login failed")
+                resolve({ status: false })
+            }
+        })
+    },
     addCategory: (data) => {
         return new Promise((resolve, reject) => {
             let obj = {

@@ -37,14 +37,14 @@
 
 
 
-    {{#if admin}}
+    {{#if adminHeader}}
     {{> ad-header}}
     {{else}}
     {{> user-header}}
     {{/if}}
 
  {{{body}}}
-    {{#if admin}}
+    {{#if adminHeader}}
     {{else}}
      {{>footer}}
     {{/if}} 

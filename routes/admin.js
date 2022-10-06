@@ -10,22 +10,54 @@ const fs = require('fs');
 const { Router } = require('express');
 const { response } = require('../app');
 
+const verifyAdminLogin = (req, res, next) => {
+  if (req.session.adminLoggedIn) {
+    next()
+  } else {
+    res.redirect('/admin/login')
+  }
+}
 
 /* GET users listing. */
-router.get('/',async function(req, res, next) {
+router.get('/',verifyAdminLogin, async function(req, res, next) {
+  let admin = req.session.admin
+  console.log(admin)
    let totalOrders = await adminHelpers.getTotalOrdersCount()
    let totalCustomers = await adminHelpers.getTotalCustomersCount()
    let totalProducts = await adminHelpers.getTotalProductsCount()
    let totalRevenue = await adminHelpers.getTotalRevenue()
-    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts,totalRevenue, admin:true})
+    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts,totalRevenue,admin, adminHeader:true})
   // })
 });
 
 router.get('/login',(req,res)=>{
-  res.render('admin/login',{admin:true})
+  if (req.session.adminLoggedIn) {
+    res.redirect('/admin')
+  } else {
+    res.render('admin/login', { "adminLoginErr": req.session.adminLoginErr })
+    req.session.adminLoginErr = false
+  }
 })
 
+router.post('/login',(req,res)=>{
+  console.log((req.body));
+  adminHelpers.adminLogin(req.body).then((response)=>{
+    if (response.status) {
+      req.session.admin = response.admin
+      req.session.adminLoggedIn = true
+      res.redirect('/admin')
+    } else {
+      req.session.adminLoginErr = true
+      res.redirect('/admin/login')
+    }
+  })
+})
 
+router.get('/logout', (req, res) => {
+  req.session.admin = null
+  req.session.adminLoggedIn = false
+  res.redirect('/admin/login')
+})
 
 router.get('/products-details',(req,res)=>{
   productHelpers.getAllproducts().then((products)=>{
