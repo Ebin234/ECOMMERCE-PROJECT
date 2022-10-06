@@ -48,7 +48,8 @@ module.exports = {
                 Mobile : userdata.Mobile,
                 Date : date,
                 Time : time,
-                Password : userdata.Password
+                Password : userdata.Password,
+                Blocked : false
             }
             console.log("userObj:",userObj)
             db.get().collection(collection.USER_COLLECTION).insertOne(userObj)
