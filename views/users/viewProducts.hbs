@@ -23,11 +23,13 @@
                 </h2>
                 <div class="genre">
                     <input type="checkbox" name="catagoryName" value="" hidden checked>
+                    {{#each categories}}
                     <div class="check">
-                        <input type="checkbox" name="catagoryName" value="smartpnones">
-                        <label for="">Smart Phones</label>
+                        <input type="checkbox" name="catagoryName" value="{{this.name}}">
+                        <label for="">{{this.name}}</label>
                     </div>
-                    <div class="check">
+                    {{/each}}
+                    {{!-- <div class="check">
                         <input type="checkbox" name="catagoryName" value="smartwatches">
                         <label for="">Smart Watches</label>
                     </div>
@@ -42,7 +44,7 @@
                     <div class="check">
                         <input type="checkbox" name="catagoryName" value="smarttv">
                         <label for="">Smart TV</label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="outer">
@@ -50,12 +52,18 @@
                     shop by brand
                 </h2>
                 <div class="genre">
-                    <input type="checkbox" name="brandName" value="" hidden checked>
-                    <div class="check">
-                        <input type="checkbox" name="brandName" value="OnePlus">
-                        <label for="">oneplus</label>
+                    <div class="check" hidden>
+                        <input type="checkbox" name="brandName" value=""  checked>
+                        <label for=""></label>
                     </div>
+                    
+                    {{#each brands}}
                     <div class="check">
+                        <input type="checkbox" name="brandName" value="{{this.name}}">
+                        <label for="">{{this.name}}</label>
+                    </div>
+                    {{/each}}
+                    {{!-- <div class="check">
                         <input type="checkbox" name="brandName" value="Motorola ">
                         <label for="">motorla</label>
                     </div>
@@ -70,7 +78,7 @@
                     <div class="check">
                         <input type="checkbox">
                         <label for="">Smart TV</label>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="outer">
@@ -93,6 +101,14 @@
                     <div class="check">
                         <input type="radio" name="price" value="2000">
                         <label for="">under rs.2000</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="price" value="10000">
+                        <label for="">under rs.10000</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="price" value="100000">
+                        <label for="">under rs.100000</label>
                     </div>
                     {{!-- <div class="check">
                         <input type="radio">

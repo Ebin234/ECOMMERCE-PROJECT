@@ -6,6 +6,7 @@ var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
 const twilioHelpers = require('../helpers/twilio_helpers')
+const adminHelpers = require('../helpers/admin-helpers')
 // const ApiError = require('../config/Apierrors');
 let productFilter = [];
 let searchProducts;
@@ -202,6 +203,7 @@ router.get('/allProducts', async (req, res) => {
     wishCount = await userhelpers.getWishCount(user._id)
   }
   productFilter = await productHelpers.getAllproducts()
+  
 
   // res.render('users/viewProducts',{products,user,cartCount,wishCount})
   res.redirect('/shope')
@@ -406,16 +408,20 @@ router.get('/shope', async (req, res) => {
   let user = req.session.user
   let cartCount = 0;
   let wishCount = 0;
+  let brands = await adminHelpers.getBrands()
+  console.log(brands)
+  let categories = await adminHelpers.getCategories()
+  console.log(categories)
   if (user) {
     cartCount = await userhelpers.getCartCount(user._id)
     wishCount = await userhelpers.getWishCount(user._id)
   }
   if (searchProducts) {
     productFilter = searchProducts;
-    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user })
+    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands,categories })
     searchProducts = null
   } else {
-    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user })
+    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands, categories })
   }
 
 })
