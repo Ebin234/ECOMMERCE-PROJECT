@@ -63,7 +63,11 @@ module.exports = {
             let loginStatus = false
             let response = {}
             let user = await db.get().collection(collection.USER_COLLECTION)
-                .findOne({ Email: userdata.Email })
+                .findOne({
+                    $and : [
+                        { Email: userdata.Email },{ Blocked : false}
+                    ]
+                })
             if (user) {
                 bcrypt.compare(userdata.Password, user.Password).then((status) => {
                     if (status) {
