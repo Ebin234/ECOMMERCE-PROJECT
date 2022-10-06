@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
 <style>
-    a.normal {
+    button.normal {
         font-size: 23px;
         font-weight: 500;
         padding: 9px 8px;
@@ -16,12 +16,12 @@
         text-decoration: none;
     }
 
-    a.b1 {
+    button.b1 {
         background-color: rgb(56, 179, 19);
         padding: 9px 20px;
     }
 
-    a.b2 {
+    button.b2 {
         background-color: rgb(238, 18, 18);
             padding: 9px 36px;
     }
@@ -56,7 +56,7 @@
         }
     }
 
-    .add a {
+    .add button {
         text-decoration: none;
         background-color: rgb(56, 179, 19);
         color: #000;
@@ -122,8 +122,12 @@
                     <td>{{this.Mobile}}</td>
                     <td>{{this.Date}} <br>{{this.Time}}</td>
                     <td>
-                        <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Block</a>
-                        <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Unblock</a>
+                        {{#if this.Blocked}}
+                        <button onclick="unblockUser('{{this._id}}')" class=" normal b1 ">Unblock</button>
+                        {{else}}
+                        <button onclick="blockUser('{{this._id}}')"  class="normal b2 ">Block</button>
+                        {{/if}}
+                        
                         
                     </td>
                 </tr>
@@ -151,4 +155,21 @@
     $(function () {
         $('#productTable').DataTable();
     });
+</script>
+
+<script>
+    function blockUser(userId){
+        $.ajax({
+            url : '/admin/block-user',
+            data : {
+                userId : userId
+            },
+            method : 'post',
+            success : (response)=>{
+                if(response.blocked){
+                    location.reload()
+                }
+            }
+        })
+    }
 </script>

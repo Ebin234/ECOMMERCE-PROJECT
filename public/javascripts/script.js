@@ -270,21 +270,3 @@ function editBrand(brandId) {
     })
 }
 
-// function signupFunc() {
-//     $.ajax({
-//         url: '/signup',
-//         data: $('#signupform').serialize(),
-//         method: 'post',
-//         success: (response) => {
-//             if (response.exist) {
-//                 Swal.fire({"ddfvdfvdfv":dcsdcsdc
-//                 })
-
-
-
-//             }else{
-//                 location.href = '/login'
-//             }
-//         }
-//     })
-// }

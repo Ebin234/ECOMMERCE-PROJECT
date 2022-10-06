@@ -154,5 +154,24 @@ module.exports = {
             console.log(revenue[0].totalRevenue)
             resolve(revenue[0].totalRevenue)
         })
+    },
+    blockUser : (userId)=>{
+        return new Promise((resolve,reject)=>{
+            console.log(userId)
+            db.get().collection(collection.USER_COLLECTION)
+            .updateOne(
+                {
+                    _id : objectId(userId)
+                },
+                {
+                    $set : {
+                        Blocked : true
+                    }
+                }
+            ).then((response)=>{
+                console.log(response)
+                resolve(response)
+            })
+        })
     }
 }

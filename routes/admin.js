@@ -281,5 +281,12 @@ router.post('/change-delivery-status',(req,res)=>{
   
 })
 
+router.post('/block-user',(req,res)=>{
+  // console.log(req.body);
+  adminHelpers.blockUser(req.body.userId).then((response)=>{
+    res.json({blocked : true})
+  })
+})
+
 
 module.exports = router;
