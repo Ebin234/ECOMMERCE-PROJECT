@@ -95,7 +95,7 @@
 
 <script>
     function changeQuantity(cartId,prodId,userId,count,subId){
-        console.log(subId)
+        console.log("subId : ",subId)
         let quantity = parseInt(document.getElementById(prodId).innerHTML)
         count = parseInt(count)
         $.ajax({

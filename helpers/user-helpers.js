@@ -184,13 +184,13 @@ module.exports = {
             resolve(cartProducts)
         })
     },
-    getProductSubtotal : (prodId)=>{
+    getProductSubtotal : (prodId,userId)=>{
         return new Promise(async(resolve,reject)=>{
             // console.log("prodId:",prodId)
            let totalPrice = await db.get().collection(collection.CART_COLLECTION)
             .aggregate([
                 {
-                    $match:{'products.item' : objectId(prodId)}
+                    $match:{user : objectId(userId)}
                 },
                 {
                     $unwind:'$products'
@@ -236,7 +236,7 @@ module.exports = {
 
             console.log("subtotal:",totalPrice)
             console.log(totalPrice.length)
-            if(totalPrice.legth>0){
+            if(totalPrice.length>0){
             resolve(totalPrice[0].totalPrice)
             }else{
                 // totalPrice[0].totalPrice = 0;
