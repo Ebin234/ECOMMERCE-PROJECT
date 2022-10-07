@@ -196,6 +196,9 @@ router.get('/add-to-cart/:id', (req, res,next) => {
 })
 
 router.get('/allProducts', async (req, res) => {
+  let page = req.query.page || 0
+  console.log("page:",page)
+  let prodperpage = 4
   let user = req.session.user
   let cartCount = 0;
   let wishCount = 0;
@@ -203,11 +206,38 @@ router.get('/allProducts', async (req, res) => {
     cartCount = await userhelpers.getCartCount(user._id)
     wishCount = await userhelpers.getWishCount(user._id)
   }
-  productFilter = await productHelpers.getAllproducts()
+  productFilter = await productHelpers.getAllproducts(page,prodperpage)
   
 
   // res.render('users/viewProducts',{products,user,cartCount,wishCount})
   res.redirect('/shope')
+
+})
+
+router.get('/shope', async (req, res) => {
+  // let page = req.query.page || 0
+  // console.log("page:",page)
+  // let prodperpage = 4
+  // productFilter = await productHelpers.getAllproducts(page,prodperpage)
+  console.log("searchproducts:", searchProducts)
+  let user = req.session.user
+  let cartCount = 0;
+  let wishCount = 0;
+  let brands = await adminHelpers.getBrands()
+  console.log(brands)
+  let categories = await adminHelpers.getCategories()
+  console.log(categories)
+  if (user) {
+    cartCount = await userhelpers.getCartCount(user._id)
+    wishCount = await userhelpers.getWishCount(user._id)
+  }
+  if (searchProducts) {
+    productFilter = searchProducts;
+    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands,categories })
+    searchProducts = null
+  } else {
+    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands, categories })
+  }
 
 })
 
@@ -402,29 +432,6 @@ router.post('/search-product', async (req, res) => {
   // console.log(resolve.search)
   // res.json(resolve.search)
   res.json(searchProducts)
-})
-
-router.get('/shope', async (req, res) => {
-  console.log("searchproducts:", searchProducts)
-  let user = req.session.user
-  let cartCount = 0;
-  let wishCount = 0;
-  let brands = await adminHelpers.getBrands()
-  console.log(brands)
-  let categories = await adminHelpers.getCategories()
-  console.log(categories)
-  if (user) {
-    cartCount = await userhelpers.getCartCount(user._id)
-    wishCount = await userhelpers.getWishCount(user._id)
-  }
-  if (searchProducts) {
-    productFilter = searchProducts;
-    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands,categories })
-    searchProducts = null
-  } else {
-    res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands, categories })
-  }
-
 })
 
 router.post('/product-filter', async (req, res) => {

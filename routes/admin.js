@@ -123,7 +123,7 @@ router.post('/add-product',(req,res)=>{
               }else{
                 subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
                   if(!err){
-                    res.render('admin/products-details')
+                    res.redirect('/admin/products-details')
                   }else{
                     console.log(err)
                   }

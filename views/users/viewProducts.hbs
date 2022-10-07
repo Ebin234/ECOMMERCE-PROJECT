@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="/lightbox.min.css">
 <script src="lightbox-plus-jquery.min.js"></script>
 
+<style>
+    #pagination .active { 
+        background: red;
+    }
+</style>
+
 <section id="page-header">
     <h2>#Stayhome</h2>
     <p>save more with coupons & up to 70% off!</p>
@@ -173,8 +179,8 @@
 
 
 <section id="pagination" class="section-p1">
-    <a href="">1</a>
-    <a href="">2</a>
+    <a href="/allProducts?page=0">1</a>
+    <a href="/allProducts?page=1">2</a>
     <a href=""><i class="fal fa-long-arrow-alt-right"></i></a>
 </section>
 
@@ -239,5 +245,13 @@
                 location.href = '/shope'
             })
         })
+    }
+</script>
+
+<script>
+    function paginationClick(){
+    const currentLocation = location.href;
+    console.log("current",currentLocation);
+    
     }
 </script>

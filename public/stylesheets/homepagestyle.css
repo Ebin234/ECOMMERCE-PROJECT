@@ -236,7 +236,8 @@ div ul li .dropdown li a:after {
 }
 
 #product1 .pro {
-    width: 23%;
+    width: 22%;
+    height: 685px;
     min-width: 250px;
     padding: 10px 12px;
     border: 1px solid #cce7d0;
@@ -258,10 +259,17 @@ div ul li .dropdown li a:after {
     border-radius: 20px;
 } */
 
-#product1 .pro img {
+/* #product1 .pro img {
     width: 90%;
     height: 80%;
     object-fit: cover;
+} */
+
+#product1 .pro img {
+    width: 75%;
+    height: 77%;
+    object-fit: cover;
+    margin-top: 23px;
 }
 
 #product1 .pro:hover .a{

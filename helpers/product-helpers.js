@@ -26,10 +26,11 @@ module.exports = {
             callback(data.insertedId)
         })
     },
-    getAllproducts : ()=>{
+    getAllproducts : (page,prodperpage)=>{
         return new Promise(async(resolve,reject)=>{
-            let products =await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
-            //console.log(products)
+            let products =await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find().skip(page*prodperpage).limit(prodperpage).toArray()
+            console.log(products)
             resolve(products)
         })
     },
