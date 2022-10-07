@@ -241,6 +241,11 @@ router.get('/shope', async (req, res) => {
 
 })
 
+router.get('/newArrivals',async(req,res)=>{
+  let newProducts = await productHelpers.getNewArrivalProducts()
+  res.render('users/new-arrivals',{newProducts})
+})
+
 router.get('/product/:id', async (req, res,next) => {
   try{
   let prodId = req.params.id

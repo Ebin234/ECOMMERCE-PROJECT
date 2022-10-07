@@ -50,6 +50,14 @@ module.exports = {
             resolve(newProducts)
         })
     },
+    getNewArrivalProducts : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let newProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find().sort({$natural:-1}).limit(20).toArray()
+            console.log(newProducts)
+            resolve(newProducts)
+        })
+    },
     deleteProduct : (prodId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
