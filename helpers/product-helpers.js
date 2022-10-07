@@ -21,7 +21,7 @@ module.exports = {
                    Description5 : product.Description5
         }
         console.log(proObj)
-        db.get().collection('product').insertOne(proObj).then((data)=>{
+        db.get().collection(collection.PRODUCT_COLLECTION).insertOne(proObj).then((data)=>{
             //console.log(data.insertedId)
             callback(data.insertedId)
         })

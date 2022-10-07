@@ -22,10 +22,13 @@ const verifyAdminLogin = (req, res, next) => {
 router.get('/',verifyAdminLogin, async function(req, res, next) {
   let admin = req.session.admin
   console.log(admin)
+  let totalRevenue = 0
    let totalOrders = await adminHelpers.getTotalOrdersCount()
    let totalCustomers = await adminHelpers.getTotalCustomersCount()
    let totalProducts = await adminHelpers.getTotalProductsCount()
-   let totalRevenue = await adminHelpers.getTotalRevenue()
+   if(totalOrders.length > 0 ){
+    totalRevenue = await adminHelpers.getTotalRevenue()
+  }
     res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts,totalRevenue,admin, adminHeader:true})
   // })
 });
@@ -62,7 +65,7 @@ router.get('/logout', (req, res) => {
 router.get('/products-details',(req,res)=>{
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
-  res.render('admin/products-details',{products,admin:true})
+  res.render('admin/products-details',{products,adminHeader:true})
   })
 })
 
@@ -70,7 +73,7 @@ router.get('/products-details',(req,res)=>{
 router.get('/add-product',async(req,res)=>{
   let catagories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
-  res.render('admin/add-product',{brands,catagories, admin:true})
+  res.render('admin/add-product',{brands,catagories, adminHeader:true})
 })
 
 // router.get('/add-product2',(req,res)=>{
@@ -150,7 +153,7 @@ router.get('/edit-product/:id',async(req,res)=>{
   let catagories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
   //console.log(product)
-  res.render('admin/edit-product',{brands,catagories,product,admin:true})
+  res.render('admin/edit-product',{brands,catagories,product,adminHeader:true})
 })
 
 router.post('/edit-product1/:id',(req,res)=>{
@@ -175,7 +178,7 @@ router.post('/edit-product1/:id',(req,res)=>{
 
 
 router.get('/create-coupon',(req,res)=>{
-  res.render('admin/create-coupon',{admin:true})
+  res.render('admin/create-coupon',{adminHeader:true})
 })
 
 router.post('/create-coupon',(req,res)=>{
@@ -189,7 +192,7 @@ router.post('/create-coupon',(req,res)=>{
 router.get('/coupons',async(req,res)=>{
   let coupons = await productHelpers.getAllCoupons() 
   console.log(coupons);
-  res.render('admin/coupon-details',{coupons,admin:true})
+  res.render('admin/coupon-details',{coupons,adminHeader:true})
 })
 
 router.get('/edit-coupon/:id',async(req,res)=>{
@@ -197,7 +200,7 @@ router.get('/edit-coupon/:id',async(req,res)=>{
   console.log(couponId)
   let couponDetails = await productHelpers.getCouponDetails(couponId)
   console.log(couponDetails)
-  res.render('admin/edit-coupon',{couponDetails,admin:true})
+  res.render('admin/edit-coupon',{couponDetails,adminHeader:true})
 })
 
 router.post('/edit-coupon/:id',(req,res)=>{
@@ -218,12 +221,12 @@ router.get('/delete-coupon/:id',(req,res)=>{
 router.get('/users-details',async(req,res)=>{
   let users = await userHelpers.getAllUsers()
   console.log(users)
-  res.render('admin/users-details',{users,admin:true})
+  res.render('admin/users-details',{users,adminHeader:true})
 })
 
 router.get('/view-categories',async(req,res)=>{
   let categories = await adminHelpers.getCategories()
-  res.render('admin/view-categories',{categories, admin:true})
+  res.render('admin/view-categories',{categories, adminHeader:true})
 })
 
 router.post('/add-category',(req,res)=>{
@@ -261,7 +264,7 @@ router.get('/delete-category/:id',(req,res)=>{
 
 router.get('/view-brands',async(req,res)=>{
   let brands = await adminHelpers.getBrands()
-  res.render('admin/view-brands',{brands,admin:true})
+  res.render('admin/view-brands',{brands,adminHeader:true})
 })
 
 router.post('/add-brand',(req,res)=>{
@@ -301,7 +304,7 @@ router.get('/view-orders',async(req,res)=>{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
   
-  res.render('admin/view-orders',{orders,admin:true})
+  res.render('admin/view-orders',{orders,adminHeader:true})
 })
 
 router.post('/change-delivery-status',(req,res)=>{
