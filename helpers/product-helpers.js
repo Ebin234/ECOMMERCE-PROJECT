@@ -41,6 +41,14 @@ module.exports = {
             resolve(featuredProducts)
         })
     },
+    getNewProducts : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let newProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find().sort({$natural:-1}).toArray()
+            console.log(newProducts)
+            resolve(newProducts)
+        })
+    },
     deleteProduct : (prodId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
@@ -202,5 +210,3 @@ module.exports = {
         })
     }
 }
-
-// products : { $elemMatch : {item : objectId(prodId)}}
