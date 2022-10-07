@@ -28,6 +28,7 @@ module.exports = {
     },
     getAllproducts : (page,prodperpage)=>{
         return new Promise(async(resolve,reject)=>{
+            prodperpage = parseInt(prodperpage)
             let products =await db.get().collection(collection.PRODUCT_COLLECTION)
             .find().skip(page*prodperpage).limit(prodperpage).toArray()
             console.log(products)

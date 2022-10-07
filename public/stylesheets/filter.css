@@ -1,23 +1,36 @@
 
 .search {
     width: 90%;
-    height: 73px;
+    height: 40px;
     outline: none;
-    font-size: 29px;
+    font-size: 15px;
     padding: 0 23px;
     border: 1px solid #cce7d0;
     border-radius: 20px;
-    margin-left: -158px;
+    margin-left: -127px;
+}
+
+button.normal {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px 30px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
 }
 
 button.searchbtn {
-    margin: 0 11px;
+    margin: 0 5px;
     position: absolute;
-    font-size: 29px;
+    font-size: 15px;
     /* background: green; */
-    width: 203px;
+    width: 128px;
     border: 1px solid #cce7d0;
-    height: 70px;
+    height: 40px;
     border-radius: 18px;
     font-weight: 400;
 }
@@ -26,20 +39,18 @@ button.searchbtn {
     padding-top: 50px;
 }
 
- .outer {
-    padding: 97px;
-    width: 27%;
+.outer {
+    padding: 7px;
+    width: 19%;
 }
 
-.outer h2{
-   /* text-decoration: underline;
-   text-decoration-color: red; */
-   font-size: 30px;
-   color: #111111;
-   font-weight: 600;
-   text-transform: uppercase;
-   position: relative;
-   display: inline-block;
+.outer h2 {
+    font-size: 20px;
+    color: #111111;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
 }
 
 .outer h2::after{
@@ -58,7 +69,7 @@ button.searchbtn {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 20px 75px;
+    padding: 20px 7px;
 }
 
 .genre div {
@@ -66,16 +77,15 @@ button.searchbtn {
 }
 
 label {
-    font-size: 30px;
+    font-size: 15px;
 }
 
 .genre .check input {
-    
-
-    width: 45px;
-    height: 25px;
+    width: 19px;
+    height: 15px;
     border: 1px solid red;
     background: red;
+    margin-left: 14px;
 }
 
 

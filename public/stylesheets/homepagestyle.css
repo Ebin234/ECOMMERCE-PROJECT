@@ -48,8 +48,12 @@ button.normal {
     transition: 0.2s;
 }
 
-.section-p1 {
+/* .section-p1 {
     padding: 40px 80px;
+} */
+
+.section-p1 {
+    padding: 25px 40px;
 }
 
 .section-m1 {
@@ -392,12 +396,12 @@ div ul li .dropdown li a:after {
 .overlay .fa {
     cursor: pointer;
     color: #088178;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50px;
     font-weight: 500;
     background-color: #fff;
-    font-size: 20px;
+    font-size: 15px;
     padding: 7px;
     margin: 5%;
     margin-bottom: 5%;
@@ -576,7 +580,7 @@ footer .copyright {
 #pagination a {
     text-decoration: none;
     background-color: #088178;
-    padding: 15px 20px;
+    padding: 6px 11px;
     border-radius: 4px;
     color: #fff;
     font-weight: 600;
