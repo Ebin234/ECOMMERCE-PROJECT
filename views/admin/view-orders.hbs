@@ -2,8 +2,14 @@
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
 <style>
+
+    .section-p1 {
+    padding: 24px 10px;
+}
+
+
     a.normal {
-        font-size: 23px;
+        font-size: 16px;
         font-weight: 500;
         padding: 9px 8px;
         color: #000;
@@ -78,48 +84,83 @@
         }
     }
 
+    #cart table td:nth-child(1) {
+        width: 1px;
+        text-align: center;
+    }
+
+    #cart table td:nth-child(2) {
+        width: 9px;
+        text-align: center;
+    }
+
     #cart table td:nth-child(3) {
-    width: 210px;
-    text-align: start;
-    line-height: 20px;
-}
+        width: 25px;
+        text-align: start;
+        line-height: 20px;
+    }
 
-#cart table thead td {
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 13px;
-    padding: 18px 7px;
-}
+    #cart table thead td {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 13px;
+        padding: 18px 7px;
+    }
 
-#cart table  td:nth-child(4), #cart table td:nth-child(5), #cart table td:nth-child(6) ,
-#cart table td:nth-child(7),#cart table td:nth-child(8),#cart table td:nth-child(9){
-    width: 150px;
-    text-align: start;
-    justify-content: flex-start;
-}
+    #cart table td:nth-child(4) {
+        width: 21px;
+        text-align: center;
+        justify-content: flex-start;
+    }
 
-#cart table tbody td:nth-child(9){
-    font-weight: 700;
-    font-size: 16px;
-}
+    #cart table td:nth-child(5) {
+        width: 15px;
+        text-align: center;
+        justify-content: flex-start;
+    }
 
-#cart table td:nth-child(1) {
-    width: 30px;
+    #cart table td:nth-child(6) {
+        width: 20px;
+        text-align: center;
+        justify-content: flex-start;
+    }
+
+    #cart table td:nth-child(7) {
+        width: 18px;
+        text-align: start;
+        justify-content: flex-start;
+    }
+
+    #cart table td:nth-child(8) {
+        width: 15px;
+            justify-content: center;
+    align-items: center;
     text-align: center;
-}
+    }
 
-#cart table td:nth-child(9) select {
-    background: #f5f5f5;
-    border: 1px solid gray;
-    height: 29px;
-    border-radius: 10px;
-}
+    #cart table td:nth-child(9) {
+        width: 9px;
+        text-align: start;
+        justify-content: flex-start;
+    }
 
-#cart table td:nth-child(9) select option{
-    border-radius: 10px;
-}
+    #cart table tbody td:nth-child(9) {
+        font-weight: 700;
+        font-size: 16px;
+    }
 
 
+
+    #cart table td:nth-child(9) select {
+        background: #f5f5f5;
+        border: 1px solid gray;
+        height: 29px;
+        border-radius: 10px;
+    }
+
+    #cart table td:nth-child(9) select option {
+        border-radius: 10px;
+    }
 </style>
 
 <div class="main">
@@ -174,16 +215,17 @@
                 {{#each orders}}
                 <tr>
                     <td>1.</td>
-                    <td><img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg" alt=""></td>
+                    <td><img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg"
+                            alt=""></td>
                     <td>{{this.productDetails.Name}} <br>
-                        Category : {{this.productDetails.Catagory}}  <br>
-                        Brand : {{this.productDetails.brand}}   <br>
-                        Quantity : {{this.products.Quantity}}  <br>
+                        Category : {{this.productDetails.Catagory}} <br>
+                        Brand : {{this.productDetails.brand}} <br>
+                        Quantity : {{this.products.Quantity}} <br>
                         Price : {{this.productDetails.Price}} <br>
-                        Stock : {{this.productDetails.Stoke}} 
+                        Stock : {{this.productDetails.Stoke}}
                     </td>
                     <td>{{this.deliveryDetails.fullName}} <br>
-                        
+
                         {{this.deliveryDetails.mobile}}
                     </td>
                     <td>{{this.date}}</td>
@@ -191,51 +233,54 @@
                     <td>
                         {{this.deliveryDetails.fullName}} <br>
                         {{this.deliveryDetails.address}} <br>
-                        {{this.deliveryDetails.state}}  <br>
+                        {{this.deliveryDetails.state}} <br>
                         {{this.deliveryDetails.city}} <br>
                         {{this.deliveryDetails.pincode}}
                     </td>
                     <td>{{this.paymentMethod}}</td>
-                    
-                        
-                        {{!-- <form id="submit" method="post" enctype="multipart/form-data" > --}}
+
+
+                    {{!-- <form id="submit" method="post" enctype="multipart/form-data"> --}}
                         {{!-- <form action="" id="deliveryStatus"> --}}
-                        {{!-- <input type="text" id="orderId" value="{{this._id}}" hidden> --}}
-                        {{!-- <input type="text" id="prodId" value="{{this.products.item}}" hidden> --}}
+                            {{!-- <input type="text" id="orderId" value="{{this._id}}" hidden> --}}
+                            {{!-- <input type="text" id="prodId" value="{{this.products.item}}" hidden> --}}
 
-                        {{#ifEquals this.products.deliveryStatus  "Delivered"}}
-                         <td>Delivered</td>
+                            {{#ifEquals this.products.deliveryStatus "Delivered"}}
+                            <td>Delivered</td>
 
-                        {{else}}
-                        <td>
-                        <select id="change" name="deliveryStatus" onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}','{{this.userDetails.Email}}',this)">
-                            <option  value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
-                            <option name="deliveryStatus" value="Pending">Pending</option>
-                            <option value="Shipped">Shipped</option>
-                            <option name="deliveryStatus" value="Delivered">Delivered</option>
-                            
-                        </select>
-                        </td>
-                        {{/ifEquals}}
-                        {{!-- <button  >submit</button> --}}
-                        {{!-- </form> --}}
-                    
-                    {{!-- <td id="product" hidden>{{this._id}}</td> --}}
+                            {{else}}
+                            <td>
+                                <select id="change" name="deliveryStatus"
+                                    onchange="changeDeliveryStatus('{{this._id}}','{{this.products.item}}','{{this.userDetails.Email}}',this)">
+                                    <option value="{{this.deliveryStatus}}">{{this.products.deliveryStatus}}</option>
+                                    <option name="deliveryStatus" value="Pending">Pending</option>
+                                    <option value="Shipped">Shipped</option>
+                                    <option name="deliveryStatus" value="Delivered">Delivered</option>
+
+                                </select>
+                            </td>
+                            {{/ifEquals}}
+                            {{!-- <button>submit</button> --}}
+                            {{!--
+                        </form> --}}
+
+                        {{!-- <td id="product" hidden>{{this._id}}</td> --}}
                 </tr>
                 {{/each}}
 
                 <tr>
                     <td>1.</td>
-                    <td><img src="/images/product-images/631cb14dc8a1a2d7fd4fc623/0631cb14dc8a1a2d7fd4fc623.jpg" alt=""></td>
-                    <td>Cartoon  <br>
-                        Category : smartphone  <br>
-                        Brand : Samsung   <br>
-                        Quantity : 3  <br>
+                    <td><img src="/images/product-images/631cb14dc8a1a2d7fd4fc623/0631cb14dc8a1a2d7fd4fc623.jpg" alt="">
+                    </td>
+                    <td>Cartoon <br>
+                        Category : smartphone <br>
+                        Brand : Samsung <br>
+                        Quantity : 3 <br>
                         Price : 30000 <br>
-                        Stock : 300 
+                        Stock : 300
                     </td>
                     <td>Ebin yesudas <br>
-                        
+
                         85574237
                     </td>
                     <td>20/05/2022</td>
@@ -243,7 +288,7 @@
                     <td>
                         Ebin yesudas <br>
                         Koilparambil <br>
-                        kerala  <br>
+                        kerala <br>
                         Alappuzha <br>
                         688004
                     </td>
@@ -262,7 +307,8 @@
 
 </div>
 
-{{!-- <script>
+{{!--
+<script>
     $(function () {
         $('#productTable').DataTable();
     });
@@ -283,24 +329,24 @@
 
 
 <script>
-    function changeDeliveryStatus (orderId,prodId,userEmail,obj){
+    function changeDeliveryStatus(orderId, prodId, userEmail, obj) {
 
-            $.ajax({
-            url:'/admin/change-delivery-status',
-            data:{
-                orderId : orderId,
-                prodId : prodId,
-                userEmail : userEmail,
-                data : obj.value
+        $.ajax({
+            url: '/admin/change-delivery-status',
+            data: {
+                orderId: orderId,
+                prodId: prodId,
+                userEmail: userEmail,
+                data: obj.value
             },
-            method:'post',
-            success : (response)=>{
-                {{!-- $('#change').load(location.href + " #change") --}}
+            method: 'post',
+            success: (response) => {
+                { { !--$('#change').load(location.href + " #change") --} }
                 location.reload()
             }
         })
-        
-        
+
+
     }
 </script>
 
@@ -312,33 +358,35 @@
 
 
 
-{{!-- <script>
-    {{!-- $('select[name=deliveryStatus]').change(function () { --}}
-    $('#submit').submit((e)=>{
-        e.preventDefault()
-        {{!-- document.forms["submit"].submit(); --}}
-        {{!-- let data = document.getElementById('change').value --}}
-        let prodId = document.getElementById('prodId').value
-        let orderId = $('#product').html()
-        {{!-- let pay = $('#change').val() --}}
-        $.ajax({
-            url:'/admin/change-delivery-status',
-            data:$('#submit').serialize(),
-            
-            method:'post',
-            
-        })
+{{!--
+<script>
+    {
+        { !--$('select[name=deliveryStatus]').change(function () { --}}
+        $('#submit').submit((e) => {
+            e.preventDefault()
+            { { !--document.forms["submit"].submit(); --} }
+            { { !--let data = document.getElementById('change').value-- } }
+            let prodId = document.getElementById('prodId').value
+            let orderId = $('#product').html()
+            { { !--let pay = $('#change').val()-- } }
+            $.ajax({
+                url: '/admin/change-delivery-status',
+                data: $('#submit').serialize(),
+
+                method: 'post',
+
+            })
         })
 </script> --}}
 
 
 {{!-- $('#deliveryStatus').serialize(), --}}
 {{!-- data: {
-                data :$(this).val(),
-                prodId : $('#deliveryStatus').serialize(),
-                orderId : orderId
-            }, --}}
+data :$(this).val(),
+prodId : $('#deliveryStatus').serialize(),
+orderId : orderId
+}, --}}
 
-            {{!-- success:(response)=>{
-                {{!-- location.reload() --}}
-            } --}}
+{{!-- success:(response)=>{
+{{!-- location.reload() --}}
+} --}}
