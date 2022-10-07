@@ -31,8 +31,8 @@ router.get('/', async function (req, res, next) {
     wishCount = await userhelpers.getWishCount(user._id)
   }
   console.log("user:", user)
-  productHelpers.getAllproducts().then((products) => {
-    res.render('users/home-page', { products, user, cartCount, wishCount });
+  productHelpers.getFeaturedProducts().then((featuredProducts) => {
+    res.render('users/home-page', { featuredProducts, user, cartCount, wishCount });
   })
 });
 

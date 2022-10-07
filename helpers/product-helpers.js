@@ -33,6 +33,14 @@ module.exports = {
             resolve(products)
         })
     },
+    getFeaturedProducts : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let featuredProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+            .find({Featured : "Yes"}).toArray()
+            console.log(featuredProducts)
+            resolve(featuredProducts)
+        })
+    },
     deleteProduct : (prodId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
