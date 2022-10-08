@@ -186,33 +186,33 @@ router.get('/cart', verifyLogin, async (req, res) => {
 })
 
 router.get('/add-to-cart/:id', (req, res,next) => {
+  try{
   console.log("api called")
   
   let userId = req.session.user._id
   const prodId = req.params.id
-  // if(!userId){
-  //   next(ApiError.badRequest('login first'))
-  //   return;
-  // }
   //console.log(userId)
   //console.log(prodId)
   userhelpers.addToCart(prodId, userId).then(() => {
     // res.redirect('/')
     res.json({ cartAdded: true })
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/allProducts', async (req, res) => {
   let page = req.query.page || 0
   console.log("page:",page)
   let prodperpage = 4
-  let user = req.session.user
-  let cartCount = 0;
-  let wishCount = 0;
-  if (user) {
-    cartCount = await userhelpers.getCartCount(user._id)
-    wishCount = await userhelpers.getWishCount(user._id)
-  }
+  // let user = req.session.user
+  // let cartCount = 0;
+  // let wishCount = 0;
+  // if (user) {
+  //   cartCount = await userhelpers.getCartCount(user._id)
+  //   wishCount = await userhelpers.getWishCount(user._id)
+  // }
   productFilter = await productHelpers.getAllproducts(page,prodperpage)
   
 
@@ -221,7 +221,8 @@ router.get('/allProducts', async (req, res) => {
 
 })
 
-router.get('/shope', async (req, res) => {
+router.get('/shope', async (req, res,next) => {
+  try{
   // let page = req.query.page || 0
   // console.log("page:",page)
   // let prodperpage = 4
@@ -245,6 +246,9 @@ router.get('/shope', async (req, res) => {
   } else {
     res.render('users/viewProducts', { productFilter, cartCount, wishCount, user,brands, categories })
   }
+}catch(error){
+  next(error)
+}
 
 })
 
@@ -287,11 +291,14 @@ router.post('/change-product-quantity', (req, res, next) => {
   })
 })
 
-router.get('/checkout', verifyLogin, async (req, res) => {
+router.get('/checkout', verifyLogin, async (req, res,next) => {
+  try{
   user = req.session.user
   let total = await userhelpers.getTotalAmount(user._id)
   res.render('users/checkout', { total, user })
-
+  }catch(error){
+    next(error)
+  }
 })
 
 router.get('/checkout/:id', (req, res) => {
@@ -301,7 +308,8 @@ router.get('/checkout/:id', (req, res) => {
   res.render('users/checkout', { total, user })
 })
 
-router.post('/checkout', async (req, res) => {
+router.post('/checkout', async (req, res,next) => {
+  try{
   console.log("place:", req.body.total)
   let userEmail = req.session.user.Email
   console.log("user", userEmail)
@@ -320,6 +328,9 @@ router.post('/checkout', async (req, res) => {
       })
     }
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.post('/verify-payment', (req, res) => {
@@ -341,18 +352,26 @@ router.get('/order-success', (req, res) => {
   res.render('users/order-success', { user: req.session.user })
 })
 
-router.get('/view-orders', async (req, res) => {
+router.get('/view-orders', async (req, res,next) => {
+  try{
   let orders = await userhelpers.getUserOrders(req.session.user._id)
   console.log(orders)
   res.render('users/orders', { user: req.session.user, orders })
+  }catch(error){
+    next(error)
+  }
 })
 
-router.get('/view-order-products/:id', async (req, res) => {
+router.get('/view-order-products/:id', async (req, res,next) => {
+  try{
   let orderId = req.params.id
   console.log(orderId)
   let orderItems = await userhelpers.getOrderProductsDetails(orderId)
   console.log("orderItems :", orderItems)
   res.render('users/view-order-details', { user: req.session.user, orderItems })
+  }catch(error){
+    next(error)
+  }
 })
 // router.get('/orders',async(req,res)=>{
 //   let orders = await userhelpers.getUserOrders(req.session.user._id)
@@ -375,20 +394,29 @@ router.post('/apply-coupon', async (req, res) => {
   })
 })
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', async (req, res,next) => {
+  try{
   let userId = req.session.user._id
   let userDetails = await userhelpers.getUserDetails(userId)
   res.render('users/profile-page', { userDetails })
+}catch(error){
+  next(error)
+}
 })
 
 
-router.get('/edit-profile', async (req, res) => {
+router.get('/edit-profile', async (req, res,next) => {
+  try{
   let userId = req.session.user._id
   let userDetails = await userhelpers.getUserDetails(userId)
   res.render('users/profile-edit-page', { userDetails })
+  }catch(error){
+    next(error)
+  }
 })
 
-router.post('/edit-profile', (req, res) => {
+router.post('/edit-profile', (req, res,next) => {
+  try{
   let userId = req.session.user._id
   // console.log(userId)
   // console.log(req.body)
@@ -401,19 +429,26 @@ router.post('/edit-profile', (req, res) => {
       userImage.mv('./public/images/users-dp/' + userId + '.jpg')
     }
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/change-password', (req, res) => {
   res.render('users/change-password')
 })
 
-router.post('/change-password', (req, res) => {
+router.post('/change-password', (req, res,next) => {
+  try{
   console.log(req.body)
   let userId = req.session.user._id
   userhelpers.changePassword(userId, req.body).then((response) => {
     console.log("res:", response)
     res.json(response)
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/add-to-wishlist/:id', (req, res) => {
@@ -425,7 +460,7 @@ router.get('/add-to-wishlist/:id', (req, res) => {
   })
 })
 
-router.get('/wishlist', async (req, res) => {
+router.get('/wishlist',verifyLogin, async (req, res) => {
   let userId = req.session.user._id
   let products = await userhelpers.getWishlistProducts(userId)
   res.render('users/wishlist', { products, user: req.session.user._id })
@@ -438,15 +473,20 @@ router.post('/remove-wishlist-product', (req, res) => {
   })
 })
 
-router.post('/search-product', async (req, res) => {
+router.post('/search-product', async (req, res,next) => {
+  try{
   console.log(req.body)
   searchProducts = await userhelpers.searchProducts(req.body)
   // console.log(resolve.search)
   // res.json(resolve.search)
   res.json(searchProducts)
+  }catch(error){
+    next(error)
+  }
 })
 
-router.post('/product-filter', async (req, res) => {
+router.post('/product-filter', async (req, res,next) => {
+  try{
   let details = req.body
   console.log("filterDetails:", details)
   let price = parseInt(details.price)
@@ -459,11 +499,15 @@ router.post('/product-filter', async (req, res) => {
   console.log('brand:', brand)
   productFilter = products
   res.json({ status: true })
+}catch(error){
+  next(error)
+}
 
 
 })
 
-router.get('/invoice/:id', async (req, res) => {
+router.get('/invoice/:id', async (req, res,next) => {
+  try{
   let orderId = req.params.id
   console.log(orderId)
   let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
@@ -476,6 +520,9 @@ router.get('/invoice/:id', async (req, res) => {
   }
   console.log("total:", total)
   res.render('users/invoice', { invoiceDeliveryData, invoiceProductsData, total })
+}catch(error){
+  next(error)
+}
 })
 
 
@@ -511,8 +558,8 @@ router.post('/buysingleproduct',async(req,res,next)=>{
 })
 
 
-router.get('/500',(req,res)=>{
-  res.render('users/forgot-change-password')
-})
+// router.get('/500',(req,res)=>{
+//   res.render('users/forgot-change-password')
+// })
 
 module.exports = router;

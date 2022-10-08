@@ -286,7 +286,7 @@ div ul li .dropdown li a:after {
 #product1 .pro img {
     width: 75%;
     height: 66%;
-    object-fit: cover;
+    object-fit: contain;
     margin-top: 17px;
 }
 
