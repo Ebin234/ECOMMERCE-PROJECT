@@ -298,9 +298,13 @@ router.get('/contact', (req, res) => {
 router.post('/change-product-quantity', (req, res, next) => {
   try{
   console.log(req.body)
+  let cartCount = 0
   userhelpers.changeProductQuantity(req.body).then(async (response) => {
+    cartCount = await userhelpers.getCartCount(req.body.user)
+    if(cartCount>0){
     response.total = await userhelpers.getTotalAmount(req.body.user)
     response.subTotal = await userhelpers.getProductSubtotal(req.body.product,req.body.user)
+    }
     //console.log(cartProducts)
     //response.subtotal = cartProducts.totalPrice
     //console.log("subtotal:",subTotal)
