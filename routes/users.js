@@ -96,7 +96,8 @@ router.post('/signup', (req, res) => {
 })
 
 router.get('/otp', (req, res) => {
-  res.render('users/otp')
+  res.render('users/otp',{"otpErr": req.session.userOtpErr})
+  req.session.userOtpErr = false
 })
 
 router.post('/otp', (req, res) => {
@@ -108,6 +109,9 @@ router.post('/otp', (req, res) => {
       if (response.status == 'approved') {
         console.log("approved")
         res.render('users/forgot-change-password')
+      }else{
+        req.session.userOtpErr = true
+        res.redirect('/otp')
       }
     })
   }
@@ -122,6 +126,9 @@ router.post('/otp', (req, res) => {
           //   console.log(response)
           res.redirect('/login')
         })
+      }else{
+        req.session.userOtpErr = true
+        res.redirect('/otp')
       }
     })
   }

@@ -27,6 +27,9 @@ form #otp input{
 
   <div class="position-relative">
     <div class="card otpbody p-2 text-center">
+      {{#if otpErr}}
+        <p class="error" style="color: red;">Invalid Code</p>
+     {{/if}}
       <h6 class="text-dark">Please enter the one time password <br /> to verify your account</h6>
       <form action="/otp" method="post">
       <div id="otp" class="inputs inp d-flex flex-row justify-content-center mt-2">
