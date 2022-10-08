@@ -29,7 +29,11 @@ function addToWishlist(prodId) {
         url: '/add-to-wishlist/' + prodId,
         method: 'get',
         success: (response) => {
-            if (response.status) {
+            // alert(response)
+            if(response.prodNotAdded){
+                location.href='/login'
+            }
+            else if (response.status) {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',

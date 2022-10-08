@@ -206,6 +206,35 @@ router.get('/add-to-cart/:id', (req, res,next) => {
 }
 })
 
+router.get('/add-to-wishlist/:id', (req, res,next) => {
+  try{
+  let prodId = req.params.id
+  console.log(prodId)
+  let userId = req.session.user._id
+  console.log(userId)
+  userhelpers.addToWishlist(userId, prodId).then((response) => {
+    res.json(response)
+  })
+
+  }catch(error){
+    console.log("error")
+    res.json({prodNotAdded:true})
+  }
+})
+
+router.get('/wishlist',verifyLogin, async (req, res) => {
+  let userId = req.session.user._id
+  let products = await userhelpers.getWishlistProducts(userId)
+  res.render('users/wishlist', { products, user: req.session.user._id })
+})
+
+router.post('/remove-wishlist-product', (req, res) => {
+  console.log(req.body)
+  userhelpers.removeWishlistProduct(req.body).then((response) => {
+    res.json(response)
+  })
+})
+
 router.get('/allProducts', async (req, res) => {
   let page = req.query.page || 0
   console.log("page:",page)
@@ -460,27 +489,7 @@ router.post('/change-password', (req, res,next) => {
 }
 })
 
-router.get('/add-to-wishlist/:id', (req, res) => {
-  let prodId = req.params.id
-  let userId = req.session.user._id
-  console.log(prodId)
-  userhelpers.addToWishlist(userId, prodId).then((response) => {
-    res.json(response)
-  })
-})
 
-router.get('/wishlist',verifyLogin, async (req, res) => {
-  let userId = req.session.user._id
-  let products = await userhelpers.getWishlistProducts(userId)
-  res.render('users/wishlist', { products, user: req.session.user._id })
-})
-
-router.post('/remove-wishlist-product', (req, res) => {
-  console.log(req.body)
-  userhelpers.removeWishlistProduct(req.body).then((response) => {
-    res.json(response)
-  })
-})
 
 router.post('/search-product', async (req, res,next) => {
   try{
