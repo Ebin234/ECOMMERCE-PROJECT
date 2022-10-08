@@ -272,7 +272,7 @@ router.get('/shope', async (req, res,next) => {
 
 router.get('/newArrivals',async(req,res)=>{
   let newProducts = await productHelpers.getNewArrivalProducts()
-  res.render('users/new-arrivals',{newProducts})
+  res.render('users/new-arrivals',{newProducts,user:req.session.user})
 })
 
 router.get('/product/:id', async (req, res,next) => {
@@ -280,7 +280,7 @@ router.get('/product/:id', async (req, res,next) => {
   let prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   console.log(product)
-  res.render('users/single-product', { product })
+  res.render('users/single-product', { product,user:req.session.user })
   }
   catch(error){
     next(error)
@@ -288,11 +288,11 @@ router.get('/product/:id', async (req, res,next) => {
 })
 
 router.get('/about', (req, res) => {
-  res.render('users/about')
+  res.render('users/about',{user:req.session.user})
 })
 
 router.get('/contact', (req, res) => {
-  res.render('users/contact')
+  res.render('users/contact',{user:req.session.user})
 })
 
 router.post('/change-product-quantity', (req, res, next) => {
@@ -318,7 +318,7 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
   let products = await userhelpers.getCartProducts(userId)
   console.log("products", products)
   let total = await userhelpers.getTotalAmount(userId)
-  res.render('users/checkout', { total, userId ,products})
+  res.render('users/checkout', { total, userId,user: req.session.user ,products})
   }catch(error){
     console.log(error)
     next(error)
@@ -426,7 +426,7 @@ router.get('/profile', async (req, res,next) => {
   try{
   let userId = req.session.user._id
   let userDetails = await userhelpers.getUserDetails(userId)
-  res.render('users/profile-page', { userDetails })
+  res.render('users/profile-page', { userDetails,user:req.session.user })
 }catch(error){
   next(error)
 }
@@ -437,7 +437,7 @@ router.get('/edit-profile', async (req, res,next) => {
   try{
   let userId = req.session.user._id
   let userDetails = await userhelpers.getUserDetails(userId)
-  res.render('users/profile-edit-page', { userDetails })
+  res.render('users/profile-edit-page', { userDetails,user:req.session.user })
   }catch(error){
     next(error)
   }
@@ -463,7 +463,7 @@ router.post('/edit-profile', (req, res,next) => {
 })
 
 router.get('/change-password', (req, res) => {
-  res.render('users/change-password')
+  res.render('users/change-password',{user:req.session.user})
 })
 
 router.post('/change-password', (req, res,next) => {
@@ -527,7 +527,7 @@ router.get('/invoice/:id', async (req, res,next) => {
     total = total + (invoiceProductsData[i].productQuantity * invoiceProductsData[i].productPrice)
   }
   console.log("total:", total)
-  res.render('users/invoice', { invoiceDeliveryData, invoiceProductsData, total })
+  res.render('users/invoice', { invoiceDeliveryData, invoiceProductsData, total ,user:req.session.user})
 }catch(error){
   next(error)
 }
