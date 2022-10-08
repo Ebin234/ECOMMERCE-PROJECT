@@ -11,12 +11,14 @@ function addToCart(prodId, userId) {
         url: '/add-to-cart/' + prodId,
         method: 'get',
         success: (response) => {
-            //alert(response)
+            // alert(response)
             if (response.cartAdded) {
                 let count = $('#cart_count').html()
                 console.log("count", count)
                 count = parseInt(count) + 1
                 $("#cart_count").html(count)
+            }else{
+                location.href='/login'
             }
         }
     })

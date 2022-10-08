@@ -145,7 +145,8 @@ router.get('/forgot-password',(req,res)=>{
   req.session.userData = false
 })
 
-router.post('/forgot-password',async(req,res)=>{
+router.post('/forgot-password',async(req,res,next)=>{
+  try{
   console.log(req.body);
   let userData = await userhelpers.getUserData(req.body.Email)
   req.session.userForgotData = userData
@@ -162,6 +163,9 @@ router.post('/forgot-password',async(req,res)=>{
         req.session.userData = true
         res.redirect('/forgot-password')
     }
+  }catch(error){
+    next(error)
+  }
 })
 
 router.post('/forgot-change-password',(req,res)=>{
@@ -186,19 +190,19 @@ router.get('/cart', verifyLogin, async (req, res) => {
 })
 
 router.get('/add-to-cart/:id', (req, res,next) => {
-  try{
   console.log("api called")
   
   let userId = req.session.user._id
   const prodId = req.params.id
+  if(!userId){
+    res.json({cartAdded:false})
+  }else{
   //console.log(userId)
   //console.log(prodId)
   userhelpers.addToCart(prodId, userId).then(() => {
     // res.redirect('/')
     res.json({ cartAdded: true })
   })
-}catch(error){
-  next(error)
 }
 })
 
@@ -352,7 +356,7 @@ router.get('/order-success', (req, res) => {
   res.render('users/order-success', { user: req.session.user })
 })
 
-router.get('/view-orders', async (req, res,next) => {
+router.get('/view-orders',verifyLogin, async (req, res,next) => {
   try{
   let orders = await userhelpers.getUserOrders(req.session.user._id)
   console.log(orders)
@@ -378,7 +382,8 @@ router.get('/view-order-products/:id', async (req, res,next) => {
 //   res.render('users/order-details',{user:req.session.user,orders})
 // })
 
-router.post('/apply-coupon', async (req, res) => {
+router.post('/apply-coupon', async (req, res,next) => {
+  try{
   console.log(req.body)
   //let newTotal=100
   let couponCode = req.body.couponCode
@@ -386,12 +391,16 @@ router.post('/apply-coupon', async (req, res) => {
   let totalAmount = await userhelpers.getTotalAmount(userId)
   //console.log(totalValue)
   console.log("coupon:", couponCode)
+  
   userhelpers.getDiscount(couponCode, totalAmount).then((newTotal) => {
     console.log("newtotal:", newTotal)
     //   //res.render('/cart',{newTotal})
     //   //res.redirect('/cart')
     res.json(newTotal)
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/profile', async (req, res,next) => {

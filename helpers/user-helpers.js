@@ -486,6 +486,7 @@ module.exports = {
     },
     getDiscount : (code,total)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log(code,total)
             let discountRate = await db.get().collection(collection.COUPON_COLLECTION)
             .aggregate([
@@ -500,8 +501,12 @@ module.exports = {
             let newTotal = { total : total - ((total*discount)/100),
             name : discountRate[0].name
         }
+             
              console.log("out:",newTotal)
              resolve(newTotal)
+    }catch(error){
+        resolve({error:true})
+    }
         })
     },
     getAllUsers : ()=>{
