@@ -314,10 +314,13 @@ router.post('/change-product-quantity', (req, res, next) => {
 
 router.get('/checkout', verifyLogin, async (req, res,next) => {
   try{
-  user = req.session.user
-  let total = await userhelpers.getTotalAmount(user._id)
-  res.render('users/checkout', { total, user })
+  let userId = req.session.user._id
+  let products = await userhelpers.getCartProducts(userId)
+  console.log("products", products)
+  let total = await userhelpers.getTotalAmount(userId)
+  res.render('users/checkout', { total, userId ,products})
   }catch(error){
+    console.log(error)
     next(error)
   }
 })
