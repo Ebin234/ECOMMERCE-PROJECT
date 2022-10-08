@@ -69,11 +69,16 @@ module.exports = {
     },
     getProductDetails : (prodId)=>{
         return new Promise((resolve,reject)=>{
+            try{
             db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(prodId)})
             .then((response)=>{
                 // console.log(response)
                 resolve(response)
+            
             })
+        }catch(error){
+            reject(error)
+        }
             
 
         })

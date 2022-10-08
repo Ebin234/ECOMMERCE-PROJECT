@@ -186,6 +186,7 @@ module.exports = {
     },
     getProductSubtotal : (prodId,userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             // console.log("prodId:",prodId)
            let totalPrice = await db.get().collection(collection.CART_COLLECTION)
             .aggregate([
@@ -242,10 +243,14 @@ module.exports = {
                 // totalPrice[0].totalPrice = 0;
                 resolve(0)
             }
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getCartCount : (userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let count = 0;
            let cart = await db.get().collection(collection.CART_COLLECTION).findOne({user : objectId(userId)})
            console.log(cart)
@@ -254,6 +259,9 @@ module.exports = {
            console.log(count)
            }
            resolve(count)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     changeProductQuantity:(details)=>{
@@ -286,6 +294,8 @@ module.exports = {
     },
     getTotalAmount : (userId)=>{
         return new Promise(async (resolve, reject) => {
+
+            try{
             
             let total = await db.get().collection(collection.CART_COLLECTION).aggregate([
                 {
@@ -334,17 +344,25 @@ module.exports = {
             console.log("total:",total)
             // console.log(total.length)
            resolve(total[0].total)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getCartProductsList : (userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
           let cart = await db.get().collection(collection.CART_COLLECTION)
             .findOne({user:objectId(userId)})
             resolve(cart.products)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     placeOrder : (order,products,total)=>{
         return new Promise((resolve,reject)=>{
+            try{
             console.log(order,products,total)
             let status = order['payment-method'] ==='COD'?'placed':'pending'
             let d = new Date()
@@ -382,19 +400,27 @@ module.exports = {
             //console.log(response.insertedId)
             resolve(response.insertedId)
            })
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getUserOrders : (userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log(userId)
             let orders =await db.get().collection(collection.ORDER_COLLECTION)
             .find({userId:objectId(userId)}).sort({date:-1,time:-1}).toArray()
             console.log(orders)
             resolve(orders)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     getOrderProductsDetails : (orderId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log(orderId)
             let orderItems =await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
@@ -433,10 +459,14 @@ module.exports = {
             ]).toArray()
             // console.log(orderItems)
             resolve(orderItems)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     generateRazorpay: (orderId,total)=>{
         return new Promise((resolve,reject)=>{
+            
             console.log(orderId)
             var options = {
                 amount: total*100,
@@ -518,6 +548,7 @@ module.exports = {
     },
     updateUserDetails : (userId,details)=>{
         return new Promise((resolve,reject)=>{
+            try{
             console.log(details)
             db.get().collection(collection.USER_COLLECTION)
             .updateOne({_id:objectId(userId)},
@@ -536,18 +567,26 @@ module.exports = {
                 // console.log(response)
                 resolve()
             })
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getUserDetails : (userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let userDetails = await db.get().collection(collection.USER_COLLECTION)
             .findOne({_id:objectId(userId)})
             console.log(userDetails)
             resolve(userDetails)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     changePassword : (userId,details) =>{
         return new Promise(async(resolve,reject)=>{
+            try{
             // details.old_password = await bcrypt.hash(details.old_password, 10)
             let user = await db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)})
             console.log(details)
@@ -569,10 +608,14 @@ module.exports = {
                     resolve({response:false})
                 }
             })
+        }catch(error){
+            reject(error)
+        }
         })
     },
     addToWishlist : (userId,prodId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let prodObj = {
                 item : objectId(prodId)
             }
@@ -605,10 +648,14 @@ module.exports = {
                     resolve({status:true})
                 })
             }
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getWishCount : (userId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let count = 0;
             let wishlist = await db.get().collection(collection.WISHLIST_COLLECTION)
             .findOne({user:objectId(userId)})
@@ -617,6 +664,9 @@ module.exports = {
             }
             console.log(count);
             resolve(count)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getWishlistProducts : (userId)=>{
@@ -652,6 +702,7 @@ module.exports = {
     },
     removeWishlistProduct : (details)=>{
         return new Promise((resolve,reject)=>{
+            try{
             let prodId = details.prodId
             let wishlistId = details.wishlistId
             db.get().collection(collection.WISHLIST_COLLECTION)
@@ -662,10 +713,14 @@ module.exports = {
                 console.log(response)
                 resolve({removeProduct:true})
             })
+        }catch(error){
+            reject(error)
+        }
         })
     },
     searchProducts : (details)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log("search:",details.result)
             let obj = details.result;
             let products = await db.get().collection(collection.PRODUCT_COLLECTION)
@@ -681,10 +736,14 @@ module.exports = {
             }).toArray()
             console.log(products)
             resolve(products)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     filterProducts : (brand,price)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log("brand:",brand)
             console.log("brandlength:",brand.length)
             if(brand.length>1){
@@ -715,10 +774,14 @@ module.exports = {
                 console.log("filterProducts:",filterProducts)
                 resolve(filterProducts)
             }
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getInvoiceDeliveryData : (orderId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log("orderId:",orderId)
             let invoiceDeliveryData = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
@@ -804,10 +867,14 @@ module.exports = {
             ]).toArray()
             // console.log(invoiceDeliveryData[0])
             resolve(invoiceDeliveryData[0])
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getInvoiceProductsData : (orderId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let invoiceProductsData = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -838,10 +905,14 @@ module.exports = {
             ]).toArray()
             // console.log(invoiceProductsData)
             resolve(invoiceProductsData)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     checkCartProduct : (userId,prodId)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let  cart = null
            cart = await db.get().collection(collection.CART_COLLECTION)
             .aggregate([
@@ -861,10 +932,14 @@ module.exports = {
             ]).toArray()
             // console.log(cart.length)
             resolve(cart.length)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getUserData : (userEmail)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log(userEmail);
             let userData = await db.get().collection(collection.USER_COLLECTION)
             .findOne({
@@ -872,10 +947,14 @@ module.exports = {
             })
             // console.log(userData);
             resolve(userData)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     changeUserForgottenPassword : (userId,data)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             console.log(userId,data);
         data = await bcrypt.hash(data, 10);
         console.log(data);
@@ -892,6 +971,9 @@ module.exports = {
         ).then((response)=>{
             resolve(response)
         })
+    }catch(error){
+        reject(error)
+    }
         })
     }
 }

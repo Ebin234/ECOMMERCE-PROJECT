@@ -84,14 +84,7 @@ router.post('/signup', (req, res) => {
           res.redirect('/signup')
         }
       })
-      // req.session.userExist = false
-      // res.json(response)
     }
-    // userhelpers.dosignup(req.body).then((response) => {
-    //   console.log(response)
-    //   req.session.user = response
-    //   req.session.userLoggedIn = true
-    //   res.redirect('/')
   })
 })
 
@@ -168,13 +161,17 @@ router.post('/forgot-password',async(req,res,next)=>{
   }
 })
 
-router.post('/forgot-change-password',(req,res)=>{
+router.post('/forgot-change-password',(req,res,next)=>{
+  try{
   console.log(req.body);
   console.log(req.session.userForgotData);
   userhelpers.changeUserForgottenPassword(req.session.userForgotData._id,req.body.new_password)
   .then((response)=>{
     res.json({changed : true})
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/cart', verifyLogin, async (req, res) => {
@@ -189,7 +186,7 @@ router.get('/cart', verifyLogin, async (req, res) => {
   res.render('users/newcart', { products, user: req.session.user._id, totalValue })
 })
 
-router.get('/add-to-cart/:id', (req, res,next) => {
+router.get('/add-to-cart/:id', (req, res) => {
   console.log("api called")
   
   let userId = req.session.user._id
@@ -200,7 +197,6 @@ router.get('/add-to-cart/:id', (req, res,next) => {
   //console.log(userId)
   //console.log(prodId)
   userhelpers.addToCart(prodId, userId).then(() => {
-    // res.redirect('/')
     res.json({ cartAdded: true })
   })
 }
@@ -215,8 +211,7 @@ router.get('/add-to-wishlist/:id', (req, res,next) => {
   userhelpers.addToWishlist(userId, prodId).then((response) => {
     res.json(response)
   })
-
-  }catch(error){
+ }catch(error){
     console.log("error")
     res.json({prodNotAdded:true})
   }
@@ -228,38 +223,28 @@ router.get('/wishlist',verifyLogin, async (req, res) => {
   res.render('users/wishlist', { products, user: req.session.user._id })
 })
 
-router.post('/remove-wishlist-product', (req, res) => {
+router.post('/remove-wishlist-product', (req, res , next) => {
+  try{
   console.log(req.body)
   userhelpers.removeWishlistProduct(req.body).then((response) => {
     res.json(response)
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/allProducts', async (req, res) => {
   let page = req.query.page || 0
   console.log("page:",page)
-  let prodperpage = 4
-  // let user = req.session.user
-  // let cartCount = 0;
-  // let wishCount = 0;
-  // if (user) {
-  //   cartCount = await userhelpers.getCartCount(user._id)
-  //   wishCount = await userhelpers.getWishCount(user._id)
-  // }
-  productFilter = await productHelpers.getAllproducts(page,prodperpage)
-  
-
-  // res.render('users/viewProducts',{products,user,cartCount,wishCount})
+  let prodPerPage = 4
+  productFilter = await productHelpers.getAllproducts(page,prodPerPage)
   res.redirect('/shope')
 
 })
 
 router.get('/shope', async (req, res,next) => {
   try{
-  // let page = req.query.page || 0
-  // console.log("page:",page)
-  // let prodperpage = 4
-  // productFilter = await productHelpers.getAllproducts(page,prodperpage)
   console.log("searchproducts:", searchProducts)
   let user = req.session.user
   let cartCount = 0;
@@ -295,7 +280,6 @@ router.get('/product/:id', async (req, res,next) => {
   let prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   console.log(product)
-
   res.render('users/single-product', { product })
   }
   catch(error){
@@ -312,6 +296,7 @@ router.get('/contact', (req, res) => {
 })
 
 router.post('/change-product-quantity', (req, res, next) => {
+  try{
   console.log(req.body)
   userhelpers.changeProductQuantity(req.body).then(async (response) => {
     response.total = await userhelpers.getTotalAmount(req.body.user)
@@ -322,6 +307,9 @@ router.post('/change-product-quantity', (req, res, next) => {
     console.log(response)
     res.json(response)
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/checkout', verifyLogin, async (req, res,next) => {
@@ -375,9 +363,8 @@ router.post('/verify-payment', (req, res) => {
       console.log("payment successfull")
       res.json({ status: true })
     })
-  }).catch((err) => {
-    console.log(err)
-    res.json({ status: false, errmsg: '' })
+  }).catch((err)=>{
+    res.json({status : false,errmsg: ""})
   })
 })
 
@@ -544,19 +531,6 @@ router.get('/invoice/:id', async (req, res,next) => {
 })
 
 
-// router.post('/invoice',async(req,res)=>{
-//   let orderId = req.body.orderId
-//   console.log(orderId)
-//   let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
-//   let invoiceProductsData = await userhelpers.getInvoiceProductsData(orderId)
-
-
-
-
-
-//    res.json()
-// })
-
 router.post('/buysingleproduct',async(req,res,next)=>{
   try{
   console.log(req.body)
@@ -575,9 +549,5 @@ router.post('/buysingleproduct',async(req,res,next)=>{
 }
 })
 
-
-// router.get('/500',(req,res)=>{
-//   res.render('users/forgot-change-password')
-// })
 
 module.exports = router;
