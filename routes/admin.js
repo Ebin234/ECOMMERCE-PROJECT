@@ -21,22 +21,29 @@ const verifyAdminLogin = (req, res, next) => {
 /* GET users listing. */
 router.get('/',verifyAdminLogin, async function(req, res, next) {
   let admin = req.session.admin
-  console.log(admin)
+  const datas = await Promise.all([
+    await adminHelpers.getTotalOrdersCount(),
+    await adminHelpers.getTotalCustomersCount(),
+    await adminHelpers.getTotalProductsCount(),
+    await adminHelpers.getStatus()
+  ])
   let totalRevenue = 0
   let totalCodRevenue = 0
   let totalOnlineRevenue = 0
-   let totalOrders = await adminHelpers.getTotalOrdersCount()
-   console.log("orders",totalOrders);
-   let totalCustomers = await adminHelpers.getTotalCustomersCount()
-   let totalProducts = await adminHelpers.getTotalProductsCount()
-   let orderStatus = await adminHelpers.getStatus()
-   if(totalOrders > 0 ){
+   if(datas[0] > 0 ){
     totalRevenue = await adminHelpers.getTotalRevenue()
     totalCodRevenue = await adminHelpers.getTotalCodRevenue()
     totalOnlineRevenue = await adminHelpers.getTotalOnlineRevenue()
-    
   }
-    res.render('admin/admin-Dashboard',{orderStatus,totalOnlineRevenue,totalCodRevenue,totalOrders,totalCustomers,totalProducts,totalRevenue,admin, adminHeader:true})
+    res.render('admin/admin-Dashboard',{
+      orderStatus: datas[3],
+      totalOnlineRevenue,
+      totalCodRevenue,
+      totalOrders: datas[0],
+      totalCustomers: datas[1],
+      totalProducts: datas[2],
+      totalRevenue,
+      admin, adminHeader:true})
   // })
 });
 
