@@ -355,6 +355,7 @@ module.exports = {
             try {
                 let cart = await db.get().collection(collection.CART_COLLECTION)
                     .findOne({ user: objectId(userId) })
+                    // console.log("cart",cart);
                 resolve(cart.products)
             } catch (error) {
                 reject(error)
@@ -364,7 +365,7 @@ module.exports = {
     placeOrder: (order, products, total) => {
         return new Promise((resolve, reject) => {
             try {
-                console.log(order, products, total)
+                console.log(order,"codproducts", products, total)
                 let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
                 let d = new Date()
                 let date = moment(d).format('YYYY-MM-DD');

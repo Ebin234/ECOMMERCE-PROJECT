@@ -215,6 +215,99 @@ module.exports = {
             resolve(revenue[0].totalRevenue)
         })
     },
+    getTotalOnlineRevenue : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let revenue = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {
+                        status : "placed"
+                    }
+                },
+                {
+                    $match : {
+                        paymentMethod : "ONLINE"
+                    }
+                },
+                {
+                    $group : {
+                        _id : null,
+                        totalRevenue : {
+                            $sum : "$totalAmount"
+                        }
+                    }
+                }
+            ]).toArray()
+            console.log(revenue)
+            resolve(revenue[0].totalRevenue)
+        })
+    },
+    getStatus : ()=>{
+        let orderStatus = []
+        return new Promise(async(resolve,reject)=>{
+            let pendingProducts = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {status : 'placed'}
+                },
+                {
+                    $unwind : '$products'
+                },
+                {
+                    $match : {'products.deliveryStatus' : 'pending'}
+                }
+            ]).toArray()
+            console.log(pendingProducts.length);
+            orderStatus.push(pendingProducts.length)
+            console.log(orderStatus)
+
+            let shippedProducts = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {status : 'placed'}
+                },
+                {
+                    $unwind : '$products'
+                },
+                {
+                    $match : {'products.deliveryStatus' : 'Shipped'}
+                }
+            ]).toArray()
+            console.log(shippedProducts.length);
+            orderStatus.push(shippedProducts.length)
+            console.log(orderStatus)
+
+            let deliveredProducts = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {status : 'placed'}
+                },
+                {
+                    $unwind : '$products'
+                },
+                {
+                    $match : {'products.deliveryStatus' : 'Delivered'}
+                }
+            ]).toArray()
+            console.log(deliveredProducts);
+            orderStatus.push(deliveredProducts.length)
+            console.log(orderStatus)
+
+            let cancelledProducts = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {status : 'pending'}
+                },
+                {
+                    $unwind : '$products'
+                }
+            ]).toArray()
+            console.log(cancelledProducts.length);
+            orderStatus.push(cancelledProducts.length)
+            console.log(orderStatus)
+            resolve(orderStatus)
+        })
+    },
     blockUser : (userId)=>{
         return new Promise((resolve,reject)=>{
             console.log(userId)
