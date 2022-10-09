@@ -268,8 +268,13 @@ router.post('/product-filter', async (req, res,next) => {
   for (const i of details.brandName) {
     brand.push({ brand: i });
   }
-  let products = await userhelpers.filterProducts(brand, price)
-  console.log('brand:', brand)
+  const category = [];
+  for (const i of details.categoryName) {
+    category.push({ Catagory : i });
+  }
+  console.log("categories:",category);
+  let products = await userhelpers.filterProducts(category,brand, price)
+  // console.log('brand:', brand)
   productFilter = products
   res.json({ status: true })
 }catch(error){

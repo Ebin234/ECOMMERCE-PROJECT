@@ -28,10 +28,10 @@
                     shop by genre
                 </h2>
                 <div class="genre">
-                    <input type="checkbox" name="catagoryName" value="" hidden checked>
+                    <input type="checkbox" name="categoryName" value=" " hidden checked>
                     {{#each categories}}
                     <div class="check">
-                        <input type="checkbox" name="catagoryName" value="{{this.name}}">
+                        <input type="checkbox" name="categoryName" value="{{this.name}}">
                         <label for="">{{this.name}}</label>
                     </div>
                     {{/each}}
@@ -58,10 +58,9 @@
                     shop by brand
                 </h2>
                 <div class="genre">
-                    <div class="check" hidden>
-                        <input type="checkbox" name="brandName" value=""  checked>
-                        <label for=""></label>
-                    </div>
+                    
+                        <input type="checkbox" name="brandName" value=" "  checked hidden>
+                        
                     
                     {{#each brands}}
                     <div class="check">
@@ -196,11 +195,16 @@
 </section>
 
 <script>
-    $('input[name=catagoryName]').change(function () {
+    $('input[name=categoryName]').change(function () {
         $.ajax({
             url: '/product-filter',
             data: $('#productfilter').serialize(),
-            method: 'post'
+            method: 'post',
+            success: (response) => {
+                if (response.status) {
+                    $('#products').load(location.href + " #products")
+                }
+            }
         })
     })
 
@@ -245,13 +249,5 @@
                 location.href = '/shope'
             })
         })
-    }
-</script>
-
-<script>
-    function paginationClick(){
-    const currentLocation = location.href;
-    console.log("current",currentLocation);
-    
     }
 </script>
