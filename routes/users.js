@@ -293,19 +293,19 @@ router.get('/newArrivals',async(req,res)=>{
 /* CART PAGE */
 router.get('/cart', verifyLogin, async (req, res) => {
   let user = req.session.user;
-  let cartCount = 0;
-  let wishCount = 0;
-  if (user) {
-    cartCount = await userhelpers.getCartCount(user._id)
-    wishCount = await userhelpers.getWishCount(user._id)
-  }
+  let cartCount = await userhelpers.getCartCount(user._id)
+  let wishCount = await userhelpers.getWishCount(user._id)
   let products = await userhelpers.getCartProducts(user._id)
   let totalValue = 0
+  if(cartCount === 0){
+    res.render('users/empty-cart',{user,cartCount,wishCount})
+  }else{
   if (products.length > 0) {
     totalValue = await userhelpers.getTotalAmount(user._id)
   }
   console.log("products", products)
   res.render('users/newcart', { products,cartCount,wishCount, user, totalValue })
+}
 })
 
 /* CHANGE PRODUCT QUANTITY */
@@ -355,14 +355,14 @@ router.post('/apply-coupon', async (req, res,next) => {
 /* WISHLIST PAGE */
 router.get('/wishlist',verifyLogin, async (req, res) => {
   let user = req.session.user;
-  let cartCount = 0;
-  let wishCount = 0;
-  if (user) {
-    cartCount = await userhelpers.getCartCount(user._id)
-    wishCount = await userhelpers.getWishCount(user._id)
-  }
+  let cartCount = await userhelpers.getCartCount(user._id)
+  let wishCount = await userhelpers.getWishCount(user._id)
+  if(wishCount === 0){
+    res.render('users/empty-wishlist',{user,cartCount,wishCount})
+  }else{
   let products = await userhelpers.getWishlistProducts(user._id)
   res.render('users/wishlist', { products, user , cartCount , wishCount })
+  }
 })
 
 /* REMOVE WISHLIST PRODUCT */
@@ -383,7 +383,6 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
   let userId = req.session.user._id
   let  cartCount = await userhelpers.getCartCount(userId)
   let  wishCount = await userhelpers.getWishCount(userId)
-  
   let products = await userhelpers.getCartProducts(userId)
   console.log("products", products)
   if(cartCount === 0){
@@ -398,11 +397,17 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
   }
 })
 
-router.get('/checkout/:id', (req, res) => {
+router.get('/checkout/:id',async (req, res) => {
   let total = req.params.id
   let user = req.session.user
-  console.log("total:", total)
-  res.render('users/checkout', { total, user })
+  let cartCount = await userhelpers.getCartCount(user._id)
+  let wishCount = await userhelpers.getWishCount(user._id)
+  if(cartCount === 0){
+    res.redirect('/cart')
+  }else{
+  // console.log("total:", total)
+  res.render('users/checkout', { total, cartCount , wishCount , user })
+  }
 })
 
 router.post('/checkout', async (req, res,next) => {
@@ -446,16 +451,26 @@ router.post('/verify-payment', (req, res) => {
 })
 
 /* ORDER SUCCESS PAGE */
-router.get('/order-success', (req, res) => {
-  res.render('users/order-success', { user: req.session.user })
+router.get('/order-success',verifyLogin, async(req, res) => {
+  let user = req.session.user;
+  let cartCount = await userhelpers.getCartCount(user._id)
+  let wishCount = await userhelpers.getWishCount(user._id)
+  res.render('users/order-success', { user , cartCount , wishCount})
 })
 
 /* VIEW ORDERS PAGE */
 router.get('/view-orders',verifyLogin, async (req, res,next) => {
   try{
-  let orders = await userhelpers.getUserOrders(req.session.user._id)
-  console.log(orders)
-  res.render('users/orders', { user: req.session.user, orders })
+    let user = req.session.user;
+    let cartCount = await userhelpers.getCartCount(user._id)
+    let wishCount = await userhelpers.getWishCount(user._id)
+  let orders = await userhelpers.getUserOrders(user._id)
+  console.log(orders.length)
+  if(orders.length === 0){
+    res.render('users/empty-orders',{user,cartCount,wishCount})
+  }else{
+  res.render('users/orders', { user, wishCount , cartCount , orders })
+  }
   }catch(error){
     next(error)
   }
@@ -464,6 +479,9 @@ router.get('/view-orders',verifyLogin, async (req, res,next) => {
 /* INVOICE PAGE */
 router.get('/invoice/:id', async (req, res,next) => {
   try{
+    let user = req.session.user;
+    let cartCount = await userhelpers.getCartCount(user._id)
+    let wishCount = await userhelpers.getWishCount(user._id)
   let orderId = req.params.id
   console.log(orderId)
   let invoiceDeliveryData = await userhelpers.getInvoiceDeliveryData(orderId)
@@ -475,7 +493,7 @@ router.get('/invoice/:id', async (req, res,next) => {
     total = total + (invoiceProductsData[i].productQuantity * invoiceProductsData[i].productPrice)
   }
   console.log("total:", total)
-  res.render('users/invoice', { invoiceDeliveryData, invoiceProductsData, total ,user:req.session.user})
+  res.render('users/invoice', { cartCount , wishCount , invoiceDeliveryData, invoiceProductsData, total ,user})
 }catch(error){
   next(error)
 }
@@ -484,11 +502,14 @@ router.get('/invoice/:id', async (req, res,next) => {
 /* VIEW ORDERS PRODUCTS PAGE */
 router.get('/view-order-products/:id', async (req, res,next) => {
   try{
+    let user = req.session.user;
+    let cartCount = await userhelpers.getCartCount(user._id)
+    let wishCount = await userhelpers.getWishCount(user._id)
   let orderId = req.params.id
   console.log(orderId)
   let orderItems = await userhelpers.getOrderProductsDetails(orderId)
   console.log("orderItems :", orderItems)
-  res.render('users/view-order-details', { user: req.session.user, orderItems })
+  res.render('users/view-order-details', { user , cartCount , wishCount , orderItems })
   }catch(error){
     next(error)
   }
@@ -497,10 +518,17 @@ router.get('/view-order-products/:id', async (req, res,next) => {
 /*SINGLE PRODUCT DETAILS PAGE */
 router.get('/product/:id', async (req, res,next) => {
   try{
+    let user = req.session.user;
+  let cartCount = 0;
+  let wishCount = 0;
+  if (user) {
+    cartCount = await userhelpers.getCartCount(user._id)
+    wishCount = await userhelpers.getWishCount(user._id)
+  }
   let prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   console.log(product)
-  res.render('users/single-product', { product,user:req.session.user })
+  res.render('users/single-product', { product,user,cartCount,wishCount })
   }
   catch(error){
     next(error)
@@ -527,22 +555,26 @@ router.post('/buysingleproduct',async(req,res,next)=>{
 })
 
 /* PROFILE PAGE */
-router.get('/profile', async (req, res,next) => {
+router.get('/profile', verifyLogin, async (req, res,next) => {
   try{
-  let userId = req.session.user._id
-  let userDetails = await userhelpers.getUserDetails(userId)
-  res.render('users/profile-page', { userDetails,user:req.session.user })
+    let user = req.session.user;
+    let cartCount = await userhelpers.getCartCount(user._id)
+    let wishCount = await userhelpers.getWishCount(user._id)
+  let userDetails = await userhelpers.getUserDetails(user._id)
+  res.render('users/profile-page', { userDetails , user , cartCount , wishCount })
 }catch(error){
   next(error)
 }
 })
 
 /* EDIT PROFILE PAGE */
-router.get('/edit-profile', async (req, res,next) => {
+router.get('/edit-profile',verifyLogin , async (req, res,next) => {
   try{
-  let userId = req.session.user._id
-  let userDetails = await userhelpers.getUserDetails(userId)
-  res.render('users/profile-edit-page', { userDetails,user:req.session.user })
+    let user = req.session.user;
+    let cartCount = await userhelpers.getCartCount(user._id)
+    let wishCount = await userhelpers.getWishCount(user._id)
+  let userDetails = await userhelpers.getUserDetails(user._id)
+  res.render('users/profile-edit-page', { userDetails , user , cartCount , wishCount })
   }catch(error){
     next(error)
   }
@@ -568,8 +600,11 @@ router.post('/edit-profile', (req, res,next) => {
 })
 
 /* CHNAGE PASSWORD */
-router.get('/change-password', (req, res) => {
-  res.render('users/change-password',{user:req.session.user})
+router.get('/change-password',verifyLogin, async(req, res) => {
+  let user = req.session.user;
+  let cartCount = await userhelpers.getCartCount(user._id)
+  let wishCount = await userhelpers.getWishCount(user._id)
+  res.render('users/change-password',{ user , cartCount , wishCount})
 })
 
 router.post('/change-password', (req, res,next) => {
@@ -586,13 +621,27 @@ router.post('/change-password', (req, res,next) => {
 })
 
 /* ABOUT PAGE */
-router.get('/about', (req, res) => {
-  res.render('users/about',{user:req.session.user})
+router.get('/about', async(req, res) => {
+  let user = req.session.user;
+  let cartCount = 0;
+  let wishCount = 0;
+  if (user) {
+    cartCount = await userhelpers.getCartCount(user._id)
+    wishCount = await userhelpers.getWishCount(user._id)
+  }
+  res.render('users/about',{user,cartCount,wishCount})
 })
 
 /*CONTACT PAGE */
-router.get('/contact', (req, res) => {
-  res.render('users/contact',{user:req.session.user})
+router.get('/contact',async (req, res) => {
+  let user = req.session.user;
+  let cartCount = 0;
+  let wishCount = 0;
+  if (user) {
+    cartCount = await userhelpers.getCartCount(user._id)
+    wishCount = await userhelpers.getWishCount(user._id)
+  }
+  res.render('users/contact',{user,cartCount,wishCount})
 })
 
 /* LOGOUT */

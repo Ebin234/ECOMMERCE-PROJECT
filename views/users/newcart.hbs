@@ -25,9 +25,9 @@
                 <td>{{this.product.Name}}</td>
                 <td>${{this.product.Price}}</td>
                 <td>
-                        <button class="normal b1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1,'1{{this.product._id}}')">-</button>
+                        <button class="normal b1" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1,'1{{this.product._id}}')">-</button>
                         <span id="{{this.product._id}}">{{this.quantity}}</span>
-                        <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1,'1{{this.product._id}}')">+</button>
+                        <button class="normal b2" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1,'1{{this.product._id}}')">+</button>
                 </td>
                 <td><span id="1{{this.product._id}}">{{totalPrice}}</span></td>
             </tr>
