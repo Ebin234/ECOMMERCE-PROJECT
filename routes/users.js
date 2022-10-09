@@ -298,11 +298,14 @@ router.get('/cart', verifyLogin, async (req, res) => {
   let products = await userhelpers.getCartProducts(user._id)
   let totalValue = 0
   if(cartCount === 0){
+    req.session.total = 0
     res.render('users/empty-cart',{user,cartCount,wishCount})
   }else{
   if (products.length > 0) {
     totalValue = await userhelpers.getTotalAmount(user._id)
   }
+  req.session.total = totalValue
+  console.log(req.session.total)
   console.log("products", products)
   res.render('users/newcart', { products,cartCount,wishCount, user, totalValue })
 }
@@ -317,9 +320,10 @@ router.post('/change-product-quantity', (req, res, next) => {
     cartCount = await userhelpers.getCartCount(req.body.user)
     if(cartCount>0){
     response.total = await userhelpers.getTotalAmount(req.body.user)
+    req.session.total = response.total
     response.subTotal = await userhelpers.getProductSubtotal(req.body.product,req.body.user)
     }
-    //console.log(cartProducts)
+    console.log("sesstotal:",req.session.total)
     //response.subtotal = cartProducts.totalPrice
     //console.log("subtotal:",subTotal)
     console.log(response)
@@ -343,6 +347,8 @@ router.post('/apply-coupon', async (req, res,next) => {
   
   userhelpers.getDiscount(couponCode, totalAmount).then((newTotal) => {
     console.log("newtotal:", newTotal)
+    req.session.total = newTotal.total
+    console.log(("sesstotal",req.session.total));
     //   //res.render('/cart',{newTotal})
     //   //res.redirect('/cart')
     res.json(newTotal)
@@ -388,25 +394,13 @@ router.get('/checkout', verifyLogin, async (req, res,next) => {
   if(cartCount === 0){
     res.redirect('/cart')
   }else{
-  let total = await userhelpers.getTotalAmount(userId)
+  let total = req.session.total
+  // await userhelpers.getTotalAmount(userId)
   res.render('users/checkout', { total, cartCount , wishCount , userId,user:req.session.user,products})
   }
   }catch(error){
     console.log(error)
     next(error)
-  }
-})
-
-router.get('/checkout/:id',async (req, res) => {
-  let total = req.params.id
-  let user = req.session.user
-  let cartCount = await userhelpers.getCartCount(user._id)
-  let wishCount = await userhelpers.getWishCount(user._id)
-  if(cartCount === 0){
-    res.redirect('/cart')
-  }else{
-  // console.log("total:", total)
-  res.render('users/checkout', { total, cartCount , wishCount , user })
   }
 })
 
@@ -416,8 +410,8 @@ router.post('/checkout', async (req, res,next) => {
   let userEmail = req.session.user.Email
   console.log("user", userEmail)
   let products = await userhelpers.getCartProductsList(req.body.userId)
-  let totalPrice = req.body.total
-  // console.log(products)
+  let totalPrice = parseInt(req.body.total)
+  console.log(totalPrice)
   userhelpers.placeOrder(req.body, products, totalPrice).then(async (orderId) => {
     // console.log("orderId:",orderId)
     if (req.body['payment-method'] == 'COD') {
