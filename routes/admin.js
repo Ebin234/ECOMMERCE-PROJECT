@@ -23,13 +23,16 @@ router.get('/',verifyAdminLogin, async function(req, res, next) {
   let admin = req.session.admin
   console.log(admin)
   let totalRevenue = 0
+  let totalCodRevenue = 0
    let totalOrders = await adminHelpers.getTotalOrdersCount()
+   console.log("orders",totalOrders);
    let totalCustomers = await adminHelpers.getTotalCustomersCount()
    let totalProducts = await adminHelpers.getTotalProductsCount()
-   if(totalOrders.length > 0 ){
+   if(totalOrders > 0 ){
     totalRevenue = await adminHelpers.getTotalRevenue()
+    totalCodRevenue = await adminHelpers.getTotalCodRevenue()
   }
-    res.render('admin/admin-Dashboard',{totalOrders,totalCustomers,totalProducts,totalRevenue,admin, adminHeader:true})
+    res.render('admin/admin-Dashboard',{totalCodRevenue,totalOrders,totalCustomers,totalProducts,totalRevenue,admin, adminHeader:true})
   // })
 });
 

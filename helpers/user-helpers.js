@@ -746,10 +746,10 @@ module.exports = {
     filterProducts: (Catagory, brand, price) => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log("brand:", brand)
-                console.log("category:", Catagory)
-                console.log("catalength:", Catagory.length)
-                console.log("brandlength:", brand.length)
+                // console.log("brand:", brand)
+                // console.log("category:", Catagory)
+                // console.log("catalength:", Catagory.length)
+                // console.log("brandlength:", brand.length)
                     if (Catagory.length > 1 && brand.length === 1) {
                         let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
                             .aggregate([

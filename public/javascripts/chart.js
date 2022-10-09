@@ -6,7 +6,7 @@ var myChart = new Chart(ctx, {
         labels: ['Red', 'Blue', 'Yellow'],
         datasets: [{
             label: 'Trafic Source',
-            data: [1200, 1977, 3000],
+            data: [{{ totalCodRevenue}}],
             backgroundColor: [
                 'rgba(255, 99, 132, 1)',
                 'rgba(54, 162, 235, 1)',

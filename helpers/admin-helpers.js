@@ -188,6 +188,33 @@ module.exports = {
             resolve(revenue[0].totalRevenue)
         })
     },
+    getTotalCodRevenue : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            let revenue = await db.get().collection(collection.ORDER_COLLECTION)
+            .aggregate([
+                {
+                    $match : {
+                        status : "placed"
+                    }
+                },
+                {
+                    $match : {
+                        paymentMethod : "COD"
+                    }
+                },
+                {
+                    $group : {
+                        _id : null,
+                        totalRevenue : {
+                            $sum : "$totalAmount"
+                        }
+                    }
+                }
+            ]).toArray()
+            console.log(revenue)
+            resolve(revenue[0].totalRevenue)
+        })
+    },
     blockUser : (userId)=>{
         return new Promise((resolve,reject)=>{
             console.log(userId)
