@@ -270,7 +270,7 @@ router.post('/product-filter', async (req, res, next) => {
     }
     const category = [];
     for (const i of details.categoryName) {
-      category.push({ Catagory: i });
+      category.push({ Category: i });
     }
     console.log("categories:", category);
     let products = await userhelpers.filterProducts(category, brand, price)
@@ -415,11 +415,16 @@ router.post('/checkout', async (req, res, next) => {
     let userEmail = req.session.user.Email
     console.log("user", userEmail)
     let products = await userhelpers.getCartProductsList(req.body.userId)
+    console.log("hi:",products)
     let totalPrice = parseInt(req.body.total)
-    console.log(totalPrice)
+    
     userhelpers.placeOrder(req.body, products, totalPrice).then(async (orderId) => {
       // console.log("orderId:",orderId)
       if (req.body['payment-method'] == 'COD') {
+        for(var i=0;i<products.length;i++){
+          
+         await userhelpers.adminProductQuantityChange(products[i])
+        }
         await mailConnection.sendMail(userEmail)
         res.json({ codSuccess: true })
       } else {

@@ -54,9 +54,9 @@ module.exports = {
     getCategories : ()=>{
         return new Promise(async(resolve,reject)=>{
             try{
-            let catagories = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
-            console.log("cat:",catagories)
-            resolve(catagories)
+            let categories = await db.get().collection(collection.CATEGORY_COLLECTION).find().toArray()
+            console.log("cat:",categories)
+            resolve(categories)
             }catch(error){
                 reject(error)
             }
@@ -234,7 +234,11 @@ module.exports = {
                 }
             ]).toArray()
             console.log(revenue)
+            if(revenue.length>0){
             resolve(revenue[0].totalRevenue)
+            }else{
+                resolve(0)
+            }
         }catch(error){
             reject(error)
         }
@@ -264,8 +268,12 @@ module.exports = {
                     }
                 }
             ]).toArray()
-            console.log(revenue)
+            console.log("rev",revenue.length)
+            if(revenue.length>0){
             resolve(revenue[0].totalRevenue)
+            }else{
+                resolve(0)
+            }
         }catch(error){
             reject(error)
         }

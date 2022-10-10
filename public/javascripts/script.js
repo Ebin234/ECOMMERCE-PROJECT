@@ -1,10 +1,3 @@
-// const { default: Swal } = require("sweetalert2")
-
-// const { response } = require("../../app")
-
-// const { response } = require("../../app")
-
-
 
 function addToCart(prodId, userId) {
     $.ajax({
@@ -92,16 +85,7 @@ function removeWishlistProduct(prodId, wishlistId) {
 }
 
 function addCategory() {
-
-    // const ipAPI = 'http://localhost:3000/admin/add-category';
-
-
     const inputValue = null
-
-    // fetch(ipAPI)
-    //     .then(response => response.json())
-    //     .then(data => data.result)
-
     Swal.fire({
         title: 'Enter Category Name',
         input: 'text',
@@ -140,14 +124,9 @@ function addCategory() {
 function editCategory(catId) {
     console.log(catId)
     const ipAPI = 'http://localhost:3000/admin/edit-category/' + catId
-
-
     const inputValue = fetch(ipAPI)
         .then(response => response.json())
         .then(data => data)
-
-
-
     Swal.fire({
         title: 'Edit Category Name',
         input: 'text',
@@ -184,16 +163,7 @@ function editCategory(catId) {
 }
 
 function addBrand() {
-
-    // const ipAPI = 'http://localhost:3000/admin/add-category';
-
-
     const inputValue = null
-
-    // fetch(ipAPI)
-    //     .then(response => response.json())
-    //     .then(data => data.result)
-
     Swal.fire({
         title: 'Enter Brand Name',
         input: 'text',
@@ -233,14 +203,9 @@ function addBrand() {
 function editBrand(brandId) {
     console.log(brandId)
     const ipAPI = 'http://localhost:3000/admin/edit-brand/' + brandId
-
-
     const inputValue = fetch(ipAPI)
         .then(response => response.json())
         .then(data => data)
-
-
-
     Swal.fire({
         title: 'Edit Brand Name',
         input: 'text',

@@ -52,20 +52,6 @@
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 15px;
-
-            {
-                {
-                 !-- flex-wrap: nowrap;
-                --
-            }
-        }
-
-            {
-                {
-                 !-- justify-content: end;
-                --
-            }
-        }
     }
 
     .add button {
@@ -82,16 +68,10 @@
 
     #cart table tbody tr:hover {
         background: #fff;
-
-            {
-                {
-                 !-- color: #fff;
-                03a9f4--
-            }
-        }
     }
 </style>
 
+<div class="container">
 <div class="main">
     <div class="topbar">
         <div class="toggle" onclick="toggleMenu()"></div>
@@ -149,7 +129,7 @@
             </tbody>
         </table>
     </section>
-
+</div>
 </div>
 
 <script>
@@ -157,4 +137,16 @@
         $('#productTable').DataTable();
     });
 
+</script>
+
+
+<script>
+    function toggleMenu() {
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+        main.classList.toggle('active')
+    }
 </script>

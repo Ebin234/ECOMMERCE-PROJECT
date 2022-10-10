@@ -35,15 +35,16 @@ router.get('/',verifyAdminLogin, async function(req, res, next) {
     totalOnlineRevenue = await adminHelpers.getTotalOnlineRevenue()
   }
     res.render('admin/admin-Dashboard',{
-      orderStatus: datas[3],
       totalOnlineRevenue,
       totalCodRevenue,
       totalOrders: datas[0],
       totalCustomers: datas[1],
       totalProducts: datas[2],
+      orderStatus: datas[3],
       totalRevenue,
       admin, adminHeader:true})
     }catch(error){
+      console.log(error)
       next(error)
     }
 });
@@ -79,9 +80,9 @@ router.post('/login',(req,res,next)=>{
 /* ADD PRODUCT PAGE */
 router.get('/add-product',verifyAdminLogin,async(req,res)=>{
   try{
-  let catagories = await adminHelpers.getCategories()
+  let categories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
-  res.render('admin/add-product',{brands,catagories, adminHeader:true})
+  res.render('admin/add-product',{brands,categories, adminHeader:true})
   }catch(error){
     next(error)
   }
@@ -149,10 +150,10 @@ router.get('/edit-product/:id',async(req,res,next)=>{
   try{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
-  let catagories = await adminHelpers.getCategories()
+  let categories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
   //console.log(product)
-  res.render('admin/edit-product',{brands,catagories,product,adminHeader:true})
+  res.render('admin/edit-product',{brands,categories,product,adminHeader:true})
   }catch(error){
     next(error)
   }

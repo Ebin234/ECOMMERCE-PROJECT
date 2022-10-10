@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/headerstyle.css">
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
+<link rel="stylesheet" href="/stylesheets/admin-page-style.css">
 
 
 <style>
@@ -93,8 +94,9 @@
         object-fit: cover;
     }
 </style>
-
-<div class="mainhead">
+    
+<div class="container">
+    <div class="main">
     <div class="topbar">
         <div class="toggle" onclick="toggleMenu()"></div>
         <div class="search">
@@ -109,8 +111,7 @@
     </div>
 
     <section id="page-header" class="about-header">
-        <h2>#Edit product</h2>
-        {{!-- <p>LEAVE A MESSAGE,We love to hear from you!</p> --}}
+        <h2>Edit product</h2>
     </section>
 
     <section class="section-p2">
@@ -120,35 +121,30 @@
                 <div class="s1">
                     <div class="s2">
                         <label for="">product name</label>
-                        <input type="text" name="Name" value="{{product.Name}}">
-                        <label for="">Catagory</label>
-                        <select id="" name="Catagory">
-                            <option value="{{product.Catagory}}">{{product.Catagory}}</option>
-                            {{#each catagories}}
+                        <input type="text" name="Name" value="{{product.Name}}" required>
+                        <label for="">Category</label>
+                        <select id="" name="Category" required>
+                            <option value="{{product.Category}}">{{product.Category}}</option>
+                            {{#each categories}}
                             <option value="{{this.name}}">{{this.name}}</option>
                             {{/each}}
-                            {{!-- <option value="laptop">laptop</option> --}}
                         </select>
                         <label for="">brand</label>
-                        <select id="" name="brand">
+                        <select id="" name="brand" required>
                             <option value="{{product.brand}}">{{product.brand}}</option>
                             {{#each brands}}
                             <option value="{{this.name}}">{{this.name}}</option>
                             {{/each}}
-                            {{!-- <option value="laptop">laptop</option> --}}
                         </select>
-                        {{!-- <input type="text" name="brand" value="{{product.brand}}"> --}}
                         <label for="">stoke</label>
-                        <input type="number" name="Stoke" value="{{product.Stoke}}">
+                        <input type="number" name="Stoke" value="{{product.Stoke}}" required>
                         <label for="">Price</label>
-                        <input type="number" name="Price" value="{{product.Price}}">
+                        <input type="number" name="Price" value="{{product.Price}}" required>
                         <label for="">Featured</label>
-                        <select id="" name="Featured">
+                        <select id="" name="Featured" required>
                             <option value="{{product.Featured}}">{{product.Featured}}</option>
-                            {{!-- <option value="{{this.name}}">{{this.name}}</option> --}}
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
-                    
                         </select>
                     </div>
                     <div class="s3">
@@ -186,6 +182,7 @@
             </form>
         </div>
     </section>
+    </div>
 </div>
 
 <script>
@@ -200,5 +197,16 @@
     }
     function viewImage3(event) {
         document.getElementById('imgView3').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<script>
+    function toggleMenu() {
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+        main.classList.toggle('active')
     }
 </script>

@@ -9,7 +9,7 @@ module.exports = {
         console.log(product)
         let proObj = {
             Name : product.Name,
-                   Catagory : product.Catagory,
+                   Category : product.Category,
                    brand : product.brand,
                    Stoke : parseInt(product.Stoke),
                    Price : parseInt(product.Price),
@@ -95,7 +95,7 @@ module.exports = {
             .updateOne({_id:objectId(prodId)},
             {$set:{
                    Name : prodDetails.Name,
-                   Catagory : prodDetails.Catagory,
+                   Category : prodDetails.Category,
                    brand : prodDetails.brand,
                    Stoke : parseInt(prodDetails.Stoke) ,
                    Price : parseInt(prodDetails.Price),

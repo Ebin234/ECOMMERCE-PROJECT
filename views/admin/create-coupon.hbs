@@ -39,20 +39,6 @@
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 15px;
-
-            {
-                {
-                 !-- flex-wrap: nowrap;
-                --
-            }
-        }
-
-            {
-                {
-                 !-- justify-content: end;
-                --
-            }
-        }
     }
 
     .add a {
@@ -69,13 +55,6 @@
 
     #cart table tbody tr:hover {
         background: #fff;
-
-            {
-                {
-                 !-- color: #fff;
-                03a9f4--
-            }
-        }
     }
 
     .mainhead {
@@ -128,6 +107,7 @@
 
 </style>
 
+<div class="container">
 <div class="main">
     <div class="topbar">
         <div class="toggle" onclick="toggleMenu()"></div>
@@ -143,8 +123,7 @@
     </div>
 
     <section id="page-header" class="about-header">
-        <h2>#Create Coupon</h2>
-        {{!-- <p>LEAVE A MESSAGE,We love to hear from you!</p> --}}
+        <h2>Create Coupon</h2>
     </section>
 
     <section>
@@ -152,22 +131,33 @@
             <form action="/admin/create-coupon" method="post" enctype="multipart/form-data">
                 <div class="createcoupon">
                     <div>
-                        <label for="">coupon Name :</label>
-                        <input type="text" name="Name" id="">
+                        <label for="">Coupon Name :</label>
+                        <input type="text" name="Name" id="" required>
                     </div>
                     <div>
                         <label for="">Coupon Code :</label>
-                        <input type="text" name="Code">
+                        <input type="text" name="Code" required>
                     </div>
                     <div>
                         <label for="">Discount rate :</label>
-                        <input type="number" name="Discount">
+                        <input type="number" name="Discount" required>
                     </div>
                     <button type="submit" class="normal">submit</button>
                 </div>
             </form>
         </div>
     </section>
-
-
 </div>
+</div>
+
+
+<script>
+    function toggleMenu() {
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+        main.classList.toggle('active')
+    }
+</script>

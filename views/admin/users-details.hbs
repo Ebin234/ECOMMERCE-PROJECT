@@ -40,20 +40,6 @@
         justify-content: flex-start;
         align-items: center;
         margin-bottom: 15px;
-
-            {
-                {
-                 !-- flex-wrap: nowrap;
-                --
-            }
-        }
-
-            {
-                {
-                 !-- justify-content: end;
-                --
-            }
-        }
     }
 
     .add button {
@@ -70,16 +56,10 @@
 
     #cart table tbody tr:hover {
         background: #fff;
-
-            {
-                {
-                 !-- color: #fff;
-                03a9f4--
-            }
-        }
     }
 </style>
 
+<div class="container">
 <div class="main">
     <div class="topbar">
         <div class="toggle" onclick="toggleMenu()"></div>
@@ -99,12 +79,10 @@
         <div class="head">
             <h2>Users Details</h2>
         </div>
-        {{!-- <div class="add"><a href="/admin/add-product" class="normal">Add Product</a></div> --}}
         <table id="productTable" width="100%">
             <thead>
                 <tr>
                     <td>No</td>
-                    {{!-- <td>Image</td> --}}
                     <td>Name</td>
                     <td>Email</td>
                     <td>Mobile</td>
@@ -116,7 +94,6 @@
                 {{#each users}}
                 <tr>
                     <td>1.</td>
-                    {{!-- <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td> --}}
                     <td>{{this.Name}}</td>
                     <td>{{this.Email}}</td>
                     <td>{{this.Mobile}}</td>
@@ -132,29 +109,29 @@
                     </td>
                 </tr>
                 {{/each}}
-                {{!-- <tr>
-                    <td>1.</td>
-                    <td><img src="/images/products/n1.jpg" alt=""></td>
-                    <td>Cartoon Astronaut T-shirts</td>
-                    <td>smartphone</td>
-                    <td>2000</td>
-                    <td>$118.19</td>
-                    <td>
-                        <button class="b1 normal">Edit</button>
-                        <button class=" b2 normal">Delete</button>
-                    </td>
-                </tr> --}}
 
             </tbody>
         </table>
     </section>
-
+</div>
 </div>
 
 <script>
     $(function () {
         $('#productTable').DataTable();
     });
+</script>
+
+
+<script>
+    function toggleMenu() {
+        let toggle = document.querySelector('.toggle');
+        let navigation = document.querySelector('.navigation');
+        let main = document.querySelector('.main');
+        toggle.classList.toggle('active')
+        navigation.classList.toggle('active')
+        main.classList.toggle('active')
+    }
 </script>
 
 <script>

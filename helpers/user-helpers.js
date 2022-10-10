@@ -184,6 +184,23 @@ module.exports = {
             resolve(cartProducts)
         })
     },
+    adminProductQuantityChange : (data)=>{
+        return new Promise((resolve,reject)=>{
+            console.log("data:",data)
+            db.get().collection(collection.PRODUCT_COLLECTION)
+            .updateOne(
+                {_id : objectId(data.item)},
+                {
+                    $inc : {
+                        Stoke : -data.quantity
+                    }
+                }
+            ).then((response)=>{
+                // console.log(response)
+                resolve()
+            })
+        })
+    },
     getProductSubtotal: (prodId, userId) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -355,7 +372,7 @@ module.exports = {
             try {
                 let cart = await db.get().collection(collection.CART_COLLECTION)
                     .findOne({ user: objectId(userId) })
-                    // console.log("cart",cart);
+                    console.log("cart",cart);
                 resolve(cart.products)
             } catch (error) {
                 reject(error)
@@ -447,7 +464,7 @@ module.exports = {
                             $project: {
                                 deliveryDetails: 1,
                                 productName: "$productDetails.Name",
-                                catagory: "$productDetails.Catagory",
+                                category: "$productDetails.Category",
                                 date: 1,
                                 time: 1,
                                 status: 1,
@@ -744,19 +761,19 @@ module.exports = {
             }
         })
     },
-    filterProducts: (Catagory, brand, price) => {
+    filterProducts: (Category, brand, price) => {
         return new Promise(async (resolve, reject) => {
             try {
                 // console.log("brand:", brand)
                 // console.log("category:", Catagory)
                 // console.log("catalength:", Catagory.length)
                 // console.log("brandlength:", brand.length)
-                    if (Catagory.length > 1 && brand.length === 1) {
+                    if (Category.length > 1 && brand.length === 1) {
                         let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
                             .aggregate([
                                 {
                                     $match: {
-                                        $or: Catagory
+                                        $or: Category
                                     }
                                 },
                                 {
@@ -770,7 +787,7 @@ module.exports = {
                         // console.log("filterProducts:",filterProducts , "a",filterProducts.length)
                         resolve(filterProducts)
                     }
-                    else if (brand.length > 1 && Catagory.length === 1) {
+                    else if (brand.length > 1 && Category.length === 1) {
                        let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
                             .aggregate([
                                 {
@@ -789,12 +806,12 @@ module.exports = {
                         // console.log("filterProducts:",filterProducts,"b",filterProducts.length)
                         resolve(filterProducts)
 
-                    }else if(brand.length > 1 && Catagory.length > 1){
+                    }else if(brand.length > 1 && Category.length > 1){
                         let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
                             .aggregate([
                                 {
                                     $match: {
-                                        $or: Catagory
+                                        $or: Category
                                     }
                                 },
                                 {
@@ -863,60 +880,6 @@ module.exports = {
                                 userName: "$userDetails.Name"
                             }
                         }
-                        // {
-                        //     $unwind : "$products"
-                        // },
-                        // {
-                        //     $group : {
-                        //         _id:0,
-                        //         merged: {
-                        //             $push: "$$ROOT"
-                        //         }
-                        //     }
-                        // },
-                        // {
-                        //     $replaceRoot:{
-                        //         newRoot:{
-                        //             "$mergeObjects": "$merged"
-                        //         }
-                        //     }
-                        // }
-                        // {
-                        //     $group : {
-                        //         _id : null,
-                        //         products : {
-                        //             "$addToSet": "$products"
-                        //         }
-                        //     }
-                        // },
-                        // {
-                        //     $lookup : {
-                        //         from : collection.PRODUCT_COLLECTION,
-                        //         localField : 'products.item',
-                        //         foreignField : '_id',
-                        //         as : 'productDetails'
-                        //     }
-                        // },
-                        // {
-                        //     $unwind : '$productDetails'
-                        // },
-                        // 
-                        // {
-                        //     $project : {
-                        //         deliveryDetails : 1,
-                        //         paymentMethod : 1,
-                        //         productQuantity : '$products.quantity',
-                        //         deliveryStatus : '$products.deliveryStatus',
-                        //         orderStatus : '$status',
-                        //         date : 1,
-                        //         time : 1,
-                        //         productName : '$productDetails.Name',
-                        //         productCategory : '$productDetails.catagory',
-                        //         productPrice : '$productDetails.Price',
-                        //         subTotal : '$totalAmount',
-                        //         userName : '$userDetails.Name'
-                        //     }
-                        // }
                     ]).toArray()
                 // console.log(invoiceDeliveryData[0])
                 resolve(invoiceDeliveryData[0])
@@ -951,7 +914,7 @@ module.exports = {
                             $project: {
                                 productQuantity: "$products.quantity",
                                 productName: "$productDetails.Name",
-                                productCategory: "$productDetails.Catagory",
+                                productCategory: "$productDetails.Category",
                                 productPrice: "$productDetails.Price"
                             }
                         }

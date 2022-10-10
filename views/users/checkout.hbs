@@ -18,10 +18,6 @@
         display: flex;
     }
 
-    {{!-- .formbody #form {
-        width: 70%;
-    } --}}
-
     .formbody .billing {
         display: flex;
         flex-direction: row;
@@ -168,15 +164,15 @@
                         <input type="text" name="Name" required>
                         <input type="text" name="userId" value="{{user._id}}" hidden>
                         <label for="">Address*</label>
-                        <input type="text" name="address">
+                        <input type="text" name="address" required>
                         <label for="">Town/City*</label>
-                        <input type="text" name="city">
+                        <input type="text" name="city" required>
                         <label for="">State*</label>
-                        <input type="text" name="state">
+                        <input type="text" name="state" required>
                         <label for="">Postcode/Zip*</label>
-                        <input type="number" name="pincode">
+                        <input type="number" name="pincode" required>
                         <label for="">Phone*</label>
-                        <input type="number" name="mobile">
+                        <input type="number" name="mobile" required>
                         <input type="number" name="total" value={{total}} hidden>
                     </div>
 
@@ -201,11 +197,6 @@
                                     <td>{{this.totalPrice}}</td>
                                 </tr>
                                 {{/each}}
-                                {{!-- <tr>
-                                    <td>iphone</td>
-                                    <td>4</td>
-                                    <td>400</td>
-                                </tr> --}}
                             </tbody>
                         </table>
                         <div>
