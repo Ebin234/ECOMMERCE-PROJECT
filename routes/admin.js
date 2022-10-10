@@ -7,8 +7,6 @@ const adminHelpers = require('../helpers/admin-helpers')
 const mailConnection = require('../config/mailConnection');
 const path = require('path');
 const fs = require('fs');
-const { Router } = require('express');
-const { response } = require('../app');
 
 const verifyAdminLogin = (req, res, next) => {
   if (req.session.adminLoggedIn) {
@@ -18,7 +16,7 @@ const verifyAdminLogin = (req, res, next) => {
   }
 }
 
-/* GET users listing. */
+/* GET ADMIN HOME PAGE */
 router.get('/',verifyAdminLogin, async function(req, res, next) {
   let admin = req.session.admin
   try{
@@ -50,6 +48,7 @@ router.get('/',verifyAdminLogin, async function(req, res, next) {
     }
 });
 
+/* ADMIN LOGIN PAGE */
 router.get('/login',(req,res)=>{
   if (req.session.adminLoggedIn) {
     res.redirect('/admin')
@@ -77,25 +76,8 @@ router.post('/login',(req,res,next)=>{
 }
 })
 
-router.get('/logout', (req, res) => {
-  req.session.admin = null
-  req.session.adminLoggedIn = false
-  res.redirect('/admin/login')
-})
-
-router.get('/products-details',(req,res,next)=>{
-  try{
-  productHelpers.getAllproducts().then((products)=>{
-    console.log(products)
-  res.render('admin/products-details',{products,adminHeader:true})
-  })
-}catch(error){
-  next(error)
-}
-})
-
-
-router.get('/add-product',async(req,res)=>{
+/* ADD PRODUCT PAGE */
+router.get('/add-product',verifyAdminLogin,async(req,res)=>{
   try{
   let catagories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
@@ -150,15 +132,19 @@ router.post('/add-product',(req,res,next)=>{
 }
 })
 
-router.get('/delete-product/:id',(req,res)=>{
-  const prodId = req.params.id
-  //console.log(proId)
-  productHelpers.deleteProduct(prodId).then((response)=>{
-    //console.log(response)
-    res.redirect('/admin/products-details')
+/* PRODUCT DETAILS PAGE */
+router.get('/products-details',verifyAdminLogin,(req,res,next)=>{
+  try{
+  productHelpers.getAllproducts().then((products)=>{
+    console.log(products)
+  res.render('admin/products-details',{products,adminHeader:true})
   })
+}catch(error){
+  next(error)
+}
 })
 
+/* EDIT PRODUCT PAGE */
 router.get('/edit-product/:id',async(req,res,next)=>{
   try{
   const prodId = req.params.id
@@ -196,8 +182,48 @@ router.post('/edit-product1/:id',(req,res,next)=>{
   }
 })
 
+/* DELETE PRODUCT */
+router.get('/delete-product/:id',(req,res)=>{
+  const prodId = req.params.id
+  //console.log(proId)
+  productHelpers.deleteProduct(prodId).then((response)=>{
+    //console.log(response)
+    res.redirect('/admin/products-details')
+  })
+})
 
-router.get('/create-coupon',(req,res)=>{
+/* USERS DETAILS PAGE */
+router.get('/users-details',verifyAdminLogin,async(req,res)=>{
+  let users = await userHelpers.getAllUsers()
+  console.log(users)
+  res.render('admin/users-details',{users,adminHeader:true})
+})
+
+/* USER BLOCK */
+router.post('/block-user',(req,res)=>{
+  // console.log(req.body);
+  adminHelpers.blockUser(req.body.userId).then((response)=>{
+    res.json({blocked : true})
+  })
+})
+
+/* USER UNBLOCK */
+router.post('/unblock-user',(req,res)=>{
+  // console.log(req.body);
+  adminHelpers.unblockUser(req.body.userId).then((response)=>{
+   res.json({unblocked : true})
+  })
+})
+
+/* COUPONS PAGE */
+router.get('/coupons',verifyAdminLogin,async(req,res)=>{
+  let coupons = await productHelpers.getAllCoupons() 
+  console.log(coupons);
+  res.render('admin/coupon-details',{coupons,adminHeader:true})
+})
+
+/* CREATE COUPON */
+router.get('/create-coupon',verifyAdminLogin,(req,res)=>{
   res.render('admin/create-coupon',{adminHeader:true})
 })
 
@@ -208,13 +234,7 @@ router.post('/create-coupon',(req,res)=>{
   })
 })
 
-
-router.get('/coupons',async(req,res)=>{
-  let coupons = await productHelpers.getAllCoupons() 
-  console.log(coupons);
-  res.render('admin/coupon-details',{coupons,adminHeader:true})
-})
-
+/* EDIT COUPON */
 router.get('/edit-coupon/:id',async(req,res)=>{
   couponId = req.params.id
   console.log(couponId)
@@ -231,6 +251,7 @@ router.post('/edit-coupon/:id',(req,res)=>{
   })
 })
 
+/* DELETE COUPON */
 router.get('/delete-coupon/:id',(req,res)=>{
   let couponId = req.params.id
   productHelpers.deleteCoupon(couponId).then(()=>{
@@ -238,17 +259,13 @@ router.get('/delete-coupon/:id',(req,res)=>{
   })
 })
 
-router.get('/users-details',async(req,res)=>{
-  let users = await userHelpers.getAllUsers()
-  console.log(users)
-  res.render('admin/users-details',{users,adminHeader:true})
-})
-
-router.get('/view-categories',async(req,res)=>{
+/* VIEW CATEGORIES PAGE */
+router.get('/view-categories',verifyAdminLogin,async(req,res)=>{
   let categories = await adminHelpers.getCategories()
   res.render('admin/view-categories',{categories, adminHeader:true})
 })
 
+/* ADD CATEGORY */
 router.post('/add-category',(req,res)=>{
   console.log("body:",req.body)
   adminHelpers.addCategory(req.body).then((response)=>{
@@ -256,6 +273,7 @@ router.post('/add-category',(req,res)=>{
   })
 })
 
+/* EDIT CATEGORY */
 router.get('/edit-category/:id',async(req,res)=>{
   let catId = req.params.id
   console.log("catId",catId)
@@ -274,6 +292,7 @@ router.post('/edit-category',(req,res)=>{
   })
 })
 
+/* DELETE CATEGORY */
 router.get('/delete-category/:id',(req,res)=>{
   let catId = req.params.id
   console.log(catId)
@@ -282,11 +301,13 @@ router.get('/delete-category/:id',(req,res)=>{
   })
 })
 
-router.get('/view-brands',async(req,res)=>{
+/* BRANDS PAGE */
+router.get('/view-brands',verifyAdminLogin,async(req,res)=>{
   let brands = await adminHelpers.getBrands()
   res.render('admin/view-brands',{brands,adminHeader:true})
 })
 
+/* ADD BRAND */
 router.post('/add-brand',(req,res)=>{
   // console.log(req.body)
   adminHelpers.addBrand(req.body).then(()=>{
@@ -294,6 +315,7 @@ router.post('/add-brand',(req,res)=>{
   })
 })
 
+/* EDIT BRAND */
 router.get('/edit-brand/:id',async(req,res)=>{
   let brandId = req.params.id
   console.log("brandId:",brandId)
@@ -312,6 +334,7 @@ router.post('/edit-brand',(req,res)=>{
   })
 })
 
+/* DELETE BRAND */
 router.get('/delete-brand/:id',(req,res)=>{
   let brandId = req.params.id
   console.log(brandId)
@@ -320,17 +343,18 @@ router.get('/delete-brand/:id',(req,res)=>{
   })
 })
 
-router.get('/view-orders',async(req,res,next)=>{
+/* ORDER DETAILS PAGE */
+router.get('/view-orders',verifyAdminLogin,async(req,res,next)=>{
   try{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
-  
   res.render('admin/view-orders',{orders,adminHeader:true})
   }catch(error){
     next(error)
   }
 })
 
+/* CHANGE DELIVERY STATUS */
 router.post('/change-delivery-status',(req,res,next)=>{
   try{
   console.log(req.body)
@@ -349,19 +373,11 @@ router.post('/change-delivery-status',(req,res,next)=>{
 }
 })
 
-router.post('/block-user',(req,res)=>{
-  // console.log(req.body);
-  adminHelpers.blockUser(req.body.userId).then((response)=>{
-    res.json({blocked : true})
-  })
+/* ADMIN LOGOUT */
+router.get('/logout', (req, res) => {
+  req.session.admin = null
+  req.session.adminLoggedIn = false
+  res.redirect('/admin/login')
 })
-
-router.post('/unblock-user',(req,res)=>{
-  // console.log(req.body);
-  adminHelpers.unblockUser(req.body.userId).then((response)=>{
-    res.json({unblocked : true})
-  })
-})
-
 
 module.exports = router;
