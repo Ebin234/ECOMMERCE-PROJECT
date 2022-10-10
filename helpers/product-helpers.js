@@ -40,10 +40,10 @@ module.exports = {
             }
         })
     },
-    getFeaturedProducts : ()=>{
+    getFeaturedProducts : (limit)=>{
         return new Promise(async(resolve,reject)=>{
             let featuredProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-            .find({Featured : "Yes"}).toArray()
+            .find({Featured : "Yes"}).limit(limit).toArray()
             console.log(featuredProducts)
             resolve(featuredProducts)
         })

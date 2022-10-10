@@ -30,7 +30,7 @@ router.get('/', async function (req, res, next) {
   }
   console.log("user:", user)
   let newProducts = await productHelpers.getNewProducts()
-  productHelpers.getFeaturedProducts().then((featuredProducts) => {
+  productHelpers.getFeaturedProducts(8).then((featuredProducts) => {
     res.render('users/home-page', { newProducts, featuredProducts, user, cartCount, wishCount });
   })
 });
@@ -531,8 +531,9 @@ router.get('/product/:id', async (req, res, next) => {
     }
     let prodId = req.params.id
     let product = await productHelpers.getProductDetails(prodId)
+    let featured = await productHelpers.getFeaturedProducts(4)
     console.log(product)
-    res.render('users/single-product', { product, user, cartCount, wishCount })
+    res.render('users/single-product', {featured, product, user, cartCount, wishCount })
   }
   catch (error) {
     next(error)

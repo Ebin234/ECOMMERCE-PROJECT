@@ -54,7 +54,7 @@ router.get('/login',(req,res)=>{
   if (req.session.adminLoggedIn) {
     res.redirect('/admin')
   } else {
-    res.render('admin/login', { "adminLoginErr": req.session.adminLoginErr })
+    res.render('admin/login', { "adminLoginErr": req.session.adminLoginErr ,layout:'error-layout'})
     req.session.adminLoginErr = false
   }
 })

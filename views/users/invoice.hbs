@@ -96,7 +96,7 @@
 									{{this.productQuantity}}
 								</div>
 								<div class="col-xs-5 amount text-right">
-									${{this.productPrice}}
+									&#8377 {{this.productPrice}}
 								</div>
 							</div>
 							{{/each}}
@@ -108,10 +108,10 @@
 								Thanks a lot.
 							</p>
 							<div class="field">
-								Subtotal <span>${{total}}</span>
+								Subtotal <span>&#8377 {{total}}</span>
 							</div>
 							<div class="field">
-								Shipping <span>$0.00</span>
+								Shipping <span>&#8377 0.00</span>
 							</div>
 							<div class="field">
 								Discount <span>
@@ -123,7 +123,7 @@
 								</span>
 							</div>
 							<div class="field grand-total">
-								Total <span>${{invoiceDeliveryData.subTotal}}</span>
+								Total <span>&#8377 {{invoiceDeliveryData.subTotal}}</span>
 							</div>
 						</div>
 
