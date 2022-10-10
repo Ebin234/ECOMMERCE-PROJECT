@@ -21,6 +21,7 @@ const verifyAdminLogin = (req, res, next) => {
 /* GET users listing. */
 router.get('/',verifyAdminLogin, async function(req, res, next) {
   let admin = req.session.admin
+  try{
   const datas = await Promise.all([
     await adminHelpers.getTotalOrdersCount(),
     await adminHelpers.getTotalCustomersCount(),
@@ -44,7 +45,9 @@ router.get('/',verifyAdminLogin, async function(req, res, next) {
       totalProducts: datas[2],
       totalRevenue,
       admin, adminHeader:true})
-  // })
+    }catch(error){
+      next(error)
+    }
 });
 
 router.get('/login',(req,res)=>{
@@ -56,7 +59,8 @@ router.get('/login',(req,res)=>{
   }
 })
 
-router.post('/login',(req,res)=>{
+router.post('/login',(req,res,next)=>{
+  try{
   console.log((req.body));
   adminHelpers.adminLogin(req.body).then((response)=>{
     if (response.status) {
@@ -68,6 +72,9 @@ router.post('/login',(req,res)=>{
       res.redirect('/admin/login')
     }
   })
+}catch(error){
+  next(error)
+}
 })
 
 router.get('/logout', (req, res) => {
@@ -76,42 +83,30 @@ router.get('/logout', (req, res) => {
   res.redirect('/admin/login')
 })
 
-router.get('/products-details',(req,res)=>{
+router.get('/products-details',(req,res,next)=>{
+  try{
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
   res.render('admin/products-details',{products,adminHeader:true})
   })
+}catch(error){
+  next(error)
+}
 })
 
 
 router.get('/add-product',async(req,res)=>{
+  try{
   let catagories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
   res.render('admin/add-product',{brands,catagories, adminHeader:true})
+  }catch(error){
+    next(error)
+  }
 })
 
-// router.get('/add-product2',(req,res)=>{
-//   res.render('admin/add-product2',{admin:true})
-// })
-
-// router.post('/add-product',(req,res)=>{
-//   //console.log(req.body)
-//   //console.log(req.files.image)
-//   productHelpers.addproduct(req.body,(insertedId)=>{
-//    // console.log(insertedId)
-//    let image = req.files.image
-//    image.mv('./public/product-images/'+insertedId+'.jpg',(err,done)=>{
-//     if(!err){
-//       res.render('admin/add-product')
-//     }else{
-//       console.log(err)
-//     }
-//    })
-    
-//   })
-// })
-
-router.post('/add-product',(req,res)=>{
+router.post('/add-product',(req,res,next)=>{
+  try{
   // console.log(req.body);
   // console.log(req.files.image)
   productHelpers.addproduct(req.body,(insertedId)=>{
@@ -125,21 +120,21 @@ router.post('/add-product',(req,res)=>{
     let subImage3 = req.files.image[3]
     mainImage.mv('./public/images/product-images/'+insertedId+'/0'+insertedId+'.jpg',(err,done)=>{
       if(err){
-        console.log(err)
+        throw err
       }else{
         subImage1.mv('./public/images/product-images/'+insertedId+'/1'+insertedId+'.jpg',(err,done)=>{
           if(err){
-            console.log(err)
+            throw err
           }else{
             subImage2.mv('./public/images/product-images/'+insertedId+'/2'+insertedId+'.jpg',(err,done)=>{
               if(err){
-                console.log(err)
+                throw err
               }else{
                 subImage3.mv('./public/images/product-images/'+insertedId+'/3'+insertedId+'.jpg',(err,done)=>{
                   if(!err){
                     res.redirect('/admin/products-details')
                   }else{
-                    console.log(err)
+                    throw err
                   }
                 })
               }
@@ -150,6 +145,9 @@ router.post('/add-product',(req,res)=>{
     })
     
   })
+}catch(err){
+  next(err)
+}
 })
 
 router.get('/delete-product/:id',(req,res)=>{
@@ -161,16 +159,21 @@ router.get('/delete-product/:id',(req,res)=>{
   })
 })
 
-router.get('/edit-product/:id',async(req,res)=>{
+router.get('/edit-product/:id',async(req,res,next)=>{
+  try{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   let catagories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
   //console.log(product)
   res.render('admin/edit-product',{brands,catagories,product,adminHeader:true})
+  }catch(error){
+    next(error)
+  }
 })
 
-router.post('/edit-product1/:id',(req,res)=>{
+router.post('/edit-product1/:id',(req,res,next)=>{
+  try{
   prodId = req.params.id
   // console.log(req.body)
   // console.log(req.files)
@@ -188,6 +191,9 @@ router.post('/edit-product1/:id',(req,res)=>{
       subImage3.mv('./public/images/product-images/'+prodId+'/3'+prodId+'.jpg')
      }
    })
+  }catch(error){
+    next(error)
+  }
 })
 
 
@@ -314,14 +320,19 @@ router.get('/delete-brand/:id',(req,res)=>{
   })
 })
 
-router.get('/view-orders',async(req,res)=>{
+router.get('/view-orders',async(req,res,next)=>{
+  try{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
   
   res.render('admin/view-orders',{orders,adminHeader:true})
+  }catch(error){
+    next(error)
+  }
 })
 
-router.post('/change-delivery-status',(req,res)=>{
+router.post('/change-delivery-status',(req,res,next)=>{
+  try{
   console.log(req.body)
   let deliveryStatus = req.body.data
   let prodId = req.body.prodId
@@ -333,7 +344,9 @@ router.post('/change-delivery-status',(req,res)=>{
     await mailConnection.statusMail(userEmail,deliveryStatus)
     res.json({updated:true})
   })
-  
+}catch(error){
+  next(error)
+}
 })
 
 router.post('/block-user',(req,res)=>{

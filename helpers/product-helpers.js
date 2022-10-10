@@ -25,14 +25,19 @@ module.exports = {
             //console.log(data.insertedId)
             callback(data.insertedId)
         })
+    
     },
     getAllproducts : (page,prodperpage)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             prodperpage = parseInt(prodperpage)
             let products =await db.get().collection(collection.PRODUCT_COLLECTION)
             .find().skip(page*prodperpage).limit(prodperpage).toArray()
             console.log(products)
             resolve(products)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     getFeaturedProducts : ()=>{
@@ -85,6 +90,7 @@ module.exports = {
     },
     updateProduct : (prodId,prodDetails)=>{
         return new Promise((resolve,reject)=>{
+            try{
             db.get().collection(collection.PRODUCT_COLLECTION)
             .updateOne({_id:objectId(prodId)},
             {$set:{
@@ -104,6 +110,9 @@ module.exports = {
                 //console.log(response)
                 resolve()
             })
+        }catch(error){
+            reject(error)
+        }
         })
     },
     createCoupon:(details)=>{
@@ -169,6 +178,7 @@ module.exports = {
     },
     getOrders : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let orders = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -205,10 +215,14 @@ module.exports = {
             ]).toArray()
             console.log(orders)
             resolve(orders)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     changeDeliveryStatus : (orderId,prodId,paymentStatus)=>{
         return new Promise((resolve,reject)=>{
+            try{
             console.log(orderId,prodId,paymentStatus)
            db.get().collection(collection.ORDER_COLLECTION)
             .updateOne(
@@ -222,6 +236,9 @@ module.exports = {
                     // console.log(response)
                     resolve(response)
                 })
+            }catch(error){
+                reject(error)
+            }
         })
     }
 }

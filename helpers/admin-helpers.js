@@ -3,6 +3,7 @@ var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
 const { response } = require('../app')
 const async = require('hbs/lib/async')
+const { NetworkContext } = require('twilio/lib/rest/supersim/v1/network')
 // const { Promise } = require('mongodb')
 const objectId = require('mongodb').ObjectId
 
@@ -10,6 +11,7 @@ const objectId = require('mongodb').ObjectId
 module.exports = {
     adminLogin : (data)=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let loginStatus = false
             let response = {}
             let admin = await db.get().collection(collection.ADMIN_COLLECTION)
@@ -30,6 +32,9 @@ module.exports = {
                 console.log("login failed")
                 resolve({ status: false })
             }
+        }catch(error){
+            reject(error)
+        }
         })
     },
     addCategory: (data) => {
@@ -144,30 +149,43 @@ module.exports = {
     },
     getTotalOrdersCount : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let orders = await db.get().collection(collection.ORDER_COLLECTION)
             .find({status:"placed"}).toArray()
             console.log(orders.length)
             resolve(orders.length)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     getTotalCustomersCount : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let customers = await db.get().collection(collection.USER_COLLECTION)
             .find().toArray()
             console.log(customers.length)
             resolve(customers.length)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     getTotalProductsCount : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let products = await db.get().collection(collection.PRODUCT_COLLECTION)
             .find().toArray()
             console.log(products.length)
             resolve(products.length)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     getTotalRevenue : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let revenue = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -186,10 +204,14 @@ module.exports = {
             ]).toArray()
             console.log(revenue[0].totalRevenue)
             resolve(revenue[0].totalRevenue)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getTotalCodRevenue : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let revenue = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -213,10 +235,14 @@ module.exports = {
             ]).toArray()
             console.log(revenue)
             resolve(revenue[0].totalRevenue)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getTotalOnlineRevenue : ()=>{
         return new Promise(async(resolve,reject)=>{
+            try{
             let revenue = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -240,11 +266,15 @@ module.exports = {
             ]).toArray()
             console.log(revenue)
             resolve(revenue[0].totalRevenue)
+        }catch(error){
+            reject(error)
+        }
         })
     },
     getStatus : ()=>{
         let orderStatus = []
         return new Promise(async(resolve,reject)=>{
+            try{
             let pendingProducts = await db.get().collection(collection.ORDER_COLLECTION)
             .aggregate([
                 {
@@ -306,6 +336,9 @@ module.exports = {
             orderStatus.push(cancelledProducts.length)
             console.log(orderStatus)
             resolve(orderStatus)
+            }catch(error){
+                reject(error)
+            }
         })
     },
     blockUser : (userId)=>{
