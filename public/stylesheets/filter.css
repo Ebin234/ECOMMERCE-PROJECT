@@ -1,4 +1,9 @@
-
+.filter{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
 .search {
     width: 90%;
     height: 40px;
@@ -88,5 +93,92 @@ label {
     margin-left: 14px;
 }
 
+@media (max-width: 477px){
+    .outer {
+        padding: 7px;
+        width: 26%;
+    }
+    h2 {
+        font-size: 46px;
+        line-height: 28px;
+        color: #222;
+    }
+#product1 .filter {
+    justify-content: space-around;
+}
 
+.search {
+    width: 84%;
+    height: 28px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 23px;
+    border: 1px solid #cce7d0;
+    border-radius: 20px;
+    margin-left: -67px;
+}
+button.normal {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px 7px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: 0.2s;
+}
+button.searchbtn {
+    margin: 0 5px;
+    position: absolute;
+    font-size: 10px;
+    /* background: green; */
+    width: 67px;
+    border: 1px solid #cce7d0;
+    height: 28px;
+    border-radius: 13px;
+    font-weight: 400;
+    /* display: flex; */
+}
 
+.outer h2::after {
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 5px;
+    width: 50px;
+    background: #ca1515;
+    content: "";
+    margin-left: 24px;
+}
+
+.genre {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px 5px;
+    width: 113px;
+}
+.genre .check input {
+    /* width: 0px; */
+    /* height: 15px; */
+    border: 1px solid red;
+    background: red;
+    margin-left: -15px;
+}
+label {
+    font-size: 10px;
+}
+
+.outer h2 {
+    font-size: 15px;
+    color: #111111;
+    font-weight: 600;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
+    margin-left: -25px;
+}
+}
