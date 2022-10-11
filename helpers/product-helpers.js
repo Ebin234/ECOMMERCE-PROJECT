@@ -32,7 +32,7 @@ module.exports = {
             try{
             prodperpage = parseInt(prodperpage)
             let products =await db.get().collection(collection.PRODUCT_COLLECTION)
-            .find().skip(page*prodperpage).limit(prodperpage).toArray()
+            .find().sort({$natural:-1}).skip(page*prodperpage).limit(prodperpage).toArray()
             console.log(products)
             resolve(products)
             }catch(error){
@@ -43,7 +43,7 @@ module.exports = {
     getFeaturedProducts : (limit)=>{
         return new Promise(async(resolve,reject)=>{
             let featuredProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-            .find({Featured : "Yes"}).limit(limit).toArray()
+            .find({Featured : "Yes"}).sort({$natural:-1}).limit(limit).toArray()
             console.log(featuredProducts)
             resolve(featuredProducts)
         })
@@ -51,7 +51,7 @@ module.exports = {
     getNewProducts : ()=>{
         return new Promise(async(resolve,reject)=>{
             let newProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-            .find().sort({$natural:-1}).toArray()
+            .find().sort({$natural:-1}).limit(8).toArray()
             console.log(newProducts)
             resolve(newProducts)
         })

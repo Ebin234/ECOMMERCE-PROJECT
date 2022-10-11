@@ -213,7 +213,7 @@ router.get('/add-to-wishlist/:id', (req, res, next) => {
 router.get('/allProducts', async (req, res) => {
   let page = req.query.page || 0
   console.log("page:", page)
-  let prodPerPage = 4
+  let prodPerPage = 12
   productFilter = await productHelpers.getAllproducts(page, prodPerPage)
   res.redirect('/shope')
 })

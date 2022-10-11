@@ -11,7 +11,8 @@ const nav = document.getElementById('navbar');
   }
 
  if(close){
-     close.addEventListener('click', ()=>{
+     close.addEventListener('click', (e)=>{
          nav.classList.remove('active');
+         e.preventDefault();
      })
  }
