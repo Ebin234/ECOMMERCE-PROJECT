@@ -93,7 +93,74 @@ label {
     margin-left: 14px;
 }
 
-@media (max-width: 477px){
+
+@media (max-width:900px){
+    .search {
+        width: 80%;
+        height: 40px;
+        outline: none;
+        font-size: 15px;
+        padding: 0 23px;
+        border: 1px solid #cce7d0;
+        border-radius: 20px;
+        margin-left: -127px;
+    }
+    .filter {
+        display: flex;
+        justify-content: space-around;
+        padding-top: 20px;
+        flex-wrap: wrap;
+    }
+    .outer {
+        padding: 7px;
+        width: 24%;
+    }
+    .outer h2 {
+        font-size: 16px;
+        color: #111111;
+        font-weight: 600;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        margin-left: -36px;
+    }
+    .outer h2::after {
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        height: 5px;
+        width: 86px;
+        background: #ca1515;
+        content: "";
+    }
+    .genre {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px 7px;
+        width: 174px;
+    }
+    .genre div {
+        padding: 10px 0;
+    }
+    .genre .check input {
+        width: 15px;
+        height: 15px;
+        border: 1px solid red;
+        background: red;
+        margin-left: -20px;
+    }
+    label {
+        font-size: 15px;
+    }
+
+}
+
+
+
+@media (max-width: 499px){
+    
     .outer {
         padding: 7px;
         width: 26%;
