@@ -17,7 +17,7 @@
 
         .wrapper {
             width: 90%;
-            height: 100vh;
+            height: 100%;
             margin: auto;
             display: flex;
             align-items: center;
@@ -42,21 +42,38 @@
             flex-direction: column;
         }
 
-        .small-images img {
+        {{!-- .small-images img {
             height: 19vh;
             margin-bottom: 9px;
             cursor: pointer;
             opacity: 0.6;
-        }
+        } --}}
 
+.small-images img {
+    /* height: 19vh; */
+    height: 23%;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 9px;
+    cursor: pointer;
+    opacity: 0.6;
+}
         .small-images img:hover {
             opacity: 1;
         }
 
-        .main-images img {
+        {{!-- .main-images img {
     height: 90%;
     max-width: 100%;
     object-fit: fill;
+} --}}
+
+.main-images img {
+    height: 90%;
+    width: 95%;
+    max-width: 100%;
+    object-fit: contain;
+    margin-left: 18px;
 }
 
         p {
@@ -176,6 +193,7 @@
                 flex-direction: row;
                 justify-content: space-evenly;
                 order: 1;
+                margin-top: 10px;
             }
 
             .product-box {
@@ -184,11 +202,15 @@
 
             .main-images img {
                 width: 100%;
+                margin-left: 0;
             }
 
             .small-images img {
-                width: 25%;
-            }
+    width: 25%;
+    height: 19vh;
+    margin: 0 4px;
+    object-fit: contain;
+}
 
             h2 {
                 font-size: 25px;
