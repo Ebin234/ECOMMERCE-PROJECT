@@ -182,7 +182,7 @@ a:hover{
 
 @media screen and (max-width:1000px){
     form{
-        width: 290px;
+        width: 370px;
     }
 
     form h2{
@@ -207,4 +207,19 @@ a:hover{
     .login-container{
         justify-content: center;
     }
+    .mt-2{
+            margin-bottom: 29px;
+    }
+}
+
+@media screen and (max-width:499px){
+.mt-2{
+        display: flex;
+        flex-direction: column;
+}
+.mt-2 .link {
+        float: left;
+        margin: 10px 0;
+}
+
 }

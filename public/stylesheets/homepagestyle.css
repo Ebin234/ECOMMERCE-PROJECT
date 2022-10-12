@@ -912,6 +912,11 @@ footer .copyright {
 /* Start Mediia Query */
 
 @media (max-width:999px) {
+ .overlay{
+        opacity: 1;
+        margin-left: 5%;
+        transition: 0.5s;
+    }
     #navbar {
         display: flex;
         flex-direction: column;
