@@ -48,13 +48,15 @@
                 <a href="" id="close"><i class="far fa-times"></i></a>
 
                 {{#if user}}
-                <li><a href="">{{user.Name}}</a>
-                    <ul class="dropdown">
+                <li class="mt-1" id="order" style="display: none;"><a href="">Orders</a></li>
+                <li><a href="/profile">{{user.Name}}</a>
+                    <ul class="dropdown" id="drop">
                         <li class="mt-1"><a href="">Profile</a></li>
                         <li class="mt-1"><a href="">Orders</a></li>
                         <li class="mt-1"><a href="/logout">Logout</a></li>
                     </ul>
                 </li>
+                <li class="mt-1" id="logout" style="display: none;"><a href="/logout">Logout</a></li>
                 {{else}}
                 <div class="dis">
                 <li ><a class="act" href="/login">Login</a> / 

@@ -7,6 +7,9 @@ const nav = document.getElementById('navbar');
  if(bar){
       bar.addEventListener('click', ()=>{
           nav.classList.add('active');
+          document.getElementById('drop').style.display = 'none'
+          document.getElementById('logout').style.display = 'block'
+          document.getElementById('order').style.display = 'block'
       })
   }
 
