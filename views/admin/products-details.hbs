@@ -1,13 +1,18 @@
 <link rel="stylesheet" href="/stylesheets/admin-page-style.css">
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
-<style>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
+
+<style>
     h2 {
-    font-size: 40px;
-    line-height: 54px;
-    color: #222;
-}
+        font-size: 40px;
+        line-height: 54px;
+        color: #222;
+    }
 
 
     a.normal {
@@ -33,7 +38,7 @@
         background-color: rgb(238, 18, 18);
     }
 
-    #cart .head {
+    .head {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -61,101 +66,84 @@
         cursor: pointer;
     }
 
-    #cart table tbody tr:hover {
-        background: #fff;
-    }
-
 
     #cart table td:nth-child(1) {
-    width: 4px;
-    text-align: center;
-}
+        width: 25px;
+        text-align: center;
+    }
 
-#cart table td:nth-child(2) {
-    width: 11px;
-    text-align: center;
-}
+    #cart table td:nth-child(2) {
+        width: 150px;
+        text-align: center;
+    }
 
-#cart table td:nth-child(3) {
-    width: 16px;
-    text-align: center;
-}
+    #cart table td:nth-child(3) {
+        width: 230px;
+        text-align: center;
+    }
 
-#cart table td:nth-child(4){
-    width: 10px;
-    text-align: center;
-}
-
- #cart table td:nth-child(5) {
-    width: 7px;
-    text-align: center;
-}
-
- #cart table td:nth-child(6) {
-    width: 9px;
-    text-align: center;
-}
-
- #cart table td:nth-child(7){
-    width: 13px;
-    text-align: center;
- }
-
+    #cart table td:nth-child(4),
+    #cart table td:nth-child(5),
+    #cart table td:nth-child(6),
+    #cart table td:nth-child(7),
+    #cart table td:nth-child(8) {
+        width: 150px;
+        text-align: center;
+    }
 </style>
 
 <div class="container">
-<div class="main">
-    <div class="topbar">
-        <div class="toggle" onclick="toggleMenu()"></div>
-        <div class="search">
-            <label for="">
-                <input type="text" placeholder="Search Here">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </label>
+    <div class="main">
+        <div class="topbar">
+            <div class="toggle" onclick="toggleMenu()"></div>
+            <div class="search">
+                <label for="">
+                    <input type="text" placeholder="Search Here">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </label>
+            </div>
+            <div class="user">
+                <img src="/login-images/avatar2.svg" alt="">
+            </div>
         </div>
-        <div class="user">
-            <img src="/login-images/avatar2.svg" alt="">
-        </div>
-    </div>
 
-
-    <section id="cart" class="section-p1">
         <div class="head">
             <h2>Product Details</h2>
         </div>
         <div class="add"><a href="/admin/add-product" class="normal">Add Product</a></div>
-        <table id="productTable" width="100%">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>Image</td>
-                    <td>product</td>
-                    <td>Catagory</td>
-                    <td>stock</td>
-                    <td>Price</td>
-                    <td>options</td>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each products}}
-                <tr>
-                    <td>1.</td>
-                    <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td>
-                    <td>{{this.Name}}</td>
-                    <td>{{this.Category}}</td>
-                    <td>{{this.Stoke}}</td>
-                    <td>&#8377 {{this.Price}}</td>
-                    <td>
-                        <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
-                        <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
-                    </td>
-                </tr>
-                {{/each}}
+        <section id="cart" class="section-p1">
+            <table id="productTable" width="100%">
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>Image</td>
+                        <td>product</td>
+                        <td>Catagory</td>
+                        <td>stock</td>
+                        <td>Price</td>
+                        <td>options</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
+                        <td>1.</td>
+                        <td><img src="/images/product-images/{{this._id}}/0{{this._id}}.jpg" alt=""></td>
+                        <td>{{this.Name}}</td>
+                        <td>{{this.Category}}</td>
+                        <td>{{this.Stoke}}</td>
+                        <td>&#8377 {{this.Price}}</td>
+                        <td>
+                            <a href="/admin/edit-product/{{this._id}}" class=" normal b1 ">Edit</a>
+                            <a href="/admin/delete-product/{{this._id}}" class="normal b2 ">Delete</a>
+                        </td>
+                    </tr>
+                    {{/each}}
 
-            </tbody>
-        </table>
-    </section>
-</div>
+                </tbody>
+            </table>
+        </section>
+    </div>
 </div>
 
 <script>
