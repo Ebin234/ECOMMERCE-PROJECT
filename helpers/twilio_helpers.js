@@ -27,7 +27,7 @@ module.exports = {
                 to: `+91${mobile}` ,
                 code : verifycode
             }).then((response)=>{
-                // console.log(response)
+                console.log("otp response:",response)
                 resolve(response)
             })
         })

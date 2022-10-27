@@ -74,7 +74,10 @@ router.get('/otp', (req, res) => {
   req.session.userOtpErr = false
 })
 
-router.post('/otp', (req, res) => {
+router.post('/otp', (req, res,next) => {
+  try{
+    let cartCount = 0;
+    let wishCount = 0;
   if (req.session.userForgotData) {
     console.log(req.session.userForgotData)
     console.log(req.body)
@@ -82,7 +85,7 @@ router.post('/otp', (req, res) => {
       .then((response) => {
         if (response.status == 'approved') {
           console.log("approved")
-          res.render('users/forgot-change-password')
+          res.render('users/forgot-change-password',{cartCount,wishCount})
         } else {
           req.session.userOtpErr = true
           res.redirect('/otp')
@@ -99,6 +102,7 @@ router.post('/otp', (req, res) => {
           userhelpers.dosignup(req.session.signupBody).then((response) => {
             //   console.log(response)
             res.redirect('/login')
+            req.session.signupBody=false
           })
         } else {
           req.session.userOtpErr = true
@@ -106,6 +110,9 @@ router.post('/otp', (req, res) => {
         }
       })
   }
+}catch(err){
+  next(err)
+}
 })
 
 /* LOGIN PAGE */
