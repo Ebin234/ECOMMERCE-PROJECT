@@ -346,6 +346,18 @@ router.post('/change-product-quantity', (req, res, next) => {
   }
 })
 
+router.get('/remove-product/:id',(req,res,next)=>{
+  try{
+  let userId = req.session.user._id;
+     console.log(req.params.id);
+     userhelpers.removeCartProduct(userId,req.params.id).then(()=>{
+      res.redirect('/cart')
+     })
+  }catch(error){
+    next(error)
+  }
+})
+
 /* APPLY COUPON */
 router.post('/apply-coupon', async (req, res, next) => {
   try {

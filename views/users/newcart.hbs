@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/stylesheets/homepagestyle.css">
 
 <section id="page-header" class="about-header">
-    <h2>#Let's_talk</h2>
-    <p>LEAVE A MESSAGE,We love to hear from you!</p>
+    <h2>My Cart</h2>
+    {{!-- <p>LEAVE A MESSAGE,We love to hear from you!</p> --}}
 </section>
 
 <section id="cart" class="section-p1">
@@ -20,7 +20,7 @@
         <tbody>
             {{#each products}}
             <tr>
-                <td><a href=""><i class="far fa-times-circle"></i></a></td>
+                <td><a href="/remove-product/{{this.product._id}}"><i class="far fa-times-circle"></i></a></td>
                 <td><img src="/images/product-images/{{this.product._id}}/0{{this.product._id}}.jpg" alt=""></td>
                 <td>{{this.product.Name}}</td>
                 <td>&#8377 {{this.product.Price}}</td>

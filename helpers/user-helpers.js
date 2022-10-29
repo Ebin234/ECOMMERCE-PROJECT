@@ -184,21 +184,21 @@ module.exports = {
             resolve(cartProducts)
         })
     },
-    adminProductQuantityChange : (data)=>{
-        return new Promise((resolve,reject)=>{
-            console.log("data:",data)
+    adminProductQuantityChange: (data) => {
+        return new Promise((resolve, reject) => {
+            console.log("data:", data)
             db.get().collection(collection.PRODUCT_COLLECTION)
-            .updateOne(
-                {_id : objectId(data.item)},
-                {
-                    $inc : {
-                        Stoke : -data.quantity
+                .updateOne(
+                    { _id: objectId(data.item) },
+                    {
+                        $inc: {
+                            Stoke: -data.quantity
+                        }
                     }
-                }
-            ).then((response)=>{
-                // console.log(response)
-                resolve()
-            })
+                ).then((response) => {
+                    // console.log(response)
+                    resolve()
+                })
         })
     },
     getProductSubtotal: (prodId, userId) => {
@@ -309,6 +309,21 @@ module.exports = {
             }
         })
     },
+    removeCartProduct: (userId, prodId) => {
+        return new Promise((resolve, reject) => {
+            console.log("user:", userId)
+            console.log("prod:", prodId)
+            db.get().collection(collection.CART_COLLECTION)
+                .updateOne({ user: objectId(userId) },
+                    {
+                        $pull: { products: { item: objectId(prodId) } }
+                    }
+                ).then((response) => {
+                    console.log(response)
+                    resolve()
+                })
+        })
+    },
     getTotalAmount: (userId) => {
         return new Promise(async (resolve, reject) => {
 
@@ -372,7 +387,7 @@ module.exports = {
             try {
                 let cart = await db.get().collection(collection.CART_COLLECTION)
                     .findOne({ user: objectId(userId) })
-                    console.log("cart",cart);
+                console.log("cart", cart);
                 resolve(cart.products)
             } catch (error) {
                 reject(error)
@@ -382,7 +397,7 @@ module.exports = {
     placeOrder: (order, products, total) => {
         return new Promise((resolve, reject) => {
             try {
-                console.log(order,"codproducts", products, total)
+                console.log(order, "codproducts", products, total)
                 let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
                 let d = new Date()
                 let date = moment(d).format('YYYY-MM-DD');
@@ -768,69 +783,69 @@ module.exports = {
                 // console.log("category:", Catagory)
                 // console.log("catalength:", Catagory.length)
                 // console.log("brandlength:", brand.length)
-                    if (Category.length > 1 && brand.length === 1) {
-                        let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-                            .aggregate([
-                                {
-                                    $match: {
-                                        $or: Category
-                                    }
-                                },
-                                {
-                                    $match: {
-                                        Price: {
-                                            $lt: price
-                                        }
+                if (Category.length > 1 && brand.length === 1) {
+                    let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+                        .aggregate([
+                            {
+                                $match: {
+                                    $or: Category
+                                }
+                            },
+                            {
+                                $match: {
+                                    Price: {
+                                        $lt: price
                                     }
                                 }
-                            ]).toArray()
-                        // console.log("filterProducts:",filterProducts , "a",filterProducts.length)
-                        resolve(filterProducts)
-                    }
-                    else if (brand.length > 1 && Category.length === 1) {
-                       let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-                            .aggregate([
-                                {
-                                    $match: {
-                                        $or: brand
-                                    }
-                                },
-                                {
-                                    $match: {
-                                        Price: {
-                                            $lt: price
-                                        }
+                            }
+                        ]).toArray()
+                    // console.log("filterProducts:",filterProducts , "a",filterProducts.length)
+                    resolve(filterProducts)
+                }
+                else if (brand.length > 1 && Category.length === 1) {
+                    let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+                        .aggregate([
+                            {
+                                $match: {
+                                    $or: brand
+                                }
+                            },
+                            {
+                                $match: {
+                                    Price: {
+                                        $lt: price
                                     }
                                 }
-                            ]).toArray()
-                        // console.log("filterProducts:",filterProducts,"b",filterProducts.length)
-                        resolve(filterProducts)
+                            }
+                        ]).toArray()
+                    // console.log("filterProducts:",filterProducts,"b",filterProducts.length)
+                    resolve(filterProducts)
 
-                    }else if(brand.length > 1 && Category.length > 1){
-                        let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
-                            .aggregate([
-                                {
-                                    $match: {
-                                        $or: Category
-                                    }
-                                },
-                                {
-                                    $match: {
-                                        $or: brand
-                                    }
-                                },
-                                {
-                                    $match: {
-                                        Price: {
-                                            $lt: price
-                                        }
+                } else if (brand.length > 1 && Category.length > 1) {
+                    let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
+                        .aggregate([
+                            {
+                                $match: {
+                                    $or: Category
+                                }
+                            },
+                            {
+                                $match: {
+                                    $or: brand
+                                }
+                            },
+                            {
+                                $match: {
+                                    Price: {
+                                        $lt: price
                                     }
                                 }
-                            ]).toArray()
-                        // console.log("filterProducts:",filterProducts,"a&b",filterProducts.length)
-                        resolve(filterProducts)
+                            }
+                        ]).toArray()
+                    // console.log("filterProducts:",filterProducts,"a&b",filterProducts.length)
+                    resolve(filterProducts)
 
-                    }else {
+                } else {
                     let filterProducts = await db.get().collection(collection.PRODUCT_COLLECTION)
                         .aggregate([
                             {
