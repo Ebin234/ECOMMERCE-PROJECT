@@ -66,7 +66,8 @@ form h2{
     bottom: -2px;
     width: 0;
     height: 2px;
-    background-color: #1CCE25;
+    /* background-color: #1CCE25; */
+    background-color: #4ab5ba;
     transition: .3s;
 }
 
@@ -79,7 +80,8 @@ form h2{
 }
 
 .input-div.focus .i i{
-    color: #1CCE25;
+    /* color: #1CCE25; */
+    color: #4ab5ba;
 }
 
 .input-div.focus div h5{
@@ -148,7 +150,8 @@ a{
 }
 
 a:hover{
-    color: #1CCE25;
+    /* color: #1CCE25; */
+    color: #4ab5ba;
 }
 
 .login-btn{
@@ -160,7 +163,8 @@ a:hover{
     font-size: 1.2rem;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #1cce25,#24f02e,#1cce25);/*2cd0e9*/
+    /* background-image: linear-gradient(to right, #1cce25,#24f02e,#1cce25); */
+    background-image: linear-gradient(to right, #78dbe0,#68c8cd,#7dd9dd);
     cursor: pointer;
     color: #333;
     text-transform: uppercase;

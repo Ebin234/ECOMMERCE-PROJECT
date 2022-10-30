@@ -9,8 +9,8 @@ module.exports = {
             const transporter = nodeMailer.createTransport({
                 service:process.env.NODEMAILER_SERVICE,
                 auth : {
-                    user :process.env.NODEMAILER_USER,
-                    pass :process.env.NODEMAILER_PASS,
+                    user : process.env.NODEMAILER_USER,
+                    pass : process.env.NODEMAILER_PASS,
                 },
             });
 

@@ -29,9 +29,11 @@ h6 {
     font-size: 12px;
 }
 
+
 p {
     font-size: 16px;
     color: #465b52;
+    /* color: #b4edd5; */
     margin: 15px 0 20px 0;
 }
 
@@ -72,7 +74,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 20px 80px;
-    background: #e3e6f3;
+    /* background: #e3e6f3; */
+    background: #4ab5ba;
     /*e3e6f3*/
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
     z-index: 999;
@@ -196,16 +199,23 @@ div ul li .dropdown li a:after {
 /* Home Page */
 
 #hero {
-    background-image: url('/images/1.jpg');
-    height: 90vh;
+    background-image: url('/images/banner.jpg');
+    height: 100vh;
     width: 100%;
     background-size: cover;
-    /*background-position: top 25% right 0;*/
-    padding: 0 80px;
+    background-position: top 70% right 0;
+    padding: 0 45px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+}
+
+#hero p {
+    font-size: 16px;
+    /* color: #465b52; */
+    color: #b4edd5;
+    margin: 15px 0 20px 0;
 }
 
 #hero h4 {
@@ -494,7 +504,8 @@ div ul li .dropdown li a:after {
 }
 
 footer {
-    background: #cdd4f8;
+    /* background: #cdd4f8; */
+    background: #2e979691;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -927,7 +938,8 @@ footer .copyright {
         right: -300px;
         height: 100vh;
         width: 300px;
-        background-color: #e3e6f3;
+        /* background-color: #e3e6f3; */
+        background-color: #4ab5ba;
         box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
         padding: 80px 0 0 10px;
         transition: 0.3s;
@@ -1058,6 +1070,9 @@ footer .copyright {
     #hero {
         padding: 0 20px;
         background-position: 55%;
+            height: 70vh;
+            padding: 0 80px;
+            background-position: top 30% right 50%;
     }
 
     #product1 .pro {
