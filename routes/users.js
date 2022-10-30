@@ -1,13 +1,10 @@
 var express = require('express');
-const async = require('hbs/lib/async');
-const { response } = require('../app');
 const mailConnection = require('../config/mailConnection');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userhelpers = require('../helpers/user-helpers')
 const twilioHelpers = require('../helpers/twilio_helpers')
 const adminHelpers = require('../helpers/admin-helpers')
-// const ApiError = require('../config/Apierrors');
 let productFilter = [];
 let searchProducts;
 

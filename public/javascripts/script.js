@@ -1,4 +1,3 @@
-
 function addToCart(prodId, userId) {
     $.ajax({
         url: '/add-to-cart/' + prodId,

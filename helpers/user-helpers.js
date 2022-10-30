@@ -1,17 +1,10 @@
 var db = require('../config/connection')
 var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
-const async = require('hbs/lib/async')
-const { response } = require('../app')
-const { promiseCallback } = require('express-fileupload/lib/utilities')
 const objectId = require('mongodb').ObjectId
 const moment = require('moment')
 const Razorpay = require('razorpay')
-// const { options } = require('../routes/admin')
-const { resolve } = require('path')
-
 const dotenv = require('dotenv')
-const { log } = require('console')
 dotenv.config()
 
 var instance = new Razorpay({
@@ -162,22 +155,6 @@ module.exports = {
                         // subtotalId:'$product._id'
                     }
                 }
-                //{
-                //     $lookup: {
-                //         from: collection.PRODUCT_COLLECTION,
-                //         let: { proList: '$products' },
-                //         pipeline: [
-                //             {
-                //                 $match: {
-                //                     $expr: {
-                //                         $in: ['$_id', "$$proList"]
-                //                     }
-                //                 }
-                //             }
-                //         ],
-                //         as: 'cartItems'
-                //     }
-                // }
 
             ]).toArray()
             console.log("cart:", cartProducts)
@@ -243,13 +220,6 @@ module.exports = {
                                 totalPrice: 1
                             }
                         }
-                        //  {
-                        //     $project:{
-                        //         item:1,
-                        //         quantity:1,
-                        //         productDetails:{$arrayElemAt:['$product',0]}
-                        //     }
-                        //  }
                     ]).toArray()
 
                 console.log("subtotal:", totalPrice)
@@ -360,19 +330,11 @@ module.exports = {
                     {
                         $group: {
                             _id: null,
-                            // _id:'$totalPrice',
-                            // total:{$sum:'$totalPrice'}
-                            // totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]},
                             total: {
                                 $sum: { $multiply: ['$quantity', { $toInt: '$product.Price' }] }
                             }
                         }
                     }
-                    // {
-                    //     $addFields:{
-                    //         totalPrice:{$multiply:['$quantity',{$toInt:'$product.Price'}]}
-                    //     }
-                    //  },
                 ]).toArray()
                 console.log("total:", total)
                 // console.log(total.length)

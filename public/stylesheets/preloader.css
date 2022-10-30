@@ -99,9 +99,9 @@
       stroke: #ffa700;
     }
   }
- body {
+  /* body { */
     /* background-color: #eee; */
-  }
+  /* } */
   
   .showbox {
     position: fixed;
@@ -109,10 +109,5 @@
     height: 100vh;
     background: #fff;
     z-index: 99999;
-    
-    /* top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0; */
     padding: 5%;
   }

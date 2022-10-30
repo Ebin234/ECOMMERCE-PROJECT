@@ -1,7 +1,3 @@
-// const { response } = require('../app')
-
-// const { response } = require('../app')
-
 const twilio = require('twilio')(process.env.TWILIO_ACCOUNTSID,process.env.TWILIO_AUTHTOKEN)
 
 module.exports = {
