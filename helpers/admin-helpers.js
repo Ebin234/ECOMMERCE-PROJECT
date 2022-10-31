@@ -1,10 +1,26 @@
 var db = require('../config/connection')
 var collection = require('../config/collections')
 const bcrypt = require('bcrypt')
+const { removeWishlistProduct } = require('./user-helpers')
 const objectId = require('mongodb').ObjectId
 
 
 module.exports = {
+    signup : ()=>{
+        return new Promise(async(resolve,reject)=>{
+            data = await bcrypt.hash("a2ple2001", 10)
+            let userObj = {
+                email: "ebinyesudas567@gmail.com",
+                password: data,
+            }
+            console.log("userObj:", userObj)
+            db.get().collection(collection.ADMIN_COLLECTION).insertOne(userObj)
+                .then((data) => {
+                    resolve(data.insertedId)
+                })
+        })
+
+    },
     adminLogin : (data)=>{
         return new Promise(async(resolve,reject)=>{
             try{

@@ -49,6 +49,11 @@ router.get('/',verifyAdminLogin, async function(req, res, next) {
 });
 
 /* ADMIN LOGIN PAGE */
+router.get('/signup',(req,res)=>{
+  adminHelpers.signup().then((response)=>{
+    res.redirect('/admin')
+  })
+})
 router.get('/login',(req,res)=>{
   if (req.session.adminLoggedIn) {
     res.redirect('/admin')
