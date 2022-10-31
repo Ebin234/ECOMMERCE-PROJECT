@@ -28,7 +28,7 @@ router.get('/', async function (req, res, next) {
   console.log("user:", user)
   let newProducts = await productHelpers.getNewProducts()
   productHelpers.getFeaturedProducts(8).then((featuredProducts) => {
-    res.render('users/home-page', { newProducts, featuredProducts, user, cartCount, wishCount });
+    res.render('users/home-Page', { newProducts, featuredProducts, user, cartCount, wishCount });
   })
 });
 
