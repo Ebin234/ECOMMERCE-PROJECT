@@ -51,7 +51,7 @@ router.post('/signup', (req, res) => {
       res.redirect('/signup')
     } else {
       twilioHelpers.sendOtp(req.session.signupBody.Mobile).then((response) => {
-        // console.log(response)
+        console.log(response)
         if (response.send) {
           res.redirect('/otp')
         } else {
