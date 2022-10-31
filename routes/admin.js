@@ -99,7 +99,7 @@ router.post('/add-product',(req,res,next)=>{
     let mainImage = req.files.image[0]
     let subImage1 = req.files.image[1]
     let subImage2 = req.files.image[2]
-    let subImage3 = req.files.image[3]
+    let subImage3 = req.files.image[3] 
     mainImage.mv('./public/images/product-images/'+insertedId+'/0'+insertedId+'.jpg',(err,done)=>{
       if(err){
         throw err
