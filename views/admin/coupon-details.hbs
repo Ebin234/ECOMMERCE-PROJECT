@@ -102,7 +102,7 @@
             <tbody>
                 {{#each coupons}}
                 <tr>
-                    <td>1.</td>
+                    <td>{{inc @index}}</td>
                     <td>{{this.name}}</td>
                     <td>{{this.code}}</td>
                     <td>{{this.discount}} %</td>

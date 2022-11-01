@@ -154,7 +154,7 @@
                 <tbody>
                     {{#each orders}}
                     <tr>
-                        <td>1.</td>
+                        <td>{{inc @index}}</td>
                         <td><img src="/images/product-images/{{this.productDetails._id}}/0{{this.productDetails._id}}.jpg"
                                 alt=""></td>
                         <td>{{this.productDetails.Name}} <br>

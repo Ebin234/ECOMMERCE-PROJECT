@@ -103,7 +103,7 @@
             <tbody>
                 {{#each brands}}
                 <tr>
-                    <td>1.</td>
+                    <td>{{inc @index}}</td>
                     <td>{{this.name}}</td>
                     <td>
                         <button href="/admin/edit-brand/{{this._id}}" class=" normal b1 " onclick="editBrand('{{this._id}}')">Edit</button>
