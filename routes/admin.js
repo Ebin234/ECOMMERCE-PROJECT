@@ -230,7 +230,7 @@ router.get('/create-coupon',verifyAdminLogin,(req,res)=>{
 router.post('/create-coupon',(req,res)=>{
     console.log(req.body);
   productHelpers.createCoupon(req.body).then(()=>{
-    res.redirect('/admin')
+    res.redirect('/admin/coupons')
   })
 })
 
