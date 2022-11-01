@@ -62,6 +62,14 @@ section div h2{
     margin-bottom: 20px;
     border: 1px solid #e1e1e1;
 }
+    .addform input {
+    height: 40px;
+    width: 622px;
+    padding: 8px 7px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+}
 .wd input{
     width: 100%;
     margin-bottom: 37px;

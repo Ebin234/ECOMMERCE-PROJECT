@@ -195,10 +195,15 @@ div ul li .dropdown li a:after {
     justify-content: center;
 }
 
+#hero h2 {
+    /* color: #088178; */
+    color: #222;
+}
+
 #hero p {
     font-size: 16px;
     /* color: #465b52; */
-    color: #b4edd5;
+    color: #a60b3d;
     margin: 15px 0 20px 0;
 }
 
@@ -925,6 +930,12 @@ footer .copyright {
         width: 70%;
     }
 
+    /* About Page */
+    #feature {
+        justify-content: space-between;
+        margin: 65px;
+    }
+
     /* Contact Page */
 
     #form-details {
@@ -952,6 +963,13 @@ footer .copyright {
 
     #product1 .popup-image img{
         width: 95%;
+    }
+}
+@media (max-width: 899px) {
+     /* About Page */
+     #feature {
+        justify-content: space-between;
+        margin: 12px;
     }
 }
 
@@ -1097,3 +1115,10 @@ footer .copyright {
         padding: 20px;
     }
 }
+
+@media (max-width: 400px) {
+    #feature {
+        justify-content: space-between;
+        margin: 0px;
+    }
+    }

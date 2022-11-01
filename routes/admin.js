@@ -81,7 +81,7 @@ router.get('/add-product',verifyAdminLogin,async(req,res)=>{
   try{
   let categories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
-  res.render('admin/add-product',{brands,categories, adminHeader:true})
+  res.render('admin/add-product',{brands,categories,admin:req.session.admin, adminHeader:true})
   }catch(error){
     next(error)
   }
@@ -137,7 +137,7 @@ router.get('/products-details',verifyAdminLogin,(req,res,next)=>{
   try{
   productHelpers.getAllproducts().then((products)=>{
     console.log(products)
-  res.render('admin/products-details',{products,adminHeader:true})
+  res.render('admin/products-details',{products,admin:req.session.admin,adminHeader:true})
   })
 }catch(error){
   next(error)
@@ -145,14 +145,14 @@ router.get('/products-details',verifyAdminLogin,(req,res,next)=>{
 })
 
 /* EDIT PRODUCT PAGE */
-router.get('/edit-product/:id',async(req,res,next)=>{
+router.get('/edit-product/:id',verifyAdminLogin, async(req,res,next)=>{
   try{
   const prodId = req.params.id
   let product = await productHelpers.getProductDetails(prodId)
   let categories = await adminHelpers.getCategories()
   let brands = await adminHelpers.getBrands()
   //console.log(product)
-  res.render('admin/edit-product',{brands,categories,product,adminHeader:true})
+  res.render('admin/edit-product',{brands,categories,product,admin:req.session.admin,adminHeader:true})
   }catch(error){
     next(error)
   }
@@ -196,7 +196,7 @@ router.get('/delete-product/:id',(req,res)=>{
 router.get('/users-details',verifyAdminLogin,async(req,res)=>{
   let users = await userHelpers.getAllUsers()
   console.log(users)
-  res.render('admin/users-details',{users,adminHeader:true})
+  res.render('admin/users-details',{users,admin:req.session.admin,adminHeader:true})
 })
 
 /* USER BLOCK */
@@ -219,12 +219,12 @@ router.post('/unblock-user',(req,res)=>{
 router.get('/coupons',verifyAdminLogin,async(req,res)=>{
   let coupons = await productHelpers.getAllCoupons() 
   console.log(coupons);
-  res.render('admin/coupon-details',{coupons,adminHeader:true})
+  res.render('admin/coupon-details',{coupons,admin:req.session.admin,adminHeader:true})
 })
 
 /* CREATE COUPON */
 router.get('/create-coupon',verifyAdminLogin,(req,res)=>{
-  res.render('admin/create-coupon',{adminHeader:true})
+  res.render('admin/create-coupon',{admin:req.session.admin,adminHeader:true})
 })
 
 router.post('/create-coupon',(req,res)=>{
@@ -235,12 +235,12 @@ router.post('/create-coupon',(req,res)=>{
 })
 
 /* EDIT COUPON */
-router.get('/edit-coupon/:id',async(req,res)=>{
+router.get('/edit-coupon/:id',verifyAdminLogin, async(req,res)=>{
   couponId = req.params.id
   console.log(couponId)
   let couponDetails = await productHelpers.getCouponDetails(couponId)
   console.log(couponDetails)
-  res.render('admin/edit-coupon',{couponDetails,adminHeader:true})
+  res.render('admin/edit-coupon',{couponDetails,admin:req.session.admin,adminHeader:true})
 })
 
 router.post('/edit-coupon/:id',(req,res)=>{
@@ -262,7 +262,7 @@ router.get('/delete-coupon/:id',(req,res)=>{
 /* VIEW CATEGORIES PAGE */
 router.get('/view-categories',verifyAdminLogin,async(req,res)=>{
   let categories = await adminHelpers.getCategories()
-  res.render('admin/view-categories',{categories, adminHeader:true})
+  res.render('admin/view-categories',{categories,admin:req.session.admin, adminHeader:true})
 })
 
 /* ADD CATEGORY */
@@ -304,7 +304,7 @@ router.get('/delete-category/:id',(req,res)=>{
 /* BRANDS PAGE */
 router.get('/view-brands',verifyAdminLogin,async(req,res)=>{
   let brands = await adminHelpers.getBrands()
-  res.render('admin/view-brands',{brands,adminHeader:true})
+  res.render('admin/view-brands',{brands,admin:req.session.admin,adminHeader:true})
 })
 
 /* ADD BRAND */
@@ -348,7 +348,7 @@ router.get('/view-orders',verifyAdminLogin,async(req,res,next)=>{
   try{
   let orders = await productHelpers.getOrders()
   console.log("allOrders:",orders)
-  res.render('admin/view-orders',{orders,adminHeader:true})
+  res.render('admin/view-orders',{orders,admin:req.session.admin,adminHeader:true})
   }catch(error){
     next(error)
   }
