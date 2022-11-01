@@ -122,11 +122,14 @@ header {
     color: #088178;
 }
 
-
 div ul li:hover .dropdown {
     top: 27px;
+    width: 148px;
+    text-align: center;
     opacity: 1;
     visibility: visible;
+    background: #4ab5ba;
+    border-radius: 12px;
 }
 
 div ul li:last-child {
@@ -134,12 +137,13 @@ div ul li:last-child {
 }
 
 div ul li .dropdown {
+   
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 156px;
-    background: #e3e6f3;
-    text-align: left;
+    top: 27px;
+    width: 148px;
+    text-align: center;
+    background: #4ab5ba;
+    border-radius: 12px; 
     padding: 2px 0;
     z-index: 9;
     opacity: 0;
@@ -148,7 +152,9 @@ div ul li .dropdown {
     -o-transition: all, 0.3s;
     transition: all, 0.3s;
 }
-
+#drop li {
+    padding: 4px 20px;
+}
 div ul li .dropdown li {
     display: block;
     margin-right: 0;
